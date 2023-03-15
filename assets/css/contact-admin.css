@@ -1,0 +1,78 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1D2D44;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    color: #fcfcfc;
+}
+
+.contact {
+    margin-top: 50px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 40%;
+    margin: auto;
+}
+
+.contact h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.name {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.form-name {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin: 10px 0 10px 0;
+}
+
+input,
+textarea {
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #F0EBD8;
+}
+
+.form-email-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.submit {
+    width: 220px;
+    margin: auto;
+    margin-top: 20px;
+    color: #3E5C76;
+    font-weight: 600;
+}
+
+.submit:hover {
+    background-color: #f0ebd882;
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 17px;
+}
+
+footer small {
+    padding: 10px;
+}
