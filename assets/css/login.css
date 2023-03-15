@@ -1,0 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Roboto, sans-serif;
+    text-decoration: none;
+}
+
+body {
+    overflow-x: hidden;
+    background-color: #1D2D44;
+    color: #F0EBD8;
+}
+
+header, .main-content, .copyright {
+    padding: 70px 0;
+    text-align: center;
+}
+
+.main-content {
+    margin-top: -5%;
+}
+
+form {
+    display: inline-block;
+}
+
+form > small {
+    margin-top: -20%;
+    margin-left: -50%;
+    cursor: pointer;
+}
+
+form input {
+    max-width: 500px;
+    width: 350px;
+    margin: 20px;
+    display: block;
+    background-color: #F0EBD8;
+    padding: 13px;
+    text-align: center;
+    border-radius: 15px;
+}
+
+form input[type=submit] {
+    width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: bold;
+    font-size: 18px;
+    color: #F0EBD8; 
+    background-color: #748CAB;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+}
+
+form label {
+    padding: 10px;
+}
+
+form input[type=submit]:hover {
+    background-color: #1D2D44;
+}
