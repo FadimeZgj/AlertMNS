@@ -50,6 +50,11 @@ textarea {
     background-color: #F0EBD8;
 }
 
+::placeholder {
+    text-align: center;
+    font-size: 18px;
+}
+
 .form-email-text {
     display: flex;
     flex-direction: column;
