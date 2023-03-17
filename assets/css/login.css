@@ -40,10 +40,12 @@ form input {
     padding: 13px;
     text-align: center;
     border-radius: 15px;
+    font-size: 16px;
 }
 
 form input[type=submit] {
-    width: 250px;
+    width: 220px;
+    padding: 10px;
     margin-left: auto;
     margin-right: auto;
     font-weight: bold;
@@ -60,4 +62,73 @@ form label {
 
 form input[type=submit]:hover {
     background-color: #1D2D44;
+    color: #F0EBD8;
+}
+
+/* .main-footer .contact {
+    display: inline-block;
+    text-align: center;
+    margin-left: 30px;
+    position: absolute;
+    top: 90%;
+}
+
+.fa-envelope {
+    margin: 20px;
+}
+
+.main-footer .copyright{
+    text-align: center;
+    position: relative;
+    top: 100%;
+
+} */
+
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+    width: 100vw;
+    padding-top: 40px;
+    color: #fff;
+}
+
+.footer-content .copyright {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.footer-content .contact {
+    display: inline-block;
+    text-align: center;
+    margin-left: 30px;
+    position: absolute;
+    top: 50%;
+}
+
+.fa-envelope {
+    margin: 20px;
+}
+
+/* Reponsive */
+
+@media only screen and (max-width: 600px) {
+    .footer-content .contact {
+        margin-left: 30px;
+        position: absolute;
+        top: 350px;
+        left: 50px;
+    }
+
+    .footer-content .copyright {
+        margin-left: 30px;
+        position: absolute;
+        top: 400px;
+        left: 80px;
+    }
 }
