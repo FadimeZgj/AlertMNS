@@ -18,7 +18,7 @@ body {
 form {
     display: flex;
     flex-direction: column;
-    max-width: 40%;
+    max-width: 30%;
     margin: auto;
 }
 
@@ -81,3 +81,23 @@ footer {
 footer small {
     padding: 10px;
 }
+
+@media screen and (max-width: 996px) {
+    .name {
+        flex-direction: column;
+    }
+
+    form{
+        max-width: max-content;
+    }
+
+    footer {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    footer small {
+        padding: 5px;
+    }
+    
+  }
