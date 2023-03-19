@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Roboto, sans-serif;
+    text-decoration: none;
+}
+
+body {
+    background-color: #1D2D44;
+    color: #F0EBD8;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+    overflow: hidden
+}
+
+.container .chaines {
+    border: 1px solid rgba(240, 235, 216, 0.2);
+    width: 20%;
+    text-align: center;
+}
+
+.container .chaines h3 {
+    border: 1px solid rgba(240, 235, 216, 0.2);
+    text-align: center;
+    padding: 20px;
+    margin: auto;
+}
+
+
+.border {
+    border-bottom: 1px solid rgba(240, 235, 216, 0.2);
+    padding: 10px;
+}
+
+.border h5 {
+    margin: 10px;
+}
+
+
+.container .salons {
+    border: 1px solid rgba(240, 235, 216, 0.2);
+    width: 20%;
+    text-align: center;
+}
+
+.container .discussion {
+    border: 1px solid rgba(240, 235, 216, 0.2);
+    width: 60%;
+    text-align: center;
+}
+
+/* bordure de l'image */
+img {
+    border: 2px solid rgba(240, 235, 216, 0.2);
+    border-radius: 50%;
+}
