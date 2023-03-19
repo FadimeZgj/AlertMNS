@@ -6,6 +6,41 @@
     text-decoration: none;
 }
 
+/* Barre de navigation temporaire qui me permet de visualiser */
+
+.sidebar {
+    background-color: #3e5c76;
+    color: #F0EBD8;
+    width: 60px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-left: 15px;
+}
+
+.sidebar ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar ul li a {
+    display: block;
+    margin: 20px 10px 20px -10px;
+    padding: 10px;
+    font-size: 18px;
+    text-decoration: none;
+    color: #F0EBD8;
+}
+
+.sidebar ul li a:hover {
+    background-color: #1D2D44;
+    cursor: pointer;
+}
+
+/* Les chaînes */
+
 body {
     background-color: #1D2D44;
     color: #F0EBD8;
@@ -22,38 +57,51 @@ ul {
 }
 
 .container .chaines {
-    border: 1px solid rgba(240, 235, 216, 0.2);
-    width: 20%;
+    border-right: 1px solid rgba(240, 235, 216, 0.2);
+    width: 200px;
+    margin-left: 60px;
+    border-left: none;
     text-align: center;
 }
 
-.container .chaines h3 {
+.container .chaines h2 {
     border: 1px solid rgba(240, 235, 216, 0.2);
     text-align: center;
     padding: 20px;
     margin: auto;
 }
 
-
-.border {
-    border-bottom: 1px solid rgba(240, 235, 216, 0.2);
-    padding: 10px;
+.container .salons h2 {
+    text-align: center;
+    padding: 20px;
+    margin: auto;
 }
 
-.border h5 {
-    margin: 10px;
+.channel-group {
+    /* border-bottom: 1px solid rgba(240, 235, 216, 0.2); */
+    padding: 20px;
+}
+
+.channel-group h3 {
+    margin-top: 10px;
+}
+
+.channel-group:hover {
+    background-color: #2f3f54;
+    cursor: pointer;
 }
 
 
 .container .salons {
     border: 1px solid rgba(240, 235, 216, 0.2);
-    width: 20%;
+    width: 380px;
+    height: 100%;
     text-align: center;
 }
 
 .container .discussion {
     border: 1px solid rgba(240, 235, 216, 0.2);
-    width: 60%;
+    width: 70%;
     text-align: center;
 }
 
@@ -62,3 +110,128 @@ img {
     border: 2px solid rgba(240, 235, 216, 0.2);
     border-radius: 50%;
 }
+
+/* SALONS */
+
+input[type="search"] {
+    padding: 10px;
+    width: 250px;
+    height: 28px;
+    text-align: center;
+    border-radius: 10px;
+    border: none;
+}
+
+input[type="search"]:hover {
+    cursor: pointer;
+    background: #F0EBD8;
+    border: none;
+}
+
+.salons i {
+    position: absolute;
+    color: #1D2D44;
+    padding: 7px;
+    min-width: 60px;
+}
+
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
+.create-salon {
+    margin-top: 50px;
+    float: left;
+    width: 100%;
+}
+
+.create-salon h3 {
+    text-align: left;
+    margin-left: 20px;
+    font-size: 26px;
+}
+
+.salons-liste {
+    margin-top: 20px;
+}
+
+.salons-liste .salon {
+    padding: 25px;
+    font-size: 20px;
+    text-align: left;
+    border-bottom: 1px solid rgba(240, 235, 216, 0.1);
+}
+
+.salons-liste .salon:hover {
+    background-color: #2f3f54;
+    cursor: pointer;
+}
+
+.create-salon i {
+    color: #F0EBD8;
+}
+
+.salons .create-salon .add i{
+position: relative;
+top: -24px;
+right: -150px;
+}
+
+.salons .create-salon .add i:hover {
+    cursor: pointer;
+    color: #3e5c76;
+}
+
+/* DISCUSSIONS */
+
+.discussion .topbar {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid rgba(240, 235, 216, 0.1);
+    padding-bottom: 25px;
+}
+
+.discussion .topbar h2 {
+    text-align: left;
+    margin-left: 20px;
+    font-size: 26px;
+    margin-top: 40px;
+    margin-left: 40px;
+}
+
+.discussion .topbar input[type="search"] {
+    padding: 10px;
+    width: 30%;
+    height: 28px;
+    border-radius: 10px;
+    border: none;
+    position: relative;
+    top: 40px;
+    left: 40px
+}
+
+.discussion .topbar i {
+    position: relative;
+    top: 45px;
+    left: 70px;
+    z-index: 1;
+    color: #2f3f54;
+}
+
+.discussion .topbar .fa-user-group {
+    color:#F0EBD8;
+    margin-top: 12px;
+    margin-left: 40%;
+}
+
+.discussion .topbar .fa-ellipsis {
+    color:#F0EBD8;
+    margin-top: 12px;
+    margin-left: 40px;
+}
+
+
+/* Bulle de discussion */
