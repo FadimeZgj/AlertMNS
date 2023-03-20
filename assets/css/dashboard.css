@@ -14,8 +14,8 @@ header {
 
 main {
     height: 95%;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 65px 1fr;
 }
 
 .name-dashboard {
@@ -76,11 +76,13 @@ main {
 }
 
 .options {
-    margin-top: 2%;
-    display: flex;
-    justify-content: space-around;
+    margin-top: 1%;
+    display: grid;
+    grid-template-columns: 300px 950px;
+    gap: 2%;
     width: 100%;
     color: #F0EBD8;
+    justify-content: center;
     
 }
 
@@ -93,15 +95,15 @@ main {
 
 .actions li {
     padding-bottom:5%;
-    padding-top:5%;
+    padding-top:4%;
     font-weight: 600;
 }
 
-.actions span {
+.actions a {
     color: #0D1321;
 }
 
-.actions .fa-solid {
+.actions .fa-solid, .fa-regular {
     color: #3E5C76;
 }
 
@@ -137,13 +139,16 @@ ul {
 .squares li {
     justify-self: center;
     background-color:#F0EBD8 ;
-    color: #3E5C76;
     border-radius: 30px;
     width: 250px;
     height: 200px;
     text-align: center;
     font-size: 17px;
     font-weight: 700;
+}
+
+.squares a {
+    color: #3E5C76;
 }
 
 .squares span {
