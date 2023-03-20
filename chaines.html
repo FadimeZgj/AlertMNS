@@ -17,9 +17,12 @@
 
 <body>
     <div class="sidebar">
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
         <ul>
             <li><a href="#"><i class="fas fa-house-chimney-window fa-xl"></i></a></li>
-            <li><a href="#"><i class="fa-solid fa-comment-dots fa-xl"></i></i></a></li>
+            <li><a href="#"><i class="fa-solid fa-comment-dots fa-xl"></i></a></li>
             <li><a href="#"><i class="fa-solid fa-users-rectangle fa-xl"></i></a></li>
             <li><a href=""><i class="fa-solid fa-diagram-project fa-xl"></i></a></li>
             <li><a href=""><i class="fa-regular fa-calendar fa-xl"></i></a></li>
@@ -30,7 +33,7 @@
     <div class="container">
         <div class="chaines">
             <h2>Chaînes</h2>
-            <div class="channel-group">
+            <div class="channel-group channel-devweb1">
                 <img src='https://dummyimage.com/70x70/1D2D44/FFFFFF.png?text=Cha%C3%AEnes' alt="logo chaine">
                 <h3>Dev Web 1</h3>
             </div>
@@ -66,7 +69,7 @@
                     <div class="salon">Général</div>
                     <div class="salon">HTML/CSS</div>
                     <div class="salon">JavaScript</div>
-                    <div class="salon">PHP / BDD</div>
+                    <div class="salon salon-PHP">PHP / BDD</div>
                     <div class="salon">TRE</div>
                     <div class="salon">React</div>
                     <div class="salon">Méthodologie projet</div>
@@ -84,15 +87,78 @@
             </div>
 
             <!-- Pour les bulles de discussions-->
-            <!--<div class="conversation">
-                <div class="message">
+
+            <!--Bulle de discussion de l'autre personne-->
+            <div class="conversation">
+                <div class="message-me">
                     <div class="user-info">
-                        <img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo'>
-                        <span class="username">Vous</span>
-                        <span class="time">10:00</span>
+                        <img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt="photo_de_profil">
+                    </div>
+                    <div class="bulle">
+                        <div class="info">
+                            <p class="name">Nom</p>
+                            <p class="date">14 mai 2022</p>
+                        </div>
+                        <div class="arrow-left">
+                        </div>
+                        <div class="contenu-message">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet
+                                consectetur adipisicing elit. Expedita adipisci magni magnam nostrum, at beatae
+                                reprehenderit exercitationem asperiores ex ipsam quam veniam sequi quisquam sapiente
+                                animi accusantium dolor sunt quia?</p>
+                        </div>
                     </div>
                 </div>
-            </div>-->
+
+                <!--Bulle de discussion de l'utilisateur-->
+                <div class="message-user">
+                    <div class="bulle-user">
+                        <div class="info">
+                            <p class="name">Nom</p>
+                            <p class="date">14 mai 2022</p>
+                        </div>
+                        <div class="bubble-right">
+                            <div class="contenu-my-message">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                            </div>
+                            <div class="arrow-right">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="my-info">
+                        <img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt="photo_de_profil">
+                    </div>
+                </div>
+
+                <!-- Deuxième bulle de l'autre personne-->
+
+                <div class="conversation">
+                    <div class="message-me">
+                        <div class="user-info">
+                            <img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt="photo_de_profil">
+                        </div>
+                        <div class="bulle">
+                            <div class="info">
+                                <p class="name">Nom</p>
+                                <p class="date">14 mai 2022</p>
+                            </div>
+                            <div class="arrow-left">
+                            </div>
+                            <div class="contenu-message">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet
+                                    consectetur adipisicing elit.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Boîte de dialogue -->
+                    <div class="chatbox">
+                        <input type="text" placeholder="Ecrivez votre message...">
+                    </div>
+
+                </div><!--conversation-->
+            </div> <!--discussion -->
+        </div> <!--container -->
         </div>
 </body>
 
