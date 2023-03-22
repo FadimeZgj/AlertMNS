@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -27,14 +31,25 @@
             <form action="/login-POST.php" method="POST">
                 <label for="email"></label>
                 <input type="email" id="email" name="email" placeholder="adresse@email.fr">
+                <?php if(isset($_SESSION['errors']['email'])): ?>
+                <small class="error-email"><?= $_SESSION['errors']['email'] ?></small>
+                <?php endif; ?>
 
                 <label for="password"></label>
                 <input type="password" id="password" name="password" placeholder="********">
+                <?php if(isset($_SESSION['errors']['password'])): ?>
+                <small class="error-password"><?= $_SESSION['errors']['password'] ?></small>
+                <?php endif; ?>
 
                 <small class="forgetPassword">Mot de passe oublié ?</small>
 
                 <input type="submit" name="submit" value="Connexion">
             </form>
+            
+            <?php if(isset($_SESSION['error'])): ?>
+                <p class="invalid"><?= $_SESSION['error'] ?></p>
+            <?php endif; ?> 
+
         </div>
     </main>
 
