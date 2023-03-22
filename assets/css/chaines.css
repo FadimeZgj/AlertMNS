@@ -59,8 +59,7 @@
 body {
     background-color: #1D2D44;
     color: #F0EBD8;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 ul {
@@ -79,7 +78,6 @@ ul {
     margin-left: 60px;
     border-left: none;
     text-align: center;
-    overflow-y: scroll;
 }
 
 .container .chaines h2 {
@@ -345,7 +343,7 @@ input[type="search"]:hover {
 
 .message-user {
     display: flex;
-    margin-left: 200px;
+    margin-left: 300px;
 }
 
 .bubble-right {
@@ -403,13 +401,13 @@ input[type="search"]:hover {
 /* Chatbox */
 
 .chatbox input {
-    margin-right: 100px;
+    margin-right: 110px;
     text-indent: 2%;
     width: 75%;
-    min-height: 100px;
+    min-height: 120px;
     border: 1px solid rgba(240, 235, 216, 0.1);
     border-radius: 20px;
-    color:#1D2D44;
+    color: #1D2D44;
     font-size: 16px;
 }
 
@@ -417,12 +415,51 @@ input[type="search"]:hover {
     opacity: 0.9;
 }
 
+/* Chatbox icones + bouton envoyer */
+
+.icons-group {
+    color: #748cab;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    top: -25px;
+    left: -210px;
+}
+
+.icons-group .fas {
+    position: relative;
+    left: 15px;
+}
+
+.icons-group i {
+    margin-right: 20px;
+}
+
+.icons-group i:hover {
+    color: #2f3f54;
+    cursor: pointer;
+}
+
+.send-button input[type="button"]{
+    color: #F0EBD8;
+    background-color: #748cab;
+    position: relative;
+    top: -15px;
+    padding: 8px 18px 8px 18px;
+    border-radius: 20px;
+    border: none;
+}
+
+.send-button input[type="button"]:hover {
+    background-color: #2f3f54;
+    cursor: pointer;
+}
 /* _____________________________Media query__________________________________ */
 
 /* Permet de déplacer les icônes de la top bar en grand écran */
 @media (min-width : 1600px) {
     .discussion .topbar .fa-user-group {
-        margin-left: 39%;
+        margin-left: 35%;
     }
 
     .salons .create-salon .add i {
@@ -437,6 +474,10 @@ input[type="search"]:hover {
         margin-left: 170px;
     }
 
+    .message-user {
+        margin-left: 380px;
+    }
+
     .message-user .my-info {
         right: 100px;
     }
@@ -448,6 +489,22 @@ input[type="search"]:hover {
 
     .arrow-left {
         top: 55px;
+    }
+
+    .message-user .my-info {
+        left: 15px;
+    }
+
+    .chatbox input {
+        margin-top: 120px;
+        min-height: 150px;
+    }
+
+    .bulle .info {
+        max-width: 70%;
+    }
+    .icons-group {
+        margin-right: 20px;
     }
 }
 
