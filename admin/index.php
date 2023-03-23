@@ -1,3 +1,17 @@
+<?php 
+
+require 'includes/inc-session-check.php';
+require '../includes/inc-db-connect.php';
+
+// Récupérer tous les utilisateurs
+$sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , role.libelle_role FROM utilisateur 
+LEFT JOIN role ON utilisateur.id_role = role.id_role";
+$query = $dbh->query($sql);
+$utilisateur = $query->fetch(PDO::FETCH_ASSOC);
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,8 +34,8 @@
         </div>
         <div class="name-user">           
             <div>
-                <h2>Prénom NOM</h2>
-                <p>Administrateur</p>
+                <h2><?= $utilisateur['prenom_utilisateur'] ?>  <?= $utilisateur['nom_utilisateur'] ?></h2>
+                <p><?= $utilisateur['libelle_role'] ?></p>
             </div>
             <a href=""><img src='https://dummyimage.com/50x50.jpg' alt=''/></a>
         </div> 
