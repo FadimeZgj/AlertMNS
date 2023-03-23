@@ -2,6 +2,7 @@
 
 // début de la session
 session_start();
+unset($_SESSION['error']);
 // Connexion à la BDD
 require 'includes/inc-db-connect.php';
 
@@ -21,7 +22,7 @@ if(!empty($_POST['submit']))
     {
         $_SESSION['errors'] = $errors;
         $_SESSION['values'] = $_POST;
-        header("Location: /login.php"); die;
+        header("Location: /"); die;
     }
 
     // 1. On cherche en base de donnée l'utilisateur avec son email
@@ -49,11 +50,6 @@ if(!empty($_POST['submit']))
             ]);
             $roles = $query -> fetchAll(PDO::FETCH_COLUMN);
 
-            if (in_array('ROLE_ADMIN' , $roles)) 
-            {
-                header("Location: /admin"); die;
-            }
-
             // 5. Si mdp OK alors on identifie l'utilisateur en SESSION et on redirige vers la page admin
             session_start();
 
@@ -66,31 +62,31 @@ if(!empty($_POST['submit']))
             ];
 
             // on dirige l'utilisateur en fonction de son statut
-            if (in_array("ROLE_ADMIN", $roles)) 
+            if (in_array("Administrateur", $roles)) 
             {
                 header("Location: /admin"); die;
             } 
             else
             {
-                header("Location: /"); die;
+                header("Location: /user"); die;
             }
         }
         else 
         {
             // 6. Si le mdp KO alors on redirige vers la page login
             $_SESSION['error'] = "Identifiants invalides. ";
-            header("Location: /login.php"); die;
+            header("Location: /"); die;
         }
     }
     else 
     {
         // si l'utilisateur n'existe pas, on redirige vers le login
         $_SESSION['error'] = "Identifiants invalides. ";
-        header("Location: /login.php"); die;
+        header("Location: /"); die;
     }
 
 }
 else
 {
-    header("Location: /login.php"); die;
+    header("Location: /"); die;
 }

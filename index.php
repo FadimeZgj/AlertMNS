@@ -9,7 +9,7 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page de connexion</title>
+    <title>AlertMNS - Connexion</title>
     <link rel="stylesheet" href="/assets/css/login.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,7 +48,9 @@ session_start();
             
             <?php if(isset($_SESSION['error'])): ?>
                 <p class="invalid"><?= $_SESSION['error'] ?></p>
-            <?php endif; ?> 
+            <?php endif; 
+            
+            session_destroy()?> 
 
         </div>
     </main>
