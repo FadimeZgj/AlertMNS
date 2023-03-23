@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -5,7 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page de connexion</title>
+    <title>AlertMNS - Connexion</title>
     <link rel="stylesheet" href="/assets/css/login.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,14 +31,27 @@
             <form action="/login-POST.php" method="POST">
                 <label for="email"></label>
                 <input type="email" id="email" name="email" placeholder="adresse@email.fr">
+                <?php if(isset($_SESSION['errors']['email'])): ?>
+                <small class="error-email"><?= $_SESSION['errors']['email'] ?></small>
+                <?php endif; ?>
 
                 <label for="password"></label>
                 <input type="password" id="password" name="password" placeholder="********">
+                <?php if(isset($_SESSION['errors']['password'])): ?>
+                <small class="error-password"><?= $_SESSION['errors']['password'] ?></small>
+                <?php endif; ?>
 
                 <small class="forgetPassword">Mot de passe oublié ?</small>
 
                 <input type="submit" name="submit" value="Connexion">
             </form>
+            
+            <?php if(isset($_SESSION['error'])): ?>
+                <p class="invalid"><?= $_SESSION['error'] ?></p>
+            <?php endif; 
+            
+            session_destroy()?> 
+
         </div>
     </main>
 

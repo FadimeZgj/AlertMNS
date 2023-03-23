@@ -96,6 +96,19 @@ footer {
     margin: 20px;
 }
 
+.error-password {
+    display: block;
+    margin-top: 10px;
+    margin-left: -160px;
+    color: rgb(188, 1, 1);
+}
+
+.error-email,
+.invalid {
+    color: rgb(188, 1, 1);
+}
+
+
 /* Reponsive */
 
 @media only screen and (max-width: 600px) {
