@@ -24,21 +24,21 @@ $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b7ca8ab8e7.js" crossorigin="anonymous"></script>
-    <title>Dashboard Admin</title>
+    <title>Dashboard</title>
 </head>
 
 <body>
     <header>
         <div class="name-dashboard">
             <a href=""><i class="fa-solid fa-house fa-4x"></i></a>
-            <h1>Dashboard Administrateur</h1>
+            <h1>Dashboard Utilisateur</h1>
         </div>
         <div class="name-user">
             <div>
                 <h2><?= $utilisateur['prenom_utilisateur'] ?> <?= $utilisateur['nom_utilisateur'] ?></h2>
                 <p><?= $utilisateur['libelle_role'] ?></p>
             </div>
-            <a href=""><img src='https://dummyimage.com/50x50.jpg' alt='' /></a>
+            <a href=""><img src='https://dummyimage.com/50x50.jpg' alt=''/></a>
         </div>
     </header>
 
@@ -101,8 +101,6 @@ $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
             <section>
                 <div class="actions">
                     <ul>
-                        <li><a href=""><i class="fa-solid fa-plus fa-xl"></i>Créer un utilisateur</a></li>
-                        <li><a href=""><i class="fa-solid fa-plus fa-xl"></i>Créer une nouvelle chaine</a></li>
                         <li><a href=""><i class="fa-solid fa-plus fa-xl"></i>Créer un nouveau groupe</a></li>
                         <li><a href=""><i class="fa-solid fa-plus fa-xl"></i>Organiser une réunion</a></li>
                         <li><a href=""><i class="fa-solid fa-magnifying-glass fa-xl"></i>Rechercher un utilisateur</a></li>
@@ -110,10 +108,8 @@ $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
                         <li><a href=""><i class="fa-solid fa-users fa-xl"></i>Voir les groupes</a></li>
                         <li><a href=""><i class="fa-solid fa-comment-dots fa-xl"></i>Voir les messages</a></li>
                         <li><a href=""><i class="fa-regular fa-calendar-days fa-xl"></i>Voir les réunions prévues</a></li>
-                        <li><a href=""><i class="fa-solid fa-circle-exclamation fa-xl"></i>Signalements reçus</a></li>
-                        <li><a href=""><i class="fa-solid fa-trash-can fa-xl"></i><span>Supprimer un utilisateur</span></a></li>
+                        <li><a href=""><i class="fa-solid fa-circle-exclamation fa-xl"></i>Signalements</a></li>
                         <li><a href=""><i class="fa-solid fa-trash-can fa-xl"></i><span>Supprimer un groupe</span></a></li>
-                        <li><a href=""><i class="fa-solid fa-trash-can fa-xl"></i><span>Supprimer une chaine</span></a></li>
                     </ul>
                 </div>
             </section>
@@ -121,13 +117,13 @@ $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
             <section>
                 <div class="squares">
                     <ul>
-                        <a href=""><li><i class="fa-solid fa-plus fa-2x"></i><span>Créer un utilisateur</span></li></a>
-                        <a href=""><li><i class="fa-solid fa-plus fa-2x"></i><span>Créer une nouvelle chaine</span></li></a>
-                        <a href=""><li><i class="fa-solid fa-plus fa-2x"></i><span>Créer un nouveau groupe</span></li></a>
+                        <a href=""><li><i class="fa-solid fa-plus fa-2x"></i><span>Créer un groupe</span></li></a>
+                        <a href=""><li><i class="a-solid fa-comment-dots fa-2x"></i><span>Voir tous les messages</span></li></a>
+                        <a href=""><li><i class="fa-solid fa-plus fa-2x"></i><span>Organiser une réunion</span></li></a>
                     </ul>
                     <ul>
-                        <a href=""><li><i class="fa-solid fa-plus fa-2x"></i><span>Organiser une réunion</span></li></a>
-                        <a href=""><li><i class="fa-solid fa-tower-cell fa-2x"></i><span>Voir les chaînes</span></li></a>
+                        <a href=""><li><i class="fa-solid fa-plus fa-2x"></i><span>Voir les réunions prévues</span></li></a>
+                        <a href=""><li><i class="fa-solid fa-tower-cell fa-2x"></i><span>Voir la liste des chaînes</span></li></a>
                         <a href=""><li><i class="fa-solid fa-magnifying-glass fa-2x"></i><span>Rechercher un utilisateur</span></li></a>
                     </ul>
                 </div>
@@ -150,10 +146,9 @@ $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
         <section class="section-actions">
             <div class="actions-mob">
                 <ul>
-                    <a href=""><li><i class="fa-solid fa-plus"></i><span>Créer un utilisateur</span></li></a>
-                    <a href=""><li><i class="fa-solid fa-plus"></i><span>Créer une nouvelle chaine</span></li></a>
                     <a href=""><li><i class="fa-solid fa-plus"></i><span>Créer un nouveau groupe</span></li></a>
                     <a href=""><li><i class="fa-solid fa-plus"></i><span>Organiser une réunion</span></li></a>
+                    <a href=""><li><i class="fa-solid fa-comment-dots"></i><span>Voir tous les messages</span></li></a>
                 </ul>
             </div>
         </section>
@@ -164,12 +159,9 @@ $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
                     <a href=""><li><i class="fa-solid fa-magnifying-glass fa-xl"></i>Rechercher un utilisateur</li></a>
                     <a href=""><li><i class="fa-solid fa-tower-cell fa-xl"></i>Voir les chaînes</li></a>
                     <a href=""><li><i class="fa-solid fa-users fa-xl"></i>Voir les groupes</li></a>
-                    <a href=""><li><i class="fa-solid fa-comment-dots fa-xl"></i>Voir les messages</li></a>
                     <a href=""><li><i class="fa-regular fa-calendar-days fa-xl"></i>Voir les réunions prévues</li></a>
-                    <a href=""><li><i class="fa-solid fa-circle-exclamation fa-xl"></i>Signalements reçus</li></a>
-                    <a href=""><li><i class="fa-solid fa-trash-can fa-xl"></i><span>Supprimer un utilisateur</span></li></a>
+                    <a href=""><li><i class="fa-solid fa-circle-exclamation fa-xl"></i>Signalements</li></a>
                     <a href=""><li><i class="fa-solid fa-trash-can fa-xl"></i><span>Supprimer un groupe</span></li></a>
-                    <a href=""><li><i class="fa-solid fa-trash-can fa-xl"></i><span>Supprimer une chaine</span></li></a>
                 </ul>
             </div>
         </section>

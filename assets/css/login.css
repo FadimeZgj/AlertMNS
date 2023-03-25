@@ -18,7 +18,7 @@ header, .main-content, .copyright {
 }
 
 .main-content {
-    margin-top: -5%;
+    margin-top: -10%;
 }
 
 form {
@@ -28,7 +28,6 @@ form {
 form > small {
     margin-top: -20%;
     margin-left: -50%;
-    cursor: pointer;
 }
 
 form input {
@@ -108,6 +107,10 @@ footer {
     color: rgb(188, 1, 1);
 }
 
+.forgetPassword a {
+    color: #F0EBD8;
+}
+
 
 /* Reponsive */
 
@@ -115,14 +118,14 @@ footer {
     .footer-content .contact {
         margin-left: 30px;
         position: absolute;
-        top: 350px;
+        top: -130px;
         left: 50px;
     }
 
     .footer-content .copyright {
         margin-left: 30px;
         position: absolute;
-        top: 400px;
+        top: -110px;
         left: 80px;
     }
 }
