@@ -41,7 +41,7 @@ session_start();
                 <small class="error-password"><?= $_SESSION['errors']['password'] ?></small>
                 <?php endif; ?>
 
-                <small class="forgetPassword">Mot de passe oublié ?</small>
+                <small class="forgetPassword"><a href="">Mot de passe oublié ?</a></small>
 
                 <input type="submit" name="submit" value="Connexion">
             </form>

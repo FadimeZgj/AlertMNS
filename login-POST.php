@@ -50,6 +50,8 @@ if(!empty($_POST['submit']))
             ]);
             $roles = $query -> fetchAll(PDO::FETCH_COLUMN);
 
+            
+
             // 5. Si mdp OK alors on identifie l'utilisateur en SESSION et on redirige vers la page admin
             session_start();
 
