@@ -6,6 +6,11 @@
     text-decoration: none;
 }
 
+a {
+    list-style: none;
+    color: #F0EBD8;
+}
+
 /* Barre de navigation temporaire qui me permet de visualiser */
 
 .sidebar {
@@ -21,13 +26,6 @@
     padding: 0;
     list-style: none;
 }
-
-/* Le burger */
-/* .icon {
-    color:#F0EBD8;
-    position: absolute;
-    left: 50%;
-} */
 
 .icon {
     display: none;
@@ -52,6 +50,24 @@
 .sidebar ul li:hover {
     background-color: #2f3f54;
     cursor: pointer;
+}
+
+/* Le menu burger */
+
+.burger-icon {
+    color: white;
+}
+
+.responsive-menu .ul {
+    display: none;
+}
+
+.burger-icon button {
+    display: none;
+}
+
+.burger-icon .closeMenu {
+    display: none;
 }
 
 /* Les chaînes */
@@ -87,7 +103,7 @@ ul {
     margin: auto;
 }
 
-.container .salons h2 {
+.container .salons .top-header-nom-salon h2 {
     text-align: center;
     padding: 20px;
     margin: auto;
@@ -129,6 +145,20 @@ img {
 
 /* SALONS */
 
+.salons .top-header-nom-salon {
+    display: flex;
+}
+
+.salons .top-header-nom-salon .fa-chevron-left {
+    color: white;
+    display: none;
+}
+
+.salons .top-header-nom-salon .fa-chevron-right  {
+    color: white;
+    display: none;
+}
+
 input[type="search"] {
     padding: 10px;
     width: 80%;
@@ -142,6 +172,10 @@ input[type="search"]:hover {
     cursor: pointer;
     background: #F0EBD8;
     border: none;
+}
+
+.salons button {
+    color: white;
 }
 
 .salons i {
@@ -193,7 +227,7 @@ input[type="search"]:hover {
 .salons .create-salon .add i {
     position: relative;
     top: -25px;
-    right: -90px;
+    right: -106px;
 }
 
 .salons .create-salon .add i:hover {
@@ -401,7 +435,6 @@ input[type="search"]:hover {
 /* Chatbox */
 
 .chatbox input {
-    margin-right: 110px;
     text-indent: 2%;
     width: 75%;
     min-height: 120px;
@@ -423,7 +456,7 @@ input[type="search"]:hover {
     justify-content: flex-end;
     position: relative;
     top: -25px;
-    left: -210px;
+    right: 130px;
 }
 
 .icons-group .fas {
@@ -440,7 +473,7 @@ input[type="search"]:hover {
     cursor: pointer;
 }
 
-.send-button input[type="button"]{
+.send-button input[type="button"] {
     color: #F0EBD8;
     background-color: #748cab;
     position: relative;
@@ -454,6 +487,7 @@ input[type="search"]:hover {
     background-color: #2f3f54;
     cursor: pointer;
 }
+
 /* _____________________________Media query__________________________________ */
 
 /* Permet de déplacer les icônes de la top bar en grand écran */
@@ -503,6 +537,7 @@ input[type="search"]:hover {
     .bulle .info {
         max-width: 70%;
     }
+
     .icons-group {
         margin-right: 20px;
     }
@@ -510,32 +545,182 @@ input[type="search"]:hover {
 
 
 /* Media query pour le responsive */
-@media only screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
+
+    body {
+        overflow-y: scroll;
+    }
+
+    /* Pour faire apparaître menu burger */
+    .sidebar {
+        display: none;
+    }
+
+    .sidebar .responsive-menu ul {
+        display: none;
+    }
+
+    .burger-icon {
+        display: block;
+        position: absolute;
+        top: 36px;
+        right: 24px;
+        z-index: 9999;
+    }
+
+    .burger-icon .fa-solid:hover {
+        cursor: pointer;
+    }
+
+    .burger-icon button {
+        display: block;
+        background-color: #1D2D44;
+        border: none;
+        color: #F0EBD8;
+    }
+
+    .responsive-menu ul {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        top: 60px;
+        width: 100%;
+        font-size: 22px;
+        text-align: left;
+        background-color: #2f3f54;
+    }
+
+    .responsive-menu li {
+        width: 100%;
+        padding: 15px;
+        border-top: 1px solid rgba(240, 235, 216, 0.2);
+    }
+
+    .responsive-menu ul i {
+        margin-right: 5px;
+    }
+
+    .responsive-menu ul .fa-calendar {
+        /* L'icône du calendrier qui vit pour les caméras */
+        margin-left: -1px;
+    }
+
+    .responsive-menu li:hover {
+        cursor: pointer;
+        background-color: #3e5c76;
+    }
+
+    .burger-icon .closeMenu {
+        position: absolute;
+        top: -2px;
+        right: 3px;
+        z-index: 9999;
+    }
+
+    /* Responsive des salons */
+    .container .salons {
+        display: none;
+        width: 768px;
+        margin-left: 0;
+    }
+
+    .salons .top-header-nom-salon {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .salons .top-header-nom-salon .fa-chevron-left {
+        display: block;
+        position: relative;
+        top: 24px;
+    }
+
+    .salons .top-header-nom-salon .fa-chevron-left:hover {
+        color: #2f3f54;
+        cursor: pointer;
+    }
+
+    .salons .top-header-nom-salon .fa-chevron-right {
+        display: block;
+        position: relative;
+        top: 24px;
+        right: 10px;
+    }
+
+    .salons input[type="search"] {
+        width: 60%;
+        height: 18%;
+        text-align: left;
+        text-indent: 12%;
+        border-radius: 30px;
+    }
+
+    .salons .fa-magnifying-glass {
+        top: 114px;
+        left: 92px;
+    }
+
+    .salons .fa-plus {
+        position: absolute;
+        top: 0;
+        left: 180px;
+    }
+
+    .salons .top-header-nom-salon .fa-chevron-right:hover {
+        color: #2f3f54;
+        cursor: pointer;
+    }
+
+    .salons .salons-liste {
+        margin-top: -4px;
+        border-top: 1px solid rgba(240, 235, 216, 0.2);;
+    }
+
+    /* Responsive des discussions */
+    .container .discussion {
+        display: none;
+    }
+
+    /* Responsive des chaînes */
     .container .chaines {
         border: none;
-        width: 600px;
+        width: 768px;
         margin-left: 0;
     }
 
     .container .chaines h2 {
         border: none;
         text-align: left;
-    }
-
-    .container .salons {
-        display: none;
-    }
-
-    .container .discussion {
-        display: none;
-    }
-
-    .sidebar {
-        display: none;
+        position: relative;
+        left: 10px;
+        margin-top: 10px;
+        font-size: 28px;
     }
 
     .container .chaines .channel-group {
         display: flex;
-        padding: 10px;
+        padding: 20px 10px 20px 10px;
+        border-top: 1px solid rgba(240, 235, 216, 0.2);
     }
+
+    .container .chaines .channel-group img {
+        margin-left: 10px;
+    }
+
+    .container .chaines .channel-group h3 {
+        margin-left: 20px;
+        margin-top: 24px;
+    }
+
+    .chaines .channel-devweb1 {
+        background-color: #1D2D44;
+    }
+
+    .chaines .channel-devweb1:hover {
+        background-color: #2f3f54;
+    }
+
+
 }
