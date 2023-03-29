@@ -1,3 +1,70 @@
+<?php
+require $_SERVER['DOCUMENT_ROOT'] . '/user/includes/inc-session-check.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
+
+// récupérer les messages envoyés
+// $sql = 'SELECT message.id_message as message_envoie, message.text_message, message.date_message, message.id_utilisateur as id_expediteur,
+//         recevoir.id_message as message_recue, recevoir.id_utilisateur as id_destinataire, recevoir.date_lecture, utilisateur.nom_utilisateur,
+//         utilisateur.prenom_utilisateur, role.libelle_role
+//         FROM message JOIN recevoir ON message.id_message = recevoir.id_message
+//         left join utilisateur on utilisateur.id_utilisateur = message.id_utilisateur
+//         LEFT JOIN role ON utilisateur.id_role = role.id_role
+//         WHERE recevoir.id_message = message.id_message
+//         AND recevoir.id_utilisateur = ' . $_SESSION['user']['id'] . ' ORDER BY message.date_message DESC ' ;
+
+$sql = 'SELECT message.id_message, message.text_message, message.date_message, message.id_utilisateur as id_expediteur,
+       recevoir.id_message as message_recue, recevoir.id_utilisateur as id_destinataire, recevoir.date_lecture, utilisateur.nom_utilisateur,
+       utilisateur.prenom_utilisateur, role.libelle_role
+        FROM message
+        JOIN (
+            SELECT id_utilisateur, MAX(id_message) as id_message
+            FROM message
+            WHERE id_utilisateur 
+            GROUP BY id_utilisateur
+        ) as max_message ON message.id_utilisateur = max_message.id_utilisateur AND message.id_message = max_message.id_message
+        JOIN recevoir ON message.id_message = recevoir.id_message
+        LEFT JOIN utilisateur ON utilisateur.id_utilisateur = message.id_utilisateur
+        LEFT JOIN role ON utilisateur.id_role = role.id_role
+        WHERE recevoir.id_utilisateur = ' . $_SESSION['user']['id'] . ' ORDER BY message.date_message DESC ';
+        
+$query = $dbh -> query($sql);
+$messages = $query -> fetchAll();
+
+
+// récupérer les utilisateur connecté
+$sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , role.libelle_role FROM utilisateur 
+LEFT JOIN role ON utilisateur.id_role = role.id_role
+WHERE id_utilisateur = '" . $_SESSION['user']['id'] . "'";
+$query = $dbh->query($sql);
+$utilisateur = $query->fetch(PDO::FETCH_ASSOC);
+
+// récupérer les destinataires
+// $sql = 'SELECT message.id_message as message_envoie, message.text_message, message.date_message, message.id_utilisateur as id_expediteur,
+//         recevoir.id_message, recevoir.id_utilisateur as id_destinataire, recevoir.date_lecture, utilisateur.nom_utilisateur, utilisateur.prenom_utilisateur,
+//         role.libelle_role
+//         FROM message JOIN recevoir ON message.id_message = recevoir.id_message
+//         LEFT JOIN utilisateur ON utilisateur.id_utilisateur = recevoir.id_utilisateur
+//         LEFT JOIN role ON utilisateur.id_role = role.id_role 
+        
+//         ORDER BY message.date_message DESC';
+
+//         $query = $dbh -> query($sql);
+//         $messages = $query -> fetchAll();
+
+
+// $sql = 'SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , role.libelle_role FROM utilisateur 
+//         LEFT JOIN role ON utilisateur.id_role = role.id_role
+//         JOIN recevoir ON recevoir.id_utilisateur = utilisateur.id_utilisateur
+//         WHERE recevoir.id_utilisateur != ' . $_SESSION['user']['id'];
+
+// $query = $dbh->query($sql);
+// $destinataires = $query->fetchAll(PDO::FETCH_ASSOC);
+
+
+// Envoyer un message
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -25,8 +92,8 @@
             <div class="user-info">
                 <img src='https://dummyimage.com/70x70/1D2D44/ffffff.png?text=Photo' alt='Photo'>
                 <div class="user-role">
-                    <h4>Franck Quirin</h4>
-                    <h5>Administrateur</h5>
+                    <h4><?= $utilisateur['prenom_utilisateur'] ?> <?= $utilisateur['nom_utilisateur'] ?></h4>
+                    <h5><?= $utilisateur['libelle_role'] ?></h5>
                 </div>
             </div>
         </div>
@@ -36,18 +103,36 @@
         <!-- <a href="javascript:void(0);" class="icon" onclick="myFunction()">
             <i class="fa fa-bars"></i>
         </a> -->
-        <ul>
-            <li><a href="#"><i class="fas fa-house-chimney-window fa-xl"></i></a></li>
-            <li><a href="#"><i class="fa-solid fa-comment-dots fa-xl"></i></a></li>
-            <li><a href="#"><i class="fa-solid fa-users-rectangle fa-xl"></i></a></li>
-            <li><a href=""><i class="fa-solid fa-diagram-project fa-xl"></i></a></li>
-            <li><a href=""><i class="fa-regular fa-calendar fa-xl"></i></a></li>
-        </ul>
+        <div class="top-icons">
+            <a href="/admin"><i class="fa-solid fa-house fa-2x"></i></a>
+            <a href="../messages.php"><i class="fa-solid fa-comment-dots fa-2x"></i>
+
+            </a>
+            <a href=""><i class="fa-solid fa-users fa-2x"></i>
+
+            </a>
+            <a href=""><i class="fa-solid fa-tower-cell fa-2x"></i>
+
+            </a>
+            <a href=""><i class="fa-regular fa-calendar-days fa-2x"></i>
+
+            </a>
+        </div>
+        <div class="bottom-icons">
+            <a href="../logout.php"><i class="fa-solid fa-arrow-right-from-bracket fa-2x"></i>
+            
+            </a>
+            <a href=""><i class="fa-solid fa-user fa-2x"></i>
+            
+            </a>
+            <a href=""><i class="fa-solid fa-gear fa-2x"></i>
+
+            </a>
+        </div>
     </div>
 
     <div class="container">
         <div class="messages">
-
             <!--Entête message-->
             <div class="entete-message">
                 <h1>Messages</h1>
@@ -60,104 +145,30 @@
             </div>
 
             <!--Liste des messages-->
-            <div class="liste-messages">
-
+            
+            <div class="liste-messages"><?php foreach ($messages as $message): ?>
                 <!-- Contenu d'un message-->
-                <div class="message current-message">
+                <div class="message">
                     <!--photo de profil de l'utilisateur-->
                     <div class="image-user">
                         <img src='https://dummyimage.com/70x70/1D2D44/ffffff.png?text=Photo' alt='Photo'>
                     </div>
+                    
                     <div class="right-content">
                         <div class="info-user">
                             <div class="name">
-                                <h3>Fadime Ilhan</h3>
-                                <h4>Stagiaire</h4>
+                                <h3><?= $message['prenom_utilisateur'] ?> <?= $message['nom_utilisateur'] ?> </h3>
+                                <h4><?= $message['libelle_role'] ?></h4>
                             </div>
+            
                             <div class="hour">Il y a 1 h</div>
                         </div> <!-- Referme Info user-->
                         <div class="text-message">
-                            <p>Salut, comment vas-tu ?</p>
+                            <p><?= substr($message['text_message'],0,50) ?></p>
                         </div>
                     </div>
                 </div> <!--referme la div message-->
-
-                <!-- Contenu du deuxième message message-->
-                <div class="message">
-                    <!--photo de profil de l'utilisateur-->
-                    <div class="image-user">
-                        <img src='https://dummyimage.com/70x70/1D2D44/ffffff.png?text=Photo' alt='Photo'>
-                    </div>
-                    <div class="right-content">
-                        <div class="info-user">
-                            <div class="name">
-                                <h3>Franck Quirin</h3>
-                                <h4>Administrateur</h4>
-                            </div>
-                            <div class="hour">Il y a 5 h</div>
-                        </div> <!-- Referme Info user-->
-                        <div class="text-message">
-                            <p>Voici le document demandé :</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="message">
-                    <!--photo de profil de l'utilisateur-->
-                    <div class="image-user">
-                        <img src='https://dummyimage.com/70x70/1D2D44/ffffff.png?text=Photo' alt='Photo'>
-                    </div>
-                    <div class="right-content">
-                        <div class="info-user">
-                            <div class="name">
-                                <h3>Stéphanie Bonne</h3>
-                                <h4>Administrateur</h4>
-                            </div>
-                            <div class="hour">Il y a 1 h</div>
-                        </div> <!-- Referme Info user-->
-                        <div class="text-message">
-                            <p>Nous avons bien reçu votre dossier...</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="message">
-                    <!--photo de profil de l'utilisateur-->
-                    <div class="image-user">
-                        <img src='https://dummyimage.com/70x70/1D2D44/ffffff.png?text=Photo' alt='Photo'>
-                    </div>
-                    <div class="right-content">
-                        <div class="info-user">
-                            <div class="name">
-                                <h3>Théo Gamory</h3>
-                                <h4>Formateur</h4>
-                            </div>
-                            <div class="hour">Il y a 12 h</div>
-                        </div> <!-- Referme Info user-->
-                        <div class="text-message">
-                            <p>Nous aurons cours dans la salle 103...</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="message">
-                    <!--photo de profil de l'utilisateur-->
-                    <div class="image-user">
-                        <img src='https://dummyimage.com/70x70/1D2D44/ffffff.png?text=Photo' alt='Photo'>
-                    </div>
-                    <div class="right-content">
-                        <div class="info-user">
-                            <div class="name">
-                                <h3>John Doe</h3>
-                                <h4>Formateur</h4>
-                            </div>
-                            <div class="hour">Il y a 12 h</div>
-                        </div> <!-- Referme Info user-->
-                        <div class="text-message">
-                            <p>Blablabla</p>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div> <!-- liste-messages-->
 
         </div> <!--ferme <div> Messages-->
@@ -254,6 +265,9 @@
                 </div>
             </div>
         </div> <!-- ferme <div> container-->
+
+    <script src="../assets/js/messages.js"></script>
+
 </body>
 
 </html>

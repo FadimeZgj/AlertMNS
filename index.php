@@ -1,5 +1,9 @@
 <?php
+
+
 session_start();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -49,8 +53,8 @@ session_start();
             <?php if(isset($_SESSION['error'])): ?>
                 <p class="invalid"><?= $_SESSION['error'] ?></p>
             <?php endif; 
-            
-            session_destroy()?> 
+
+            session_destroy();?> 
 
         </div>
     </main>

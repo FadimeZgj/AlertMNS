@@ -1,6 +1,6 @@
 <?php
 
-require 'includes/inc-session-check.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/admin/includes/inc-session-check.php';
 require '../includes/inc-db-connect.php';
 
 // Récupérer tous les utilisateurs
@@ -9,7 +9,6 @@ LEFT JOIN role ON utilisateur.id_role = role.id_role
 WHERE id_utilisateur = '" . $_SESSION['user']['id'] . "'";
 $query = $dbh->query($sql);
 $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
-
 
 ?>
 
@@ -30,7 +29,7 @@ $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
 <body>
     <header>
         <div class="name-dashboard">
-            <a href=""><i class="fa-solid fa-house fa-4x"></i></a>
+            
             <h1>Dashboard Administrateur</h1>
         </div>
         <div class="name-user">
@@ -55,8 +54,8 @@ $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
         </div>
         <div class="navbar-menu" id="menu">
             <ul class="nav navbar-nav">
-                <li><a href="#"><i class="fa-solid fa-house fa-2x"></i>Accueil</a></li>
-                <li><a href="#"><i class="fa-solid fa-comment-dots fa-2x"></i>Voir tous les messages</a></li>
+                <li><a href="/admin"><i class="fa-solid fa-house fa-2x"></i>Accueil</a></li>
+                <li><a href="/messages.php"><i class="fa-solid fa-comment-dots fa-2x"></i>Voir tous les messages</a></li>
                 <li><a href="#"><i class="fa-solid fa-users fa-2x"></i>Voir tous les groupes</a></li>
                 <li><a href="#"><i class="fa-solid fa-tower-cell fa-2x"></i>Voir toutes les chaînes</a></li>
                 <li><a href="#"><i class="fa-regular fa-calendar-days fa-2x"></i>Voir les réunions</a></li>
@@ -70,7 +69,8 @@ $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
     <main>
         <nav class="sidebar">
             <div class="top-icons">
-                <a href="#"><i class="fa-solid fa-comment-dots fa-2x"></i>
+                <a href="/admin"><i class="fa-solid fa-house fa-2x"></i></a>
+                <a href="/admin/messages.php"><i class="fa-solid fa-comment-dots fa-2x"></i>
                     <p>Voir tous les messages</p>
                 </a>
                 <a href=""><i class="fa-solid fa-users fa-2x"></i>

@@ -2,6 +2,7 @@ html,
 body {
     height: 100vh;
     width: 100%;
+
 }
 
 header {
@@ -10,11 +11,14 @@ header {
     align-items: center;
     color: #F0EBD8;
     border-bottom: 1px solid rgba(240, 235, 216, 0.2);
+    position: absolute;
+    width: 96%;
+    left: 3.5%;
 
 }
 
 main {
-    height: 95%;
+    height: 100vh;
     display: grid;
     grid-template-columns: 65px 1fr;
 }
@@ -40,14 +44,15 @@ main {
     margin-left: 30px;
 }
 
-.name-dashboard .fa-solid {
+.top-icons .fa-house {
     background-color: #F0EBD8;
     color: #748CAB;
+    margin-top: -5px;
 }
 
 .fa-solid,
 .fa-regular {
-    padding: 10px;
+    padding: 13px;
     align-self: center;
 
 }
@@ -63,7 +68,7 @@ main {
     justify-content: space-between;
     padding-bottom: 30px;
     background-color: #3E5C76;
-    max-height: 100vh;
+    height: 100%;
 
 }
 
@@ -95,6 +100,7 @@ main {
     width: 100%;
     color: #F0EBD8;
     justify-content: center;
+    margin-top: 5%;
 
 }
 
@@ -106,8 +112,8 @@ main {
 }
 
 .actions li {
-    padding-bottom: 5%;
-    padding-top: 4%;
+    padding-bottom: 3.1%;
+    padding-top: 3.5%;
     font-weight: 600;
 }
 
@@ -194,12 +200,20 @@ ul {
 .squares-mob,
 .actions-mob {
     display: none;
+
 }
+
+    .section-profile,
+    .section-actions,
+    .section-squares {
+        position: absolute;
+    }
 
 @media screen and (max-width: 996px) {
 
     html,body {
         width: 100%;
+
     }
 
     main {
@@ -211,6 +225,13 @@ ul {
     header,
     .sidebar {
         display: none;
+    }
+
+    .section-profile,
+    .section-actions,
+    .section-squares 
+    {
+       position: relative;
     }
 
     .profile-mob {

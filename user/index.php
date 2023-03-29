@@ -1,7 +1,7 @@
 <?php
 
-require 'includes/inc-session-check.php';
-require '../includes/inc-db-connect.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/user/includes/inc-session-check.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
 
 // Récupérer tous les utilisateurs
 $sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , role.libelle_role FROM utilisateur 
@@ -30,7 +30,6 @@ $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
 <body>
     <header>
         <div class="name-dashboard">
-            <a href=""><i class="fa-solid fa-house fa-4x"></i></a>
             <h1>Dashboard Utilisateur</h1>
         </div>
         <div class="name-user">
@@ -70,7 +69,8 @@ $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
     <main>
         <nav class="sidebar">
             <div class="top-icons">
-                <a href="#"><i class="fa-solid fa-comment-dots fa-2x"></i>
+                <a href="/user"><i class="fa-solid fa-house fa-2x"></i></a>
+                <a href="/user/messages.php"><i class="fa-solid fa-comment-dots fa-2x"></i>
                     <p>Voir tous les messages</p>
                 </a>
                 <a href=""><i class="fa-solid fa-users fa-2x"></i>
@@ -118,7 +118,7 @@ $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
                 <div class="squares">
                     <ul>
                         <a href=""><li><i class="fa-solid fa-plus fa-2x"></i><span>Créer un groupe</span></li></a>
-                        <a href=""><li><i class="a-solid fa-comment-dots fa-2x"></i><span>Voir tous les messages</span></li></a>
+                        <a href=""><li><i class="fa-solid fa-comment-dots fa-2x"></i><span>Voir tous les messages</span></li></a>
                         <a href=""><li><i class="fa-solid fa-plus fa-2x"></i><span>Organiser une réunion</span></li></a>
                     </ul>
                     <ul>
