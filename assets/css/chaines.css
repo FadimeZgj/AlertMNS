@@ -6,6 +6,169 @@
     text-decoration: none;
 }
 
+/* Pour la modale */
+
+/* Arrière-plan de la modale */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 120px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    /* Active le scroll si besoin */
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Modal Content */
+.modal-content, .modal-content-view-members {
+    background-color: #1D2D44;
+    overflow-y: auto;
+    margin: auto;
+    padding: 20px;
+    width: 50%;
+    height: 50%;
+    color: #F0EBD8;
+    border: 1px solid rgba(240, 235, 216, 0.2);
+    border-radius: 30px;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+.modal-content h3, .modal-content-view-members h3 {
+    border-bottom: 1px solid rgba(240, 235, 216, 0.2);
+    text-align: center !important;
+    padding-bottom: 20px;
+    font-size: 30px !important;
+}
+
+.modal-content form {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 10px 50px 10px;
+}
+
+.modal-content input[type="text"] {
+    height: 40px;
+    text-indent: 5%;
+    font-size: 18px;
+    width: 70%;
+    border: 1px solid rgba(240, 235, 216, 0.2);
+    border-radius: 30px;
+    padding: 10px;
+    margin-bottom: 26px;
+    margin-top: 20px;
+}
+
+.modal-content input[type="submit"] {
+    height: 42px;
+    width: 28%;
+    padding: 10px;
+    text-align: center !important;
+    border: none;
+    border-radius: 30px;
+    font-size: 18px !important;
+    background-color: #748cab;
+    color: #F0EBD8;
+    font-weight: 600;
+}
+
+.modal-content input[type="submit"]:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+/* La modale pour les membres */
+
+.members-info {
+    margin: 20px;
+}
+
+.members-info .nameAndRole {
+    display: inline-block;
+    position: relative;
+    top: 20px;
+    left: 14px;
+    text-align: left;
+}
+
+.modal-content-view-members .members-info {
+    display: flex;
+}
+
+.modal-content-view-members .modal-icons {
+    display: flex;
+    position: relative;
+    left: 50px;
+    margin-top: -34px;
+    margin-left: -18px;
+    text-align: center;
+}
+
+.modal-icons i {
+    background-color:#F0EBD8 !important;
+    padding: 10px;
+    border-radius: 60px;
+    height: 36px;
+    width: 36px;
+    position: relative !important;
+    top: 50px !important;
+    left: 40px !important;
+}
+
+.modal-icons i:hover {
+    cursor: pointer !important;
+    background-color: #748cab !important;
+}
+
+/* The Close Button */
+.closeModal {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.closeModal:hover,
+.closeModal:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 a {
     list-style: none;
     color: #F0EBD8;
@@ -45,6 +208,7 @@ a {
     font-size: 18px;
     text-decoration: none;
     color: #F0EBD8;
+    height: 100%;
 }
 
 .sidebar ul li:hover {
@@ -70,12 +234,40 @@ a {
     display: none;
 }
 
+/* Le chat-menu (options du salon) */
+
+.chat-menu {
+    background-color: #748cab;
+    border: 1px solid rgba(240, 235, 216, 0.2);
+    border-radius: 50px;
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+}
+
+
+.chat-menu-options {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-size: 16px;
+    text-align: left;
+}
+
+.chat-menu ul li a {
+    color:#1c2531;
+}
+
 /* Les chaînes */
 
 body {
     background-color: #1D2D44;
     color: #F0EBD8;
     overflow: hidden;
+    height: 100vh;
 }
 
 ul {
@@ -119,10 +311,9 @@ ul {
 }
 
 .channel-group:hover {
-    background-color: #2f3f54;
     cursor: pointer;
+    background-color: #2f3f54
 }
-
 
 .container .salons {
     border: 1px solid rgba(240, 235, 216, 0.2);
@@ -154,7 +345,7 @@ img {
     display: none;
 }
 
-.salons .top-header-nom-salon .fa-chevron-right  {
+.salons .top-header-nom-salon .fa-chevron-right {
     color: white;
     display: none;
 }
@@ -216,8 +407,8 @@ input[type="search"]:hover {
 }
 
 .salons-liste .salon:hover {
-    background-color: #2f3f54;
     cursor: pointer;
+    background-color: #2f3f54;
 }
 
 .create-salon i {
@@ -230,16 +421,16 @@ input[type="search"]:hover {
     right: -106px;
 }
 
+.salons .create-salon .add button {
+    background-color: #1D2D44;
+    border: none;
+}
+
 .salons .create-salon .add i:hover {
     cursor: pointer;
     color: #3e5c76;
 }
 
-/* Car on est sur la chaîne Dev Web 1 */
-.chaines .channel-devweb1 {
-    background-color: #2f3f54;
-    font-weight: bold;
-}
 
 /* DISCUSSIONS */
 
@@ -378,7 +569,7 @@ input[type="search"]:hover {
 
 .message-user {
     display: flex;
-    margin-left: 300px;
+    margin-left: 54%;
 }
 
 .bubble-right {
@@ -456,7 +647,7 @@ input[type="search"]:hover {
     justify-content: flex-end;
     position: relative;
     top: -25px;
-    right: 130px;
+    right: 160px;
 }
 
 .icons-group .fas {
@@ -473,7 +664,7 @@ input[type="search"]:hover {
     cursor: pointer;
 }
 
-.send-button input[type="button"] {
+.send-button input[type="submit"] {
     color: #F0EBD8;
     background-color: #748cab;
     position: relative;
@@ -483,7 +674,7 @@ input[type="search"]:hover {
     border: none;
 }
 
-.send-button input[type="button"]:hover {
+.send-button input[type="submit"]:hover {
     background-color: #2f3f54;
     cursor: pointer;
 }
@@ -675,7 +866,8 @@ input[type="search"]:hover {
 
     .salons .salons-liste {
         margin-top: -4px;
-        border-top: 1px solid rgba(240, 235, 216, 0.2);;
+        border-top: 1px solid rgba(240, 235, 216, 0.2);
+        ;
     }
 
     /* Responsive des discussions */
@@ -688,6 +880,7 @@ input[type="search"]:hover {
         border: none;
         width: 768px;
         margin-left: 0;
+
     }
 
     .container .chaines h2 {
@@ -701,26 +894,19 @@ input[type="search"]:hover {
 
     .container .chaines .channel-group {
         display: flex;
-        padding: 20px 10px 20px 10px;
+        justify-content: center;
+        padding: 10px 10px 20px 10px;
         border-top: 1px solid rgba(240, 235, 216, 0.2);
     }
 
     .container .chaines .channel-group img {
         margin-left: 10px;
+        margin-top: 10px;
     }
 
     .container .chaines .channel-group h3 {
         margin-left: 20px;
-        margin-top: 24px;
+        margin-top: 10px;
     }
-
-    .chaines .channel-devweb1 {
-        background-color: #1D2D44;
-    }
-
-    .chaines .channel-devweb1:hover {
-        background-color: #2f3f54;
-    }
-
 
 }

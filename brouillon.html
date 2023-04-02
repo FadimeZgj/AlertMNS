@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/brouillon.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5b104128e4.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+
+    <i class="fa-solid fa-user-group fa-xl" id="viewMembersModalButton"></i>
+    <div class="modal" id="viewMembersModal">
+        <div class="modal-content-view-members">
+            <span class="closeModal" id="closeModalViewMembers">&times;</span>
+            <h3>Membres</h3>
+            <?php foreach ($utilisateurs as $utilisateur) : ?>
+            <div class="members-info">
+                <img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt="photo_de_profil">
+                <div class="nameAndRole">
+                    <h4>
+                        <?= $utilisateur["prenom_utilisateur"] ?>
+                        <?= $utilisateur["nom_utilisateur"] ?>
+                    </h4>
+                    <h5>
+                        <?= $utilisateur["libelle_role"] ?>
+                    </h5>
+                </div>
+                <div class="modal-icons">
+                    <i class="fa-regular fa-paper-plane fa-lg"></i>
+                    <i class="fa-regular fa-trash-can fa-lg"></i>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+
+
+    <script>
+        // On récupère l'id de la modale pour voir les membres
+        var viewMembersModal = document.getElementById("viewMembersModal");
+
+        // On récupère le bouton qui permet d'ouvrir la modale
+        var viewMembersModalButton = document.getElementById("viewMembersModalButton")
+
+        // On récupère la classe close du <span> qui permet de fermer la modale
+        var closeModalViewMembers = document.getElementById("closeModalViewMembers");
+
+        // Quand l'utilisateur clic sur le bouton, cela ouvre la modale
+        viewMembersModalButton.onclick = function () {
+            viewMembersModal.style.display = "block";
+        }
+
+        // Quand l'utilisateur clique sur la croix <span> (x), cela ferme la modale
+        closeModalViewMembers.onclick = function () {
+        viewMembersModal.style.display = "none";
+        }
+
+        // Quand l'utilisateur clique en dehors de la modale, cela la ferme
+        window.onclick = function (event) {
+            if (event.target == viewMembersModal) {
+                viewMembersModal.style.display = "none";
+            }
+        }
+  
+    </script>
+</body>
+
+</html>
