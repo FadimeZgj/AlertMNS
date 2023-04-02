@@ -186,6 +186,7 @@ header .topbar .user-info .user-role {
 .liste-messages {
     border-bottom: 1px solid rgba(240, 235, 216, 0.2);
     margin-left: -10px;
+    overflow: scroll;
 }
 
 .liste-messages .message {
@@ -308,6 +309,10 @@ header .topbar .user-info .user-role {
 /* Interface des conversations */
 
 /* Ma bulle de conversation  / Bulle de conversation de l'utilisateur */
+.conversation-interface {
+    overflow: scroll;
+    max-height: 65%;
+}
 
 .conversation img {
     border-radius: 50px;
@@ -445,6 +450,12 @@ header .topbar .user-info .user-role {
 }
 
 /* Chatbox */
+
+.text-zone {
+    position: fixed;
+    bottom: 0;
+    width: 70%;
+ }
 
 .chatbox input {
     position: relative;
