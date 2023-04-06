@@ -10,6 +10,38 @@ WHERE id_utilisateur = '" . $_SESSION['user']['id'] . "'";
 $query = $dbh->query($sql);
 $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
 
+if (!empty($_GET)) {
+    $id = $_GET['id'];
+}
+
+
+if (isset($_POST['submit'])) 
+{
+    
+
+        $sql = "INSERT INTO message (text_message, date_message, id_utilisateur) VALUES (:text_message, NOW(), :id_utilisateur)";
+        $query = $dbh->prepare($sql);
+        
+        $res = $query->execute([
+            'text_message' => $_POST['text_message'],
+            'id_utilisateur' => $_SESSION['user']['id']
+
+        ]);
+        
+        $newMsg = $dbh->lastInsertId();
+
+    if ($newMsg) 
+    {
+        $sql = "INSERT INTO recevoir (id_message , id_utilisateur) VALUES (:id_message, :id_utilisateur)";
+        $query = $dbh->prepare($sql);
+        $recipent = $query->execute([
+            "id_message" => $newMsg,
+            "id_utilisateur" => $id
+        ]);
+    }
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -102,7 +134,7 @@ $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
         <!--Interface principale des messages-->
         <div class="messages-interface">
             <div class="top-header-messages">
-                <h3 id="dest-name">Fadime Ilhan</h3>
+                <h3 id="dest-name"></h3>
                 <div class="search-message">
                     <i class="fa-solid fa-magnifying-glass icon"></i><input type="search" placeholder="Rechercher...">
                 </div>
@@ -113,73 +145,16 @@ $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
 
                 <!--Bulle de discussion de l'autre personne-->
                 <div id="conversation">
-                    <div class="conversation">
-                        <div class="message-me">
-                            <div class="user-info">
-                                <img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt="photo_de_profil">
-                            </div>
-                            <div class="bulle">
-                                <div class="info">
-                                    <p class="name">Nom</p>
-                                    <p class="date">14 mai 2022</p>
-                                </div>
-                                <div class="arrow-left">
-                                </div>
-                                <div class="contenu-message">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet
-                                        consectetur adipisicing elit. Expedita adipisci magni magnam nostrum, at beatae
-                                        reprehenderit exercitationem asperiores ex ipsam quam veniam sequi quisquam sapiente
-                                        animi accusantium dolor sunt quia?</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--Bulle de discussion de l'utilisateur-->
-                    <div class="message-user">
-                        <div class="bulle-user">
-                            <div class="info">
-                                <p class="name">Nom</p>
-                                <p class="date">14 mai 2022</p>
-                            </div>
-                            <div class="bubble-right">
-                                <div class="contenu-my-message">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-                                </div>
-                                <div class="arrow-right">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="my-info">
-                            <img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt="photo_de_profil">
-                        </div>
-                    </div>
-
-                    <!--Bulle de discussion de l'autre personne-->
-                    <div class="conversation">
-                        <div class="message-me">
-                            <div class="user-info">
-                                <img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt="photo_de_profil">
-                            </div>
-                            <div class="bulle">
-                                <div class="info">
-                                    <p class="name">Nom</p>
-                                    <p class="date">14 mai 2022</p>
-                                </div>
-                                <div class="arrow-left">
-                                </div>
-                                <div class="contenu-message">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
             <div class="text-zone">
                 <!-- Boîte de dialogue -->
                 <div class="chatbox">
-                    <input type="text" placeholder="Ecrivez votre message...">
+                    <form action="/admin/messages.php" method="post" id="message">
+                        <label for="text_message"></label>
+                        <input type="hidden" name="id_utilisateur">
+                        <input type="text" name="text_message" placeholder="Ecrivez votre message..." id="message-input"> 
                 </div>
 
                 <!-- Icônes de la boîte de dialogue-->
@@ -188,19 +163,14 @@ $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
                     <i class="fa-regular fa-face-smile fa-xl"></i>
                     <i class="fa-solid fa-ellipsis fa-2xl"></i>
                     <div class="send-button">
-                        <input type="button" value="Envoyer">
+                        <input type="submit" value="Envoyer" name="submit" id="send-message-btn">
                     </div>
+                    </form>
                 </div>
             </div>
-
-
         </div><!-- ferme <div> container-->
 
     </div>
-
-
-
-
 
 
     <script src="../assets/js/messages.js" async></script>

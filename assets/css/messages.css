@@ -184,6 +184,7 @@ header .topbar .user-info .user-role {
 /* Interface des messages */
 
 .liste-messages {
+    height: 100%;
     border-bottom: 1px solid rgba(240, 235, 216, 0.2);
     margin-left: -10px;
     overflow: scroll;
@@ -272,7 +273,7 @@ header .topbar .user-info .user-role {
     color: #1D2D44;
     position: absolute;
     top: 95px;
-    right: 648px;
+    right: 700px;
     z-index: 9999;
 }
 
@@ -296,7 +297,7 @@ header .topbar .user-info .user-role {
     text-indent: 14%;
     border: 1px solid rgba(240, 235, 216, 0.2);
     border-radius: 10px;
-    width: 250px;
+    width: 350px;
     position: relative;
     left: -120px;
 }
@@ -309,9 +310,21 @@ header .topbar .user-info .user-role {
 /* Interface des conversations */
 
 /* Ma bulle de conversation  / Bulle de conversation de l'utilisateur */
+
+#conversation {
+    width: 100%;
+}
+
+.conversation{
+    max-width: 100%;
+}
+
 .conversation-interface {
-    overflow: scroll;
-    max-height: 65%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 100%;
+    height: 65%;
+    
 }
 
 .conversation img {
@@ -338,11 +351,12 @@ header .topbar .user-info .user-role {
 .message-me .bulle {
     margin-left: 25px;
     margin-top: -35px;
+    max-width: 100%;
 }
 
 .contenu-message {
     background-color: #2f3f54;
-    width: auto;
+    width: 70%;
     overflow-wrap: break-word;
     padding: 20px;
     border-radius: 15px;
@@ -353,7 +367,7 @@ header .topbar .user-info .user-role {
     justify-content: space-between;
     position: relative;
     top: 10px;
-    width: auto;
+    width: 50%;
     margin-bottom: 3px;
 }
 
@@ -383,6 +397,7 @@ header .topbar .user-info .user-role {
 
 .message-user img {
     border-radius: 50px;
+
 }
 
 .message-user img:hover {
@@ -392,11 +407,12 @@ header .topbar .user-info .user-role {
 
 .message-user {
     display: flex;
-    margin-left: 300px;
+    width: auto;
 }
 
 .bubble-right {
     display: flex;
+    width: 100% ;
 }
 
 .conversation .message-user {
@@ -419,18 +435,18 @@ header .topbar .user-info .user-role {
     justify-content: space-between;
     position: relative;
     margin-left: 100px;
-    width: auto;
+    width: 60%;
     overflow-wrap: break-word;
     margin-bottom: 5px;
 }
 
 .contenu-my-message {
     background-color: #F0EBD8;
-    width: auto;
+    width: 60%;
     overflow-wrap: break-word;
     padding: 20px;
     color: #1D2D44;
-    margin-left: 100px;
+    margin-left: 50px;
     margin-right: 10px;
     border-radius: 15px;
 }
@@ -438,6 +454,8 @@ header .topbar .user-info .user-role {
 .contenu-message:hover {
     background-color: #1c2531;
 }
+
+
 
 .message-user .my-info {
     position: relative;
@@ -453,13 +471,10 @@ header .topbar .user-info .user-role {
 
 .text-zone {
     position: fixed;
-    bottom: 0;
     width: 70%;
  }
 
 .chatbox input {
-    position: relative;
-    left: 100px;
     text-indent: 2%;
     width: 75%;
     min-height: 120px;
@@ -467,6 +482,7 @@ header .topbar .user-info .user-role {
     border-radius: 20px;
     color: #1D2D44;
     font-size: 16px;
+    margin-left: 100px;
 }
 
 .chatbox input:hover {
@@ -480,9 +496,11 @@ header .topbar .user-info .user-role {
     color: #748cab;
     display: flex;
     justify-content: flex-end;
-    position: relative;
-    top: -25px;
-    left: -180px;
+    position: absolute;
+    left: 550px;
+    top: 90px;
+
+
 }
 
 .icons-group .fas {
@@ -499,7 +517,7 @@ header .topbar .user-info .user-role {
     cursor: pointer;
 }
 
-.send-button input[type="button"] {
+.send-button input[type="submit"] {
     color: #F0EBD8;
     background-color: #748cab;
     position: relative;
@@ -509,7 +527,7 @@ header .topbar .user-info .user-role {
     border: none;
 }
 
-.send-button input[type="button"]:hover {
+.send-button input[type="submit"]:hover {
     background-color: #2f3f54;
     cursor: pointer;
 }
@@ -549,15 +567,15 @@ header .topbar .user-info .user-role {
     }
     .icons-group {
         top: 100px;
-        right: -20px;
+        right: 200px;
     }
     .liste-messages .message {
         margin-left: 6px;
     }
-    .messages-interface .top-header-messages .fa-magnifying-glass {
+    /* .messages-interface .top-header-messages .fa-magnifying-glass {
         top: 107px;
-        right: 812px;
-    }
+        right: 700px;
+    } */
     .messages-interface .top-header-messages {
         padding: 30px;
     }

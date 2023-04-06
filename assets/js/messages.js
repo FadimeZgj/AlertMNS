@@ -42,9 +42,10 @@ $(document).ready(function () {
     // récupérer l'ID du destinataire associé à la div cliquée
     let id_destinataire = $(this).data('id');
 
-    $.ajax({
-
-    })
+    //Ajouter l'ID du destinataire à l'URL actuelle
+    let currentUrl = window.location.href;
+    let newUrl = currentUrl.replace(/(\?|&)id=\d+/gi, '') + '?id=' + id_destinataire;
+    window.history.pushState({ path: newUrl }, '', newUrl);
 
     
     // envoyer la requête AJAX
@@ -57,6 +58,7 @@ $(document).ready(function () {
 
         // afficher la conversation dans la liste des messages
         $('.conversation-interface').empty();
+
         // parcourir tous les messages de la conversation
         response.forEach(function (message) {
           // construire le HTML pour le message
@@ -66,9 +68,9 @@ $(document).ready(function () {
               '<p class="name">' + message.prenom_exp + ' ' + message.nom_exp + '</p><p class="date">' + message.date_message + '</p></div>' +
               '<div class="bubble-right"><div class="contenu-my-message">' +
               '<p>' + message.text_message + '</p></div>' +
-              '<div class="arrow-right"></div></div></div>' +
-              '<div class="my-info">' +
-              "<img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt='photo_de_profil'></div></div>";
+              '<div class="arrow-right"></div>' + 
+              "<img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt='photo_de_profil'></div></div>" 
+              
           }
           else {
             messageHTML = '<div class="conversation"><div class ="message-me"><div class = "user-info">' +
@@ -80,7 +82,10 @@ $(document).ready(function () {
           }
           // ajouter le message HTML à la div "conversation"
           $('.conversation-interface').append(messageHTML);
-          
+
+          // commencer au bas de la div
+          element = document.querySelector('.conversation-interface')
+          element.scrollTop = element.scrollHeight;
         });
       },
       error: function (xhr, status, error) {
@@ -95,20 +100,51 @@ $(document).ready(function () {
       dataType: 'json',
       success: function (response) {
         console.log(response)
+        $('#dest-name').empty();
         // extraire le nom du destinataire de la réponse
+
         for (i = 0; i < response.length; i++) {
           let destinataireNom = response[i].prenom_utilisateur + ' ' + response[i].nom_utilisateur;
                   // afficher le nom du destinataire ailleurs dans la page
-        $('#dest-name').text(destinataireNom);
+        $('#dest-name').append(destinataireNom);
+
         }
-            
 
       },
       error: function (xhr, status, error) {
         console.error(xhr.responseText);
       }
     });
-    
+
+    $.ajax({
+      url: '/admin/messages.php',
+      type: 'POST',
+      data: {id: id_destinataire},
+      success: function (response){
+        // // Récupère l'ID du destinataire de la réponse
+        // let id_destinataire = response.id_destinataire;
+        
+        // // Ajoute l'ID du destinataire à l'URL du formulaire
+        // let form = document.querySelector("#message");
+        // form.action += "?id=" + id_destinataire;
+
+        // Obtenir les paramètres de l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Récupérer la valeur de l'ID à partir des paramètres de l'URL
+        const id_destinataire = urlParams.get('id');
+
+        // Utiliser l'ID récupéré pour le formulaire
+        if (id_destinataire !== null) {
+          let form = document.querySelector("#message");
+          form.action += "?id=" + id_destinataire;
+        }
+        let currentUrl = window.location.href;
+        let newUrl = currentUrl.replace(/(\?|&)id=\d+/gi, '') + '?id=' + id_destinataire;
+        window.history.pushState({ path: newUrl }, '', newUrl);
+
+      }
+    });
     
   });
 
