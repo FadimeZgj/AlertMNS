@@ -17,28 +17,32 @@ if (!empty($_GET)) {
 
 if (isset($_POST['submit'])) 
 {
-    
-
-        $sql = "INSERT INTO message (text_message, date_message, id_utilisateur) VALUES (:text_message, NOW(), :id_utilisateur)";
-        $query = $dbh->prepare($sql);
-        
-        $res = $query->execute([
-            'text_message' => $_POST['text_message'],
-            'id_utilisateur' => $_SESSION['user']['id']
-
-        ]);
-        
-        $newMsg = $dbh->lastInsertId();
-
-    if ($newMsg) 
+    if (!empty($_POST['text_message'])) 
     {
-        $sql = "INSERT INTO recevoir (id_message , id_utilisateur) VALUES (:id_message, :id_utilisateur)";
-        $query = $dbh->prepare($sql);
-        $recipent = $query->execute([
-            "id_message" => $newMsg,
-            "id_utilisateur" => $id
-        ]);
+            $sql = "INSERT INTO message (text_message, date_message, id_utilisateur) VALUES (:text_message, NOW(), :id_utilisateur)";
+            $query = $dbh->prepare($sql);
+            
+            $res = $query->execute([
+                'text_message' => $_POST['text_message'],
+                'id_utilisateur' => $_SESSION['user']['id']
+
+            ]);
+            
+            $newMsg = $dbh->lastInsertId();
+
+        if ($newMsg) 
+        {
+            $sql = "INSERT INTO recevoir (id_message , id_utilisateur) VALUES (:id_message, :id_utilisateur)";
+            $query = $dbh->prepare($sql);
+            $recipent = $query->execute([
+                "id_message" => $newMsg,
+                "id_utilisateur" => $id
+            ]);
+        }
+        
+        header("Location: /admin/messages.php?id=$id");
     }
+
 }
 
 
@@ -173,13 +177,12 @@ if (isset($_POST['submit']))
     </div>
 
 
-    <script src="../assets/js/messages.js" async></script>
+    <script src="../assets/js/messages-admin.js" async></script>
     <script>
         <?php $user_id = $_SESSION['user']['id']; ?>
         // déclaration de la variable user_id avec la valeur correspondante
         let userId = <?php echo $user_id; ?>;
     </script>
-
 </body>
 
 </html>

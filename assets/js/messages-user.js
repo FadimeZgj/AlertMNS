@@ -117,7 +117,7 @@ $(document).ready(function () {
     });
 
     $.ajax({
-      url: '/admin/messages.php',
+      url: '/user/messages.php',
       type: 'POST',
       data: {id: id_destinataire},
       success: function (response){
@@ -138,16 +138,11 @@ $(document).ready(function () {
         if (id_destinataire !== null) {
           let form = document.querySelector("#message");
           form.action += "?id=" + id_destinataire;
-        }
-        let currentUrl = window.location.href;
-        let newUrl = currentUrl.replace(/(\?|&)id=\d+/gi, '') + '?id=' + id_destinataire;
-        window.history.pushState({ path: newUrl }, '', newUrl);
-
+        }   
       }
     });
     
   });
-
 });
 
 
