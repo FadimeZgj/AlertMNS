@@ -237,15 +237,19 @@ a {
 /* Le chat-menu (options du salon) */
 
 .chat-menu {
+    display: none;
     background-color: #748cab;
-    border: 1px solid rgba(240, 235, 216, 0.2);
-    border-radius: 50px;
-    width: 250px;
-    height: 250px;
+    border: 2px solid rgba(240, 235, 216, 0.2);
+    border-radius: 14px;
+    width: 280px;
+    height: 300px;
     position: absolute;
     top: 0;
+    left: 78%;
+    margin-top: 40px;
     right: 0;
     z-index: 2;
+    text-align: center;
 }
 
 
@@ -253,8 +257,39 @@ a {
     display: flex;
     flex-direction: column;
     width: 100%;
+    position: relative;
     font-size: 16px;
     text-align: left;
+    margin-top: 50px;
+}
+
+
+.chat-menu .chat-menu-options .fa-trash, .chat-menu .chat-menu-options .fa-pen,
+.chat-menu .chat-menu-options .fa-volume-xmark, .chat-menu .chat-menu-options .fa-bell, .chat-menu .chat-menu-options .fa-folder{
+    position: relative;
+    top: 0;
+    left: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.chat-menu-options li {
+    width: 100%;
+}
+
+.chat-menu-options li:hover {
+    background-color: #F0EBD8;
+}
+
+.chat-menu .chat-menu-options .fa-xmark {
+    position: absolute !important;
+    top: -24px;
+    margin-left: 162px !important;
+}
+
+.chat-menu .chat-menu-options .fa-xmark:hover {
+    cursor: pointer;
+    color: #F0EBD8;
 }
 
 .chat-menu ul li a {
@@ -476,7 +511,7 @@ input[type="search"]:hover {
 .discussion .topbar .fa-user-group {
     color: #F0EBD8;
     margin-top: 12px;
-    margin-left: 28%;
+    margin-left: 10%;
 }
 
 .discussion .topbar .fa-user-group:hover {
@@ -510,7 +545,7 @@ input[type="search"]:hover {
 .message-me {
     display: flex;
     align-items: center;
-    margin: 10px;
+    margin: 10px 10px 10px 70px;
     padding: 50px;
 }
 
@@ -569,12 +604,14 @@ input[type="search"]:hover {
 
 .message-user {
     display: flex;
-    margin-left: 54%;
+    position: relative;
+    left: 520px;
 }
 
 .bubble-right {
     display: flex;
 }
+
 
 .conversation .message-user {
     display: flex;
@@ -627,12 +664,13 @@ input[type="search"]:hover {
 
 .chatbox input {
     text-indent: 2%;
-    width: 75%;
+    width: 80%;
     min-height: 120px;
     border: 1px solid rgba(240, 235, 216, 0.1);
     border-radius: 20px;
     color: #1D2D44;
     font-size: 16px;
+    margin-right: 20px;
 }
 
 .chatbox input:hover {
@@ -647,7 +685,7 @@ input[type="search"]:hover {
     justify-content: flex-end;
     position: relative;
     top: -25px;
-    right: 160px;
+    right: 125px;
 }
 
 .icons-group .fas {
@@ -684,8 +722,9 @@ input[type="search"]:hover {
 /* Permet de déplacer les icônes de la top bar en grand écran */
 @media (min-width : 1600px) {
     .discussion .topbar .fa-user-group {
-        margin-left: 35%;
+        margin-left: 24%;
     }
+
 
     .salons .create-salon .add i {
         right: -150px;
@@ -701,6 +740,7 @@ input[type="search"]:hover {
 
     .message-user {
         margin-left: 380px;
+        left: 150px;
     }
 
     .message-user .my-info {
@@ -723,6 +763,8 @@ input[type="search"]:hover {
     .chatbox input {
         margin-top: 120px;
         min-height: 150px;
+        margin-right: 160px;
+        width: 75%;
     }
 
     .bulle .info {
@@ -731,6 +773,12 @@ input[type="search"]:hover {
 
     .icons-group {
         margin-right: 20px;
+        right: 240px;
+    }
+
+    /* Menu des options */
+    .chat-menu {
+        left: 84%
     }
 }
 

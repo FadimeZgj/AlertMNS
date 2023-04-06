@@ -1,74 +1,24 @@
 <?php
 session_start();
-require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/admin/managers/chaines-manager.php';
 
-// // Peut-être un potentiel ? //
-
-// $sql = "SELECT *, GROUP_CONCAT(utilisateur.id_utilisateur SEPARATOR ',')
-// FROM `chaine` 
-// LEFT JOIN utilisateur ON utilisateur.id_utilisateur = chaine.id_utilisateur 
-// LEFT JOIN salon ON salon.id_chaine = chaine.id_chaine 
-// GROUP BY chaine.id_chaine";
-
-
-/* On récupère les chaînes */
-$sql = "SELECT * from chaine
-ORDER BY id_chaine DESC";
-
-$result = $dbh->query($sql);
-$chaines = $result->fetchAll(PDO::FETCH_ASSOC);
-json_encode($chaines);
-
-/* On récupère les salons de la chaîne Dev Web 1 */
-
-$sql = "SELECT * 
-FROM salon 
-LEFT JOIN chaine ON salon.id_chaine = chaine.id_chaine
-WHERE chaine.nom_chaine = 'Dev Web 1'
-ORDER BY nom_chaine ASC;";
-$result = $dbh->query($sql);
-$salons = $result->fetchAll(PDO::FETCH_ASSOC);
-
-
-// Récupérer l'utilisateur de la session
-$sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , role.libelle_role FROM utilisateur 
-LEFT JOIN role ON utilisateur.id_role = role.id_role
-WHERE id_utilisateur = '" . $_SESSION['user']['id'] . "'";
-$query = $dbh->query($sql);
-$user = $query->fetch(PDO::FETCH_ASSOC);
-
-// Récupérer tous les utilisateurs
-function getAllUsers()
-{
-    $dbh = $GLOBALS['dbh'];
-    $sql = $sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , role.libelle_role FROM utilisateur 
-    LEFT JOIN role ON utilisateur.id_role = role.id_role
-    ORDER BY id_utilisateur ASC";
-
-    return $dbh->query($sql)->fetchAll();
-}
-
+$salons = getAllSalons();
 $utilisateurs = getAllUsers();
+$chaines = getAllChaines();
+$user = getUserSession();
+$messages = getAllMessages();
 
-// $utilisateurs = $query->fetch(PDO::FETCH_ASSOC);
-//var_dump($utilisateurs);
-
-
-// Jointure de la table message avec la table utilisateur et la table recevoir
-
-$sql = 'SELECT message.id_message, message.text_message, message.date_message, 
-message.id_utilisateur as id_expediteur, 
-recevoir.id_message as message_reception, 
-recevoir.id_utilisateur as id_destinataire, 
-recevoir.date_lecture 
-FROM message 
-JOIN recevoir ON message.id_message = recevoir.id_message 
-        WHERE message.id_utilisateur = ' . $_SESSION['user']['id'] . ' OR recevoir.id_utilisateur = ' . $_SESSION['user']['id'] .
-    ' ORDER BY message.date_message DESC ';
-$query = $dbh->query($sql);
-$messages = $query->fetch(PDO::FETCH_ASSOC);
 
 // Fonctions pour ajouter un salon à une chaîne
+
+if (isset($_POST['submit'])) {
+    $id = insertSalon($_POST['salon']);
+
+    if ($id) {
+        header("Location: /chaines");
+        exit;
+    }
+}
 
 ?>
 
@@ -81,6 +31,7 @@ $messages = $query->fetch(PDO::FETCH_ASSOC);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chaînes</title>
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
     <link rel="stylesheet" href="/assets/css/chaines.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -96,7 +47,7 @@ $messages = $query->fetch(PDO::FETCH_ASSOC);
             <li><a href="#"><i class="fas fa-house-chimney-window fa-xl"></i></a></li>
             <li><a href="#"><i class="fa-solid fa-comment-dots fa-xl"></i></a></li>
             <li><a href="#"><i class="fa-solid fa-users-rectangle fa-xl"></i></a></li>
-            <li><a href=""><i class="fa-solid fa-diagram-project fa-xl"></i></a></li>
+            <li><a href="/admin/chaines/index.php"><i class="fa-solid fa-diagram-project fa-xl"></i></a></li>
             <li><a href=""><i class="fa-regular fa-calendar fa-xl"></i></a></li>
         </ul>
     </nav>
@@ -128,19 +79,18 @@ $messages = $query->fetch(PDO::FETCH_ASSOC);
         <div class="chaines" id="chaines">
             <h2>Chaînes</h2>
             <?php foreach ($chaines as $chaine): ?>
-                <div class="channel-group" id="nomChaine"><a>
-                        <img src='https://dummyimage.com/70x70/1D2D44/FFFFFF.png?text=Cha%C3%AEnes' alt="logo chaine">
-                        <h3>
-                            <?= $chaine['nom_chaine'] ?>
-                        </h3>
-                    </a>
+                <div class="channel-group" id="nomChaine_<?php echo $chaine["id_chaine"] ?> ">
+                    <img src='https://dummyimage.com/70x70/1D2D44/FFFFFF.png?text=Cha%C3%AEnes' alt="logo chaine">
+                    <h3 id="chaine">
+                        <?= $chaine['nom_chaine'] ?>
+                    </h3>
                 </div>
             <?php endforeach; ?>
         </div>
         <div class="salons" id="salons">
             <div class="top-header-nom-salon">
                 <i class="fa-solid fa-chevron-left fa-2xl" id="leftArrow"></i>
-                <h2 name="nomChaine">
+                <h2 id="chaineTitle">
                     <?= $chaine['nom_chaine'] ?>
                 </h2>
                 <i class="fa-solid fa-chevron-right fa-2xl"></i>
@@ -153,20 +103,22 @@ $messages = $query->fetch(PDO::FETCH_ASSOC);
                     <div class="modal" id="addSalonModal">
                         <div class="modal-content">
                             <span class="closeModal" id="closeModal">&times;</span>
-                            <h3>Création d'une chaîne</h3>
-                            <form action="">
-                                <label for="newChaine"></label>
-                                <input type="text" name="newChaine">
+                            <h3>Création d'un salon</h3>
+
+                            <form action="/admin/chaines/index.php" method="POST">
+                                <label for="newSalon"></label>
+                                <input type="text" name="salon[nom_salon]">
                                 <input type="submit" name="submit" value="Envoyer">
                             </form>
+
                         </div>
                     </div>
                 </div>
-                <div class="salons-liste" id="liste-salon">
+                <div class="salons-liste" id="listeSalon">
                     <?php foreach ($salons as $salon): ?>
-                        <div class="salon"><a>
-                                <?= $salon['nom_salon'] ?>
-                            </a></div>
+                        <div class="salon" style="display: none;">
+                            <?= $salon['nom_salon'] ?>
+                        </div>
                     <?php endforeach; ?>
                 </div>
             </div>
@@ -175,7 +127,7 @@ $messages = $query->fetch(PDO::FETCH_ASSOC);
         <!-- Concerne l'entête de la discussion -->
         <div class="discussion" id="discussion">
             <div class="topbar">
-                <h2>#
+                <h2 id="nomSalon">
                     <?= $salon['nom_salon'] ?>
                 </h2>
                 <i class="fa-solid fa-magnifying-glass icon"></i><input type="search" placeholder="Rechercher...">
@@ -208,10 +160,10 @@ $messages = $query->fetch(PDO::FETCH_ASSOC);
                 </div>
 
                 <!-- icône et menu pour les 3 petits points-->
-                <i class="fa-solid fa-ellipsis fa-2xl"></i>
-                <div class="chat-menu">
-                    <ul id="chatMenu" class="chat-menu-options">
-                    <!-- <i class="close fa-solid fa-xmark fa-2xl"></i> -->
+                <i class="fa-solid fa-ellipsis fa-2xl" id="clickEllipsis"></i>
+                <div class="chat-menu" id="showChatMenu">
+                    <ul class="chat-menu-options">
+                        <li id="closeEllipsisMenu"><i class="fa-solid fa-xmark fa-2xl"></i></li>
                         <li><a href="#"><i class="fas fa-pen fa-xl"></i> Modifier le nom du salon</a></li>
                         <li><a href="#"><i class="fas fa-volume-xmark fa-xl"></i> Mettre en sourdine</a></li>
                         <li><a href="#"><i class="fas fa-bell fa-xl"></i> Paramètre de notifications</a></li>
@@ -252,7 +204,6 @@ $messages = $query->fetch(PDO::FETCH_ASSOC);
                         <div class="info">
                             <p class="name">
                                 <?= $user['prenom_utilisateur'] ?>
-                                <?= $user['nom_utilisateur'] ?>
                             </p>
                             <p class="date">
                                 <?= $messages['date_message'] ?>
@@ -324,72 +275,93 @@ $messages = $query->fetch(PDO::FETCH_ASSOC);
         </div> <!--container -->
     </div>
     <script>
-        // On récupère l'id de la modale
-        var addSalonModal = document.getElementById("addSalonModal");
 
-        // On récupère le bouton qui permet d'ouvrir la modale
-        var createSalonModalButton = document.getElementById("createSalonModalButton");
 
-        // On récupère la classe close du <span> qui permet de fermer la modale
-        var closeModal = document.getElementById("closeModal");
+        ///////// JSON qui permet de recharger la liste des salons \\\\\\\\\\\
 
-        // Quand l'utilisateur clic sur le bouton, cela ouvre la modale
-        createSalonModalButton.onclick = function () {
-            addSalonModal.style.display = "block";
+        // Affichage de la liste des salons
+
+        // On récupère toutes les chaînes générés par le PHP qui ont la classe "channel-group"
+        const channelGroup = document.querySelectorAll(".channel-group");
+
+        for (let i of channelGroup) {
+            i.addEventListener("click", (e) => {
+                listeSalon.innerHTML = ""
+                fetch('../../get_salon.php?id_chaine=' + i.id).then(function (response) {
+                    return response.json();
+                }).then(function (monjson) {
+                    console.log(monjson)
+                    for (j = 0; j < monjson.length; j++) {
+                        // On créer une div
+                        var div = document.createElement('div');
+                        // A cette div on rajoute la classe "salon"
+                        div.classList.add('salon');
+                        // On créer le texte "salon" afin de rajouter la
+                        var salon = document.createTextNode('salon')
+                        div.appendChild(salon)
+                        div.innerHTML = monjson[j].nom_salon;
+                        // console.log(monjson[j].nom_salon) // Recupère bien tous les salons
+                        document.getElementById('listeSalon').appendChild(div);
+                    }
+
+
+                })
+            })
         }
 
-        // Quand l'utilisateur clique sur la croix <span> (x), cela ferme la modale
-        closeModal.onclick = function () {
-            addSalonModal.style.display = "none";
+        ///////// JSON qui permet d'afficher le nom de chaîne correct au-dessus de la liste des salons \\\\\\\\\\\
+        
+        // On récupère les chaînes contenant la classe "channel-group"
+        let chaineListe = document.querySelectorAll(".channel-group");
+
+        let chaineTitle = document.getElementById("chaineTitle")
+        // console.log(chaineTitle);
+
+        for (let i of chaineListe) {
+            i.addEventListener("click", (e) => {
+                chaineTitle.innerHTML = ""
+                fetch('../../get_chaines.php?id_chaine=' + i.id).then(function (response) {
+                    return response.json();
+                }).then(function (monjson) {
+                    console.log(monjson)
+
+                    for (j = 0; j < monjson.length; j++) {
+                        chaineTitle.innerHTML = monjson[j].nom_chaine;
+                    }
+                    document.getElementById('chaineTitle').appendChild(chaineTitle);
+                })
+            })
         }
 
-        // Quand l'utilisateur clique en dehors de la modale, cela la ferme
-        window.onclick = function (e) {
-            if (e.target == addSalonModal) {
-                addSalonModal.style.display = "none";
-            }
+        ///////// JSON qui permet d'afficher le salon correct au-dessus de la liste des salons \\\\\\\\\\\
+
+        // On récupère tous les salons générés en JSON qui ont la classe "salon"
+        const salonGroup = document.querySelectorAll(".salon");
+
+        for (let i of salonGroup) {
+            i.addEventListener("click", (e) => {
+                listeSalon.innerHTML = ""
+                fetch('../../get_salon.php?id_chaine=' + i.id).then(function (response) {
+                    return response.json();
+                }).then(function (monjson) {
+                    console.log(monjson)
+                    for (j = 0; j < monjson.length; j++) {
+                        // On créer une div
+                        var div = document.createElement('div');
+                        // A cette div on rajoute la classe "salon"
+                        div.classList.add('salon');
+                        // On créer le texte "salon" afin de rajouter la
+                        var salon = document.createTextNode('salon')
+                        div.appendChild(salon)
+                        div.innerHTML = monjson[j].nom_salon;
+                        // console.log(monjson[j].nom_salon) // Recupère bien tous les salons
+                        document.getElementById('listeSalon').appendChild(div);
+                    }
+
+
+                })
+            })
         }
-
-
-        // JS pour afficher le nav menu
-
-        // On récupère le bouton auquel on va ajouter l'évènement
-        const burgerMenuBtn = document.getElementById("burgerMenu");
-
-        burgerMenuBtn.addEventListener("click", responsiveMenu);
-
-        var responsiveMenu = document.getElementById("responsiveMenu");
-        // Afficher le menu quand on clic sur le burger
-        function responsiveMenu() {
-            if (responsiveMenu.style.display === "block") {
-                responsiveMenu.style.display = "none";
-                chaines.style.display = "block";
-            } else {
-                responsiveMenu.style.display = "block";
-                chaines.style.display = "block";
-            }
-        }
-
-        // 
-
-    // Test fetch Json
-
-    // document.querySelector("#nomChaine").addEventListener("click", function (e) {
-    //         salons.innerHTML = ""
-    //         fetch('/index.php').then(function (response) {
-    //         return response.json();
-    //     }).then(function (monjson) {
-    //         console.log(monjson)
-
-    //         var ul = document.createElement('ul');
-    //         for (i = 0; i < monjson.length; i++) {
-    //             var li = document.createElement('li');
-    //             li.innerHTML = monjson[i].nom_chaine;
-    //             ul.appendChild(li);
-    //         }
-    //         document.getElementById('salons').appendChild(ul);
-    //     })
-    //     })
 
     </script>
     <script src="/assets/js/chaines.js"></script>

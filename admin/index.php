@@ -55,10 +55,10 @@ $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
         </div>
         <div class="navbar-menu" id="menu">
             <ul class="nav navbar-nav">
-                <li><a href="#"><i class="fa-solid fa-house fa-2x"></i>Accueil</a></li>
+                <li><a href="/admin/index.php"><i class="fa-solid fa-house fa-2x"></i>Accueil</a></li>
                 <li><a href="#"><i class="fa-solid fa-comment-dots fa-2x"></i>Voir tous les messages</a></li>
                 <li><a href="#"><i class="fa-solid fa-users fa-2x"></i>Voir tous les groupes</a></li>
-                <li><a href="#"><i class="fa-solid fa-tower-cell fa-2x"></i>Voir toutes les chaînes</a></li>
+                <li><a href="./admin/chaines/index.php"><i class="fa-solid fa-tower-cell fa-2x"></i>Voir toutes les chaînes</a></li>
                 <li><a href="#"><i class="fa-regular fa-calendar-days fa-2x"></i>Voir les réunions</a></li>
                 <li><a href="#"><i class="fa-solid fa-user fa-2x"></i>Gérer mon profil</a></li>
                 <li><a href="#"><i class="fa-solid fa-gear fa-2x"></i>Réglages</a></li>
@@ -106,7 +106,7 @@ $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
                         <li><a href=""><i class="fa-solid fa-plus fa-xl"></i>Créer un nouveau groupe</a></li>
                         <li><a href=""><i class="fa-solid fa-plus fa-xl"></i>Organiser une réunion</a></li>
                         <li><a href=""><i class="fa-solid fa-magnifying-glass fa-xl"></i>Rechercher un utilisateur</a></li>
-                        <li><a href=""><i class="fa-solid fa-tower-cell fa-xl"></i>Voir les chaînes</a></li>
+                        <li><a href="./admin/chaines/index.php"><i class="fa-solid fa-tower-cell fa-xl"></i>Voir les chaînes</a></li>
                         <li><a href=""><i class="fa-solid fa-users fa-xl"></i>Voir les groupes</a></li>
                         <li><a href=""><i class="fa-solid fa-comment-dots fa-xl"></i>Voir les messages</a></li>
                         <li><a href=""><i class="fa-regular fa-calendar-days fa-xl"></i>Voir les réunions prévues</a></li>
