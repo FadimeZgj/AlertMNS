@@ -1,0 +1,74 @@
+.add h1 {
+    text-align: center;
+    font-size: 38px;
+}
+
+.add{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    width: 100%;
+    height: 85%;
+    background-color: #748CAB;
+    border-radius: 30px;
+    padding: 7% 50px;
+
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: auto;
+
+    
+}
+
+.form-name {
+    display: flex;
+    gap: 10px;
+}
+
+.form-name-lastname, .form-name-firstname {
+    display: flex;
+    flex-direction: column;
+    flex:1;
+}
+
+input {
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #F0EBD8;
+}
+
+label {
+    margin: 10px 0 10px 0;
+}
+
+::placeholder {
+    text-align: center;
+    font-size: 16px;
+}
+
+.submit {
+    width: 220px;
+    margin: auto;
+    margin-top: 30px;
+    color: #3E5C76;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.submit:hover {
+    background-color: #f0ebd882;
+}
+
+.error {
+    color: rgb(188, 1, 1);
+}
+
+.role {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}

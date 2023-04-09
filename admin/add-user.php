@@ -1,7 +1,8 @@
 <?php
-
 require $_SERVER['DOCUMENT_ROOT'] . '/admin/includes/inc-session-check.php';
 require '../includes/inc-db-connect.php';
+unset($_SESSION['error']);
+
 
 // Récupérer tous les utilisateurs
 $sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , role.libelle_role FROM utilisateur 
@@ -10,13 +11,16 @@ WHERE id_utilisateur = '" . $_SESSION['user']['id'] . "'";
 $query = $dbh->query($sql);
 $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
 
-$title = "AlertMNS - Dashboard Admin";
+$sql = "SELECT * FROM role";
+$query = $dbh->query($sql);
+$roles = $query->fetchAll(PDO::FETCH_ASSOC);
 
-include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
-
+$title = "AlertMNS - Ajout utilisateur";
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
 ?>
 
-    <link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/add-user.css">
+<link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/dashboard.css">
 </head>
 
@@ -112,18 +116,53 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                 </div>
             </section>
 
+            <!-- Cadre ajout utilisateur -->
             <section>
-                <div class="squares">
-                    <ul>
-                        <a href=""><li><i class="fa-solid fa-plus fa-2x"></i><span>Créer un utilisateur</span></li></a>
-                        <a href=""><li><i class="fa-solid fa-plus fa-2x"></i><span>Créer une nouvelle chaine</span></li></a>
-                        <a href=""><li><i class="fa-solid fa-plus fa-2x"></i><span>Créer un nouveau groupe</span></li></a>
-                    </ul>
-                    <ul>
-                        <a href=""><li><i class="fa-solid fa-plus fa-2x"></i><span>Organiser une réunion</span></li></a>
-                        <a href=""><li><i class="fa-solid fa-tower-cell fa-2x"></i><span>Voir les chaînes</span></li></a>
-                        <a href=""><li><i class="fa-solid fa-magnifying-glass fa-2x"></i><span>Rechercher un utilisateur</span></li></a>
-                    </ul>
+                <div class="add">
+                    <h1>Créer un nouvel utilisateur</h1>
+
+                    <form action="/admin/add-user-POST.php" method="post" name="add-user">
+                        <div class="form-name">
+                            <div class="form-name-lastname">
+                                <label for="nom_utilisateur">Nom</label>
+                                <input type="text" name="nom_utilisateur">
+                                <?php if(isset($_SESSION['errors']['nom_utilisateur'])): ?>
+                                <small class="error"><?= $_SESSION['errors']['nom_utilisateur'] ?></small>
+                                <?php endif; ?>
+                            </div>
+                            <div class="form-name-firstname">
+                                <label for="prenom_utilisateur">Prénom</label>
+                                <input type="text" name="prenom_utilisateur">
+                                <?php if(isset($_SESSION['errors']['prenom_utilisateur'])): ?>
+                                <small class="error"><?= $_SESSION['errors']['prenom_utilisateur'] ?></small>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <label for="email_utilisateur">Adresse email</label>
+                        <input type="email" placeholder="Adresse@email.com" name="email_utilisateur">
+                        <?php if(isset($_SESSION['errors']['email_utilisateur'])): ?>
+                        <small class="error"><?= $_SESSION['errors']['email_utilisateur'] ?></small>
+                        <?php endif; ?>
+
+                        <label for="mdp_utilisateur">Mot de passe</label>
+                        <input type="password" name="mdp_utilisateur">
+                        <?php if(isset($_SESSION['errors']['mdp_utilisateur'])): ?>
+                        <small class="error"><?= $_SESSION['errors']['mdp_utilisateur'] ?></small>
+                        <?php endif; ?>
+
+                        <div class="role">
+                        <?php foreach($roles as $role):?>
+                            <input type="radio" name="id_role" value="<?=$role['id_role']?>">
+                            <label for="id_role"><?=$role['libelle_role']?></label> 
+                        <?php endforeach; ?>
+                        </div> 
+                       
+
+                        <input type="submit" class="submit" value="Créer" name="submit">
+                    </form>
+                    <?php if(isset($_SESSION['error'])): ?>
+                    <p class="invalid"><?= $_SESSION['error'] ?></p>
+                    <?php endif;?> 
                 </div>
             </section>
         </div>
@@ -173,5 +212,4 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
     <footer></footer>
     <script src="../assets/js/script.js"></script>
 
-
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-bottom.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'?>
