@@ -91,6 +91,10 @@ footer {
     top: 50%;
 }
 
+footer a {
+    color: #F0EBD8;
+}
+
 .fa-envelope {
     margin: 20px;
 }
