@@ -13,7 +13,8 @@ $sql = "SELECT salon.nom_salon, salon.id_chaine as num, chaine.nom_chaine, chain
 FROM salon
 LEFT JOIN chaine ON chaine.id_chaine = salon.id_chaine
 WHERE salon.id_chaine = chaine.id_chaine
-AND chaine.id_chaine = " . $chaine_id;
+AND salon.id_chaine = salon.id_chaine
+AND chaine.id_chaine = " . $chaine_id; // ou salon.id_chaine
 
 $query = $dbh->query($sql);
 $salons = $query->fetchAll(PDO::FETCH_ASSOC);
