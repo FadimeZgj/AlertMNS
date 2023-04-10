@@ -1,6 +1,6 @@
 <?php
 session_start();
-require $_SERVER['DOCUMENT_ROOT'] . '/admin/managers/chaines-manager.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/admin/chaines-manager.php';
 
 $salons = getAllSalons();
 $utilisateurs = getAllUsers();
