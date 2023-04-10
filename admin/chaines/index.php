@@ -116,7 +116,7 @@ if (isset($_POST['submit'])) {
                 </div>
                 <div class="salons-liste" id="listeSalon">
                     <?php foreach ($salons as $salon): ?>
-                        <div class="salon" style="display: none;">
+                        <div class="salon" style="display: none;" >
                             <?= $salon['nom_salon'] ?>
                         </div>
                     <?php endforeach; ?>
@@ -277,91 +277,6 @@ if (isset($_POST['submit'])) {
     <script>
 
 
-        ///////// JSON qui permet de recharger la liste des salons \\\\\\\\\\\
-
-        // Affichage de la liste des salons
-
-        // On récupère toutes les chaînes générés par le PHP qui ont la classe "channel-group"
-        const channelGroup = document.querySelectorAll(".channel-group");
-
-        for (let i of channelGroup) {
-            i.addEventListener("click", (e) => {
-                listeSalon.innerHTML = ""
-                fetch('../../get_salon.php?id_chaine=' + i.id).then(function (response) {
-                    return response.json();
-                }).then(function (monjson) {
-                    console.log(monjson)
-                    for (j = 0; j < monjson.length; j++) {
-                        // On créer une div
-                        var div = document.createElement('div');
-                        // A cette div on rajoute la classe "salon"
-                        div.classList.add('salon');
-                        // On créer le texte "salon" afin de rajouter la
-                        var salon = document.createTextNode('salon')
-                        div.appendChild(salon)
-                        div.innerHTML = monjson[j].nom_salon;
-                        // console.log(monjson[j].nom_salon) // Recupère bien tous les salons
-                        document.getElementById('listeSalon').appendChild(div);
-                    }
-
-
-                })
-            })
-        }
-
-        ///////// JSON qui permet d'afficher le nom de chaîne correct au-dessus de la liste des salons \\\\\\\\\\\
-        
-        // On récupère les chaînes contenant la classe "channel-group"
-        let chaineListe = document.querySelectorAll(".channel-group");
-
-        let chaineTitle = document.getElementById("chaineTitle")
-        // console.log(chaineTitle);
-
-        for (let i of chaineListe) {
-            i.addEventListener("click", (e) => {
-                chaineTitle.innerHTML = ""
-                fetch('../../get_chaines.php?id_chaine=' + i.id).then(function (response) {
-                    return response.json();
-                }).then(function (monjson) {
-                    console.log(monjson)
-
-                    for (j = 0; j < monjson.length; j++) {
-                        chaineTitle.innerHTML = monjson[j].nom_chaine;
-                    }
-                    document.getElementById('chaineTitle').appendChild(chaineTitle);
-                })
-            })
-        }
-
-        ///////// JSON qui permet d'afficher le salon correct au-dessus de la liste des salons \\\\\\\\\\\
-
-        // On récupère tous les salons générés en JSON qui ont la classe "salon"
-        const salonGroup = document.querySelectorAll(".salon");
-
-        for (let i of salonGroup) {
-            i.addEventListener("click", (e) => {
-                listeSalon.innerHTML = ""
-                fetch('../../get_salon.php?id_chaine=' + i.id).then(function (response) {
-                    return response.json();
-                }).then(function (monjson) {
-                    console.log(monjson)
-                    for (j = 0; j < monjson.length; j++) {
-                        // On créer une div
-                        var div = document.createElement('div');
-                        // A cette div on rajoute la classe "salon"
-                        div.classList.add('salon');
-                        // On créer le texte "salon" afin de rajouter la
-                        var salon = document.createTextNode('salon')
-                        div.appendChild(salon)
-                        div.innerHTML = monjson[j].nom_salon;
-                        // console.log(monjson[j].nom_salon) // Recupère bien tous les salons
-                        document.getElementById('listeSalon').appendChild(div);
-                    }
-
-
-                })
-            })
-        }
 
     </script>
     <script src="/assets/js/chaines.js"></script>
