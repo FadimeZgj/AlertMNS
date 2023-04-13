@@ -43,17 +43,23 @@ if (!empty($_POST['submit']))
         header("Location: /admin/add-user.php"); die;
     }
 
+    $_POST['nom_utilisateur'] = htmlspecialchars($_POST['nom_utilisateur']);
+    $_POST['prenom_utilisateur'] = htmlspecialchars($_POST['prenom_utilisateur']);
+    $_POST['email_utilisateur'] = htmlspecialchars($_POST['email_utilisateur']);
+    $_POST['mdp_utilisateur'] = htmlspecialchars($_POST['email_utilisateur']);
+
      // On insère l'utilisateur en BDD
-     $sql = "INSERT INTO utilisateur (nom_utilisateur, prenom_utilisateur, email_utilisateur, mdp_utilisateur) 
-     VALUES (:nom_utilisateur, :prenom_utilisateur, :email_utilisateur, :mdp_utilisateur)";
+     $sql = "INSERT INTO utilisateur (nom_utilisateur, prenom_utilisateur, email_utilisateur, mdp_utilisateur, id_role) 
+     VALUES (:nom_utilisateur, :prenom_utilisateur, :email_utilisateur, :mdp_utilisateur, :id_role)";
      $query = $dbh->prepare($sql);
      $res = $query->execute([
          'nom_utilisateur' => $_POST['nom_utilisateur'],
          'prenom_utilisateur' => $_POST['prenom_utilisateur'],
          'email_utilisateur' => $_POST['email_utilisateur'],
-         'mdp_utilisateur' => password_hash($_POST['mdp_utilisateur'], PASSWORD_DEFAULT)
+         'mdp_utilisateur' => password_hash($_POST['mdp_utilisateur'], PASSWORD_DEFAULT),
+         'id_role' => $_POST['id_role']
      ]);
- 
+
      if($res)
      {
          header("Location: /admin/add-user.php"); exit;

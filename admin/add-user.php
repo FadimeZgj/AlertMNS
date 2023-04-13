@@ -151,11 +151,13 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
                         <?php endif; ?>
 
                         <div class="role">
-                        <?php foreach($roles as $role):?>
-                            <input type="radio" name="id_role" value="<?=$role['id_role']?>">
-                            <label for="id_role"><?=$role['libelle_role']?></label> 
-                        <?php endforeach; ?>
-                        </div> 
+                            <label for="role">Rôle</label>
+                            <select name="id_role" id="">
+                                <?php foreach($roles as $role):?>
+                                <option value="<?=$role['id_role']?>" name="id_role"><?=$role['libelle_role']?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                        
 
                         <input type="submit" class="submit" value="Créer" name="submit">
