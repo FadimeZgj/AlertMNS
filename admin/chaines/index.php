@@ -9,8 +9,8 @@ $user = getUserSession();
 $messages = getAllMessages();
 
 
-// Fonctions pour ajouter un salon à une chaîne
-
+// Fonction pour ajouter un salon à une chaîne
+// // Marche pas
 if (isset($_POST['submit'])) {
     $id = insertSalon($_POST['salon']);
 
@@ -19,6 +19,28 @@ if (isset($_POST['submit'])) {
         exit;
     }
 }
+
+// // Traiter le formulaire si envoyé
+// if(!empty($_POST['submit']))
+// {
+
+//     $sql = "INSERT INTO salon (nom_salon, id_chaine) VALUES (:nom_salon, :id_chaine)";
+//     $query = $dbh->prepare($sql);
+//     $res = $query->execute([
+//         'nom_salon' => $_POST['nom_salon']
+//         'id_chaine' => 
+//     ]);
+
+//     if($res)
+//     {
+//         header("Location: /admin/chaines/index.php"); exit;
+//     }
+//     else
+//     {
+//         echo "Une erreur est survenue...";
+//     }
+
+// }
 
 ?>
 
@@ -74,7 +96,6 @@ if (isset($_POST['submit'])) {
     </nav>
 
 
-
     <div class="container">
         <div class="chaines" id="chaines">
             <h2>Chaînes</h2>
@@ -82,7 +103,7 @@ if (isset($_POST['submit'])) {
                 <div class="channel-group" id="nomChaine_<?php echo $chaine["id_chaine"] ?> ">
                     <img src='https://dummyimage.com/70x70/1D2D44/FFFFFF.png?text=Cha%C3%AEnes' alt="logo chaine">
                     <h3 id="chaine">
-                        <?= $chaine['nom_chaine'] ?>
+                        <a><?= $chaine['nom_chaine'] ?></a>
                     </h3>
                 </div>
             <?php endforeach; ?>
@@ -91,7 +112,7 @@ if (isset($_POST['submit'])) {
             <div class="top-header-nom-salon">
                 <i class="fa-solid fa-chevron-left fa-2xl" id="leftArrow"></i>
                 <h2 id="chaineTitle">
-                    <?= $chaine['nom_chaine'] ?>
+                    <a><?= $chaine['nom_chaine'] ?></a>
                 </h2>
                 <i class="fa-solid fa-chevron-right fa-2xl"></i>
             </div>
@@ -258,7 +279,7 @@ if (isset($_POST['submit'])) {
                             <i class="fa-regular fa-face-smile fa-xl"></i>
                             <i class="fa-solid fa-ellipsis fa-2xl"></i>
                             <div class="send-button">
-                                <input type="submit" value="Envoyer" name="submit">
+                                <input type="submit" value="Envoyer">
                                 <!-- <?php
                                 //if (!empty($_POST['submit'])) {
                                 //    $sql = "INSERT INTO message (text_message, date_message) VALUES (:text_message, NOW())";

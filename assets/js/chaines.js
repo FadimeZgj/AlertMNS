@@ -110,6 +110,7 @@ const listeSalon = document.getElementById("listeSalon");
 channelGroups.forEach(function (channelGroup) {
     channelGroup.addEventListener("click", function () {
         checkClass("salon", 100);
+        // this.style.backgroundColor = '#2f3f54';
 
         // On vide la liste des salons
         listeSalon.innerHTML = "";
@@ -127,7 +128,7 @@ channelGroups.forEach(function (channelGroup) {
                     const div = document.createElement("div");
                     // On ajoute la classe "salon" à cette div
                     div.classList.add("salon");
-                    // On ajoute un ID à la div
+                    // On ajoute un ID à la div "salon_"
                     div.setAttribute("id", "salon_" + (j + 1));
                     // On crée le texte de la div à partir du nom de salon
                     const salon = document.createTextNode(displaySalons[j].nom_salon);
@@ -144,13 +145,12 @@ channelGroups.forEach(function (channelGroup) {
 function checkClass(salon, intervalTime) {
     // permet de définir un interval de temps (une boucle) qui exécutera une fonction à intervalles de temps réguliers.
     const intervalId = setInterval(() => {
-        const salonGroup = document.querySelectorAll(".salon");
         const salons = document.getElementsByClassName(salon);
         if (salons.length > 0) {
             clearInterval(intervalId);
             console.log(`La classe salon a été récupérée.`);
 
-            for (let i of salonGroup) {
+            for (let i of salons) {
                 i.addEventListener("click", () => {
                     nomSalon.innerHTML = ""
                     // Permet de modifier le titre h2 de la conversation des chaînes en récupérant l'id du salon

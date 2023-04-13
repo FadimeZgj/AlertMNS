@@ -2,6 +2,32 @@
 
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
 
+/**
+ * Permet de vérifier les champs d'un formulaire en précisant les champs obligatoires
+ *
+ * @param  array $data
+ * @param  array $requireds
+ * @return array
+ */
+
+function checkFormData(array $data, array $requireds = []): array
+{
+    $errors = [];
+
+    foreach($data as $key => $value)
+    {
+        if($requireds == [] || in_array($key, $requireds))
+        {
+            if(empty($value))
+            {
+                $errors[$key] = "Ce champs ne doit pas être vide";
+            }
+        }
+    }
+
+    return $errors;
+}
+
 function getUserSession()
 {
     // Récupérer l'utilisateur de la session
@@ -74,43 +100,26 @@ function getSalonById(int $id)
     return $stmt->fetch();
 }
 
-function insertSalonBis(array $data)
+// function insertSalonBis(array $data)
+// {
+//     $dbh = $GLOBALS['dbh'];
+//     $sql = "INSERT INTO salon (nom_salon, id_chaine) VALUES (nom_salon, :id_chaine)";
+//     $stmt = $dbh->prepare($sql);
+//     $stmt->execute($data);
+
+//     return $dbh->lastInsertId();
+
+// }
+
+function insertSalon(array $data)
 {
     $dbh = $GLOBALS['dbh'];
-    $sql = "INSERT INTO salon (nom_salon) VALUES (:nom_salon)";
+
+    $sql = "INSERT INTO salon (nom_salon, id_chaine) VALUES (nom_salon, :id_chaine)";
     $stmt = $dbh->prepare($sql);
     $stmt->execute($data);
-
-    return $dbh->lastInsertId();
-
-}
-
-function insertSalon(array $data, array $chaines = [])
-{
-    $dbh = $GLOBALS['dbh'];
-
-    // Traiter les données
-    $data['nom_salon'] = htmlspecialchars($data['nom_salon']);
-
-    $sql = "INSERT INTO salon (nom_salon) VALUES (:nom_salon)";
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute($data);
-
+    // On recupère l'id du salon
     $id_salon = $dbh->lastInsertId();
 
-    // On traite les genres
-    if(count($chaines) > 0)
-    {
-        foreach($chaines as $id_chaine)
-        {
-            $sql = "INSERT INTO chaine (id_chaine, id_salon) VALUES (:id_chaine, :id_salon)";
-            $stmt = $dbh->prepare($sql);
-            $stmt->execute([
-                'id_chaine' => $id_chaine,
-                'id_salon' => $id_salon
-            ]);
-        }
-    }
-
-    return $id_chaine;
+    return $id_salon;
 }

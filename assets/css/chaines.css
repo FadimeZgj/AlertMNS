@@ -446,6 +446,10 @@ input[type="search"]:hover {
     background-color: #2f3f54;
 }
 
+.salons-liste a:active {
+    background-color: #2f3f54;
+}
+
 .create-salon i {
     color: #F0EBD8;
 }
@@ -511,7 +515,7 @@ input[type="search"]:hover {
 .discussion .topbar .fa-user-group {
     color: #F0EBD8;
     margin-top: 12px;
-    margin-left: 10%;
+    margin-left: 20%;
 }
 
 .discussion .topbar .fa-user-group:hover {
