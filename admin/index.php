@@ -58,7 +58,7 @@ $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
                 <li><a href="/admin/index.php"><i class="fa-solid fa-house fa-2x"></i>Accueil</a></li>
                 <li><a href="#"><i class="fa-solid fa-comment-dots fa-2x"></i>Voir tous les messages</a></li>
                 <li><a href="#"><i class="fa-solid fa-users fa-2x"></i>Voir tous les groupes</a></li>
-                <li><a href="./admin/chaines/index.php"><i class="fa-solid fa-tower-cell fa-2x"></i>Voir toutes les chaînes</a></li>
+                <li><a href="admin/chaines/"><i class="fa-solid fa-tower-cell fa-2x"></i>Voir toutes les chaînes</a></li>
                 <li><a href="#"><i class="fa-regular fa-calendar-days fa-2x"></i>Voir les réunions</a></li>
                 <li><a href="#"><i class="fa-solid fa-user fa-2x"></i>Gérer mon profil</a></li>
                 <li><a href="#"><i class="fa-solid fa-gear fa-2x"></i>Réglages</a></li>
@@ -106,7 +106,7 @@ $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
                         <li><a href=""><i class="fa-solid fa-plus fa-xl"></i>Créer un nouveau groupe</a></li>
                         <li><a href=""><i class="fa-solid fa-plus fa-xl"></i>Organiser une réunion</a></li>
                         <li><a href=""><i class="fa-solid fa-magnifying-glass fa-xl"></i>Rechercher un utilisateur</a></li>
-                        <li><a href="./admin/chaines/index.php"><i class="fa-solid fa-tower-cell fa-xl"></i>Voir les chaînes</a></li>
+                        <li><a href="/admin/chaines/"><i class="fa-solid fa-tower-cell fa-xl"></i>Voir les chaînes</a></li>
                         <li><a href=""><i class="fa-solid fa-users fa-xl"></i>Voir les groupes</a></li>
                         <li><a href=""><i class="fa-solid fa-comment-dots fa-xl"></i>Voir les messages</a></li>
                         <li><a href=""><i class="fa-regular fa-calendar-days fa-xl"></i>Voir les réunions prévues</a></li>
@@ -127,7 +127,7 @@ $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
                     </ul>
                     <ul>
                         <a href=""><li><i class="fa-solid fa-plus fa-2x"></i><span>Organiser une réunion</span></li></a>
-                        <a href=""><li><i class="fa-solid fa-tower-cell fa-2x"></i><span>Voir les chaînes</span></li></a>
+                        <a href="/admin/chaines/"><li><i class="fa-solid fa-tower-cell fa-2x"></i><span>Voir les chaînes</span></li></a>
                         <a href=""><li><i class="fa-solid fa-magnifying-glass fa-2x"></i><span>Rechercher un utilisateur</span></li></a>
                     </ul>
                 </div>
@@ -162,7 +162,7 @@ $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
             <div class="squares-mob">
                 <ul>
                     <a href=""><li><i class="fa-solid fa-magnifying-glass fa-xl"></i>Rechercher un utilisateur</li></a>
-                    <a href=""><li><i class="fa-solid fa-tower-cell fa-xl"></i>Voir les chaînes</li></a>
+                    <a href="/admin/chaines/"><li><i class="fa-solid fa-tower-cell fa-xl"></i>Voir les chaînes</li></a>
                     <a href=""><li><i class="fa-solid fa-users fa-xl"></i>Voir les groupes</li></a>
                     <a href=""><li><i class="fa-solid fa-comment-dots fa-xl"></i>Voir les messages</li></a>
                     <a href=""><li><i class="fa-regular fa-calendar-days fa-xl"></i>Voir les réunions prévues</li></a>

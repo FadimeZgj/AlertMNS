@@ -11,35 +11,30 @@ $messages = getAllMessages();
 
 // Fonction pour ajouter un salon à une chaîne
 // // Marche pas
-if (isset($_POST['submit'])) {
-    $id = insertSalon($_POST['salon']);
+// if (isset($_POST['submit'])) {
+//     $id = insertSalon($_POST['salon']);
 
-    if ($id) {
-        header("Location: /chaines");
-        exit;
-    }
-}
+//     if ($id) {
+//         header("Location: /chaines");
+//         exit;
+//     }
+// }
 
-// // Traiter le formulaire si envoyé
-// if(!empty($_POST['submit']))
-// {
-
-//     $sql = "INSERT INTO salon (nom_salon, id_chaine) VALUES (:nom_salon, :id_chaine)";
+// if (empty($_POST['id'])) {
+//     // On vérifie si des salons sont liés à la chaîne
+//     $sql = "SELECT id_salon FROM salon WHERE id_chaine = :id_chaine";
 //     $query = $dbh->prepare($sql);
 //     $res = $query->execute([
-//         'nom_salon' => $_POST['nom_salon']
-//         'id_chaine' => 
+//         'id_chaine' => $_POST['id']
 //     ]);
 
-//     if($res)
-//     {
-//         header("Location: /admin/chaines/index.php"); exit;
-//     }
-//     else
-//     {
-//         echo "Une erreur est survenue...";
-//     }
+//     $salons = $query->fetchAll(PDO::FETCH_COLUMN);
 
+//     if (count($salons) > 0) {
+//         $ids = implode(",", $salons);
+//         $sql =  "UPDATE salon SET id_chaine = NULL WHERE id_salon IN (".$ids.")";
+//         $query = $dbh->query($sql);
+//     }
 // }
 
 ?>
@@ -66,7 +61,7 @@ if (isset($_POST['submit'])) {
 <body>
     <nav class="sidebar">
         <ul class="nav-left">
-            <li><a href="#"><i class="fas fa-house-chimney-window fa-xl"></i></a></li>
+            <li><a href="/admin/"><i class="fas fa-house-chimney-window fa-xl"></i></a></li>
             <li><a href="#"><i class="fa-solid fa-comment-dots fa-xl"></i></a></li>
             <li><a href="#"><i class="fa-solid fa-users-rectangle fa-xl"></i></a></li>
             <li><a href="/admin/chaines/index.php"><i class="fa-solid fa-diagram-project fa-xl"></i></a></li>
@@ -103,7 +98,9 @@ if (isset($_POST['submit'])) {
                 <div class="channel-group" id="nomChaine_<?php echo $chaine["id_chaine"] ?> ">
                     <img src='https://dummyimage.com/70x70/1D2D44/FFFFFF.png?text=Cha%C3%AEnes' alt="logo chaine">
                     <h3 id="chaine">
-                        <a><?= $chaine['nom_chaine'] ?></a>
+                        <a>
+                            <?= $chaine['nom_chaine'] ?>
+                        </a>
                     </h3>
                 </div>
             <?php endforeach; ?>
@@ -112,7 +109,9 @@ if (isset($_POST['submit'])) {
             <div class="top-header-nom-salon">
                 <i class="fa-solid fa-chevron-left fa-2xl" id="leftArrow"></i>
                 <h2 id="chaineTitle">
-                    <a><?= $chaine['nom_chaine'] ?></a>
+                    <a>
+                        <?= $chaine['nom_chaine'] ?>
+                    </a>
                 </h2>
                 <i class="fa-solid fa-chevron-right fa-2xl"></i>
             </div>
@@ -137,7 +136,7 @@ if (isset($_POST['submit'])) {
                 </div>
                 <div class="salons-liste" id="listeSalon">
                     <?php foreach ($salons as $salon): ?>
-                        <div class="salon" style="display: none;" >
+                        <div class="salon" style="display: none;">
                             <?= $salon['nom_salon'] ?>
                         </div>
                     <?php endforeach; ?>
@@ -189,7 +188,12 @@ if (isset($_POST['submit'])) {
                         <li><a href="#"><i class="fas fa-volume-xmark fa-xl"></i> Mettre en sourdine</a></li>
                         <li><a href="#"><i class="fas fa-bell fa-xl"></i> Paramètre de notifications</a></li>
                         <li><a href="#"><i class="fas fa-folder fa-xl"></i> Voir les fichiers partagés</a></li>
-                        <li><a href="#"><i class="fas fa-trash fa-xl"></i> Supprimer le salon</a></li>
+                        <li><a href="#"><i class="fas fa-trash fa-xl"></i> Supprimer le salon
+                        <form action="/admin/chaines/delete.php" method="post"
+                            onsubmit="return confirm('Voulez-vous vraiment supprimer ce salon ?')">
+                            <input type="hidden" name="id_salon" value="<?= $salons['id_salon'] ?>">
+                            <input type="submit" value="Supprimer">
+                        </form></a></li>
                     </ul>
                 </div>
 

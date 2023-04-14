@@ -10,25 +10,26 @@ WHERE id_utilisateur = '" . $_SESSION['user']['id'] . "'";
 $query = $dbh->query($sql);
 $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
 
-$chaines = getAllChaines();
+if(!empty($_POST['submit']))
+{
 
-if (!empty($_POST['submit'])) {
-    if (empty($_POST['id'])) {
-
-        header("Location: /admin/chaines/delete");
-        die;
-    }
-
-    $sql = "DELETE FROM chaine WHERE id_chaine = :id_chaine";
+    $sql = "INSERT INTO chaine (nom_chaine, id_utilisateur) VALUES (:nom_chaine,:id_utilisateur)";
     $query = $dbh->prepare($sql);
     $res = $query->execute([
-        'id_chaine' => $_POST['id']
+        'nom_chaine' => $_POST['nom_chaine'],
+        'id_utilisateur' => $_SESSION['user']['id'],
     ]);
 
-    header("Location: /admin/chaines/delete");
+    if($res)
+    {
+        header("Location: /admin/chaines"); exit;
+    }
+    else
+    {
+        echo "Erreur";
+    }
 
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -153,21 +154,12 @@ if (!empty($_POST['submit'])) {
 
             <section>
                 <div class="squares">
-                    <h3 class="chaineTitle">Liste des chaînes</h3>
-                    <div class="barreLaterale"></div>
-                    <div class="listeChaine">
-                        <?php foreach ($chaines as $chaine): ?>
-                            <div class="affichageChaine" id="nomChaine_<?php echo $chaine["id_chaine"] ?> ">
-                                <img src='https://dummyimage.com/70x70/1D2D44/FFFFFF.png?text=Cha%C3%AEnes'
-                                    alt="logo chaine">
-                                <h3 id="chaine">
-                                    <a>
-                                        <?= $chaine['nom_chaine'] ?>
-                                    </a>
-                                </h3>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
+                    <h3 class="chaineTitle">Créer une chaîne</h3>
+                    <form action="/admin/chaines/new.php" method="POST">
+                        <label for="newChaine"></label>
+                        <input type="text" name="nom_chaine">
+                        <input type="submit" name="submit" value="Envoyer">
+                    </form>
                 </div>
             </section>
         </div>

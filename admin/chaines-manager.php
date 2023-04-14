@@ -41,7 +41,8 @@ function getUserSession()
 function getAllChaines()
 {
     $dbh = $GLOBALS['dbh'];
-    $sql = "SELECT * FROM chaine";
+    $sql = "SELECT * FROM chaine
+    WHERE chaine.id_chaine = chaine.id_chaine";
     return $dbh->query($sql)->fetchAll();
 }
 
@@ -91,6 +92,14 @@ function getChaineById(int $id)
     $stmt->execute(['id' => $id]);
     return $stmt->fetch();
 }
+
+/**
+ * Permet de vérifier les champs d'un formulaire en précisant les champs obligatoires
+ *
+ * @param  array $data
+ * @param  int $id
+ * @return array|bool
+ */
 function getSalonById(int $id)
 {
     $dbh = $GLOBALS['dbh'];
@@ -100,26 +109,38 @@ function getSalonById(int $id)
     return $stmt->fetch();
 }
 
-// function insertSalonBis(array $data)
-// {
-//     $dbh = $GLOBALS['dbh'];
-//     $sql = "INSERT INTO salon (nom_salon, id_chaine) VALUES (nom_salon, :id_chaine)";
-//     $stmt = $dbh->prepare($sql);
-//     $stmt->execute($data);
+function insertChaine()
+{
 
-//     return $dbh->lastInsertId();
-
-// }
+}
 
 function insertSalon(array $data)
 {
     $dbh = $GLOBALS['dbh'];
 
-    $sql = "INSERT INTO salon (nom_salon, id_chaine) VALUES (nom_salon, :id_chaine)";
+    if (!isset($data['id_chaine'])) {
+        // Si la valeur de l'id_chaine est null, retournez une erreur.
+        throw new Exception("La valeur de l'id_chaine ne peut pas être nulle.");
+    }
+
+    $sql = "INSERT INTO salon (nom_salon, id_chaine) VALUES (:nom_salon, :id_chaine)";
     $stmt = $dbh->prepare($sql);
-    $stmt->execute($data);
+    $stmt->bindParam(':nom_salon', $data['nom_salon']);
+    $stmt->bindParam(':id_chaine', $data['id_chaine']);
+    $stmt->execute();
     // On recupère l'id du salon
     $id_salon = $dbh->lastInsertId();
 
     return $id_salon;
+}
+
+
+function deleteSalon(int $id)
+{
+    $dbh = $GLOBALS['dbh'];
+    $sql = "DELETE FROM salon WHERE id_salon = :id";
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute(['id' => $id]);
+
+    return $stmt->rowCount();
 }
