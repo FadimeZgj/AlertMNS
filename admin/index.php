@@ -32,7 +32,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                 <li><a href="/admin"><i class="fa-solid fa-house fa-2x"></i>Accueil</a></li>
                 <li><a href="/messages.php"><i class="fa-solid fa-comment-dots fa-2x"></i>Voir tous les messages</a></li>
                 <li><a href="#"><i class="fa-solid fa-users fa-2x"></i>Voir tous les groupes</a></li>
-                <li><a href="#"><i class="fa-solid fa-tower-cell fa-2x"></i>Voir toutes les chaînes</a></li>
+                <li><a href="admin/chaines/"><i class="fa-solid fa-tower-cell fa-2x"></i>Voir toutes les chaînes</a></li>
                 <li><a href="#"><i class="fa-regular fa-calendar-days fa-2x"></i>Voir les réunions</a></li>
                 <li><a href="#"><i class="fa-solid fa-user fa-2x"></i>Gérer mon profil</a></li>
                 <li><a href="#"><i class="fa-solid fa-gear fa-2x"></i>Réglages</a></li>
@@ -84,7 +84,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                     </ul>
                     <ul>
                         <a href=""><li><i class="fa-solid fa-plus fa-2x"></i><span>Organiser une réunion</span></li></a>
-                        <a href=""><li><i class="fa-solid fa-tower-cell fa-2x"></i><span>Voir les chaînes</span></li></a>
+                        <a href="/admin/chaines/"><li><i class="fa-solid fa-tower-cell fa-2x"></i><span>Voir les chaînes</span></li></a>
                         <a href=""><li><i class="fa-solid fa-magnifying-glass fa-2x"></i><span>Rechercher un utilisateur</span></li></a>
                     </ul>
                 </div>
@@ -119,7 +119,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
             <div class="squares-mob">
                 <ul>
                     <a href=""><li><i class="fa-solid fa-magnifying-glass fa-xl"></i>Rechercher un utilisateur</li></a>
-                    <a href=""><li><i class="fa-solid fa-tower-cell fa-xl"></i>Voir les chaînes</li></a>
+                    <a href="/admin/chaines/"><li><i class="fa-solid fa-tower-cell fa-xl"></i>Voir les chaînes</li></a>
                     <a href=""><li><i class="fa-solid fa-users fa-xl"></i>Voir les groupes</li></a>
                     <a href=""><li><i class="fa-solid fa-comment-dots fa-xl"></i>Voir les messages</li></a>
                     <a href=""><li><i class="fa-regular fa-calendar-days fa-xl"></i>Voir les réunions prévues</li></a>

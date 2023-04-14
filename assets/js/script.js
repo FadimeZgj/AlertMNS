@@ -6,3 +6,5 @@ const navbarToggle = document.querySelector(".navbar-toggle");
 navbarToggle.addEventListener("click", function (e) {
     navbarMenu.classList.toggle("active");
 });
+
+

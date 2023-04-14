@@ -149,7 +149,7 @@ ul {
     background-color: #748CAB;
     border-radius: 30px;
     padding: 7% 50px;
-
+    min-height: 95%;
 }
 
 .squares ul {
@@ -200,14 +200,113 @@ ul {
 .squares-mob,
 .actions-mob {
     display: none;
-
 }
 
-    .section-profile,
-    .section-actions,
-    .section-squares {
-        position: absolute;
+.squares .chaineTitle {
+    text-align: center;
+    font-size: 34px;
+}
+
+.squares form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.squares label{
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.squares select {
+    margin-left: 25%;
+    font-size: 16px;
+    margin-top: -80px;
+    height: 30px;
+    border-radius: 20px;
+    width: 50%;
+    text-indent: 2%;
+    border: 1px solid rgba(240, 235, 216, 0.2);
+    margin-bottom: -40px;
+}
+
+.squares select:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.squares .barreLaterale {
+    margin-top: -50px;
+    height: 6px;
+    width: 100%;
+    border-radius: 25px;
+    background-color: #1D2D44;
+    border: 1px solid rgba(240, 235, 216, 0.2);
+}
+
+.squares .listeChaine {
+    margin-top: -40px;
+    font-size: 20px;
+    margin-left: 40px;
+}
+
+.squares .listeChaine img {
+    border-radius: 50px;
+}
+
+.squares .listeChaine h3 {
+    
+}
+
+.squares form input[type="text"] {
+    width: 50%;
+    height: 38px;
+    margin-bottom: 20px;
+    margin-top: -50px;
+    border-radius: 25px;
+    text-indent: 5%;
+    border: 1px solid rgba(240, 235, 216, 0.2);
+    background-color: #F0EBD8;
+}
+
+.squares form input[type="submit"] {
+    width: 20%;
+    height: 28px;
+    border-radius: 25px;
+    border: 1px solid rgba(240, 235, 216, 0.2);
+    font-size: 18px;
+    background-color: #F0EBD8;
+    color:#3E5C76;
+}
+
+.squares form input[type="submit"]:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+/* Switch bouton */
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+/* Media query pour les grands écrans */
+
+@media (min-width : 1600px) {
+    .squares {
+        min-height: 88%;
     }
+}
 
 @media screen and (max-width: 996px) {
 
@@ -263,7 +362,6 @@ ul {
         position: relative;
         float: right;
         margin-right: 10%;
-
     }
 
     .navbar-toggle {
