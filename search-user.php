@@ -2,11 +2,34 @@
 session_start();
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
 
-// récupérer tous les utilisateurs
-$sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , role.libelle_role FROM utilisateur 
-LEFT JOIN role ON utilisateur.id_role = role.id_role ORDER BY utilisateur.nom_utilisateur ASC";
-$query = $dbh->query($sql);
-$allUsers = $query->fetchAll(PDO::FETCH_ASSOC);
+
+if(!empty($_POST['submit']))
+{
+    $search=htmlspecialchars($_POST['search']);
+    $data=explode(" ",$search);
+
+    $sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , role.libelle_role FROM utilisateur 
+    LEFT JOIN role ON utilisateur.id_role = role.id_role 
+    WHERE utilisateur.nom_utilisateur = :search
+    OR utilisateur.prenom_utilisateur = :search
+    OR role.libelle_role = :search
+    ORDER BY utilisateur.nom_utilisateur ASC";
+
+    $query = $dbh->prepare($sql);
+    $query->execute([
+        'search'=>$data[0]
+    ]);
+    
+    $allUsers=$query->fetchAll(PDO::FETCH_ASSOC);
+}
+else
+{
+    // récupérer tous les utilisateurs
+    $sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , role.libelle_role FROM utilisateur 
+    LEFT JOIN role ON utilisateur.id_role = role.id_role ORDER BY utilisateur.nom_utilisateur ASC";
+    $query = $dbh->query($sql);
+    $allUsers = $query->fetchAll(PDO::FETCH_ASSOC);
+}
 
 $title = "AlertMNS - Recherche utilisateur";
 
@@ -83,7 +106,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
             <section>
                 <div class="search">
                     <h1>Rechercher un utilisateur</h1>
-                    <form action="/search-user.php" method="get">
+                    <form action="/search-user.php" method="post">
                         <input type="search" name="search" class="search-bar">
                         <input type="submit" name="submit" value="Rechercher" class="submit">
                     </form> 

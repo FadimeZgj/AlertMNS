@@ -7,11 +7,10 @@
     overflow: hidden;
     overflow-y: scroll;
     width: 100%;
-    max-height: 65%;
+    height: 65%;
     background-color: #748CAB;
     border-radius: 30px;
     padding: 8% 50px;
-
 
 }
 
@@ -60,6 +59,11 @@ hr{
     color: #0D1321;
     width: 80%;
     margin: auto;
+
+}
+
+.user-info:hover{
+    background-color: rgba(29, 45, 68, 0.4) ;
 
 }
 
