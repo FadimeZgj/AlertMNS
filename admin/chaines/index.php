@@ -1,12 +1,14 @@
 <?php
 session_start();
 require $_SERVER['DOCUMENT_ROOT'] . '/admin/chaines-manager.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 
 $salons = getAllSalons();
 $utilisateurs = getAllUsers();
 $chaines = getAllChaines();
 $user = getUserSession();
 $messages = getAllMessages();
+$title = "AlertMNS - Chaines";
 
 
 // Fonction pour ajouter un salon à une chaîne
@@ -101,6 +103,7 @@ $messages = getAllMessages();
                         <a>
                             <?= $chaine['nom_chaine'] ?>
                         </a>
+                    <input class="isActive" type="hidden" id="isActive_<?php echo $chaine['is_active'] ?>" value="isActive_<?php echo $chaine['is_active'] ?>">
                     </h3>
                 </div>
             <?php endforeach; ?>

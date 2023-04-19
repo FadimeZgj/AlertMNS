@@ -11,25 +11,35 @@ $query = $dbh->query($sql);
 $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
 
 
-if(!empty($_POST['submit']))
-
+if(isset($_POST['submit']))
+{
     $sql = "INSERT INTO chaine (nom_chaine, id_utilisateur) VALUES (:nom_chaine,:id_utilisateur)";
     $query = $dbh->prepare($sql);
     $res = $query->execute([
         'nom_chaine' => $_POST['nom_chaine'],
-        'id_utilisateur' => $_SESSION['user']['id'],
+        'id_utilisateur' => $_SESSION['user']['id']
+    ]);
+
+    $id_channel = $dbh->lastInsertId(); 
+
+    $sql="INSERT INTO salon (nom_salon, id_chaine) VALUES (:nom_salon,:id_chaine)";
+    $query = $dbh->prepare($sql);
+    $res = $query->execute([
+        'nom_salon' => "Général",
+        'id_chaine' => $id_channel
     ]);
 
     if($res)
     {
-        header("Location: /admin/chaines/new.php"); exit;
+        header("Location: /admin/chaines"); exit;
     }
     else
     {
         echo "Erreur";
     }
+}
 
-?>
+// ?>
 
 <!DOCTYPE html>
 <html lang="fr">

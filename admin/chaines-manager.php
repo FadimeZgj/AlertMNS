@@ -109,9 +109,17 @@ function getSalonById(int $id)
     return $stmt->fetch();
 }
 
-function insertChaine()
+ /**
+  * @var int l'ID de la database
+  */
+  function insertChaine(array $data)
 {
-
+    $dbh = $GLOBALS['dbh'];
+    $sql = "INSERT INTO chaine (nom_chaine, id_utilisateur) VALUES (:nom_genre, :id_utilisateur)";
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindValue(':nom_chaine', $data['nom_chaine']);
+    $stmt->bindValue(':id_utilisateur', $_SESSION['user']['id']);
+    return $dbh->lastInsertId();
 }
 
 function insertSalon(array $data)
