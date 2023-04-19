@@ -3,6 +3,7 @@
 session_start();
 require $_SERVER['DOCUMENT_ROOT'] . '/admin/chaines-manager.php';
 
+
 // Récupérer tous les utilisateurs
 $sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , role.libelle_role FROM utilisateur 
 LEFT JOIN role ON utilisateur.id_role = role.id_role
@@ -11,24 +12,33 @@ $query = $dbh->query($sql);
 $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
 
 
-if(!empty($_POST['submit']))
-
+if(isset($_POST['submit']))
+{
     $sql = "INSERT INTO chaine (nom_chaine, id_utilisateur) VALUES (:nom_chaine,:id_utilisateur)";
     $query = $dbh->prepare($sql);
     $res = $query->execute([
         'nom_chaine' => $_POST['nom_chaine'],
-        'id_utilisateur' => $_SESSION['user']['id'],
+        'id_utilisateur' => $_SESSION['user']['id']
+    ]);
+
+    $id_channel = $dbh->lastInsertId(); 
+
+    $sql="INSERT INTO salon (nom_salon, id_chaine) VALUES (:nom_salon,:id_chaine)";
+    $query = $dbh->prepare($sql);
+    $res = $query->execute([
+        'nom_salon' => "General",
+        'id_chaine' => $id_channel
     ]);
 
     if($res)
     {
-        header("Location: /admin/chaines/new.php"); exit;
+        header("Location: /admin/chaines"); exit;
     }
     else
     {
         echo "Erreur";
     }
-
+}
 ?>
 
 <!DOCTYPE html>
