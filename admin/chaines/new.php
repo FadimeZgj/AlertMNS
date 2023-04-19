@@ -32,7 +32,6 @@ if(isset($_POST['submit']))
     if($res)
     {
         header("Location: /admin/chaines"); exit;
-        header("Location: /admin/chaines"); exit;
     }
     else
     {
