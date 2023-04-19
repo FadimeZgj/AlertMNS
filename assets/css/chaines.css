@@ -245,9 +245,7 @@ a {
     height: 300px;
     position: absolute;
     top: 0;
-    left: 78%;
     margin-top: 40px;
-    right: 0;
     z-index: 2;
     text-align: center;
 }
@@ -321,6 +319,7 @@ ul {
     margin-left: 60px;
     border-left: none;
     text-align: center;
+    overflow-y: auto;
 }
 
 .container .chaines h2 {
@@ -355,6 +354,7 @@ ul {
     width: 20%;
     height: 100%;
     text-align: center;
+    overflow-y: auto;
 }
 
 .container .discussion {
@@ -457,7 +457,7 @@ input[type="search"]:hover {
 .salons .create-salon .add i {
     position: relative;
     top: -25px;
-    right: -106px;
+    left: 105px;
 }
 
 .salons .create-salon .add button {
@@ -581,7 +581,6 @@ input[type="search"]:hover {
 }
 
 
-
 .conversation .message-me {
     display: flex;
     margin-left: -10px;
@@ -669,6 +668,9 @@ input[type="search"]:hover {
 .chatbox input {
     text-indent: 2%;
     width: 80%;
+    position: relative;
+    top: -100px;
+    left: 40px;
     min-height: 120px;
     border: 1px solid rgba(240, 235, 216, 0.1);
     border-radius: 20px;
@@ -688,8 +690,7 @@ input[type="search"]:hover {
     display: flex;
     justify-content: flex-end;
     position: relative;
-    top: -25px;
-    right: 125px;
+    top: -130px;
 }
 
 .icons-group .fas {
@@ -908,7 +909,7 @@ input[type="search"]:hover {
     .salons .fa-plus {
         position: absolute;
         top: 0;
-        left: 180px;
+        left: 160px;
     }
 
     .salons .top-header-nom-salon .fa-chevron-right:hover {

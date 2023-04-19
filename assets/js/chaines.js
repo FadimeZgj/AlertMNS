@@ -195,3 +195,14 @@ for (let i of chaineListe) {
         })
     })
 }
+
+// Si is_active = true : on voit le salon, sinon on le cache
+
+// // On récupère les chaînes contenant la classe "isActive"
+let chanelIsActiveOrNot = document.querySelectorAll(".isActive");
+
+chanelIsActiveOrNot.forEach(element => console.log(element))
+
+// if (chanelIsActiveOrNot.value == "isActive_0") {
+//     chanelIsActiveOrNot.style.display = "none";
+// }
