@@ -11,9 +11,6 @@ WHERE id_utilisateur = '" . $_SESSION['user']['id'] . "'";
 $query = $dbh->query($sql);
 $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
 
-
-if(isset($_POST['submit']))
-{
 if(isset($_POST['submit']))
 {
     $sql = "INSERT INTO chaine (nom_chaine, id_utilisateur) VALUES (:nom_chaine,:id_utilisateur)";
