@@ -38,7 +38,7 @@ if(!empty($_POST['submit']))
     // 2. On test si l'utilisateur existe
     if ($user) 
     {
-        // 4. S'il existe alors on compare les mots de passes
+        // 4. S'il existe alors on compare les mots de passes et on vérifie s'il est actif
         if (password_verify($password, $user['mdp_utilisateur'])) 
         {
             $sql = "SELECT role.libelle_role FROM role

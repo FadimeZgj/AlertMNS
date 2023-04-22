@@ -25,7 +25,7 @@ if (!empty($_POST['submit']))
     {
         $_SESSION['errors'] = $errors;
         $_SESSION['values'] = $_POST;
-        header("Location: /admin/add-user.php"); die;
+        header("Location: /admin/users/add-user.php"); die;
     }
 
     require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
@@ -40,7 +40,7 @@ if (!empty($_POST['submit']))
      if($query->rowCount() > 0)
     {
         $_SESSION['error'] = "Un utilisateur existe déjà avec cette adresse email.";
-        header("Location: /admin/add-user.php"); die;
+        header("Location: /admin/users/add-user.php"); die;
     }
 
     $_POST['nom_utilisateur'] = htmlspecialchars($_POST['nom_utilisateur']);
@@ -62,11 +62,11 @@ if (!empty($_POST['submit']))
 
      if($res)
      {
-         header("Location: /admin/add-user.php"); exit;
+         header("Location: /admin/users/add-user.php"); exit;
      }
      else
      {
          $_SESSION['error'] = "Un erreur est survenue.";
-         header("Location: /admin/add-user.php"); die;
+         header("Location: /admin/users/add-user.php"); die;
      }
 }

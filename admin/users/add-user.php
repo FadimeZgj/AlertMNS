@@ -1,6 +1,6 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/admin/includes/inc-session-check.php';
-require '../includes/inc-db-connect.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
 unset($_SESSION['error']);
 
 
@@ -19,9 +19,9 @@ $title = "AlertMNS - Ajout utilisateur";
 include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
 ?>
 
-<link rel="stylesheet" href="../assets/css/add-user.css">
-<link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/dashboard.css">
+<link rel="stylesheet" href="../../assets/css/add-user.css">
+<link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
 </head>
 
 <body>
@@ -99,7 +99,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
             <section>
                 <div class="actions">
                     <ul>
-                        <li><a href="/admin/add-user.php"><i class="fa-solid fa-plus fa-xl"></i>Créer un utilisateur</a></li>
+                        <li><a href="/admin/users/add-user.php"><i class="fa-solid fa-plus fa-xl"></i>Créer un utilisateur</a></li>
                         <li><a href=""><i class="fa-solid fa-plus fa-xl"></i>Créer une nouvelle chaine</a></li>
                         <li><a href=""><i class="fa-solid fa-plus fa-xl"></i>Créer un nouveau groupe</a></li>
                         <li><a href=""><i class="fa-solid fa-plus fa-xl"></i>Organiser une réunion</a></li>
@@ -121,7 +121,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
                 <div class="add">
                     <h1>Créer un nouvel utilisateur</h1>
 
-                    <form action="/admin/add-user-POST.php" method="post" name="add-user">
+                    <form action="/admin/users/add-user-POST.php" method="post" name="add-user">
                         <div class="form-name">
                             <div class="form-name-lastname">
                                 <label for="nom_utilisateur">Nom</label>
