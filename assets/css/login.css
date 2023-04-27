@@ -7,7 +7,7 @@
 }
 
 body {
-    overflow-x: hidden;
+    overflow: hidden;
     background-color: #1D2D44;
     color: #F0EBD8;
 }
@@ -15,6 +15,8 @@ body {
 header, .main-content, .copyright {
     padding: 70px 0;
     text-align: center;
+    position: relative;
+    top: 30px;
 }
 
 .main-content {
@@ -25,9 +27,27 @@ form {
     display: inline-block;
 }
 
+form .checkFormEmail {
+    font-weight: bold;
+    position: relative;
+    top: -10px;
+    left: 40px;
+    color:#d25634;
+}
 form > small {
     margin-top: -20%;
     margin-left: -50%;
+}
+
+form > small a {
+    font-size: 14px;
+    margin-left: 16px;
+    position: relative;
+    top: -10px;
+}
+
+form > small > a:hover {
+    color: #748CAB;
 }
 
 form input {
@@ -38,13 +58,24 @@ form input {
     background-color: #F0EBD8;
     padding: 13px;
     text-align: center;
-    border-radius: 15px;
+    border: none;
+    border-radius: 25px;
     font-size: 16px;
+}
+
+form input:hover {
+    background-color: #fbf7ec;
+    cursor: pointer;
+}
+
+form input:focus {
+    cursor: inherit;
 }
 
 form input[type=submit] {
     width: 220px;
     padding: 10px;
+    margin-top: 40px;
     margin-left: auto;
     margin-right: auto;
     font-weight: bold;
@@ -53,15 +84,18 @@ form input[type=submit] {
     background-color: #748CAB;
     letter-spacing: 0.1em;
     cursor: pointer;
+    border: 1px solid rgba(240, 235, 216, 0.2);
+    border-radius: 20px;
 }
+
 
 form label {
     padding: 10px;
 }
 
 form input[type=submit]:hover {
-    background-color: #1D2D44;
-    color: #F0EBD8;
+    background-color: #F0EBD8;
+    color: #1D2D44;
 }
 
 footer {
@@ -88,7 +122,11 @@ footer {
     text-align: center;
     margin-left: 30px;
     position: absolute;
-    top: 50%;
+    top: 55%;
+}
+
+.footer-content .contact h3:hover {
+    color:#748CAB;
 }
 
 footer a {
@@ -101,35 +139,83 @@ footer a {
 
 .error-password {
     display: block;
-    margin-top: 10px;
+    margin-top: -30px;
     margin-left: -160px;
-    color: rgb(188, 1, 1);
+    color: #d25634;
 }
 
 .error-email,
 .invalid {
-    color: rgb(188, 1, 1);
+    position: relative;
+    top: -16px;
+    left: 8px;
+    color: #d25634;
 }
 
 .forgetPassword a {
     color: #F0EBD8;
+    position: absolute;
+    top: 62%;
+    left: 37.2%;
+}
+
+.checkFormPassword {
+    position: relative;
+    left: -68px;
+    top: -12px;
+    font-weight: bold;
+    color:#d25634;
 }
 
 
 /* Reponsive */
 
-@media only screen and (max-width: 600px) {
+/* Media query pour le responsive */
+
+/* Media query pour les grands écrans */
+@media (min-width : 1600px) {
+    .forgetPassword a {
+        top: 63%;
+        left: 40.5%;
+    }
+}
+
+/* Media query pour le responsive */
+@media screen and (max-width: 768px) {
+    header {
+        margin-top: -60px;
+        margin-bottom: 30px;
+    }
+    form {
+        margin-top: -90px;
+    }
+    form input[type=submit]{
+        position: relative;
+        top: 30px;
+    }
+
+    .forgetPassword a {
+        top: 52%;
+        left: 14%;
+        margin-bottom: 14px;
+    }
+
     .footer-content .contact {
         margin-left: 30px;
         position: absolute;
-        top: -130px;
-        left: 50px;
+        top: -290px;
+        right: 236px;
+        font-size: small;
+    }
+
+    .fa-envelope {
+        display: none;
     }
 
     .footer-content .copyright {
         margin-left: 30px;
         position: absolute;
-        top: -110px;
-        left: 80px;
+        top: -80px;
+        left: 28%;
     }
 }

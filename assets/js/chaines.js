@@ -90,7 +90,7 @@ channelGroups.forEach(function (channelGroup) {
         // On vide la liste des salons
         listeSalon.innerHTML = "";
 
-        // Permet de récupérer l'id de la page HTML
+        // Permet de récupérer l'id des chaînes
         const id = channelGroup.id;
         fetch("../../get_salon.php?id_chaine=" + id)
             .then(function (response) {
