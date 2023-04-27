@@ -171,6 +171,16 @@ footer a {
 /* Reponsive */
 
 /* Media query pour le responsive */
+
+/* Media query pour les grands écrans */
+@media (min-width : 1600px) {
+    .forgetPassword a {
+        top: 63%;
+        left: 40.5%;
+    }
+}
+
+/* Media query pour le responsive */
 @media screen and (max-width: 768px) {
     header {
         margin-top: -60px;

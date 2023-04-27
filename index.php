@@ -43,7 +43,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                     </noscript>
                 <?php endif; ?>
 
-                <small class="forgetPassword" id="recupPassword"><a href="">Mot de passe oublié ?</a></small>
+                <small class="forgetPassword" id="recupPassword"><a href="/reset-password.php">Mot de passe oublié ?</a></small>
 
                 <input type="submit" name="submit" value="Connexion" id="submit">
             </form>
@@ -76,6 +76,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 
     <script src="/assets/js/script.js"></script>
     <script src="/assets/js/verification-connexion.js"></script>
+    <script src="/assets/js/functions.js"></script>
 
 
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-bottom.php'; ?>
