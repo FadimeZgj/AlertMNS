@@ -1,7 +1,6 @@
 <?php
 session_start();
 require $_SERVER['DOCUMENT_ROOT'] . '/admin/chaines-manager.php';
-require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 
 $salons = getAllSalons();
 $utilisateurs = getAllUsers();
@@ -39,37 +38,47 @@ $title = "AlertMNS - Chaines";
 //     }
 // }
 
+$title = "AlertMNS - Chaînes";
+
+require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
+
 ?>
 
-
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chaînes</title>
-    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
     <link rel="stylesheet" href="/assets/css/chaines.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
-    <script src="https://kit.fontawesome.com/5b104128e4.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <nav class="sidebar">
-        <ul class="nav-left">
-            <li><a href="/admin/"><i class="fas fa-house-chimney-window fa-xl"></i></a></li>
-            <li><a href="#"><i class="fa-solid fa-comment-dots fa-xl"></i></a></li>
-            <li><a href="#"><i class="fa-solid fa-users-rectangle fa-xl"></i></a></li>
-            <li><a href="/admin/chaines/index.php"><i class="fa-solid fa-diagram-project fa-xl"></i></a></li>
-            <li><a href=""><i class="fa-regular fa-calendar fa-xl"></i></a></li>
-        </ul>
-    </nav>
+<div class="sidebar">
+        <!-- <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a> -->
+        <div class="top-icons">
+            <a href="/admin"><i class="fa-solid fa-house fa-2x"></i></a>
+            <a href="/admin/messages.php"><i class="fa-solid fa-comment-dots fa-2x"></i>
+
+            </a>
+            <a href="/admin/messages.php"><i class="fa-solid fa-users fa-2x"></i>
+
+            </a>
+            <a href="/admin/chaines"><i class="fa-solid fa-tower-cell fa-2x"></i>
+
+            </a>
+            <a href=""><i class="fa-regular fa-calendar-days fa-2x"></i>
+
+            </a>
+        </div>
+        <div class="bottom-icons">
+            <a href="../../logout.php"><i class="fa-solid fa-arrow-right-from-bracket fa-2x"></i>
+
+            </a>
+            <a href=""><i class="fa-solid fa-user fa-2x"></i>
+
+            </a>
+            <a href=""><i class="fa-solid fa-gear fa-2x"></i>
+
+            </a>
+        </div>
+    </div>
     <nav class="responsive-menu">
         <div class="burger-icon">
             <button id="burgerMenu">
@@ -304,10 +313,34 @@ $title = "AlertMNS - Chaines";
     </div>
     <script>
 
+// On récupère l'id de la modale
+var addSalonModal = document.getElementById("addSalonModal");
+
+// On récupère le bouton qui permet d'ouvrir la modale
+var createSalonModalButton = document.getElementById("createSalonModalButton");
+
+// On récupère la classe close du <span> qui permet de fermer la modale
+var closeModal = document.getElementById("closeModal");
+
+// Quand l'utilisateur clic sur le bouton, cela ouvre la modale
+createSalonModalButton.onclick = function () {
+    addSalonModal.style.display = "block";
+}
+
+// Quand l'utilisateur clique sur la croix <span> (x), cela ferme la modale
+closeModal.onclick = function () {
+    addSalonModal.style.display = "none";
+}
+
+// Quand l'utilisateur clique en dehors de la modale, cela la ferme
+window.onclick = function (e) {
+    if (e.target == addSalonModal) {
+        addSalonModal.style.display = "none";
+    }
+}
 
 
     </script>
     <script src="/assets/js/chaines.js"></script>
-</body>
-
-</html>
+    
+    <?php require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-bottom.php'; ?>

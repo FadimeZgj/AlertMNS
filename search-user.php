@@ -2,10 +2,15 @@
 session_start();
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
 
+if(empty($_SESSION['user']))
+{
+    header("Location: /"); die;
+}
+
 if (in_array("Administrateur", $_SESSION['user']['roles'])){
-    if (!empty($_POST['submit'])) {
-        if (!empty($_POST['search'])) {
-            $search = htmlspecialchars($_POST['search']);
+    if (!empty($_GET['submit'])) {
+        if (!empty($_GET['search'])) {
+            $search = htmlspecialchars($_GET['search']);
             $data = explode(" ", $search);
 
             $sql = "SELECT utilisateur.id_utilisateur, utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur, utilisateur.is_active , role.libelle_role FROM utilisateur 
@@ -33,9 +38,9 @@ if (in_array("Administrateur", $_SESSION['user']['roles'])){
 }
 else
 {
-    if (!empty($_POST['submit'])) {
-        if (!empty($_POST['search'])) {
-            $search = htmlspecialchars($_POST['search']);
+    if (!empty($_GET['submit'])) {
+        if (!empty($_GET['search'])) {
+            $search = htmlspecialchars($_GET['search']);
             $data = explode(" ", $search);
 
             $sql = "SELECT utilisateur.id_utilisateur, utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur, utilisateur.is_active , role.libelle_role FROM utilisateur 
@@ -108,7 +113,9 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                 <li><a href="/admin"><i class="fa-solid fa-house fa-2x"></i>Accueil</a></li>
                 <li><a href="/messages.php"><i class="fa-solid fa-comment-dots fa-2x"></i>Voir tous les messages</a></li>
                 <li><a href="#"><i class="fa-solid fa-users fa-2x"></i>Voir tous les groupes</a></li>
-                <li><a href="#"><i class="fa-solid fa-tower-cell fa-2x"></i>Voir toutes les chaînes</a></li>
+                <li>
+                <a href=""><i class="fa-solid fa-tower-cell fa-2x"></i>Voir toutes les chaînes</a>             
+                </li>
                 <li><a href="#"><i class="fa-regular fa-calendar-days fa-2x"></i>Voir les réunions</a></li>
                 <li><a href="#"><i class="fa-solid fa-user fa-2x"></i>Gérer mon profil</a></li>
                 <li><a href="#"><i class="fa-solid fa-gear fa-2x"></i>Réglages</a></li>
@@ -120,14 +127,14 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
     <main>
         <nav class="sidebar">
             <div class="top-icons">
-                <a href="/admin"><i class="fa-solid fa-house fa-2x"></i></a>
-                <a href="/admin/messages.php"><i class="fa-solid fa-comment-dots fa-2x"></i>
+                <a href="<?php if(in_array("Administrateur", $_SESSION['user']['roles'])): ?> /admin <?php else: ?> /user <?php endif; ?>"><i class="fa-solid fa-house fa-2x"></i></a>
+                <a href="<?php if(in_array("Administrateur", $_SESSION['user']['roles'])): ?> /admin/messages.php <?php else: ?> /user/messages.php  <?php endif; ?>"><i class="fa-solid fa-comment-dots fa-2x"></i>
                     <p>Voir tous les messages</p>
                 </a>
                 <a href=""><i class="fa-solid fa-users fa-2x"></i>
                     <p> Voir tous les groupes</p>
                 </a>
-                <a href=""><i class="fa-solid fa-tower-cell fa-2x"></i>
+                <a href="<?php if(in_array("Administrateur", $_SESSION['user']['roles'])): ?> /admin/chaines <?php else: ?> /user/chaines  <?php endif; ?>"><i class="fa-solid fa-tower-cell fa-2x"></i>
                     <p>Voir toutes les chaînes</p>
                 </a>
                 <a href=""><i class="fa-regular fa-calendar-days fa-2x"></i>
@@ -136,7 +143,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
             </div>
 
             <div class="bottom-icons">
-                <a href="../logout.php"><i class="fa-solid fa-arrow-right-from-bracket fa-2x"></i>
+                <a href="logout.php"><i class="fa-solid fa-arrow-right-from-bracket fa-2x"></i>
                     <p>Déconnexion</p>
                 </a>
                 <a href=""><i class="fa-solid fa-user fa-2x"></i>
@@ -155,7 +162,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
             <section>
                 <div class="search">
                     <h1>Rechercher un utilisateur</h1>
-                    <form action="/search-user.php" method="post">
+                    <form action="/search-user.php" method="GET">
                         <input type="search" name="search" class="search-bar" id="searchInput">
                         <input type="submit" name="submit" value="Rechercher" class="submit" id="searchBtn">
                     </form>
@@ -182,7 +189,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                                             <input type="checkbox" name="is_active" <?= $user['is_active'] == 1 ? 'checked' : '' ?>>
                                             <span></span>
                                         </label>
-                                        <input type="submit" name="isActive" class="is-active" value="<?= $user['is_active'] == 1 ? 'Désactiver' : 'Activer' ?>">
+                                        <input type="submit" name="isActive" class="is-active" value="Envoyer">
                                     </form>
                                 <?php endif; ?>
                             </div>

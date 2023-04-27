@@ -23,31 +23,6 @@ window.onclick = function (event) {
         viewMembersModal.style.display = "none";
     }
 }
-// On récupère l'id de la modale
-var addSalonModal = document.getElementById("addSalonModal");
-
-// On récupère le bouton qui permet d'ouvrir la modale
-var createSalonModalButton = document.getElementById("createSalonModalButton");
-
-// On récupère la classe close du <span> qui permet de fermer la modale
-var closeModal = document.getElementById("closeModal");
-
-// Quand l'utilisateur clic sur le bouton, cela ouvre la modale
-createSalonModalButton.onclick = function () {
-    addSalonModal.style.display = "block";
-}
-
-// Quand l'utilisateur clique sur la croix <span> (x), cela ferme la modale
-closeModal.onclick = function () {
-    addSalonModal.style.display = "none";
-}
-
-// Quand l'utilisateur clique en dehors de la modale, cela la ferme
-window.onclick = function (e) {
-    if (e.target == addSalonModal) {
-        addSalonModal.style.display = "none";
-    }
-}
 
 
 // JS pour afficher le nav menu

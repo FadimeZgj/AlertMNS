@@ -81,7 +81,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
             <a href=""><i class="fa-solid fa-users fa-2x"></i>
 
             </a>
-            <a href=""><i class="fa-solid fa-tower-cell fa-2x"></i>
+            <a href="/admin/chaines"><i class="fa-solid fa-tower-cell fa-2x"></i>
 
             </a>
             <a href=""><i class="fa-regular fa-calendar-days fa-2x"></i>
@@ -89,7 +89,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
             </a>
         </div>
         <div class="bottom-icons">
-            <a href="../logout.php"><i class="fa-solid fa-arrow-right-from-bracket fa-2x"></i>
+            <a href="../../logout.php"><i class="fa-solid fa-arrow-right-from-bracket fa-2x"></i>
 
             </a>
             <a href=""><i class="fa-solid fa-user fa-2x"></i>
