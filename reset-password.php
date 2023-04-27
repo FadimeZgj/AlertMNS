@@ -41,7 +41,7 @@ if (isset($_POST['email'])) {
     <div class="container">
         <h1>Réinitialiser le mot de passe</h1>
 
-        <form action="forgot-password.php" method="post">
+        <form action="reset-password.php" method="post">
             <label for="email">Votre adresse email</label>
             <input type="email" name="email" id="email" required>
             <small id="emailMissing" class="emailErrorMessage"></small>
