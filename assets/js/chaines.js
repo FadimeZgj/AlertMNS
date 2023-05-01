@@ -74,24 +74,25 @@ function closeMenu() {
     }
 }
 
-///////// JSON qui permet de recharger la liste des salons \\\\\\\\\\\
+/////// JSON qui permet de recharger la liste des salons \\\\\\\\\\\
 
 // Affichage de la liste des salons
 
 // On récupère toutes les chaînes générées par le PHP qui ont la classe "channel-group"
-const channelGroups = document.querySelectorAll(".channel-group");
+const Chaines = document.querySelectorAll(".channel-group");
+console.log(Chaines);
 const listeSalon = document.getElementById("listeSalon");
 
-channelGroups.forEach(function (channelGroup) {
-    channelGroup.addEventListener("click", function () {
-        checkClass("salon", 100);
-        // this.style.backgroundColor = '#2f3f54';
+Chaines.forEach(function (chaine) {
+    chaine.addEventListener("click", function () {
+        checkClass("salon", 500);
 
         // On vide la liste des salons
         listeSalon.innerHTML = "";
 
-        // Permet de récupérer l'id des chaînes
-        const id = channelGroup.id;
+        // Permet de récupérer l'id pour chaque chaine
+        const id = chaine.id;
+        // On récupère les salons, on récupère les id des chaines grâce à la variable id
         fetch("../../get_salon.php?id_chaine=" + id)
             .then(function (response) {
                 return response.json();
@@ -104,7 +105,7 @@ channelGroups.forEach(function (channelGroup) {
                     // On ajoute la classe "salon" à cette div
                     div.classList.add("salon");
                     // On ajoute un ID à la div "salon_"
-                    div.setAttribute("id", "salon_" + (j + 1));
+                    div.setAttribute("id", "nomSalon_" + (j + 1));
                     // On crée le texte de la div à partir du nom de salon
                     const salon = document.createTextNode(displaySalons[j].nom_salon);
                     div.appendChild(salon);
@@ -114,30 +115,91 @@ channelGroups.forEach(function (channelGroup) {
     });
 });
 
+// // On récupère toutes les chaînes générées par le PHP qui ont la classe "channel-group"
+// const Chaines = document.querySelectorAll(".channel-group");
+// console.log(Chaines);
+// const listeSalon = document.getElementById("listeSalon");
+
+// Chaines.forEach(function (chaine) {
+//     chaine.addEventListener("click", function () {
+//         checkClass("salon", 500);
+
+//         // On vide la liste des salons
+//         listeSalon.innerHTML = "";
+
+//         // Permet de récupérer l'id pour chaque chaine
+//         const id = chaine.id;
+//         // On récupère les salons, on récupère les id des chaines grâce à la variable id
+//         fetch("../../get_salon.php?id_chaine=" + id)
+//             .then(function (response) {
+//                 return response.json();
+//             })
+//             .then(function (displaySalons) {
+//                 for (let j = 0; j < displaySalons.length; j++) {
+
+//                     // On crée une div
+//                     const div = document.createElement("div");
+//                     // On ajoute la classe "salon" à cette div
+//                     div.classList.add("salon");
+
+//                     // On crée le texte de la div à partir du nom de salon
+//                     const salon = document.createTextNode(displaySalons[j].nom_salon);
+//                     div.appendChild(salon);
+//                     listeSalon.appendChild(div);
+//                 }
+//                 // On ajoute un évènement click à chaque div créée
+//                 const Salons = document.querySelectorAll(".salon");
+//                 Salons.forEach(function (salon) {
+//                     salon.addEventListener("click", function () {
+//                         // récupération de l'ID du salon
+//                         const id_salon = salon.id
+//                         console.log(id_salon)
+//                         // affichage des messages du salon
+//                         fetch("../../get_salon.php?id_salon=" + id_salon)
+//                             .then(function (response) {
+//                                 return response.json();
+//                             })
+//                             .then(function (displayMessages) {
+//                                 // traitement des messages récupérés
+//                                 console.log(displayMessages);
+//                             })
+//                             .catch(function (error) {
+//                                 console.log("Erreur : " + error);
+//                             });
+//                     });
+//                 });
+//             })
+//     })
+// })
+
+
 
 // Fonction qui permet de vérifier si la classe "salon" est présente lorsque les salons sont générés grâce aux JSON.
-
 function checkClass(salon, intervalTime) {
     // permet de définir un interval de temps (une boucle) qui exécutera une fonction à intervalles de temps réguliers.
     const intervalId = setInterval(() => {
-        const salons = document.getElementsByClassName(salon);
+    const salons = document.getElementsByClassName(salon);
         if (salons.length > 0) {
             clearInterval(intervalId);
             console.log(`La classe salon a été récupérée.`);
 
-            for (let i of salons) {
-                i.addEventListener("click", () => {
+            for (let salon of salons) {
+                salon.addEventListener("click", () => {
                     nomSalon.innerHTML = ""
                     // Permet de modifier le titre h2 de la conversation des chaînes en récupérant l'id du salon
-                    fetch('../../get_salon.php?id_chaine=' + i.id)
+                    fetch('../../get_salon.php?id_chaine=' + salon.id)
                         .then(function (response) {
                             return response.json();
                         })
                         .then(function () {
                             // Permet de récupérer le contenu de l'id salon sélectionné
-                            const salonContent = i.textContent;
+                            const salonContent = salon.textContent;
                             // On crée un h2
                             const h2 = document.createElement("h2");
+                            // Je recuupère l'id de la topbar pour régler un pb d'affichage et de paadding
+                            const topbar = document.querySelector('.topbar')
+                            // je fixe le padding de la topbar à 0 lorsque je charge une page
+                            topbar.style.paddingBottom = "0px"
                             nomSalon.innerText = salonContent;
                             nomSalon.appendChild(h2);
                         });
@@ -152,15 +214,15 @@ function checkClass(salon, intervalTime) {
 ////// JSON qui permet d'afficher le nom de chaîne correct au-dessus de la liste des salons \\\\\\\\
 
 // On récupère les chaînes contenant la classe "channel-group"
-let chaineListe = document.querySelectorAll(".channel-group");
+let chaines = document.querySelectorAll(".channel-group");
 
 let chaineTitle = document.getElementById("chaineTitle")
-// console.log(chaineTitle);
 
-for (let i of chaineListe) {
-    i.addEventListener("click", (e) => {
+chaines.forEach(function (chaine) {
+    chaine.addEventListener("click", (e) => {
         chaineTitle.innerHTML = ""
-        fetch('../../get_chaines.php?id_chaine=' + i.id).then(function (response) {
+        const id = chaine.id;
+        fetch('../../get_chaines.php?id_chaine=' + id).then(function (response) {
             return response.json();
         }).then(function (showChanelTitle) {
             console.log(showChanelTitle)
@@ -169,14 +231,14 @@ for (let i of chaineListe) {
             }
         })
     })
-}
+})
 
 // Si is_active = true : on voit le salon, sinon on le cache
 
-// // On récupère les chaînes contenant la classe "isActive"
-let chanelIsActiveOrNot = document.querySelectorAll(".isActive");
+// // // On récupère les chaînes contenant la classe "isActive"
+// let chanelIsActiveOrNot = document.querySelectorAll(".isActive");
 
-chanelIsActiveOrNot.forEach(element => console.log(element))
+// chanelIsActiveOrNot.forEach(element => console.log(element))
 
 // if (chanelIsActiveOrNot.value == "isActive_0") {
 //     chanelIsActiveOrNot.style.display = "none";

@@ -73,6 +73,18 @@
     font-size: 30px !important;
 }
 
+.modal .modal-content-view-members .fa-user-plus {
+    position: relative;
+    color: #F0EBD8;
+    left: -280px;
+    top: 25px;
+}
+
+.modal .modal-content-view-members .fa-user-plus:hover {
+    cursor: pointer;
+    color:#3e5c76;
+}
+
 .modal-content form {
     padding: 20px;
     display: flex;
@@ -182,7 +194,7 @@ a {
     height: 100vh;
     position: fixed;
     top: 0;
-    left: 0;
+    left: 1px;
     margin: 0;
     list-style: none;
     display: flex;
@@ -489,9 +501,8 @@ input[type="search"]:hover {
 .discussion .topbar {
     display: flex;
     flex-direction: row;
-    width: auto;
     border-bottom: 1px solid rgba(240, 235, 216, 0.1);
-    padding-bottom: 25px;
+    padding-bottom: 20px;
 }
 
 .discussion .topbar h2 {
@@ -504,27 +515,21 @@ input[type="search"]:hover {
 
 .discussion .topbar input[type="search"] {
     padding: 10px;
-    width: 30%;
+    width: 19%;
     height: 30px;
     border-radius: 10px;
     border: none;
-    position: relative;
-    top: 40px;
-    left: 40px
-}
-
-.discussion .topbar i {
-    position: relative;
-    top: 48px;
-    left: 80px;
-    z-index: 1;
-    color: #2f3f54;
+    position: fixed;
+    top: 5.3%;
+    left: 59%;
 }
 
 .discussion .topbar .fa-user-group {
     color: #F0EBD8;
-    margin-top: 12px;
-    margin-left: 20%;
+    position: fixed;
+    top: 7%;
+    left: 86%;
+    z-index: 1;
 }
 
 .discussion .topbar .fa-user-group:hover {
@@ -534,8 +539,9 @@ input[type="search"]:hover {
 
 .discussion .topbar .fa-ellipsis {
     color: #F0EBD8;
-    margin-top: 12px;
-    margin-left: 40px;
+    position: fixed;
+    top: 7%;
+    left: 92%;
 }
 
 .discussion .topbar .fa-ellipsis:hover {
@@ -589,6 +595,11 @@ input[type="search"]:hover {
     margin-bottom: 3px;
 }
 
+.conversation {
+    max-height: 70%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
 
 .conversation .message-me {
     display: flex;
@@ -676,10 +687,10 @@ input[type="search"]:hover {
 
 .chatbox input {
     text-indent: 2%;
-    width: 80%;
-    position: relative;
-    top: -100px;
-    left: 40px;
+    width: 56%;
+    position: fixed;
+    top: 80%;
+    left: 40%;
     min-height: 120px;
     border: 1px solid rgba(240, 235, 216, 0.1);
     border-radius: 20px;
@@ -698,13 +709,20 @@ input[type="search"]:hover {
     color: #748cab;
     display: flex;
     justify-content: flex-end;
-    position: relative;
-    top: -130px;
+    position: fixed;
+    top: 91%;
+    left: 75%;
 }
 
 .icons-group .fas {
     position: relative;
     left: 15px;
+    top: -12px;
+}
+
+.icons-group .fa-face-smile {
+    position: relative;
+    top: -12px;
 }
 
 .icons-group i {

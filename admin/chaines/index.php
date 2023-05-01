@@ -6,7 +6,7 @@ $salons = getAllSalons();
 $utilisateurs = getAllUsers();
 $chaines = getAllChaines();
 $user = getUserSession();
-$messages = getAllMessages();
+$userMessages = getChainesUserMessages();
 $title = "AlertMNS - Chaines";
 
 
@@ -106,7 +106,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
         <div class="chaines" id="chaines">
             <h2>Chaînes</h2>
             <?php foreach ($chaines as $chaine): ?>
-                <div class="channel-group" id="nomChaine_<?php echo $chaine["id_chaine"] ?> ">
+                <div class="channel-group" id="nomChaine_<?php echo $chaine["id_chaine"] ?>">
                     <img src='https://dummyimage.com/70x70/1D2D44/FFFFFF.png?text=Cha%C3%AEnes' alt="logo chaine">
                     <h3 id="chaine">
                         <a>
@@ -148,7 +148,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                 </div>
                 <div class="salons-liste" id="listeSalon">
                     <?php foreach ($salons as $salon): ?>
-                        <div class="salon" style="display: none;">
+                        <div class="salon" id="nomSalon_<?php echo $salon["id_salon"] ?> " style="display: none;">
                             <?= $salon['nom_salon'] ?>
                         </div>
                     <?php endforeach; ?>
@@ -159,7 +159,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
         <!-- Concerne l'entête de la discussion -->
         <div class="discussion" id="discussion">
             <div class="topbar">
-                <h2 id="nomSalon">
+                <h2 id="nomSalon" class="salonName">
                     <?= $salon['nom_salon'] ?>
                 </h2>
                 <i class="fa-solid fa-magnifying-glass icon"></i><input type="search" placeholder="Rechercher...">
@@ -169,6 +169,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                 <div class="modal" id="viewMembersModal">
                     <div class="modal-content-view-members">
                         <span class="closeModal" id="closeModalViewMembers">&times;</span>
+                        <a><i class="fa-solid fa-user-plus fa-2xl"></i></a>
                         <h3>Membres</h3>
                         <?php foreach ($utilisateurs as $utilisateur): ?>
                             <div class="members-info">
@@ -236,6 +237,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                 </div>
 
                 <!--Bulle de discussion de l'utilisateur-->
+                <?php foreach ($userMessages as $userMessage) :?>
                 <div class="message-user">
                     <div class="bulle-user">
                         <div class="info">
@@ -243,13 +245,13 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                                 <?= $user['prenom_utilisateur'] ?>
                             </p>
                             <p class="date">
-                                <?= $messages['date_message'] ?>
+                                <?= $userMessages['date_message'] ?>
                             </p>
                         </div>
                         <div class="bubble-right">
                             <div class="contenu-my-message">
                                 <p>
-                                    <?= $messages['text_message'] ?>
+                                    <?= $userMessages['text_message'] ?>
                                 </p>
                             </div>
                             <div class="arrow-right">
@@ -260,6 +262,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                         <img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt="photo_de_profil">
                     </div>
                 </div>
+                <?php endforeach;?>
 
                 <!-- Deuxième bulle de l'autre personne-->
 
@@ -281,6 +284,27 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                             </div>
                         </div>
                     </div>
+
+                     <!--A effacer-->
+                    <div class="message-me">
+                        <div class="user-info">
+                            <img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt="photo_de_profil">
+                        </div>
+                        <div class="bulle">
+                            <div class="info">
+                                <p class="name">Nom</p>
+                                <p class="date">14 mai 2022</p>
+                            </div>
+                            <div class="arrow-left">
+                            </div>
+                            <div class="contenu-message">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet
+                                    consectetur adipisicing elit.</p>
+                            </div>
+                        </div>
+                    </div>
+                     <!--A effacer-->
+
 
                     <!-- Boîte de dialogue -->
                     <form action="/admin/chaines/index.php" method="post">
