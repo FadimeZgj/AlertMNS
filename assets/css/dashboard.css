@@ -50,6 +50,11 @@ main {
     margin-top: -5px;
 }
 
+.top-icons i:hover {
+    background-color: #2F3F54;
+}
+
+
 .fa-solid,
 .fa-regular {
     padding: 13px;
@@ -66,10 +71,8 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-bottom: 50px;
     background-color: #3E5C76;
     height: 100vh;
-
 }
 
 .sidebar a,
@@ -253,10 +256,6 @@ ul {
 
 .squares .listeChaine img {
     border-radius: 50px;
-}
-
-.squares .listeChaine h3 {
-    
 }
 
 .squares form input[type="text"] {

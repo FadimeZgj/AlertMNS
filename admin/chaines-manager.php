@@ -14,12 +14,9 @@ function checkFormData(array $data, array $requireds = []): array
 {
     $errors = [];
 
-    foreach($data as $key => $value)
-    {
-        if($requireds == [] || in_array($key, $requireds))
-        {
-            if(empty($value))
-            {
+    foreach ($data as $key => $value) {
+        if ($requireds == [] || in_array($key, $requireds)) {
+            if (empty($value)) {
                 $errors[$key] = "Ce champs ne doit pas être vide";
             }
         }
@@ -50,7 +47,8 @@ function getAllChaines()
 {
     $dbh = $GLOBALS['dbh'];
     $sql = "SELECT * FROM chaine
-    WHERE chaine.id_chaine = chaine.id_chaine";
+    WHERE chaine.id_chaine = chaine.id_chaine
+    ORDER BY chaine.nom_chaine DESC";
     return $dbh->query($sql)->fetchAll();
 }
 
@@ -68,11 +66,24 @@ function getAllUsers()
 function getAllSalons()
 {
     $dbh = $GLOBALS['dbh'];
-    $sql = "SELECT salon.nom_salon, salon.id_chaine as c, chaine.nom_chaine, chaine.id_chaine 
+    $sql = "SELECT salon.nom_salon, salon.id_salon, salon.id_chaine as idChaineDeSalon, chaine.nom_chaine, chaine.id_chaine 
     FROM salon
     LEFT JOIN chaine ON chaine.id_chaine = salon.id_chaine
-    WHERE salon.id_chaine = chaine.id_chaine";
+    WHERE salon.id_chaine = chaine.id_chaine
+    AND salon.id_salon = salon.id_salon";
     return $dbh->query($sql)->fetchAll();
+}
+
+function getChainesUserMessages()
+{
+    $dbh = $GLOBALS['dbh'];
+    $sql = "SELECT message.text_message, message.date_message, salon.nom_salon, chaine.nom_chaine, utilisateur.nom_utilisateur, utilisateur.prenom_utilisateur
+    FROM message
+    LEFT JOIN salon on message.id_salon = salon.id_salon
+    LEFT JOIN chaine on chaine.id_chaine = salon.id_salon
+    LEFT JOIN utilisateur on message.id_utilisateur = utilisateur.id_utilisateur
+    AND message.id_utilisateur = " . $_SESSION['user']['id'];
+    return $dbh->query($sql)->fetch(PDO::FETCH_ASSOC);
 }
 
 function getAllMessages()
@@ -87,7 +98,7 @@ function getAllMessages()
     FROM message 
     JOIN recevoir ON message.id_message = recevoir.id_message 
     WHERE message.id_utilisateur = ' . $_SESSION['user']['id'] . ' OR recevoir.id_utilisateur = ' . $_SESSION['user']['id'] .
-    ' ORDER BY message.date_message DESC ';
+        ' ORDER BY message.date_message DESC ';
 
     return $dbh->query($sql)->fetch(PDO::FETCH_ASSOC);
 }
@@ -117,10 +128,10 @@ function getSalonById(int $id)
     return $stmt->fetch();
 }
 
- /**
-  * @var int l'ID de la database
-  */
-  function insertChaine(array $data)
+/**
+ * @var int l'ID de la database
+ */
+function insertChaine(array $data)
 {
     $dbh = $GLOBALS['dbh'];
     $sql = "INSERT INTO chaine (nom_chaine, id_utilisateur) VALUES (:nom_genre, :id_utilisateur)";

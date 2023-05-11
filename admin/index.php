@@ -84,7 +84,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                     </ul>
                     <ul>
                         <a href=""><li><i class="fa-solid fa-plus fa-2x"></i><span>Organiser une réunion</span></li></a>
-                        <a href="/admin/chaines/"><li><i class="fa-solid fa-tower-cell fa-2x"></i><span>Voir les chaînes</span></li></a>
+                        <a href="../admin/chaines"><li><i class="fa-solid fa-tower-cell fa-2x"></i><span>Voir les chaînes</span></li></a>
                         <a href=""><li><i class="fa-solid fa-magnifying-glass fa-2x"></i><span>Rechercher un utilisateur</span></li></a>
                     </ul>
                 </div>
