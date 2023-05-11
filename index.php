@@ -12,7 +12,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 <body>
     <header>
         <div class="main-logo">
-            <div class="logo"><img src='https://dummyimage.com/150x150/1D2D44/FFFFFF.png?text=LOGO' alt="Logo" /></div>
+        <div class="logo"><img src='/assets/images/logo1.png' alt="Logo de Alert MNS" /></div>
         </div>
     </header>
 

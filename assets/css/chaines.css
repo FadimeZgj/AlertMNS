@@ -751,7 +751,7 @@ input[type="search"]:hover {
 
 /* _____________________________Media query__________________________________ */
 
-/* Permet de déplacer les icônes de la top bar en grand écran */
+/* Pour les grands écrans */
 @media (min-width : 1600px) {
     .discussion .topbar .fa-user-group {
         margin-left: 24%;
@@ -793,10 +793,8 @@ input[type="search"]:hover {
     }
 
     .chatbox input {
-        margin-top: 120px;
-        min-height: 150px;
-        margin-right: 160px;
-        width: 75%;
+        width: 50%;
+        left: 800px;
     }
 
     .bulle .info {
@@ -804,7 +802,8 @@ input[type="search"]:hover {
     }
 
     .icons-group {
-        margin-right: 20px;
+        margin-right: 10px;
+        top: 870px;
         right: 240px;
     }
 

@@ -1,5 +1,6 @@
 <?php
-session_start();
+
+require $_SERVER['DOCUMENT_ROOT'] . '/admin/includes/inc-session-check.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/admin/chaines-manager.php';
 
 $salons = getAllSalons();
@@ -10,33 +11,6 @@ $userMessages = getChainesUserMessages();
 $title = "AlertMNS - Chaines";
 
 
-// Fonction pour ajouter un salon à une chaîne
-// // Marche pas
-// if (isset($_POST['submit'])) {
-//     $id = insertSalon($_POST['salon']);
-
-//     if ($id) {
-//         header("Location: /chaines");
-//         exit;
-//     }
-// }
-
-// if (empty($_POST['id'])) {
-//     // On vérifie si des salons sont liés à la chaîne
-//     $sql = "SELECT id_salon FROM salon WHERE id_chaine = :id_chaine";
-//     $query = $dbh->prepare($sql);
-//     $res = $query->execute([
-//         'id_chaine' => $_POST['id']
-//     ]);
-
-//     $salons = $query->fetchAll(PDO::FETCH_COLUMN);
-
-//     if (count($salons) > 0) {
-//         $ids = implode(",", $salons);
-//         $sql =  "UPDATE salon SET id_chaine = NULL WHERE id_salon IN (".$ids.")";
-//         $query = $dbh->query($sql);
-//     }
-// }
 
 $title = "AlertMNS - Chaînes";
 
@@ -49,9 +23,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 
 <body>
 <div class="sidebar">
-        <!-- <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-            <i class="fa fa-bars"></i>
-        </a> -->
+
         <div class="top-icons">
             <a href="/admin"><i class="fa-solid fa-house fa-2x"></i></a>
             <a href="/admin/messages.php"><i class="fa-solid fa-comment-dots fa-2x"></i>
