@@ -129,16 +129,30 @@ $(document).ready(function () {
         // form.action += "?id=" + id_destinataire;
 
         // Obtenir les paramètres de l'URL
-        const urlParams = new URLSearchParams(window.location.search);
+        // const urlParams = new URLSearchParams(window.location.search);
 
-        // Récupérer la valeur de l'ID à partir des paramètres de l'URL
-        const id_destinataire = urlParams.get('id');
+        // // Récupérer la valeur de l'ID à partir des paramètres de l'URL
+        // const id_destinataire = urlParams.get('id');
 
-        // Utiliser l'ID récupéré pour le formulaire
-        if (id_destinataire !== null) {
-          let form = document.querySelector("#message");
-          form.action += "?id=" + id_destinataire;
-        }   
+        // // Utiliser l'ID récupéré pour le formulaire
+        // if (id_destinataire !== null) {
+        //   let form = document.querySelector("#message");
+        //   form.action += "?id=" + id_destinataire;
+        // }   
+
+        const url = new URL(document.querySelector("#message").action);
+
+        // Vérifie s'il existe déjà un paramètre 'id' dans l'URL
+        if (url.searchParams.has('id')) {
+          // Met à jour la valeur du paramètre 'id'
+          url.searchParams.set('id', id_destinataire);
+        } else {
+          // Ajoute le paramètre 'id' à l'URL
+          url.searchParams.append('id', id_destinataire);
+        }
+
+        // Utiliser l'URL mise à jour pour l'action du formulaire
+        document.querySelector("#message").action = url;
       }
     });
     

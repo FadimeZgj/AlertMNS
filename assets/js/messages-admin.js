@@ -47,7 +47,7 @@ $(document).ready(function () {
     let newUrl = currentUrl.replace(/(\?|&)id=\d+/gi, '') + '?id=' + id_destinataire;
     window.history.pushState({ path: newUrl }, '', newUrl);
 
-    
+
     // envoyer la requête AJAX
     $.ajax({
       url: '../../get-conversations.php',
@@ -57,7 +57,7 @@ $(document).ready(function () {
       success: function (response) {
 
         // afficher la conversation dans la liste des messages
-        $('.conversation-interface').empty();
+         $('.conversation-interface').empty();
 
         // parcourir tous les messages de la conversation
         response.forEach(function (message) {
@@ -68,9 +68,9 @@ $(document).ready(function () {
               '<p class="name">' + message.prenom_exp + ' ' + message.nom_exp + '</p><p class="date">' + message.date_message + '</p></div>' +
               '<div class="bubble-right"><div class="contenu-my-message">' +
               '<p>' + message.text_message + '</p></div>' +
-              '<div class="arrow-right"></div>' + 
-              "<img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt='photo_de_profil'></div></div>" 
-              
+              '<div class="arrow-right"></div>' +
+              "<img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt='photo_de_profil'></div></div>"
+
           }
           else {
             messageHTML = '<div class="conversation"><div class ="message-me"><div class = "user-info">' +
@@ -105,8 +105,8 @@ $(document).ready(function () {
 
         for (i = 0; i < response.length; i++) {
           let destinataireNom = response[i].prenom_utilisateur + ' ' + response[i].nom_utilisateur;
-                  // afficher le nom du destinataire ailleurs dans la page
-        $('#dest-name').append(destinataireNom);
+          // afficher le nom du destinataire ailleurs dans la page
+          $('#dest-name').append(destinataireNom);
 
         }
 
@@ -119,39 +119,41 @@ $(document).ready(function () {
     $.ajax({
       url: '/admin/messages.php',
       type: 'POST',
-      data: {id: id_destinataire},
-      success: function (response){
+      data: { id: id_destinataire },
+      success: function (response) {
         // // Récupère l'ID du destinataire de la réponse
         // let id_destinataire = response.id_destinataire;
-        
+
         // // Ajoute l'ID du destinataire à l'URL du formulaire
         // let form = document.querySelector("#message");
         // form.action += "?id=" + id_destinataire;
 
         // Obtenir les paramètres de l'URL
-        const urlParams = new URLSearchParams(window.location.search);
+        // const urlParams = new URLSearchParams(window.location.search);
 
-        // Récupérer la valeur de l'ID à partir des paramètres de l'URL
-        const id_destinataire = urlParams.get('id');
+        // // Récupérer la valeur de l'ID à partir des paramètres de l'URL
+        // const id_destinataire = urlParams.get('id');
 
-        // Utiliser l'ID récupéré pour le formulaire
-        if (id_destinataire !== null) {
-          let form = document.querySelector("#message");
-          form.action += "?id=" + id_destinataire;
-        }   
+        // // Utiliser l'ID récupéré pour le formulaire
+        // if (id_destinataire != null) {
+        //   let form = document.querySelector("#message");
+        //   form.action += "?id=" + id_destinataire;
+        // }
+
+        const url = new URL(document.querySelector("#message").action);
+
+        // Vérifie s'il existe déjà un paramètre 'id' dans l'URL
+        if (url.searchParams.has('id')) {
+          // Met à jour la valeur du paramètre 'id'
+          url.searchParams.set('id', id_destinataire);
+        } else {
+          // Ajoute le paramètre 'id' à l'URL
+          url.searchParams.append('id', id_destinataire);
+        }
+
+        // Utiliser l'URL mise à jour pour l'action du formulaire
+        document.querySelector("#message").action = url;
       }
-    });
-
-    
-    
+    });   
   });
 });
-
-
-
-
-
-
-
-
-

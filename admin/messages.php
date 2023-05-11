@@ -39,8 +39,7 @@ if (isset($_POST['submit']))
                 "id_utilisateur" => $id
             ]);
         }
-        
-        header("Location: /admin/messages.php?id=$id");
+
     }
 
 }
