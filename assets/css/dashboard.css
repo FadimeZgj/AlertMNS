@@ -81,7 +81,7 @@ main {
 }
 
 .sidebar a:hover {
-    background-color:#2F3F54;
+    background-color: #2F3F54;
 }
 
 .sidebar p {
@@ -126,7 +126,7 @@ main {
 }
 
 .actions a:hover {
-    color:#3E5C76;
+    color: #3E5C76;
 }
 
 .actions .fa-solid,
@@ -216,7 +216,7 @@ ul {
     align-items: center;
 }
 
-.squares label{
+.squares label {
     font-size: 24px;
     font-weight: 600;
     text-align: center;
@@ -276,7 +276,7 @@ ul {
     border: 1px solid rgba(240, 235, 216, 0.2);
     font-size: 18px;
     background-color: #F0EBD8;
-    color:#3E5C76;
+    color: #3E5C76;
 }
 
 .squares form input[type="submit"]:hover {
@@ -291,13 +291,13 @@ ul {
     display: inline-block;
     width: 60px;
     height: 34px;
-  }
+}
 
-  .switch input { 
+.switch input {
     opacity: 0;
     width: 0;
     height: 0;
-  }
+}
 
 /* Media query pour les grands écrans */
 
@@ -309,7 +309,8 @@ ul {
 
 @media screen and (max-width: 996px) {
 
-    html,body {
+    html,
+    body {
         width: 100%;
 
     }
@@ -327,9 +328,8 @@ ul {
 
     .section-profile,
     .section-actions,
-    .section-squares 
-    {
-       position: relative;
+    .section-squares {
+        position: relative;
     }
 
     .profile-mob {
@@ -409,7 +409,7 @@ ul {
         display: block;
         padding: 0 20px;
         border-top: 1px solid rgba(240, 235, 216, 0.2);
-        border-bottom: 1px solid rgba(240, 235, 216, 0.2) ;
+        border-bottom: 1px solid rgba(240, 235, 216, 0.2);
         background-color: #2F3F54;
         margin-left: auto;
         margin-right: auto;
@@ -420,7 +420,7 @@ ul {
     }
 
     .nav li:active {
-        background-color:#3e4855 ;
+        background-color: #3e4855;
     }
 
     .fa-regular {
@@ -460,14 +460,14 @@ ul {
     .squares-mob a {
         color: #F0EBD8;
         justify-self: center;
-        background-color:#1D2D44;
+        background-color: #1D2D44;
         border-radius: 10px;
         text-align: center;
         font-size: 12px;
         font-weight: 700;
         padding: 10% 0%;
         width: 30%;
-        
+
 
     }
 
@@ -495,16 +495,16 @@ ul {
     .actions-mob a {
         display: block;
         border-top: 1px solid rgba(240, 235, 216, 0.2);
-        border-bottom: 1px solid rgba(240, 235, 216, 0.2) ;
+        border-bottom: 1px solid rgba(240, 235, 216, 0.2);
         background-color: #2F3F54;
         color: #F0EBD8;
         width: 100%;
         padding-left: 20%;
     }
 
-   
 
-    .actions-mob a:active{
+
+    .actions-mob a:active {
         background-color: #3e4855;
     }
 }

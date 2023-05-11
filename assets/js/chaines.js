@@ -93,7 +93,7 @@ Chaines.forEach(function (chaine) {
         // Permet de récupérer l'id pour chaque chaine
         const id = chaine.id;
         // On récupère les salons, on récupère les id des chaines grâce à la variable id
-        fetch("../../get_salon.php?id_chaine=" + id)
+        fetch("../../json/get_salon.php?id_chaine=" + id)
             .then(function (response) {
                 return response.json();
             })
@@ -187,7 +187,7 @@ function checkClass(salon, intervalTime) {
                 salon.addEventListener("click", () => {
                     nomSalon.innerHTML = ""
                     // Permet de modifier le titre h2 de la conversation des chaînes en récupérant l'id du salon
-                    fetch('../../get_salon.php?id_chaine=' + salon.id)
+                    fetch('../../json/get_salon.php?id_chaine=' + salon.id)
                         .then(function (response) {
                             return response.json();
                         })
@@ -222,7 +222,7 @@ chaines.forEach(function (chaine) {
     chaine.addEventListener("click", (e) => {
         chaineTitle.innerHTML = ""
         const id = chaine.id;
-        fetch('../../get_chaines.php?id_chaine=' + id).then(function (response) {
+        fetch('../../json/get_chaines.php?id_chaine=' + id).then(function (response) {
             return response.json();
         }).then(function (showChanelTitle) {
             console.log(showChanelTitle)

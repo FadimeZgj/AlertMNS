@@ -5,7 +5,7 @@ if (in_array("Administrateur", $_SESSION['user']['roles'])) : ?>
     <section>
         <div class="actions">
             <ul>
-                <li><a href="/admin/add-user.php"><i class="fa-solid fa-plus fa-xl"></i>Créer un utilisateur</a></li>
+                <li><a href="/admin/users/add-user.php"><i class="fa-solid fa-plus fa-xl"></i>Créer un utilisateur</a></li>
                 <li><a href=""><i class="fa-solid fa-plus fa-xl"></i>Créer une nouvelle chaine</a></li>
                 <li><a href=""><i class="fa-solid fa-plus fa-xl"></i>Créer un nouveau groupe</a></li>
                 <li><a href=""><i class="fa-solid fa-plus fa-xl"></i>Organiser une réunion</a></li>

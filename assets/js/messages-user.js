@@ -4,7 +4,7 @@ let user = userId
 // récupérer le dernier message envoyé par l'interlocuteur
 $.ajax({
   type: "GET",
-  url: "../../get-last-messages.php", // Le fichier PHP qui retourne les donnée
+  url: "../../json/get-last-messages.php", // Le fichier PHP qui retourne les donnée
   dataType: "json",
   success: function (response) {
     // La fonction à exécuter en cas de succès
@@ -50,7 +50,7 @@ $(document).ready(function () {
     
     // envoyer la requête AJAX
     $.ajax({
-      url: '../../get-conversations.php',
+      url: '../../json/get-conversations.php',
       type: 'POST',
       data: { id_destinataire: id_destinataire },
       dataType: 'json',
@@ -94,7 +94,7 @@ $(document).ready(function () {
     });
 
     $.ajax({
-      url: '../../get-users.php',
+      url: '../../json/get-users.php',
       type: 'POST',
       data: { id_destinataire: id_destinataire },
       dataType: 'json',
