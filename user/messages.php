@@ -69,37 +69,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
         </div>
     </header>
 
-    <div class="sidebar">
-        <!-- <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-            <i class="fa fa-bars"></i>
-        </a> -->
-        <div class="top-icons">
-            <a href="/user"><i class="fa-solid fa-house fa-2x"></i></a>
-            <a href="/user/messages.php"><i class="fa-solid fa-comment-dots fa-2x"></i>
-
-            </a>
-            <a href=""><i class="fa-solid fa-users fa-2x"></i>
-
-            </a>
-            <a href="/user/chaines"><i class="fa-solid fa-tower-cell fa-2x"></i>
-
-            </a>
-            <a href=""><i class="fa-regular fa-calendar-days fa-2x"></i>
-
-            </a>
-        </div>
-        <div class="bottom-icons">
-            <a href="../../logout.php"><i class="fa-solid fa-arrow-right-from-bracket fa-2x"></i>
-
-            </a>
-            <a href=""><i class="fa-solid fa-user fa-2x"></i>
-
-            </a>
-            <a href=""><i class="fa-solid fa-gear fa-2x"></i>
-
-            </a>
-        </div>
-    </div>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . "/includes/inc-navbar-chaines.php" ?>
 
     <div class="container">
         <div class="messages">

@@ -41,7 +41,7 @@
     animation-duration: 0.4s;
 }
 
-/* Add Animation */
+/* Animation Modal */
 @-webkit-keyframes animatetop {
     from {
         top: -300px;

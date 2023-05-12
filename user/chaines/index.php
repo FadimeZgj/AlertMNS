@@ -10,73 +10,15 @@ $messages = getAllMessages();
 $title = "AlertMNS - Chaines";
 
 
-// Fonction pour ajouter un salon à une chaîne
-// // Marche pas
-// if (isset($_POST['submit'])) {
-//     $id = insertSalon($_POST['salon']);
-
-//     if ($id) {
-//         header("Location: /chaines");
-//         exit;
-//     }
-// }
-
-// if (empty($_POST['id'])) {
-//     // On vérifie si des salons sont liés à la chaîne
-//     $sql = "SELECT id_salon FROM salon WHERE id_chaine = :id_chaine";
-//     $query = $dbh->prepare($sql);
-//     $res = $query->execute([
-//         'id_chaine' => $_POST['id']
-//     ]);
-
-//     $salons = $query->fetchAll(PDO::FETCH_COLUMN);
-
-//     if (count($salons) > 0) {
-//         $ids = implode(",", $salons);
-//         $sql =  "UPDATE salon SET id_chaine = NULL WHERE id_salon IN (".$ids.")";
-//         $query = $dbh->query($sql);
-//     }
-// }
-
-$title = "AlertMNS - Chaines";
-
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
-?>
-    <link rel="stylesheet" href="/assets/css/chaines.css">
+?>    
+
+<link rel="stylesheet" href="/assets/css/chaines.css">
+
 </head>
 
 <body>
-<div class="sidebar">
-        <!-- <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-            <i class="fa fa-bars"></i>
-        </a> -->
-        <div class="top-icons">
-            <a href="/user"><i class="fa-solid fa-house fa-2x"></i></a>
-            <a href="/user/messages.php"><i class="fa-solid fa-comment-dots fa-2x"></i>
-
-            </a>
-            <a href="/user/messages.php"><i class="fa-solid fa-users fa-2x"></i>
-
-            </a>
-            <a href="/user/chaines"><i class="fa-solid fa-tower-cell fa-2x"></i>
-
-            </a>
-            <a href=""><i class="fa-regular fa-calendar-days fa-2x"></i>
-
-            </a>
-        </div>
-        <div class="bottom-icons">
-            <a href="../../logout.php"><i class="fa-solid fa-arrow-right-from-bracket fa-2x"></i>
-
-            </a>
-            <a href=""><i class="fa-solid fa-user fa-2x"></i>
-
-            </a>
-            <a href=""><i class="fa-solid fa-gear fa-2x"></i>
-
-            </a>
-        </div>
-    </div>
+<?php include $_SERVER['DOCUMENT_ROOT'] . "/includes/inc-navbar-chaines.php" ?>
     <nav class="responsive-menu">
         <div class="burger-icon">
             <button id="burgerMenu">
@@ -110,7 +52,8 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                         <a>
                             <?= $chaine['nom_chaine'] ?>
                         </a>
-                    <input class="isActive" type="hidden" id="isActive_<?php echo $chaine['is_active'] ?>" value="isActive_<?php echo $chaine['is_active'] ?>">
+                        <input class="isActive" type="hidden" id="isActive_<?php echo $chaine['is_active'] ?>"
+                            value="isActive_<?php echo $chaine['is_active'] ?>">
                     </h3>
                 </div>
             <?php endforeach; ?>
@@ -199,11 +142,12 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                         <li><a href="#"><i class="fas fa-bell fa-xl"></i> Paramètre de notifications</a></li>
                         <li><a href="#"><i class="fas fa-folder fa-xl"></i> Voir les fichiers partagés</a></li>
                         <li><a href="#"><i class="fas fa-trash fa-xl"></i> Supprimer le salon
-                        <form action="/admin/chaines/delete.php" method="post"
-                            onsubmit="return confirm('Voulez-vous vraiment supprimer ce salon ?')">
-                            <input type="hidden" name="id_salon" value="<?= $salons['id_salon'] ?>">
-                            <input type="submit" value="Supprimer">
-                        </form></a></li>
+                                <form action="/admin/chaines/delete.php" method="post"
+                                    onsubmit="return confirm('Voulez-vous vraiment supprimer ce salon ?')">
+                                    <input type="hidden" name="id_salon" value="<?= $salons['id_salon'] ?>">
+                                    <input type="submit" value="Supprimer">
+                                </form>
+                            </a></li>
                     </ul>
                 </div>
 
@@ -312,9 +256,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
     <script>
 
 
-
     </script>
     <script src="/assets/js/chaines.js"></script>
-</body>
 
-</html>
+<?php require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-bottom.php'; ?>

@@ -18,39 +18,13 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 
 ?>
 
-    <link rel="stylesheet" href="/assets/css/chaines.css">
+<link rel="stylesheet" href="/assets/css/chaines.css">
 </head>
 
 <body>
-<div class="sidebar">
 
-        <div class="top-icons">
-            <a href="/admin"><i class="fa-solid fa-house fa-2x"></i></a>
-            <a href="/admin/messages.php"><i class="fa-solid fa-comment-dots fa-2x"></i>
+<?php include $_SERVER['DOCUMENT_ROOT'] . "/includes/inc-navbar-chaines.php" ?>
 
-            </a>
-            <a href="/admin/messages.php"><i class="fa-solid fa-users fa-2x"></i>
-
-            </a>
-            <a href="/admin/chaines"><i class="fa-solid fa-tower-cell fa-2x"></i>
-
-            </a>
-            <a href=""><i class="fa-regular fa-calendar-days fa-2x"></i>
-
-            </a>
-        </div>
-        <div class="bottom-icons">
-            <a href="../../logout.php"><i class="fa-solid fa-arrow-right-from-bracket fa-2x"></i>
-
-            </a>
-            <a href=""><i class="fa-solid fa-user fa-2x"></i>
-
-            </a>
-            <a href=""><i class="fa-solid fa-gear fa-2x"></i>
-
-            </a>
-        </div>
-    </div>
     <nav class="responsive-menu">
         <div class="burger-icon">
             <button id="burgerMenu">
@@ -84,7 +58,8 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                         <a>
                             <?= $chaine['nom_chaine'] ?>
                         </a>
-                    <input class="isActive" type="hidden" id="isActive_<?php echo $chaine['is_active'] ?>" value="isActive_<?php echo $chaine['is_active'] ?>">
+                        <input class="isActive" type="hidden" id="isActive_<?php echo $chaine['is_active'] ?>"
+                            value="isActive_<?php echo $chaine['is_active'] ?>">
                     </h3>
                 </div>
             <?php endforeach; ?>
@@ -106,7 +81,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                     <i class="fas fa-plus fa-2xl" id="createSalonModalButton"></i>
                     <div class="modal" id="addSalonModal">
                         <div class="modal-content">
-                            <span class="closeModal" id="closeModal">&times;</span>
+                            <span class="closeModal" id="closeCreateSalonModal">&times;</span>
                             <h3>Création d'un salon</h3>
 
                             <form action="/admin/chaines/index.php" method="POST">
@@ -174,11 +149,12 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                         <li><a href="#"><i class="fas fa-bell fa-xl"></i> Paramètre de notifications</a></li>
                         <li><a href="#"><i class="fas fa-folder fa-xl"></i> Voir les fichiers partagés</a></li>
                         <li><a href="#"><i class="fas fa-trash fa-xl"></i> Supprimer le salon
-                        <form action="/admin/chaines/delete.php" method="post"
-                            onsubmit="return confirm('Voulez-vous vraiment supprimer ce salon ?')">
-                            <input type="hidden" name="id_salon" value="<?= $salons['id_salon'] ?>">
-                            <input type="submit" value="Supprimer">
-                        </form></a></li>
+                                <form action="/admin/chaines/delete.php" method="post"
+                                    onsubmit="return confirm('Voulez-vous vraiment supprimer ce salon ?')">
+                                    <input type="hidden" name="id_salon" value="<?= $salons['id_salon'] ?>">
+                                    <input type="submit" value="Supprimer">
+                                </form>
+                            </a></li>
                     </ul>
                 </div>
 
@@ -209,32 +185,32 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                 </div>
 
                 <!--Bulle de discussion de l'utilisateur-->
-                <?php foreach ($userMessages as $userMessage) :?>
-                <div class="message-user">
-                    <div class="bulle-user">
-                        <div class="info">
-                            <p class="name">
-                                <?= $user['prenom_utilisateur'] ?>
-                            </p>
-                            <p class="date">
-                                <?= $userMessages['date_message'] ?>
-                            </p>
-                        </div>
-                        <div class="bubble-right">
-                            <div class="contenu-my-message">
-                                <p>
-                                    <?= $userMessages['text_message'] ?>
+                <?php foreach ($userMessages as $userMessage): ?>
+                    <div class="message-user">
+                        <div class="bulle-user">
+                            <div class="info">
+                                <p class="name">
+                                    <?= $user['prenom_utilisateur'] ?>
+                                </p>
+                                <p class="date">
+                                    <?= $userMessages['date_message'] ?>
                                 </p>
                             </div>
-                            <div class="arrow-right">
+                            <div class="bubble-right">
+                                <div class="contenu-my-message">
+                                    <p>
+                                        <?= $userMessages['text_message'] ?>
+                                    </p>
+                                </div>
+                                <div class="arrow-right">
+                                </div>
                             </div>
                         </div>
+                        <div class="my-info">
+                            <img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt="photo_de_profil">
+                        </div>
                     </div>
-                    <div class="my-info">
-                        <img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt="photo_de_profil">
-                    </div>
-                </div>
-                <?php endforeach;?>
+                <?php endforeach; ?>
 
                 <!-- Deuxième bulle de l'autre personne-->
 
@@ -257,7 +233,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                         </div>
                     </div>
 
-                     <!--A effacer-->
+                    <!--A effacer-->
                     <div class="message-me">
                         <div class="user-info">
                             <img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt="photo_de_profil">
@@ -275,7 +251,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                             </div>
                         </div>
                     </div>
-                     <!--A effacer-->
+                    <!--A effacer-->
 
 
                     <!-- Boîte de dialogue -->
@@ -307,36 +283,34 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
             </div> <!--discussion -->
         </div> <!--container -->
     </div>
+    <script src="/assets/js/chaines.js"></script>
     <script>
 
-// On récupère l'id de la modale
-var addSalonModal = document.getElementById("addSalonModal");
+        // On récupère l'id de la modale
+        var addSalonModal = document.getElementById("addSalonModal");
 
-// On récupère le bouton qui permet d'ouvrir la modale
-var createSalonModalButton = document.getElementById("createSalonModalButton");
+        // On récupère le bouton qui permet d'ouvrir la modale
+        var createSalonModalButton = document.getElementById("createSalonModalButton");
 
-// On récupère la classe close du <span> qui permet de fermer la modale
-var closeModal = document.getElementById("closeModal");
+        // On récupère la classe close du <span> qui permet de fermer la modale
+        var closeCreateSalonModal = document.getElementById("closeCreateSalonModal");
 
-// Quand l'utilisateur clic sur le bouton, cela ouvre la modale
-createSalonModalButton.onclick = function () {
-    addSalonModal.style.display = "block";
-}
+        // Quand l'utilisateur clic sur le bouton, cela ouvre la modale
+        createSalonModalButton.onclick = function () {
+            addSalonModal.style.display = "block";
+        }
 
-// Quand l'utilisateur clique sur la croix <span> (x), cela ferme la modale
-closeModal.onclick = function () {
-    addSalonModal.style.display = "none";
-}
+        // Quand l'utilisateur clique sur la croix <span> (x), cela ferme la modale
+        closeCreateSalonModal.onclick = function () {
+            addSalonModal.style.display = "none";
+        }
 
-// Quand l'utilisateur clique en dehors de la modale, cela la ferme
-window.onclick = function (e) {
-    if (e.target == addSalonModal) {
-        addSalonModal.style.display = "none";
-    }
-}
-
+        // Quand l'utilisateur clique en dehors de la modale, cela la ferme
+        window.onclick = function (e) {
+            if (e.target == addSalonModal) {
+                addSalonModal.style.display = "none";
+            }
+        }
 
     </script>
-    <script src="/assets/js/chaines.js"></script>
-    
     <?php require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-bottom.php'; ?>
