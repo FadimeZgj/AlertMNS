@@ -35,13 +35,13 @@ function getUserSession()
     return $dbh->query($sql)->fetch(PDO::FETCH_ASSOC);
 }
 
-function getAllEmails()
-{
-    $dbh = $GLOBALS['dbh'];
-    $sql = "SELECT * FROM utilisateur
-    WHERE utilisateur.email_utilisateur = utilisateur.email_utilisateur";
-    return $dbh->query($sql)->fetchAll();
-}
+// function getAllEmails()
+// {
+//     $dbh = $GLOBALS['dbh'];
+//     $sql = "SELECT * FROM utilisateur
+//     WHERE utilisateur.email_utilisateur = utilisateur.email_utilisateur";
+//     return $dbh->query($sql)->fetchAll();
+// }
 
 function getAllChaines()
 {

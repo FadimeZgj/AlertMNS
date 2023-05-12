@@ -1,12 +1,8 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 
-// Récupérer utilisateur connecté
-$sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , role.libelle_role FROM utilisateur 
-LEFT JOIN role ON utilisateur.id_role = role.id_role
-WHERE id_utilisateur = '" . $_SESSION['user']['id'] . "'";
-$query = $dbh->query($sql);
-$utilisateur = $query->fetch(PDO::FETCH_ASSOC);
+// Récupérer l'utilisateur connecté
+$utilisateur = getAllActiveUsers();
 
 if(in_array("Administrateur", $_SESSION['user']['roles'])):?>
 

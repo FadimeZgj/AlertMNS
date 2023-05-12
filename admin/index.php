@@ -1,7 +1,6 @@
 <?php
 
 require $_SERVER['DOCUMENT_ROOT'] . '/admin/includes/inc-session-check.php';
-require '../includes/inc-db-connect.php';
 
 $title = "AlertMNS - Dashboard Admin";
 

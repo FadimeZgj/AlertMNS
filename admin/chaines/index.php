@@ -3,6 +3,7 @@
 require $_SERVER['DOCUMENT_ROOT'] . '/admin/includes/inc-session-check.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/admin/chaines-manager.php';
 
+
 $salons = getAllSalons();
 $utilisateurs = getAllUsers();
 $chaines = getAllChaines();

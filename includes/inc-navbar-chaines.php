@@ -15,7 +15,7 @@ if (in_array("Administrateur", $_SESSION['user']['roles'])): ?>
             <a href="/admin/chaines"><i class="fa-solid fa-tower-cell fa-2x"></i>
 
             </a>
-            <a href=""><i class="fa-regular fa-calendar-days fa-2x"></i>
+            <a href="/admin/reunions"><i class="fa-regular fa-calendar-days fa-2x"></i>
 
             </a>
         </div>
