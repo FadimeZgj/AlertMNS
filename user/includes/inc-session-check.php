@@ -7,7 +7,7 @@ if(empty($_SESSION['user']))
     header("Location: /"); die;
 }
 
-// On vérifie que l'utilisateur est bien admin
+// Si c'est un admin, on le rédirige à l'accueil
 if(in_array("Administrateur", $_SESSION['user']['roles']))
 {
     header("Location: /"); die;

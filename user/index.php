@@ -7,8 +7,8 @@ $tite = "AlertMNS - Dashboard";
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 ?>
 
-    <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 
 <body>
@@ -40,36 +40,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
     </nav>
 
     <main>
-        <nav class="sidebar">
-            <div class="top-icons">
-                <a href="/user"><i class="fa-solid fa-house fa-2x"></i></a>
-                <a href="/user/messages.php"><i class="fa-solid fa-comment-dots fa-2x"></i>
-                    <p>Voir tous les messages</p>
-                </a>
-                <a href=""><i class="fa-solid fa-users fa-2x"></i>
-                    <p> Voir tous les groupes</p>
-                </a>
-                <a href="/user/chaines"><i class="fa-solid fa-tower-cell fa-2x"></i>
-                    <p>Voir toutes les chaînes</p>
-                </a>
-                <a href=""><i class="fa-regular fa-calendar-days fa-2x"></i>
-                    <p>Voir les réunions</p>
-                </a>
-            </div>
-
-            <div class="bottom-icons">
-                <a href="../../logout.php"><i class="fa-solid fa-arrow-right-from-bracket fa-2x"></i>
-                    <p>Déconnexion</p>
-                </a>
-                <a href=""><i class="fa-solid fa-user fa-2x"></i>
-                    <p>Gérer mon profil</p>
-                </a>
-                <a href=""><i class="fa-solid fa-gear fa-2x"></i>
-                    <p> Réglages</p>
-                </a>
-            </div>
-        </nav>
-
+    <?php include $_SERVER['DOCUMENT_ROOT'] . "/includes/inc-navbar.php" ?>
         <div class="options">
         <?php include $_SERVER['DOCUMENT_ROOT'] . "/includes/inc-sidebar.php" ?>
 
@@ -128,7 +99,5 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
     </main>
 
     <footer></footer>
-
-    <script src="../assets/js/script.js"></script>
 
 <?php require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-bottom.php'; ?>

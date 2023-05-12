@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Roboto, sans-serif;
+    text-decoration: none;
+}
+
+body {
+    background-color: #1D2D44;
+    color: #F0EBD8;
+}
+
+a {
+    color:#F0EBD8;
+}
+
+i {
+    position: absolute;
+    top: -17px;
+    left: -70px;
+}
+
+.bounce {
+    position: relative;
+    left: 110px;
+    top: 34px;
+    font-size: 18px;
+}
+
+a:hover {
+    cursor: pointer;
+    color: #748CAB;
+}
+
+.container {
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.container h1 {
+    font-size: 23px;
+}
+
+.container h1, .container h4 {
+    font-weight: 400;
+}
+
+
