@@ -79,23 +79,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 </head>
 
 <body>
-    <header>
-        <div class="name-dashboard">
-            <h1>Dashboard Administrateur</h1>
-        </div>
-        <div class="name-user">
-            <div>
-                <h2>
-                    <?= $utilisateur['prenom_utilisateur'] ?>
-                    <?= $utilisateur['nom_utilisateur'] ?>
-                </h2>
-                <p>
-                    <?= $utilisateur['libelle_role'] ?>
-                </p>
-            </div>
-            <a href=""><img src='https://dummyimage.com/50x50.jpg' alt='' /></a>
-        </div>
-    </header>
+<?php require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top-bar.php';?>
 
     <!-- Menu burger pour mobile -->
 
@@ -125,36 +109,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
     </nav>
 
     <main>
-        <nav class="sidebar">
-            <div class="top-icons">
-            <a href="/admin">
-                <i class="fa-solid fa-house fa-2x"></i></a>
-                <a href="/admin/messages.php"><i class="fa-solid fa-comment-dots fa-2x"></i>
-                    <p>Voir tous les messages</p>
-                </a>
-                <a href=""><i class="fa-solid fa-users fa-2x"></i>
-                    <p> Voir tous les groupes</p>
-                </a>
-                <a href="/admin/chaines"><i class="fa-solid fa-tower-cell fa-2x"></i>
-                    <p>Voir toutes les chaînes</p>
-                </a>
-                <a href=""><i class="fa-regular fa-calendar-days fa-2x"></i>
-                    <p>Voir les réunions</p>
-                </a>
-            </div>
-
-            <div class="bottom-icons">
-                <a href="../../logout.php"><i class="fa-solid fa-arrow-right-from-bracket fa-2x"></i>
-                    <p>Déconnexion</p>
-                </a>
-                <a href=""><i class="fa-solid fa-user fa-2x"></i>
-                    <p>Gérer mon profil</p>
-                </a>
-                <a href=""><i class="fa-solid fa-gear fa-2x"></i>
-                    <p> Réglages</p>
-                </a>
-            </div>
-        </nav>
+    <?php require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-navbar.php';?>
 
         <div class="options">
             <?php include $_SERVER['DOCUMENT_ROOT'] . "/includes/inc-sidebar.php" ?>
@@ -264,7 +219,5 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
     </main>
 
     <footer></footer>
-
-    <script src="../assets/js/script.js"></script>
 
     <?php require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-bottom.php'; ?>

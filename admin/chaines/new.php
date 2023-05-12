@@ -48,9 +48,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 </head>
 
 <body>
-    
-<?php require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
-?>
+<?php require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top-bar.php';?>
 
     <!-- Menu burger pour mobile -->
 
@@ -80,7 +78,8 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
     </nav>
 
     <main>
-    <?php include $_SERVER['DOCUMENT_ROOT'] . "/includes/inc-navbar-admin.php" ?>
+    <?php require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-navbar.php';?>
+
         <div class="options">
             <?php include $_SERVER['DOCUMENT_ROOT'] . "/includes/inc-sidebar.php" ?>
 
@@ -172,7 +171,4 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 
     <footer></footer>
 
-    <script src="../assets/js/script.js"></script>
-
-    
-    <?php require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-bottom.php'; ?>
+<?php require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-bottom.php'; ?>

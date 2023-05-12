@@ -53,10 +53,10 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
             <section>
                 <div class="squares">
                     <ul>
-                        <a href="">
+                        <a href="/admin/users/add-user.php">
                             <li><i class="fa-solid fa-plus fa-2x"></i><span>Créer un utilisateur</span></li>
                         </a>
-                        <a href="">
+                        <a href="/admin/chaines/new.php">
                             <li><i class="fa-solid fa-plus fa-2x"></i><span>Créer une nouvelle chaine</span></li>
                         </a>
                         <a href="">
@@ -70,7 +70,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                         <a href="../admin/chaines">
                             <li><i class="fa-solid fa-tower-cell fa-2x"></i><span>Voir les chaînes</span></li>
                         </a>
-                        <a href="">
+                        <a href="/search-user.php">
                             <li><i class="fa-solid fa-magnifying-glass fa-2x"></i><span>Rechercher un utilisateur</span>
                             </li>
                         </a>
@@ -100,7 +100,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
         <section class="section-actions">
             <div class="actions-mob">
                 <ul>
-                    <a href="">
+                    <a href="/admin/users/add-user.php">
                         <li><i class="fa-solid fa-plus"></i><span>Créer un utilisateur</span></li>
                     </a>
                     <a href="">

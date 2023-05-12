@@ -17,6 +17,6 @@ session_destroy();
     <a class="bounce" href="/index.php"><i class="fa-solid fa-arrow-left fa-3x"></i>Retourner à la page d'accueil</a>
     <div class="container">
         <h1>Vous êtes bien déconnecté(e)</h1>
-        <h4>Merci d'avoir utiliser Alert MNS</h4>
+        <h4>Merci d'avoir utilisé Alert MNS</h4>
     </div>
 </body>
