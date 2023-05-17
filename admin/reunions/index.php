@@ -11,33 +11,43 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 $utilisateur = getAllActiveUsers();
 
 ?>
-<link rel="stylesheet" href="/assets/css/messages.css">
+<link rel="stylesheet" href="/assets/css/reunions.css">
 <link rel="stylesheet" href="/assets/css/chaines.css">
 </head>
 
 <body>
 
-<?php include $_SERVER['DOCUMENT_ROOT'] . "/includes/inc-navbar-chaines.php" ?>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . "/includes/inc-navbar-chaines.php" ?>
 
-<header>
+    <header>
         <div class="topbar">
             <div class="logo">
-                <img src='https://dummyimage.com/70x70/1D2D44/ffffff.png?text=Logo' alt='Logo'>
-                <h3>ALERT MNS</h3>
+                <img src='/assets/images/logo1.png' alt='Logo'>
+                <h3>Réunions</h3>
             </div>
             <div class="user-info">
                 <img src='https://dummyimage.com/70x70/1D2D44/ffffff.png?text=Photo' alt='Photo'>
                 <div class="user-role">
-                    <h4 id="userName"><?= $utilisateur['prenom_utilisateur'] ?> <?= $utilisateur['nom_utilisateur'] ?></h4>
-                    <h5><?= $utilisateur['libelle_role'] ?></h5>
+                    <h4 id="userName">
+                        <?= $utilisateur['prenom_utilisateur'] ?>
+                        <?= $utilisateur['nom_utilisateur'] ?>
+                    </h4>
+                    <h5>
+                        <?= $utilisateur['libelle_role'] ?>
+                    </h5>
                 </div>
             </div>
         </div>
     </header>
 
-<div class="container-reunions">
-<h1 style="margin-left: 100px;">Liste des réunions</h1>
-</div>
+    <div class="container">
+        <div class="containerLeftInfo">
+            <h1>Bonjouuur</h1>
+        </div>
+        <div class="container-reunions">
+            <h1>Liste des réunions</h1>
+        </div>
+    </div>
 
 
-<?php include $_SERVER['DOCUMENT_ROOT'] . "/includes/inc-bottom.php" ?>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . "/includes/inc-bottom.php" ?>

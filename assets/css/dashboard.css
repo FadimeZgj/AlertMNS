@@ -23,6 +23,7 @@ main {
     grid-template-columns: 65px 1fr;
 }
 
+
 /* Arrière-plan de la modale */
 .modal-logout {
     display: none;
@@ -198,6 +199,7 @@ main {
     border-radius: 30px;
     padding: 30px 20px;
     align-items: center;
+    min-height: 95%;
 }
 
 .actions li {
@@ -391,6 +393,13 @@ ul {
     .squares {
         min-height: 88%;
     }
+    .squares ul {
+        margin-top: 36px;
+    }
+    .actions {
+        min-height: 88%;
+    }
+
 }
 
 @media screen and (max-width: 996px) {

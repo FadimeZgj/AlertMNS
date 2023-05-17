@@ -10,11 +10,27 @@ body {
     background-color: #1D2D44;
 }
 
+header .logo img {
+    border: none;
+    border-radius: 0px;
+    width: 124px;
+    height: 124px;
+    margin-top: -36px;
+    margin-left: -20px;
+    margin-right: -14px;
+    z-index: -1;
+}
+
 /* Arrière-plan de la modale */
 
 .sidebar i:hover {
     background-color: #2F3F54;
     cursor:pointer;
+}
+
+.sidebar .fa-power-off:hover {
+    background-color: inherit;
+    cursor: inherit;
 }
 
 .modal-logout {
@@ -130,5 +146,11 @@ body {
     }
     .modal-content-logout i {
         left: 42%;
+    }
+}
+
+@media (min-width : 1600px) {
+    .modal-content-logout .logout-btn {
+        top: -10px;
     }
 }

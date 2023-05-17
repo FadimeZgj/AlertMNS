@@ -753,10 +753,6 @@ input[type="search"]:hover {
 
 /* Pour les grands écrans */
 @media (min-width : 1600px) {
-    /* .discussion .topbar .fa-user-group {
-
-    } */
-
 
     .salons .create-salon .add i {
         right: -150px;

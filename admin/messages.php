@@ -55,7 +55,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
     <header>
         <div class="topbar">
             <div class="logo">
-                <img src='https://dummyimage.com/70x70/1D2D44/ffffff.png?text=Logo' alt='Logo'>
+                <img src='/assets/images/logo1.png' alt='Logo'>
                 <h3>ALERT MNS</h3>
             </div>
             <div class="user-info">

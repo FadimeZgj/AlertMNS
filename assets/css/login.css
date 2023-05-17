@@ -21,11 +21,11 @@ header, .main-content, .copyright {
 }
 
 header img {
-height: 220px;
-width: 220px;
-border-radius: 50px;
-margin-top: -20px;
-margin-bottom: -30px;
+height: 220px !important;
+width: 220px !important;
+border-radius: 50px !important;
+margin-top: -20px !important;
+margin-bottom: -30px !important;
 }
 
 

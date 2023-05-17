@@ -1,0 +1,62 @@
+/* header - top bar */
+
+header img {
+    border: 1px solid rgba(240, 235, 216, 0.2);
+    border-radius: 50%;
+    text-align: center;
+    padding: 5px;
+}
+
+header img:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+header .topbar {
+    margin-left: 60px;
+    max-height: 70px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(240, 235, 216, 0.2);
+    padding: 10px;
+}
+
+header .topbar .logo {
+    display: flex;
+    margin-left: 10px;
+}
+
+header .topbar .logo h3 {
+    margin-top: 16px;
+    margin-left: 10px;
+}
+
+header .topbar .user-info {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+header .topbar .user-info .user-role {
+    margin-right: 16px;
+    margin-top: 7px;
+    text-align: left;
+}
+
+.container {
+    display: flex;
+}
+
+.container-reunions {
+    margin-left: 10%;
+    border-left:2px solid rgba(240, 235, 216, 0.2);
+}
+
+.container-reunions h1 {
+    margin-top: 20px;
+    margin-left: 50px;
+}
+
+.containerLeftInfo h1 {
+    margin-top: 20px;
+    margin-left: 140px;
+}
