@@ -158,32 +158,35 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
         </nav>
 
         <div class="options">
-        <?php require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-sidebar.php'; ?>
+            <?php require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-sidebar.php'; ?>
 
             <!-- Cadre ajout utilisateur -->
             <section>
                 <div class="add">
                     <h1>Modifier l'utilisateur</h1>
 
-                    <form action="/admin/users/edit-user.php?id=<?= $userEdit['id_utilisateur'] ?>" method="post">
+                    <form action="/admin/users/edit-user.php?id=<?= $userEdit['id_utilisateur'] ?>" method="post" id="addUserForm">
                         <div class="form-name">
                             <div class="form-name-lastname">
                                 <label for="nom_utilisateur">Nom</label>
-                                <input type="text" name="nom_utilisateur" value="<?= $userEdit['nom_utilisateur'] ?>">
+                                <input type="text" name="nom_utilisateur" value="<?= $userEdit['nom_utilisateur'] ?>" id="lastname">
+                                <small class="error" id="errorName"></small>
                                 <?php if (isset($_SESSION['errors']['nom_utilisateur'])) : ?>
                                     <small class="error"><?= $_SESSION['errors']['nom_utilisateur'] ?></small>
                                 <?php endif; ?>
                             </div>
                             <div class="form-name-firstname">
                                 <label for="prenom_utilisateur">Prénom</label>
-                                <input type="text" name="prenom_utilisateur" value="<?= $userEdit['prenom_utilisateur'] ?>">
+                                <input type="text" name="prenom_utilisateur" value="<?= $userEdit['prenom_utilisateur'] ?>" id="firstname">
+                                <small class="error" id="errorFirstname"></small>
                                 <?php if (isset($_SESSION['errors']['prenom_utilisateur'])) : ?>
                                     <small class="error"><?= $_SESSION['errors']['prenom_utilisateur'] ?></small>
                                 <?php endif; ?>
                             </div>
                         </div>
                         <label for="email_utilisateur">Adresse email</label>
-                        <input type="email" placeholder="Adresse@email.com" name="email_utilisateur" value="<?= $userEdit['email_utilisateur'] ?>">
+                        <input type="email" placeholder="Adresse@email.com" name="email_utilisateur" value="<?= $userEdit['email_utilisateur'] ?>" id="email">
+                        <small class="error" id="errorEmail"></small>
                         <?php if (isset($_SESSION['errors']['email_utilisateur'])) : ?>
                             <small class="error"><?= $_SESSION['errors']['email_utilisateur'] ?></small>
                         <?php endif; ?>
@@ -192,9 +195,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
                             <label for="role">Rôle</label>
                             <select name="id_role" id="">
                                 <?php foreach ($roles as $role) : ?>
-                                    <option value="<?= $role['id_role'] ?>" 
-                                    <?php if ($role['id_role'] == $userEdit['id_role']) echo "selected"; ?>>
-                                    <?= $role['libelle_role'] ?></option>
+                                    <option value="<?= $role['id_role'] ?>" <?php if ($role['id_role'] == $userEdit['id_role']) echo "selected"; ?>>
+                                        <?= $role['libelle_role'] ?></option>
                                 <?php endforeach; ?>
                             </select>
 
@@ -209,6 +211,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
                 </div>
             </section>
         </div>
+        <?php unset($_SESSION['errors']); ?>
 
         <!-- tablette/mobile -->
 
@@ -279,6 +282,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
     </main>
 
     <footer></footer>
-    <script src="../assets/js/script.js"></script>
+    <script src="../../assets/js/script.js"></script>
+    <script src="../../assets/js/addUser.js"></script>
 
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php' ?>

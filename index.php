@@ -12,7 +12,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 <body>
     <header>
         <div class="main-logo">
-        <div class="logo"><img src='/assets/images/logo1.png' alt="Logo de Alert MNS" /></div>
+            <div class="logo"><img src='/assets/images/logo1.png' alt="Logo de Alert MNS" /></div>
         </div>
     </header>
 
@@ -22,7 +22,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                 <label for="email"></label>
                 <input type="email" id="email" name="email" placeholder="adresse@email.fr">
                 <small id="emailMissing" class="checkFormEmail"></small>
-                <?php if (isset($_SESSION['errors']['email'])): ?>
+                <?php if (isset($_SESSION['errors']['email'])) : ?>
                     <!-- Si JavaScript est désactivé, on affiche un message d'erreur-->
                     <noscript>
                         <small class="error-email" id="errorEmail">
@@ -34,8 +34,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                 <label for="password"></label>
                 <input type="password" id="password" name="password" placeholder="********">
                 <small id="passwordMissing" class="checkFormPassword"></small>
-                <?php if (isset($_SESSION['errors']['password'])): ?>
-                <!-- Si JavaScript est désactivé, on affiche un message d'erreur-->
+                <?php if (isset($_SESSION['errors']['password'])) : ?>
+                    <!-- Si JavaScript est désactivé, on affiche un message d'erreur-->
                     <noscript>
                         <small class="error-password">
                             <?= $_SESSION['errors']['password'] ?>
@@ -48,7 +48,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                 <input type="submit" name="submit" value="Connexion" id="submit">
             </form>
 
-            <?php if (isset($_SESSION['error'])): ?>
+            <?php if (isset($_SESSION['error'])) : ?>
                 <p class="invalid">
                     <?= $_SESSION['error'] ?>
                 </p>

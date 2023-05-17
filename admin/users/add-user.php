@@ -4,6 +4,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
 unset($_SESSION['error']);
 
 
+
 // Récupérer tous les utilisateurs
 $sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , role.libelle_role FROM utilisateur 
 LEFT JOIN role ON utilisateur.id_role = role.id_role
@@ -21,13 +22,13 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
 
 <link rel="stylesheet" href="../../assets/css/add-user.css">
 <link rel="stylesheet" href="../../assets/css/style.css">
-    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+<link rel="stylesheet" href="../../assets/css/dashboard.css">
 </head>
 
 <body>
     <header>
         <div class="name-dashboard">
-            
+
             <h1>Dashboard Administrateur</h1>
         </div>
         <div class="name-user">
@@ -96,66 +97,71 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
         </nav>
 
         <div class="options">
-        <?php require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-sidebar.php'; ?>
+            <?php require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-sidebar.php'; ?>
 
             <!-- Cadre ajout utilisateur -->
             <section>
                 <div class="add">
                     <h1>Créer un nouvel utilisateur</h1>
 
-                    <form action="/admin/users/add-user-POST.php" method="post" name="add-user">
+                    <form action="/admin/users/add-user-POST.php" method="post" name="add-user" id="addUserForm">
                         <div class="form-name">
                             <div class="form-name-lastname">
                                 <label for="nom_utilisateur">Nom</label>
-                                <input type="text" name="nom_utilisateur">
-                                <?php if(isset($_SESSION['errors']['nom_utilisateur'])): ?>
-                                <small class="error"><?= $_SESSION['errors']['nom_utilisateur'] ?></small>
+                                <input type="text" name="nom_utilisateur" id="lastname">
+                                <small class="error" id="errorName"></small>
+                                <?php if (isset($_SESSION['errors']['nom_utilisateur'])) : ?>
+                                    <small class="error"><?= $_SESSION['errors']['nom_utilisateur'] ?></small>
                                 <?php endif; ?>
                             </div>
                             <div class="form-name-firstname">
                                 <label for="prenom_utilisateur">Prénom</label>
-                                <input type="text" name="prenom_utilisateur">
-                                <?php if(isset($_SESSION['errors']['prenom_utilisateur'])): ?>
-                                <small class="error"><?= $_SESSION['errors']['prenom_utilisateur'] ?></small>
+                                <input type="text" name="prenom_utilisateur" id="firstname">
+                                <small class="error" id="errorFirstname"></small>
+                                <?php if (isset($_SESSION['errors']['prenom_utilisateur'])) : ?>
+                                    <small class="error"><?= $_SESSION['errors']['prenom_utilisateur'] ?></small>
                                 <?php endif; ?>
                             </div>
                         </div>
                         <label for="email_utilisateur">Adresse email</label>
-                        <input type="email" placeholder="Adresse@email.com" name="email_utilisateur">
-                        <?php if(isset($_SESSION['errors']['email_utilisateur'])): ?>
-                        <small class="error"><?= $_SESSION['errors']['email_utilisateur'] ?></small>
+                        <input type="email" placeholder="Adresse@email.com" name="email_utilisateur" id="email">
+                        <?php if (isset($_SESSION['errors']['email_utilisateur'])) : ?>
+                            <small class="error"><?= $_SESSION['errors']['email_utilisateur'] ?></small>
                         <?php endif; ?>
+                        <small class="error" id="errorEmail"></small>
 
                         <label for="mdp_utilisateur">Mot de passe</label>
-                        <input type="password" name="mdp_utilisateur">
-                        <?php if(isset($_SESSION['errors']['mdp_utilisateur'])): ?>
-                        <small class="error"><?= $_SESSION['errors']['mdp_utilisateur'] ?></small>
+                        <input type="password" name="mdp_utilisateur" id="password">
+                        <small class="error" id="errorPassword"></small>
+                        <small class="pwValid">Minimum 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre </small>
+                        <?php if (isset($_SESSION['errors']['mdp_utilisateur'])) : ?>
+                            <small class="error"><?= $_SESSION['errors']['mdp_utilisateur'] ?></small>
                         <?php endif; ?>
 
                         <div class="role">
                             <label for="role">Rôle</label>
                             <select name="id_role" id="">
-                                <?php foreach($roles as $role):?>
-                                <option value="<?=$role['id_role']?>" name="id_role"><?=$role['libelle_role']?></option>
+                                <?php foreach ($roles as $role) : ?>
+                                    <option value="<?= $role['id_role'] ?>" name="id_role"><?= $role['libelle_role'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                       
+
 
                         <input type="submit" class="submit" value="Créer" name="submit">
                     </form>
-                    <?php if(isset($_SESSION['error'])): ?>
-                    <p class="invalid"><?= $_SESSION['error'] ?></p>
-                    <?php endif;?> 
+                    <?php if (isset($_SESSION['error'])) : ?>
+                        <p class="invalid"><?= $_SESSION['error'] ?></p>
+                    <?php endif; ?>
                 </div>
             </section>
         </div>
-
+        <?php unset($_SESSION['errors']); ?>
         <!-- tablette/mobile -->
 
         <section class="section-profile">
             <div class="profile-mob">
-                <a href=""><img src='https://dummyimage.com/100x100.jpg' alt=''/></a>
+                <a href=""><img src='https://dummyimage.com/100x100.jpg' alt='' /></a>
                 <div class="name-mob">
                     <h2><?= $utilisateur['prenom_utilisateur'] ?> <?= $utilisateur['nom_utilisateur'] ?></h2>
                     <p><?= $utilisateur['libelle_role'] ?></p>
@@ -163,14 +169,22 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
 
             </div>
         </section>
-        
+
         <section class="section-actions">
             <div class="actions-mob">
                 <ul>
-                    <a href=""><li><i class="fa-solid fa-plus"></i><span>Créer un utilisateur</span></li></a>
-                    <a href=""><li><i class="fa-solid fa-plus"></i><span>Créer une nouvelle chaine</span></li></a>
-                    <a href=""><li><i class="fa-solid fa-plus"></i><span>Créer un nouveau groupe</span></li></a>
-                    <a href=""><li><i class="fa-solid fa-plus"></i><span>Organiser une réunion</span></li></a>
+                    <a href="">
+                        <li><i class="fa-solid fa-plus"></i><span>Créer un utilisateur</span></li>
+                    </a>
+                    <a href="">
+                        <li><i class="fa-solid fa-plus"></i><span>Créer une nouvelle chaine</span></li>
+                    </a>
+                    <a href="">
+                        <li><i class="fa-solid fa-plus"></i><span>Créer un nouveau groupe</span></li>
+                    </a>
+                    <a href="">
+                        <li><i class="fa-solid fa-plus"></i><span>Organiser une réunion</span></li>
+                    </a>
                 </ul>
             </div>
         </section>
@@ -178,15 +192,33 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
         <section class="section-squares">
             <div class="squares-mob">
                 <ul>
-                    <a href=""><li><i class="fa-solid fa-magnifying-glass fa-xl"></i>Rechercher un utilisateur</li></a>
-                    <a href=""><li><i class="fa-solid fa-tower-cell fa-xl"></i>Voir les chaînes</li></a>
-                    <a href=""><li><i class="fa-solid fa-users fa-xl"></i>Voir les groupes</li></a>
-                    <a href=""><li><i class="fa-solid fa-comment-dots fa-xl"></i>Voir les messages</li></a>
-                    <a href=""><li><i class="fa-regular fa-calendar-days fa-xl"></i>Voir les réunions prévues</li></a>
-                    <a href=""><li><i class="fa-solid fa-circle-exclamation fa-xl"></i>Signalements reçus</li></a>
-                    <a href=""><li><i class="fa-solid fa-trash-can fa-xl"></i><span>Supprimer un utilisateur</span></li></a>
-                    <a href=""><li><i class="fa-solid fa-trash-can fa-xl"></i><span>Supprimer un groupe</span></li></a>
-                    <a href=""><li><i class="fa-solid fa-trash-can fa-xl"></i><span>Supprimer une chaine</span></li></a>
+                    <a href="">
+                        <li><i class="fa-solid fa-magnifying-glass fa-xl"></i>Rechercher un utilisateur</li>
+                    </a>
+                    <a href="">
+                        <li><i class="fa-solid fa-tower-cell fa-xl"></i>Voir les chaînes</li>
+                    </a>
+                    <a href="">
+                        <li><i class="fa-solid fa-users fa-xl"></i>Voir les groupes</li>
+                    </a>
+                    <a href="">
+                        <li><i class="fa-solid fa-comment-dots fa-xl"></i>Voir les messages</li>
+                    </a>
+                    <a href="">
+                        <li><i class="fa-regular fa-calendar-days fa-xl"></i>Voir les réunions prévues</li>
+                    </a>
+                    <a href="">
+                        <li><i class="fa-solid fa-circle-exclamation fa-xl"></i>Signalements reçus</li>
+                    </a>
+                    <a href="">
+                        <li><i class="fa-solid fa-trash-can fa-xl"></i><span>Supprimer un utilisateur</span></li>
+                    </a>
+                    <a href="">
+                        <li><i class="fa-solid fa-trash-can fa-xl"></i><span>Supprimer un groupe</span></li>
+                    </a>
+                    <a href="">
+                        <li><i class="fa-solid fa-trash-can fa-xl"></i><span>Supprimer une chaine</span></li>
+                    </a>
                 </ul>
             </div>
         </section>
@@ -194,6 +226,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
     </main>
 
     <footer></footer>
-    <script src="../assets/js/script.js"></script>
+    <script src="../../assets/js/script.js"></script>
+    <script src="../../assets/js/addUser.js"></script>
 
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'?>
+
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php' ?>

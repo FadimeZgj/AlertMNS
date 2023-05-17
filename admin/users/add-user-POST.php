@@ -1,7 +1,9 @@
 <?php
 
 session_start();
+unset($_SESSION['error']);
 require $_SERVER['DOCUMENT_ROOT'] . '/admin/includes/inc-session-check.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
 
 if (!empty($_POST['submit'])) {
 
@@ -27,7 +29,10 @@ if (!empty($_POST['submit'])) {
         die;
     }
 
-    require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
+    $_POST['nom_utilisateur'] = htmlspecialchars($_POST['nom_utilisateur']);
+    $_POST['prenom_utilisateur'] = htmlspecialchars($_POST['prenom_utilisateur']);
+    $_POST['email_utilisateur'] = htmlspecialchars($_POST['email_utilisateur']);
+    $_POST['mdp_utilisateur'] = htmlspecialchars($_POST['email_utilisateur']);
 
     // On vérifie que l'utilisateur n'existe pas
     $sql = "SELECT * FROM utilisateur WHERE email_utilisateur = :email_utilisateur";
@@ -42,10 +47,7 @@ if (!empty($_POST['submit'])) {
         die;
     }
 
-    $_POST['nom_utilisateur'] = htmlspecialchars($_POST['nom_utilisateur']);
-    $_POST['prenom_utilisateur'] = htmlspecialchars($_POST['prenom_utilisateur']);
-    $_POST['email_utilisateur'] = htmlspecialchars($_POST['email_utilisateur']);
-    $_POST['mdp_utilisateur'] = htmlspecialchars($_POST['email_utilisateur']);
+
 
     // On insère l'utilisateur en BDD
     $sql = "INSERT INTO utilisateur (nom_utilisateur, prenom_utilisateur, email_utilisateur, mdp_utilisateur, id_role) 

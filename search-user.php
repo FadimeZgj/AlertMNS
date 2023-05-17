@@ -1,13 +1,14 @@
 <?php
 session_start();
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/admin/users/archive-user.php';
 
-if(empty($_SESSION['user']))
-{
-    header("Location: /"); die;
+if (empty($_SESSION['user'])) {
+    header("Location: /");
+    die;
 }
 
-if (in_array("Administrateur", $_SESSION['user']['roles'])){
+if (in_array("Administrateur", $_SESSION['user']['roles'])) {
     if (!empty($_GET['submit'])) {
         if (!empty($_GET['search'])) {
             $search = htmlspecialchars($_GET['search']);
@@ -35,9 +36,7 @@ if (in_array("Administrateur", $_SESSION['user']['roles'])){
         $query = $dbh->query($sql);
         $allUsers = $query->fetchAll(PDO::FETCH_ASSOC);
     }
-}
-else
-{
+} else {
     if (!empty($_GET['submit'])) {
         if (!empty($_GET['search'])) {
             $search = htmlspecialchars($_GET['search']);
@@ -68,22 +67,7 @@ else
         $query = $dbh->query($sql);
         $allUsers = $query->fetchAll(PDO::FETCH_ASSOC);
     }
-}    
-
-// maj de is_active
-
-if (!empty($_POST['isActive'])) {
-        $isActive = isset($_POST['is_active']) ? 1 : 0;
-
-        $sql = "UPDATE utilisateur SET is_active = :is_active WHERE id_utilisateur = :id_utilisateur";
-        $query = $dbh->prepare($sql);
-        $active = $query->execute([
-            'is_active' => $isActive,
-            'id_utilisateur' => $_POST['id_utilisateur']
-        ]);
-        header("Location: /search-user.php");
 }
-
 
 $title = "AlertMNS - Recherche utilisateur";
 
@@ -114,7 +98,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                 <li><a href="/messages.php"><i class="fa-solid fa-comment-dots fa-2x"></i>Voir tous les messages</a></li>
                 <li><a href="#"><i class="fa-solid fa-users fa-2x"></i>Voir tous les groupes</a></li>
                 <li>
-                <a href=""><i class="fa-solid fa-tower-cell fa-2x"></i>Voir toutes les chaînes</a>             
+                    <a href=""><i class="fa-solid fa-tower-cell fa-2x"></i>Voir toutes les chaînes</a>
                 </li>
                 <li><a href="#"><i class="fa-regular fa-calendar-days fa-2x"></i>Voir les réunions</a></li>
                 <li><a href="#"><i class="fa-solid fa-user fa-2x"></i>Gérer mon profil</a></li>
@@ -127,14 +111,14 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
     <main>
         <nav class="sidebar">
             <div class="top-icons">
-                <a href="<?php if(in_array("Administrateur", $_SESSION['user']['roles'])): ?> /admin <?php else: ?> /user <?php endif; ?>"><i class="fa-solid fa-house fa-2x"></i></a>
-                <a href="<?php if(in_array("Administrateur", $_SESSION['user']['roles'])): ?> /admin/messages.php <?php else: ?> /user/messages.php  <?php endif; ?>"><i class="fa-solid fa-comment-dots fa-2x"></i>
+                <a href="<?php if (in_array("Administrateur", $_SESSION['user']['roles'])) : ?> /admin <?php else : ?> /user <?php endif; ?>"><i class="fa-solid fa-house fa-2x"></i></a>
+                <a href="<?php if (in_array("Administrateur", $_SESSION['user']['roles'])) : ?> /admin/messages.php <?php else : ?> /user/messages.php  <?php endif; ?>"><i class="fa-solid fa-comment-dots fa-2x"></i>
                     <p>Voir tous les messages</p>
                 </a>
                 <a href=""><i class="fa-solid fa-users fa-2x"></i>
                     <p> Voir tous les groupes</p>
                 </a>
-                <a href="<?php if(in_array("Administrateur", $_SESSION['user']['roles'])): ?> /admin/chaines <?php else: ?> /user/chaines  <?php endif; ?>"><i class="fa-solid fa-tower-cell fa-2x"></i>
+                <a href="<?php if (in_array("Administrateur", $_SESSION['user']['roles'])) : ?> /admin/chaines <?php else : ?> /user/chaines  <?php endif; ?>"><i class="fa-solid fa-tower-cell fa-2x"></i>
                     <p>Voir toutes les chaînes</p>
                 </a>
                 <a href=""><i class="fa-regular fa-calendar-days fa-2x"></i>
@@ -184,7 +168,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                                 <?php if (in_array("Administrateur", $_SESSION['user']['roles'])) : ?>
                                     <a href="/admin/users/edit-user.php?id=<?= $user['id_utilisateur'] ?>"><i class="fa-solid fa-pen-to-square fa-xl"></i></a>
                                     <form action="/search-user.php" method="post">
-                                    <input type="hidden" name="id_utilisateur" value="<?= $user['id_utilisateur'] ?>">
+                                        <input type="hidden" name="id_utilisateur" value="<?= $user['id_utilisateur'] ?>">
                                         <label class="switch">
                                             <input type="checkbox" name="is_active" <?= $user['is_active'] == 1 ? 'checked' : '' ?>>
                                             <span></span>

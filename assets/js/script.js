@@ -19,3 +19,6 @@ navbarToggle.addEventListener("click", function (e) {
 //     searchBtn.disabled = false;
 //   }
 // }
+
+
+

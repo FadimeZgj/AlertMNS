@@ -3,7 +3,7 @@
     font-size: 38px;
 }
 
-.add{
+.add {
     display: flex;
     flex-direction: column;
     box-sizing: content-box;
@@ -21,7 +21,7 @@ form {
     width: 60%;
     margin: auto;
 
-    
+
 }
 
 .form-name {
@@ -29,10 +29,11 @@ form {
     gap: 10px;
 }
 
-.form-name-lastname, .form-name-firstname {
+.form-name-lastname,
+.form-name-firstname {
     display: flex;
     flex-direction: column;
-    flex:1;
+    flex: 1;
 }
 
 input {
@@ -79,4 +80,8 @@ label {
     background-color: #F0EBD8;
     font-size: 15px;
     color: #3E5C76;
+}
+
+.pwValid {
+    opacity: 70%;
 }
