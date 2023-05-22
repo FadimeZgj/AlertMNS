@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-require $_SERVER['DOCUMENT_ROOT'] . '/admin/chaines-manager.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/managers/chaines-manager.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/managers/user-manager.php';
 
 // Récupérer tous les utilisateurs
 $sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , role.libelle_role FROM utilisateur 

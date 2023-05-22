@@ -1,8 +1,8 @@
 <?php
 
 require $_SERVER['DOCUMENT_ROOT'] . '/admin/includes/inc-session-check.php';
-require $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
-require $_SERVER['DOCUMENT_ROOT'] . '/admin/chaines-manager.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/managers/chaines-manager.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/managers/user-manager.php';
 
 // Récupérer tous les utilisateurs
 $utilisateur = getAllActiveUsers();

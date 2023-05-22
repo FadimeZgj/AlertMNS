@@ -52,16 +52,6 @@ function getAllChaines()
     return $dbh->query($sql)->fetchAll();
 }
 
-// Récupérer tous les utilisateurs
-function getAllUsers()
-{
-    $dbh = $GLOBALS['dbh'];
-    $sql = $sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , role.libelle_role FROM utilisateur 
-    LEFT JOIN role ON utilisateur.id_role = role.id_role
-    ORDER BY id_utilisateur ASC";
-
-    return $dbh->query($sql)->fetchAll();
-}
 
 function getAllSalons()
 {

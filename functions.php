@@ -9,17 +9,6 @@ function getAllEmails()
     return $dbh->query($sql)->fetchAll();
 }
 
-function getAllUsers()
-{
-    $dbh = $GLOBALS['dbh'];
-
-    $sql = "SELECT * FROM utilisateur ORDER BY nom_utilisateur ASC";
-    $query = $dbh->query($sql);
-    $utilisateurs = $query->fetchAll(PDO::FETCH_ASSOC);
-
-    return $utilisateurs;  
-}
-
 // Récupérer les utilisateurs connectés (utile pour la topbar)
 function getAllActiveUsers()
 {
@@ -28,16 +17,6 @@ function getAllActiveUsers()
 LEFT JOIN role ON utilisateur.id_role = role.id_role
 WHERE id_utilisateur = '" . $_SESSION['user']['id'] . "'";
     return $dbh->query($sql)->fetch(PDO::FETCH_ASSOC);
-}
-
-function getUserById(int $id)
-{
-    $dbh = $GLOBALS['dbh'];
-    $sql = "SELECT * FROM utilisateur WHERE id_utilisateur = :id";
-    $query = $dbh->prepare($sql);
-    $res = $query->execute(['id_utilisateur' => $id]);
-    $user = $query->fetch(PDO::FETCH_ASSOC);
-    return $user;
 }
 
 function getAllReunions()
