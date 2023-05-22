@@ -134,6 +134,7 @@ header .logo img {
 }
 
 .modal-content-logout .logout-btn:hover {
+    cursor: pointer;
     background-color: #F0EBD8;
     color: #0D1321;
     font-weight: 600;
@@ -149,8 +150,9 @@ header .logo img {
     }
 }
 
+/* Media query pour les grands écrans */
 @media (min-width : 1600px) {
     .modal-content-logout .logout-btn {
-        top: -10px;
+        top: 10px;
     }
 }

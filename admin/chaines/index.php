@@ -69,9 +69,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
             <div class="top-header-nom-salon">
                 <i class="fa-solid fa-chevron-left fa-2xl" id="leftArrow"></i>
                 <h2 id="chaineTitle">
-                    <a>
                         <?= $chaine['nom_chaine'] ?>
-                    </a>
                 </h2>
                 <i class="fa-solid fa-chevron-right fa-2xl"></i>
             </div>

@@ -58,15 +58,15 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                         <a href="/admin/chaines/new.php">
                             <li><i class="fa-solid fa-plus fa-2x"></i><span>Créer une nouvelle chaine</span></li>
                         </a>
-                        <a href="">
+                        <a href="/admin/groupes/new.php">
                             <li><i class="fa-solid fa-plus fa-2x"></i><span>Créer un nouveau groupe</span></li>
                         </a>
                     </ul>
                     <ul>
-                        <a href="">
+                        <a href="/admin/reunions/new.php">
                             <li><i class="fa-solid fa-plus fa-2x"></i><span>Organiser une réunion</span></li>
                         </a>
-                        <a href="../admin/chaines">
+                        <a href="/admin/chaines">
                             <li><i class="fa-solid fa-tower-cell fa-2x"></i><span>Voir les chaînes</span></li>
                         </a>
                         <a href="/search-user.php">
@@ -102,13 +102,13 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                     <a href="/admin/users/add-user.php">
                         <li><i class="fa-solid fa-plus"></i><span>Créer un utilisateur</span></li>
                     </a>
-                    <a href="">
+                    <a href="/admin/chaines/new.php">
                         <li><i class="fa-solid fa-plus"></i><span>Créer une nouvelle chaine</span></li>
                     </a>
-                    <a href="">
+                    <a href="/admin/groupes/new.php">
                         <li><i class="fa-solid fa-plus"></i><span>Créer un nouveau groupe</span></li>
                     </a>
-                    <a href="">
+                    <a href="/admin/reunions/new.php">
                         <li><i class="fa-solid fa-plus"></i><span>Organiser une réunion</span></li>
                     </a>
                 </ul>
@@ -118,7 +118,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
         <section class="section-squares">
             <div class="squares-mob">
                 <ul>
-                    <a href="">
+                    <a href="/search-user.php">
                         <li><i class="fa-solid fa-magnifying-glass fa-xl"></i>Rechercher un utilisateur</li>
                     </a>
                     <a href="/admin/chaines/">
@@ -127,16 +127,16 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                     <a href="">
                         <li><i class="fa-solid fa-users fa-xl"></i>Voir les groupes</li>
                     </a>
-                    <a href="">
+                    <a href="/admin/messages.php">
                         <li><i class="fa-solid fa-comment-dots fa-xl"></i>Voir les messages</li>
                     </a>
-                    <a href="">
+                    <a href="/admin/reunions/">
                         <li><i class="fa-regular fa-calendar-days fa-xl"></i>Voir les réunions prévues</li>
                     </a>
                     <a href="">
                         <li><i class="fa-solid fa-circle-exclamation fa-xl"></i>Signalements reçus</li>
                     </a>
-                    <a href="">
+                    <a href="/search-user.php">
                         <li><i class="fa-solid fa-trash-can fa-xl"></i><span>Supprimer un utilisateur</span></li>
                     </a>
                     <a href="">

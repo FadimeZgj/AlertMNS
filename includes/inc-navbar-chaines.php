@@ -9,7 +9,7 @@ if (in_array("Administrateur", $_SESSION['user']['roles'])): ?>
             <a href="/admin/messages.php"><i class="fa-solid fa-comment-dots fa-2x"></i>
 
             </a>
-            <a href="/admin/messages.php"><i class="fa-solid fa-users fa-2x"></i>
+            <a href="/admin/groupes/new.php"><i class="fa-solid fa-users fa-2x"></i>
 
             </a>
             <a href="/admin/chaines"><i class="fa-solid fa-tower-cell fa-2x"></i>
@@ -47,13 +47,13 @@ if (in_array("Administrateur", $_SESSION['user']['roles'])): ?>
             <a href="/../user/messages.php"><i class="fa-solid fa-comment-dots fa-2x"></i>
 
             </a>
-            <a href="/../user/messages.php"><i class="fa-solid fa-users fa-2x"></i>
+            <a href="/../user/groupes"><i class="fa-solid fa-users fa-2x"></i>
 
             </a>
             <a href="/../user/chaines"><i class="fa-solid fa-tower-cell fa-2x"></i>
 
             </a>
-            <a href=""><i class="fa-regular fa-calendar-days fa-2x"></i>
+            <a href="/../user/reunions"><i class="fa-regular fa-calendar-days fa-2x"></i>
 
             </a>
         </div>

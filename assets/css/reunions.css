@@ -60,3 +60,119 @@ header .topbar .user-info .user-role {
     margin-top: 20px;
     margin-left: 140px;
 }
+
+.createReunionBtn {
+    width: 110%;
+    height: 52px;
+    padding: 6px 16px;
+    position: relative;
+    left: 90px;
+    top: 30px;
+    border-radius: 40px;
+    border: none;
+    background-color: #2F3F54;
+    color: #F0EBD8;
+    font-size: 18px;
+}
+
+.createReunionBtn:hover {
+    cursor: pointer;
+    background-color: #F0EBD8;
+    color: #0D1321;
+}
+
+.createReunionBtn i {
+    padding: 4px;
+}
+
+table {
+    background-color: #2F3F54;
+    color: #F0EBD8;
+    border: solid 1px rgba(240, 235, 216, 0.2); 
+    padding: 10px; 
+    text-align: center; 
+    width: 90%; 
+    margin-left: 6%;
+    border-radius: 15px; 
+    margin-top: 5%;
+}
+
+table thead tr th {
+    font-weight: 500;
+    padding: 10px;
+}
+
+table tbody tr td {
+    padding: 6px;
+}
+
+table button {
+    background-color: #0D1321;
+    color: #F0EBD8;
+    border-radius: 40px;
+    border: none;
+    padding: 10px;
+}
+
+table button:hover {
+    background-color: #F0EBD8;
+    color: #0D1321;
+    cursor: pointer;
+}
+
+/* ADD REUNION */
+
+.container-create-reunions {
+    width: 70%;
+    padding-top: 40px;
+    margin-left: 12%;
+    border-left: 1px solid rgba(240, 235, 216, 0.2)
+}
+
+.createReunionForm {
+    background-color: #2F3F54;
+    height: 80%;
+    width: 90%;
+    border-radius: 30px;
+    margin: auto;
+}
+
+.CreateReunionTitle {
+    border-bottom: solid 1px rgba(240, 235, 216, 0.2);
+    margin-right: 40px;
+    padding: 12px 6px;
+    width: 50%;
+    font-size: 28px;
+}
+
+.createReunionForm p {
+    margin-top: 60px;
+}
+
+.form-group {
+    padding: 10px;
+}
+
+.goBackReunionBtn {
+    width: 110%;
+    height: 52px;
+    padding: 6px 16px;
+    position: relative;
+    left: 106px;
+    top: 30px;
+    border-radius: 40px;
+    border: none;
+    background-color: #2F3F54;
+    color: #F0EBD8;
+    font-size: 18px;
+}
+
+.goBackReunionBtn:hover {
+    cursor: pointer;
+    background-color: #F0EBD8;
+    color: #0D1321;
+}
+
+.goBackReunionBtn i {
+    padding: 4px;
+}
