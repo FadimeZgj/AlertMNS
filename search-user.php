@@ -1,5 +1,6 @@
 <?php
 session_start();
+//require $_SERVER['DOCUMENT_ROOT'] . '/managers/user-manager.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/admin/users/archive-user.php';
 
@@ -11,61 +12,68 @@ if (empty($_SESSION['user'])) {
 if (in_array("Administrateur", $_SESSION['user']['roles'])) {
     if (!empty($_GET['submit'])) {
         if (!empty($_GET['search'])) {
-            $search = htmlspecialchars($_GET['search']);
-            $data = explode(" ", $search);
+            // $search = htmlspecialchars($_GET['search']);
+            // $data = explode(" ", $search);
 
-            $sql = "SELECT utilisateur.id_utilisateur, utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur, utilisateur.is_active , role.libelle_role FROM utilisateur 
-            LEFT JOIN role ON utilisateur.id_role = role.id_role 
-            WHERE utilisateur.nom_utilisateur = :search
-            OR utilisateur.prenom_utilisateur = :search
-            OR role.libelle_role = :search
-            ORDER BY utilisateur.nom_utilisateur ASC";
+            // $sql = "SELECT utilisateur.id_utilisateur, utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur, utilisateur.is_active , role.libelle_role FROM utilisateur 
+            // LEFT JOIN role ON utilisateur.id_role = role.id_role 
+            // WHERE utilisateur.nom_utilisateur = :search
+            // OR utilisateur.prenom_utilisateur = :search
+            // OR role.libelle_role = :search
+            // ORDER BY utilisateur.nom_utilisateur ASC";
 
-            $query = $dbh->prepare($sql);
-            $query->execute([
-                'search' => $data[0]
-            ]);
-            $allUsers = $query->fetchAll(PDO::FETCH_ASSOC);
+            // $query = $dbh->prepare($sql);
+            // $query->execute([
+            //     'search' => $data[0]
+            // ]);
+            // $allUsers = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            $allUsers = searchUser($_GET['search']);
         } else {
             header("Location: /search-user.php");
         }
     } else {
         // récupérer tous les utilisateurs
-        $sql = "SELECT utilisateur.id_utilisateur, utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur, utilisateur.is_active , role.libelle_role FROM utilisateur 
-        LEFT JOIN role ON utilisateur.id_role = role.id_role ORDER BY utilisateur.nom_utilisateur ASC";
-        $query = $dbh->query($sql);
-        $allUsers = $query->fetchAll(PDO::FETCH_ASSOC);
+        // $sql = "SELECT utilisateur.id_utilisateur, utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur, utilisateur.is_active , role.libelle_role FROM utilisateur 
+        // LEFT JOIN role ON utilisateur.id_role = role.id_role ORDER BY utilisateur.nom_utilisateur ASC";
+        // $query = $dbh->query($sql);
+        // $allUsers = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        $allUsers = getAllUsers();
     }
 } else {
     if (!empty($_GET['submit'])) {
         if (!empty($_GET['search'])) {
-            $search = htmlspecialchars($_GET['search']);
-            $data = explode(" ", $search);
+            // $search = htmlspecialchars($_GET['search']);
+            // $data = explode(" ", $search);
 
-            $sql = "SELECT utilisateur.id_utilisateur, utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur, utilisateur.is_active , role.libelle_role FROM utilisateur 
-            LEFT JOIN role ON utilisateur.id_role = role.id_role
-            WHERE utilisateur.is_active = 1 
-            AND utilisateur.nom_utilisateur = :search
-            OR utilisateur.prenom_utilisateur = :search
-            OR role.libelle_role = :search
-            ORDER BY utilisateur.nom_utilisateur ASC";
+            // $sql = "SELECT utilisateur.id_utilisateur, utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur, utilisateur.is_active , role.libelle_role FROM utilisateur 
+            // LEFT JOIN role ON utilisateur.id_role = role.id_role
+            // WHERE utilisateur.is_active = 1 
+            // AND utilisateur.nom_utilisateur = :search
+            // OR utilisateur.prenom_utilisateur = :search
+            // OR role.libelle_role = :search
+            // ORDER BY utilisateur.nom_utilisateur ASC";
 
-            $query = $dbh->prepare($sql);
-            $query->execute([
-                'search' => $data[0]
-            ]);
-            $allUsers = $query->fetchAll(PDO::FETCH_ASSOC);
+            // $query = $dbh->prepare($sql);
+            // $query->execute([
+            //     'search' => $data[0]
+            // ]);
+            // $allUsers = $query->fetchAll(PDO::FETCH_ASSOC);
+            $allUsers = adminSearchUser($_GET['search']);
         } else {
             header("Location: /search-user.php");
         }
     } else {
         // récupérer tous les utilisateurs
-        $sql = "SELECT utilisateur.id_utilisateur, utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur, utilisateur.is_active , role.libelle_role FROM utilisateur 
-        LEFT JOIN role ON utilisateur.id_role = role.id_role 
-        WHERE utilisateur.is_active = 1 
-        ORDER BY utilisateur.nom_utilisateur ASC";
-        $query = $dbh->query($sql);
-        $allUsers = $query->fetchAll(PDO::FETCH_ASSOC);
+        // $sql = "SELECT utilisateur.id_utilisateur, utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur, utilisateur.is_active , role.libelle_role FROM utilisateur 
+        // LEFT JOIN role ON utilisateur.id_role = role.id_role 
+        // WHERE utilisateur.is_active = 1 
+        // ORDER BY utilisateur.nom_utilisateur ASC";
+        // $query = $dbh->query($sql);
+        // $allUsers = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        $allUsers = adminGetAllUser();
     }
 }
 
@@ -173,7 +181,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                                             <input type="checkbox" name="is_active" <?= $user['is_active'] == 1 ? 'checked' : '' ?>>
                                             <span></span>
                                         </label>
-                                        <input type="submit" name="isActive" class="is-active" value="Envoyer">
+                                        <input type="submit" name="isActive" class="is-active" value=<?= $user['is_active'] == 1 ? 'Désactiver' : 'Activer' ?>>
                                     </form>
                                 <?php endif; ?>
                             </div>

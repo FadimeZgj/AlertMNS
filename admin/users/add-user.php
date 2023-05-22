@@ -1,20 +1,22 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/admin/includes/inc-session-check.php';
-require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/managers/user-manager.php';
+
 unset($_SESSION['error']);
 
+$user = getLoggedUser();
+$roles = getAllRoles();
 
+// Récupérer utilisateur conncté
+// $sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , role.libelle_role FROM utilisateur 
+// LEFT JOIN role ON utilisateur.id_role = role.id_role
+// WHERE id_utilisateur = '" . $_SESSION['user']['id'] . "'";
+// $query = $dbh->query($sql);
+// $user = $query->fetch(PDO::FETCH_ASSOC);
 
-// Récupérer tous les utilisateurs
-$sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , role.libelle_role FROM utilisateur 
-LEFT JOIN role ON utilisateur.id_role = role.id_role
-WHERE id_utilisateur = '" . $_SESSION['user']['id'] . "'";
-$query = $dbh->query($sql);
-$utilisateur = $query->fetch(PDO::FETCH_ASSOC);
-
-$sql = "SELECT * FROM role";
-$query = $dbh->query($sql);
-$roles = $query->fetchAll(PDO::FETCH_ASSOC);
+// $sql = "SELECT * FROM role";
+// $query = $dbh->query($sql);
+// $roles = $query->fetchAll(PDO::FETCH_ASSOC);
 
 $title = "AlertMNS - Ajout utilisateur";
 include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
@@ -33,8 +35,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
         </div>
         <div class="name-user">
             <div>
-                <h2><?= $utilisateur['prenom_utilisateur'] ?> <?= $utilisateur['nom_utilisateur'] ?></h2>
-                <p><?= $utilisateur['libelle_role'] ?></p>
+                <h2><?= $user['prenom_utilisateur'] ?> <?= $user['nom_utilisateur'] ?></h2>
+                <p><?= $user['libelle_role'] ?></p>
             </div>
             <a href=""><img src='https://dummyimage.com/50x50.jpg' alt='' /></a>
         </div>
@@ -107,31 +109,31 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
                     <form action="/admin/users/add-user-POST.php" method="post" name="add-user" id="addUserForm">
                         <div class="form-name">
                             <div class="form-name-lastname">
-                                <label for="nom_utilisateur">Nom</label>
-                                <input type="text" name="nom_utilisateur" id="lastname">
+                                <label for="newUser[nom_utilisateur]">Nom</label>
+                                <input type="text" name="newUser[nom_utilisateur]" id="lastname">
                                 <small class="error" id="errorName"></small>
                                 <?php if (isset($_SESSION['errors']['nom_utilisateur'])) : ?>
                                     <small class="error"><?= $_SESSION['errors']['nom_utilisateur'] ?></small>
                                 <?php endif; ?>
                             </div>
                             <div class="form-name-firstname">
-                                <label for="prenom_utilisateur">Prénom</label>
-                                <input type="text" name="prenom_utilisateur" id="firstname">
+                                <label for="newUser[prenom_utilisateur]">Prénom</label>
+                                <input type="text" name="newUser[prenom_utilisateur]" id="firstname">
                                 <small class="error" id="errorFirstname"></small>
                                 <?php if (isset($_SESSION['errors']['prenom_utilisateur'])) : ?>
                                     <small class="error"><?= $_SESSION['errors']['prenom_utilisateur'] ?></small>
                                 <?php endif; ?>
                             </div>
                         </div>
-                        <label for="email_utilisateur">Adresse email</label>
-                        <input type="email" placeholder="Adresse@email.com" name="email_utilisateur" id="email">
+                        <label for="newUser[email_utilisateur]">Adresse email</label>
+                        <input type="email" placeholder="Adresse@email.com" name="newUser[email_utilisateur]" id="email">
                         <?php if (isset($_SESSION['errors']['email_utilisateur'])) : ?>
                             <small class="error"><?= $_SESSION['errors']['email_utilisateur'] ?></small>
                         <?php endif; ?>
                         <small class="error" id="errorEmail"></small>
 
-                        <label for="mdp_utilisateur">Mot de passe</label>
-                        <input type="password" name="mdp_utilisateur" id="password">
+                        <label for="newUser[mdp_utilisateur]">Mot de passe</label>
+                        <input type="password" name="newUser[mdp_utilisateur]" id="password">
                         <small class="error" id="errorPassword"></small>
                         <small class="pwValid">Minimum 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre </small>
                         <?php if (isset($_SESSION['errors']['mdp_utilisateur'])) : ?>
@@ -140,9 +142,9 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
 
                         <div class="role">
                             <label for="role">Rôle</label>
-                            <select name="id_role" id="">
+                            <select name="newUser[id_role]" id="">
                                 <?php foreach ($roles as $role) : ?>
-                                    <option value="<?= $role['id_role'] ?>" name="id_role"><?= $role['libelle_role'] ?></option>
+                                    <option value="<?= $role['id_role'] ?>" name="newUser[id_role]"><?= $role['libelle_role'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -163,8 +165,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
             <div class="profile-mob">
                 <a href=""><img src='https://dummyimage.com/100x100.jpg' alt='' /></a>
                 <div class="name-mob">
-                    <h2><?= $utilisateur['prenom_utilisateur'] ?> <?= $utilisateur['nom_utilisateur'] ?></h2>
-                    <p><?= $utilisateur['libelle_role'] ?></p>
+                    <h2><?= $user['prenom_utilisateur'] ?> <?= $user['nom_utilisateur'] ?></h2>
+                    <p><?= $user['libelle_role'] ?></p>
                 </div>
 
             </div>

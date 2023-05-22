@@ -1,18 +1,22 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/admin/includes/inc-session-check.php';
-require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/managers/user-manager.php';
 unset($_SESSION['error']);
 
-// Récupérer tous les utilisateurs
-$sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , role.libelle_role FROM utilisateur 
-LEFT JOIN role ON utilisateur.id_role = role.id_role
-WHERE id_utilisateur = '" . $_SESSION['user']['id'] . "'";
-$query = $dbh->query($sql);
-$utilisateur = $query->fetch(PDO::FETCH_ASSOC);
+$user = getLoggedUser();
+$roles = getAllRoles();
 
-$sql = "SELECT * FROM role";
-$query = $dbh->query($sql);
-$roles = $query->fetchAll(PDO::FETCH_ASSOC);
+
+// Récupérer tous les utilisateurs
+// $sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , role.libelle_role FROM utilisateur 
+// LEFT JOIN role ON utilisateur.id_role = role.id_role
+// WHERE id_utilisateur = '" . $_SESSION['user']['id'] . "'";
+// $query = $dbh->query($sql);
+// $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
+
+// $sql = "SELECT * FROM role";
+// $query = $dbh->query($sql);
+// $roles = $query->fetchAll(PDO::FETCH_ASSOC);
 
 // if(empty($_GET['id']))
 // {
@@ -20,15 +24,16 @@ $roles = $query->fetchAll(PDO::FETCH_ASSOC);
 // }
 
 if (!empty($_POST['submit'])) {
+
     $errors = [];
 
-    if (empty($_POST['nom_utilisateur']))
+    if (empty($_POST['user']['nom_utilisateur']))
         $errors['nom_utilisateur'] = "Saisissez le nom.";
 
-    if (empty($_POST['prenom_utilisateur']))
+    if (empty($_POST['user']['prenom_utilisateur']))
         $errors['prenom_utilisateur'] = "Saisissez le prenom.";
 
-    if (empty($_POST['email_utilisateur']))
+    if (empty($_POST['user']['email_utilisateur']))
         $errors['email_utilisateur'] = "Saisissez l'adresse email.";
 
     if (count($errors) > 0) {
@@ -38,29 +43,30 @@ if (!empty($_POST['submit'])) {
         die;
     }
 
-    $_POST['nom_utilisateur'] = htmlspecialchars($_POST['nom_utilisateur']);
-    $_POST['prenom_utilisateur'] = htmlspecialchars($_POST['prenom_utilisateur']);
-    $_POST['email_utilisateur'] = htmlspecialchars($_POST['email_utilisateur']);
+    $_POST['user']['nom_utilisateur'] = htmlspecialchars($_POST['user']['nom_utilisateur']);
+    $_POST['user']['prenom_utilisateur'] = htmlspecialchars($_POST['user']['prenom_utilisateur']);
+    $_POST['user']['email_utilisateur'] = htmlspecialchars($_POST['user']['email_utilisateur']);
 
     // On insère l'utilisateur en BDD
-    $sql = "UPDATE utilisateur 
-     SET nom_utilisateur = :nom_utilisateur, 
-     prenom_utilisateur = :prenom_utilisateur, 
-     email_utilisateur = :email_utilisateur,
-     id_role = :id_role
-     WHERE id_utilisateur = :id_utilisateur";
-    $query = $dbh->prepare($sql);
-    $res = $query->execute([
-        'nom_utilisateur' => $_POST['nom_utilisateur'],
-        'prenom_utilisateur' => $_POST['prenom_utilisateur'],
-        'email_utilisateur' => $_POST['email_utilisateur'],
-        'id_role' => $_POST['id_role'],
-        'id_utilisateur' => $_GET['id']
-    ]);
+    // $sql = "UPDATE utilisateur 
+    //  SET nom_utilisateur = :nom_utilisateur, 
+    //  prenom_utilisateur = :prenom_utilisateur, 
+    //  email_utilisateur = :email_utilisateur,
+    //  id_role = :id_role
+    //  WHERE id_utilisateur = :id_utilisateur";
+    // $query = $dbh->prepare($sql);
+    // $res = $query->execute([
+    //     'nom_utilisateur' => $_POST['nom_utilisateur'],
+    //     'prenom_utilisateur' => $_POST['prenom_utilisateur'],
+    //     'email_utilisateur' => $_POST['email_utilisateur'],
+    //     'id_role' => $_POST['id_role'],
+    //     'id_utilisateur' => $_GET['id']
+    // ]);
+
+    $updateUser = updateUser($_POST['user']);
 
 
-
-    if ($res) {
+    if ($updateUser) {
         header("Location: /search-user.php");
         exit;
     } else {
@@ -71,11 +77,13 @@ if (!empty($_POST['submit'])) {
 }
 
 // Récupération des informations de la utilisateur à modifier
-$sql = "SELECT * FROM utilisateur 
-LEFT JOIN role ON utilisateur.id_role = role.id_role WHERE utilisateur.id_utilisateur = :id_utilisateur";
-$query = $dbh->prepare($sql);
-$res = $query->execute(['id_utilisateur' => $_GET['id']]);
-$userEdit = $query->fetch(PDO::FETCH_ASSOC);
+// $sql = "SELECT * FROM utilisateur 
+// LEFT JOIN role ON utilisateur.id_role = role.id_role WHERE utilisateur.id_utilisateur = :id_utilisateur";
+// $query = $dbh->prepare($sql);
+// $res = $query->execute(['id_utilisateur' => $_GET['id']]);
+// $userEdit = $query->fetch(PDO::FETCH_ASSOC);
+
+$userEdit = getUserById($_GET['id']);
 
 $title = "AlertMNS - Modifier utilisateur";
 include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
@@ -94,8 +102,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
         </div>
         <div class="name-user">
             <div>
-                <h2><?= $utilisateur['prenom_utilisateur'] ?> <?= $utilisateur['nom_utilisateur'] ?></h2>
-                <p><?= $utilisateur['libelle_role'] ?></p>
+                <h2><?= $user['prenom_utilisateur'] ?> <?= $user['nom_utilisateur'] ?></h2>
+                <p><?= $user['libelle_role'] ?></p>
             </div>
             <a href=""><img src='https://dummyimage.com/50x50.jpg' alt='' /></a>
         </div>
@@ -165,35 +173,36 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
                 <div class="add">
                     <h1>Modifier l'utilisateur</h1>
 
-                    <form action="/admin/users/edit-user.php?id=<?= $userEdit['id_utilisateur'] ?>" method="post" id="addUserForm">
+                    <form action="/admin/users/edit-user.php?id=<?= $userEdit['id_utilisateur'] ?>" method="post" id="addUserForm" name="user">
                         <div class="form-name">
                             <div class="form-name-lastname">
-                                <label for="nom_utilisateur">Nom</label>
-                                <input type="text" name="nom_utilisateur" value="<?= $userEdit['nom_utilisateur'] ?>" id="lastname">
+                                <input type="hidden" name="user[id_utilisateur]" value="<?= $userEdit['id_utilisateur'] ?>">
+                                <label for="user[nom_utilisateur]">Nom</label>
+                                <input type="text" name="user[nom_utilisateur]" value="<?= $userEdit['nom_utilisateur'] ?>" id="lastname">
                                 <small class="error" id="errorName"></small>
                                 <?php if (isset($_SESSION['errors']['nom_utilisateur'])) : ?>
                                     <small class="error"><?= $_SESSION['errors']['nom_utilisateur'] ?></small>
                                 <?php endif; ?>
                             </div>
                             <div class="form-name-firstname">
-                                <label for="prenom_utilisateur">Prénom</label>
-                                <input type="text" name="prenom_utilisateur" value="<?= $userEdit['prenom_utilisateur'] ?>" id="firstname">
+                                <label for="user[prenom_utilisateur]">Prénom</label>
+                                <input type="text" name="user[prenom_utilisateur]" value="<?= $userEdit['prenom_utilisateur'] ?>" id="firstname">
                                 <small class="error" id="errorFirstname"></small>
                                 <?php if (isset($_SESSION['errors']['prenom_utilisateur'])) : ?>
                                     <small class="error"><?= $_SESSION['errors']['prenom_utilisateur'] ?></small>
                                 <?php endif; ?>
                             </div>
                         </div>
-                        <label for="email_utilisateur">Adresse email</label>
-                        <input type="email" placeholder="Adresse@email.com" name="email_utilisateur" value="<?= $userEdit['email_utilisateur'] ?>" id="email">
+                        <label for="user[email_utilisateur]">Adresse email</label>
+                        <input type="email" placeholder="Adresse@email.com" name="user[email_utilisateur]" value="<?= $userEdit['email_utilisateur'] ?>" id="email">
                         <small class="error" id="errorEmail"></small>
                         <?php if (isset($_SESSION['errors']['email_utilisateur'])) : ?>
                             <small class="error"><?= $_SESSION['errors']['email_utilisateur'] ?></small>
                         <?php endif; ?>
 
                         <div class="role">
-                            <label for="role">Rôle</label>
-                            <select name="id_role" id="">
+                            <label for="user[id_role]">Rôle</label>
+                            <select name="user[id_role]" id="">
                                 <?php foreach ($roles as $role) : ?>
                                     <option value="<?= $role['id_role'] ?>" <?php if ($role['id_role'] == $userEdit['id_role']) echo "selected"; ?>>
                                         <?= $role['libelle_role'] ?></option>
