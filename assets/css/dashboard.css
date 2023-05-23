@@ -66,7 +66,7 @@ main {
 }
 
 .modal-content-logout span {
-    color:#748CAB
+    color: #748CAB
 }
 
 .modal-content-logout button {
@@ -391,13 +391,19 @@ ul {
 
 @media (min-width : 1600px) {
     .squares {
-        min-height: 88%;
+        min-height: 30em;
     }
-    .squares ul {
-        margin-top: 36px;
+
+    .options {
+        margin: auto;
     }
+
+    /* .squares ul {
+        margin-top: 10px;
+    } */
+
     .actions {
-        min-height: 88%;
+        height: 40em;
     }
 
 }
