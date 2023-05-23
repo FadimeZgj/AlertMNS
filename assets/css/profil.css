@@ -35,3 +35,18 @@
     background-color: #F0EBD8;
     color: #748CAB;
 }
+
+.profile-elements .user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-input .name-email {
+    display: flex;
+    flex-direction: column;
+}
+
+.firstname-lastname {
+    display: flex;
+}

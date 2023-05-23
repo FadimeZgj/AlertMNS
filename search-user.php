@@ -60,7 +60,7 @@ if (in_array("Administrateur", $_SESSION['user']['roles'])) {
             //     'search' => $data[0]
             // ]);
             // $allUsers = $query->fetchAll(PDO::FETCH_ASSOC);
-            $allUsers = adminSearchUser($_GET['search']);
+            $allUsers = searchUser($_GET['search']);
         } else {
             header("Location: /search-user.php");
         }
@@ -154,7 +154,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
             <section>
                 <div class="search">
                     <h1>Rechercher un utilisateur</h1>
-                    <form action="/search-user.php" method="GET">
+                    <form action="/search-user.php" method="GET" name="user">
                         <input type="search" name="search" class="search-bar" id="searchInput">
                         <input type="submit" name="submit" value="Rechercher" class="submit" id="searchBtn">
                     </form>

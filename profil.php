@@ -66,6 +66,32 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
             </div>
             <div class="profile-elements">
 
+                <div class="user-info">
+                    <img src="https://dummyimage.com/100x100.jpg" alt="">
+                    <div class="user-name">
+                        <h3>Fadime Ilhan</h3>
+                        <h4>Administrateur</h4>
+                    </div>
+                </div>
+                <div class="user-input">
+                    <form action="">
+                        <div class="firstname-lastname">
+                            <div class="name-email">
+                                <label for="">Nom</label>
+                                <input type="text">
+                            </div>
+                            <div class="name-email">
+                                <label for="">Prénom</label>
+                                <input type="text">
+                            </div>
+                        </div>
+                        <div class="name-email"><label for="">Adresse email</label>
+                            <input type="email">
+                        </div>
+                        <button type="submit">Enregistrer les modifications</button>
+                    </form>
+                </div>
+
             </div>
         </section>
 

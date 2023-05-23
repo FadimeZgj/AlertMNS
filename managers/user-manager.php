@@ -91,6 +91,7 @@ function archiveUser(int $id)
     return $query->rowCount() == 1;
 }
 
+
 function searchUser(string $data)
 {
     $search = htmlspecialchars($data);
@@ -98,36 +99,15 @@ function searchUser(string $data)
 
     $dbh = $GLOBALS['dbh'];
     $sql = "SELECT utilisateur.id_utilisateur, utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur, utilisateur.is_active , role.libelle_role FROM utilisateur 
-            LEFT JOIN role ON utilisateur.id_role = role.id_role 
-            WHERE utilisateur.nom_utilisateur = :search
-            OR utilisateur.prenom_utilisateur = :search
-            OR role.libelle_role = :search
-            ORDER BY utilisateur.nom_utilisateur ASC";
-
-    $query = $dbh->prepare($sql);
-    $query->execute([
-        'search' => $data[0]
-    ]);
-    return $query->fetchAll(PDO::FETCH_ASSOC);
-}
-
-function adminSearchUser(string $data)
-{
-    $search = htmlspecialchars($data);
-    $data = explode(" ", $search);
-
-    $dbh = $GLOBALS['dbh'];
-    $sql = "SELECT utilisateur.id_utilisateur, utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur, utilisateur.is_active , role.libelle_role FROM utilisateur 
             LEFT JOIN role ON utilisateur.id_role = role.id_role
-            WHERE utilisateur.is_active = 1 
-            AND utilisateur.nom_utilisateur = :search
-            OR utilisateur.prenom_utilisateur = :search
-            OR role.libelle_role = :search
+            WHERE utilisateur.nom_utilisateur LIKE :search
+            OR utilisateur.prenom_utilisateur LIKE :search
+            OR role.libelle_role LIKE :search
             ORDER BY utilisateur.nom_utilisateur ASC";
 
     $query = $dbh->prepare($sql);
     $query->execute([
-        'search' => $data[0]
+        'search' => '%' . $data[0] . '%'
     ]);
     return $query->fetchAll(PDO::FETCH_ASSOC);
 }
