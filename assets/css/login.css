@@ -128,7 +128,8 @@ footer {
 }
 
 .footer-content .contact {
-    display: inline-block;
+    display: none;
+    /* display: inline-block; */
     text-align: center;
     margin-left: 30px;
     position: absolute;

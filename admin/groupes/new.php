@@ -50,11 +50,21 @@ $utilisateur = getAllActiveUsers();
         </div>
         <div class="container-reunions">
             <div class="participantsForm">
-                <form action="" method="post">
+                <form action="/admin/groupes/new.php" method="post">
                     <h1 class="createReunionTitle">Créer un nouveau groupe</h1>
 
                     <div class="form-group">
                         <h4>Formulaire création d'un nouveau groupe</h4>
+                    </div>
+
+                    <div class="form-group">
+                    <label for="nom">Nom du groupe</label>
+                    <input type="text" name="nom_groupe" />
+                    </div>
+
+                    <div class="form-group">
+                    <label for="nom">Nom du groupe</label>
+                    <input type="text" name="date_groupe" />
                     </div>
 
                 </form>

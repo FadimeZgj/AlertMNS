@@ -45,33 +45,28 @@ $groupes = getAllGroupes();
     </header>
 
     <div class="container">
-        <div class="containerLeftInfo">
+        <div class="containerLeftInfoIndex">
             <a href="/admin/reunions/new.php"><button class="createReunionBtn"><i class="fa-solid fa-plus fa-lg"></i> Organiser une nouvelle
                 réunion</button></a>
-            <a href="/admin/groupes/list.php"><button class="createReunionBtn">Voir la liste des groupes</button></a>
+            <a href="/admin/groupes/list.php"><button class="createReunionBtn">Voir mes réunions</button></a>
         </div>
         <div class="container-reunions">
             <h1>Liste des réunions</h1>
             <table>
                     <thead>
                         <tr>  
-                            <th>ID</th>
                             <th>Nom de la réunion</th>
                             <th>Sujet</th>
                             <th>Organisateur</th>
-                            <th>ID du groupe (pour les réunions)</th>
+                            <th>Participants</th>
                             <th>Date prévue de la réunion</th>
-                            <th colspan="2"></th>
+                            <th colspan="3"></th>
                             <th colspan="2"></th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php foreach ($reunions as $reunion): ?>
                         <tr style="text-align: center;">
-
-                            <td>
-                                <?= $reunion['id_reunion'] ?>
-                            </td>
                             <td>
                                 <?= $reunion['nom_reunion'] ?>
                             </td>
@@ -79,13 +74,17 @@ $groupes = getAllGroupes();
                                 <?= $reunion['sujet_reunion'] ?>
                             </td>
                             <td>
-                                <?= $reunion['id_utilisateur'] ?>
+                                <?= $reunion['prenom_utilisateur'] ?>
+                                <?= $reunion['nom_utilisateur'] ?>
                             </td>
                             <td>
-                                <?= $reunion['id_groupe'] ?>
+                                <?= $reunion['nom_groupe'] ?>
                             </td>
                             <td>
                                 <?= $reunion['date_reunion'] ?>
+                            </td>
+                            <td>
+                                <a href="/admin/groupes/list.php"><button>Plus d'infos</button></a>
                             </td>
                             <td>
                                 <a href="/admin/groupes/list.php"><button>Participer</button></a>

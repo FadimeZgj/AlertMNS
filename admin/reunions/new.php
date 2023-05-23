@@ -12,22 +12,16 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 $utilisateur = getAllActiveUsers();
 $groupes = getAllGroupes();
 $reunions = getAllReunions();
+$users = getAllUsers();
+$roles = getAllRoles();
 
 // Traiter le formulaire si envoyé
 // Permet de créer une nouvelle réunion
 if (!empty($_POST['submit'])) {
 
-    $sql = "INSERT INTO reunion (nom_reunion, date_reunion, sujet_reunion, id_utilisateur, id_groupe) VALUES (:nom_reunion,:date_reunion, :sujet_reunion, :id_utilisateur, :id_groupe)";
-    $query = $dbh->prepare($sql);
-    $res = $query->execute([
-        'nom_reunion' => htmlspecialchars($_POST['nom']),
-        'date_reunion' => $_POST['date'],
-        'sujet_reunion' => htmlspecialchars($_POST['sujet']),
-        'id_utilisateur' => $_SESSION['user']['id'],
-        'id_groupe' => $_POST['groupe']
-    ]);
+    $id = insertUsersInGroups($_POST['groupe'], $_POST['utilisateurs']);
 
-    if ($res) {
+    if ($id) {
         header("Location: /admin/reunions/");
         exit;
     } else {
@@ -35,8 +29,6 @@ if (!empty($_POST['submit'])) {
     }
 
 }
-
-// $categories = getCategories();
 
 ?>
 <link rel="stylesheet" href="/assets/css/reunions.css">
@@ -71,48 +63,65 @@ if (!empty($_POST['submit'])) {
 
     <div class="container">
         <div class="containerLeftInfo">
-            <a href="/admin/reunions/index.php"><button class="goBackReunionBtn"><i
-                        class="fa-solid fa-arrow-left fa-lg"></i> Revenir à la liste des réunions</button></a>
+            <a href="/admin/reunions/index.php">
+                <button class="goBackReunionBtn">
+                    <i class="fa-solid fa-arrow-left fa-lg"></i>
+                    Revenir à la liste des réunions</button>
+            </a>
         </div>
         <!--Information de la colonne de droite-->
         <div class="container-create-reunions">
             <div class="createReunionForm">
-                <form action="" method="post">
-                    <h1 class="createReunionTitle">Créer une nouvelle réunion</h1>
-
-                    <div class="form-group">
-                    <label for="nom">Nom de la réunion</label>
-                    <input type="text" name="nom" />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="date">Date de la réunion</label>
-                        <input type="date" name="date">
-                    </div>
-
-                    <div class="form-group">
-                    <label for="sujet">Sujet de la réunion</label>
-                        <input type="text" name="sujet">
-                    </div>
-                    <div class="form-group">
-                        <label for="groupe">Selectionnez les participants</label>
-                        <select name="groupe" class="">
-                            <?php foreach ($groupes as $groupe): ?>
-                                <option value="<?= $groupe['id_groupe'] ?>">
-                                    <?= $groupe['nom_groupe'] ?>
+            <h1 class="createReunionTitle">Créer une nouvelle réunion</h1>
+                <form action="/admin/reunions/new.php" method="post">
+                    <div class="create-form-group">
+                        <div class="form-group">
+                            <h3>Créer un groupe (Sélectionnez les participants)</h3>
+                            
+                            <select name="groupe" class="">
+                            <?php foreach ($roles as $role): ?>
+                                <option value="<?= $role['id_role'] ?>">
+                                    <?= $role['libelle_role'] ?>
                                 </option>
                             <?php endforeach; ?>
 
+                            <label for="groupe">Liste des utilisateurs:</label>
+                            <?php foreach ($users as $user): ?>
+
+                                <input type="checkbox" name="utilisateurs[]" value="<?= $user['id_utilisateur'] ?>" ">
+                                <?= $user['prenom_utilisateur'] ?>
+                                <?= $user['nom_utilisateur'] ?>
+                            <?php endforeach; ?>
+                        </div>
+                        <!--Div pour le nom du groupe-->
+                        <div class=" form-group">
+                            <label for="nom">Nom du groupe</label>
+                            <input type="text" name="groupe[nom_groupe]" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nom">Nom de la réunion</label>
+                            <input type="text" name="nom" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sujet">Sujet de la réunion</label>
+                            <input type="text" name="sujet">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="date">Date de la réunion</label>
+                            <input type="date" name="date">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" name="submit" value="Créer">
+                        </div>
+
                     </div>
-                    <div class="form-group">
-                    <input type="submit" name="submit" value="Créer">
-                    </div>
+
                 </form>
 
-                <div class="form-group">
-                    <label for="no-group">Pas de groupe ?</label>
-                    <a href="/admin/groupes/new.php"><button name="no-group">CREER UN NOUVEAU GROUPE</button></a>
-                </div>
             </div>
 
         </div>

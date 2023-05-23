@@ -9,6 +9,10 @@ function getAllEmails()
     return $dbh->query($sql)->fetchAll();
 }
 
+// function getAll{
+
+// }
+
 // Récupérer les utilisateurs connectés (utile pour la topbar)
 function getAllActiveUsers()
 {
@@ -68,28 +72,47 @@ function updateReunion(int $id)
     return $stmt;
 }
 
-function insertUsersInGroups(array $users = [])
+function updateReunionBis(array $data, array $users = [])
+{
+    
+}
+
+
+function insertUsersInGroups(array $data, array $users)
 {
     $dbh = $GLOBALS['dbh'];
+    $data['nom_groupe'] = htmlspecialchars($data['nom_groupe']);
+    $data['id_utilisateur'] = $_SESSION['user']['id'];
 
     $sql = "INSERT INTO groupe (nom_groupe, date_groupe, id_utilisateur) VALUES (:nom_groupe, NOW(), :id_utilisateur)";
     $stmt = $dbh->prepare($sql);
-    $stmt->execute();
+    $stmt->execute($data);
 
     $id_groupe = $dbh->lastInsertId();
 
-    // On traite les utilisateurs
+    // Lorsqu'on coche les utilisateurs qui seront inscrit dans le groupe
     if(count($users) > 0)
     {
-        foreach($users as $id_user)
+        foreach($users as $id_utilisateur)
         {
+            // On les affecte dans le groupe
             $sql = "INSERT INTO affecter (id_utilisateur, id_groupe) VALUES (:id_utilisateur, :id_groupe)";
             $stmt = $dbh->prepare($sql);
             $stmt->execute([
-                'id_utilisateur' => $id_user,
+                'id_utilisateur' => $id_utilisateur,
                 'id_groupe' => $id_groupe
             ]);
         }
+    // On créer la réunion
+    $sql = "INSERT INTO reunion (nom_reunion, date_reunion, sujet_reunion, id_utilisateur, id_groupe) VALUES (:nom_reunion,:date_reunion, :sujet_reunion, :id_utilisateur, :id_groupe)";
+    $query = $dbh->prepare($sql);
+    $res = $query->execute([
+        'nom_reunion' => htmlspecialchars($_POST['nom']),
+        'date_reunion' => $_POST['date'],
+        'sujet_reunion' => htmlspecialchars($_POST['sujet']),
+        'id_utilisateur' => $_SESSION['user']['id'],
+        'id_groupe' => $id_groupe
+    ]);
     }
 
     return $id_groupe;
