@@ -115,64 +115,6 @@ Chaines.forEach(function (chaine) {
     });
 });
 
-// // On récupère toutes les chaînes générées par le PHP qui ont la classe "channel-group"
-// const Chaines = document.querySelectorAll(".channel-group");
-// console.log(Chaines);
-// const listeSalon = document.getElementById("listeSalon");
-
-// Chaines.forEach(function (chaine) {
-//     chaine.addEventListener("click", function () {
-//         checkClass("salon", 500);
-
-//         // On vide la liste des salons
-//         listeSalon.innerHTML = "";
-
-//         // Permet de récupérer l'id pour chaque chaine
-//         const id = chaine.id;
-//         // On récupère les salons, on récupère les id des chaines grâce à la variable id
-//         fetch("../../get_salon.php?id_chaine=" + id)
-//             .then(function (response) {
-//                 return response.json();
-//             })
-//             .then(function (displaySalons) {
-//                 for (let j = 0; j < displaySalons.length; j++) {
-
-//                     // On crée une div
-//                     const div = document.createElement("div");
-//                     // On ajoute la classe "salon" à cette div
-//                     div.classList.add("salon");
-
-//                     // On crée le texte de la div à partir du nom de salon
-//                     const salon = document.createTextNode(displaySalons[j].nom_salon);
-//                     div.appendChild(salon);
-//                     listeSalon.appendChild(div);
-//                 }
-//                 // On ajoute un évènement click à chaque div créée
-//                 const Salons = document.querySelectorAll(".salon");
-//                 Salons.forEach(function (salon) {
-//                     salon.addEventListener("click", function () {
-//                         // récupération de l'ID du salon
-//                         const id_salon = salon.id
-//                         console.log(id_salon)
-//                         // affichage des messages du salon
-//                         fetch("../../get_salon.php?id_salon=" + id_salon)
-//                             .then(function (response) {
-//                                 return response.json();
-//                             })
-//                             .then(function (displayMessages) {
-//                                 // traitement des messages récupérés
-//                                 console.log(displayMessages);
-//                             })
-//                             .catch(function (error) {
-//                                 console.log("Erreur : " + error);
-//                             });
-//                     });
-//                 });
-//             })
-//     })
-// })
-
-
 
 // Fonction qui permet de vérifier si la classe "salon" est présente lorsque les salons sont générés grâce aux JSON.
 function checkClass(salon, intervalTime) {

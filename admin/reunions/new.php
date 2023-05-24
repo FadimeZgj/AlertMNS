@@ -62,7 +62,7 @@ if (!empty($_POST['submit'])) {
     </header>
 
     <div class="container">
-        <div class="containerLeftInfo">
+        <div class="containerLeftInfoIndex">
             <a href="/admin/reunions/index.php">
                 <button class="goBackReunionBtn">
                     <i class="fa-solid fa-arrow-left fa-lg"></i>
@@ -72,33 +72,39 @@ if (!empty($_POST['submit'])) {
         <!--Information de la colonne de droite-->
         <div class="container-create-reunions">
             <div class="createReunionForm">
-            <h1 class="createReunionTitle">Créer une nouvelle réunion</h1>
+                <h1 class="createReunionTitle">Organiser une nouvelle réunion</h1>
                 <form action="/admin/reunions/new.php" method="post">
                     <div class="create-form-group">
                         <div class="form-group">
-                            <h3>Créer un groupe (Sélectionnez les participants)</h3>
-                            
-                            <select name="groupe" class="">
-                            <?php foreach ($roles as $role): ?>
-                                <option value="<?= $role['id_role'] ?>">
-                                    <?= $role['libelle_role'] ?>
+                            <h2 class="formTitle">Création du groupe</h2>
+                            <h3>Sélectionnez les participants</h3>
+                            <select name="select-roles" class="" id="selectRole">
+                                <option value="">Veuillez selectionnez les participants </option>
+                                <?php foreach ($roles as $role): ?>
+                                    <option value="<?= $role['id_role'] ?>">
+                                        <?= $role['libelle_role'] ?>
+                                    <?php endforeach; ?>
+                                <option value="4">
+                                    Tous les utilisateurs
                                 </option>
-                            <?php endforeach; ?>
 
-                            <label for="groupe">Liste des utilisateurs:</label>
-                            <?php foreach ($users as $user): ?>
-
-                                <input type="checkbox" name="utilisateurs[]" value="<?= $user['id_utilisateur'] ?>" ">
-                                <?= $user['prenom_utilisateur'] ?>
-                                <?= $user['nom_utilisateur'] ?>
+                                <?php foreach ($users as $user): ?>
+                                    <ul id="usersList" style="display: none;">
+                                        <li>
+                                            <input type="hidden" name="utilisateurs[]"
+                                                value="<?= $user['id_utilisateur'] ?>" ">
+                                        </li>
+                                    </ul>
                             <?php endforeach; ?>
                         </div>
                         <!--Div pour le nom du groupe-->
-                        <div class=" form-group">
-                            <label for="nom">Nom du groupe</label>
-                            <input type="text" name="groupe[nom_groupe]" />
+                        <div class="form-group group-name">
+                                        <label for="nom">Nom du groupe</label>
+                                        <input type="text" name="groupe[nom_groupe]" />
                         </div>
 
+                        <h2 class="formTitle">Création de la réunion</h2>
+                        <h3>Sélectionnez les participants</h3>
                         <div class="form-group">
                             <label for="nom">Nom de la réunion</label>
                             <input type="text" name="nom" />
@@ -126,6 +132,51 @@ if (!empty($_POST['submit'])) {
 
         </div>
     </div>
+    <script>
+        const getSelect = document.getElementById("selectRole");
+        const ulUsersList = document.getElementById("usersList");
 
+        getSelect.addEventListener("click", (e) => {
+            let id = getSelect.options[getSelect.selectedIndex].value; // permet de récupérer l'ID
+            let role = getSelect.options[getSelect.selectedIndex].text; // permet de récupérer la valeur de l'ID (admin, formateur, stagiaire...)
+            console.log(id, role);
+            ulUsersList.innerHTML = ""
+            ulUsersList.style.display = "block"
+            fetch('../../json/get_users_roles.php?id_role=' + id).then(function (response) {
+                return response.json();
+            }).then(function (displayUsersByRole) {
+                console.log(displayUsersByRole)
+                for (j = 0; j < displayUsersByRole.length; j++) {
+                    // Si option value = 1 (Administrateur), j'affiche les membres qui ont pour rôle "Administrateur"
+                    if (id == displayUsersByRole[j].id_role) {
+                        const li = document.createElement("li");
+                        const input = document.createElement("input");
+                        input.type = "checkbox";
+                        input.name = "utilisateurs[]"
+                        input.value = "<?= $user['id_utilisateur'] ?>"
+                        li.appendChild(input)
+                        usersList = document.createTextNode(" " + displayUsersByRole[j].nom_utilisateur + " " + displayUsersByRole[j].prenom_utilisateur)
+                        li.appendChild(usersList)
+                        ulUsersList.appendChild(li);
+                        console.log(displayUsersByRole[j].libelle_role + " " + displayUsersByRole[j].nom_utilisateur + " " + displayUsersByRole[j].prenom_utilisateur)
+                    }
+                    // Correspond à l'option value 4 = "Tous les utilisateurs"
+                    else if (id == 4) {
+                        const li = document.createElement("li");
+                        const input = document.createElement("input");
+                        input.type = "checkbox";
+                        input.name = "utilisateurs[]"
+                        input.value = "<?= $user['id_utilisateur'] ?>"
+                        li.appendChild(input)
+                        usersList = document.createTextNode(" " + displayUsersByRole[j].nom_utilisateur + " " + displayUsersByRole[j].prenom_utilisateur)
+                        li.appendChild(usersList)
+                        ulUsersList.appendChild(li);
+                        console.log(displayUsersByRole[j].libelle_role + " " + displayUsersByRole[j].nom_utilisateur + " " + displayUsersByRole[j].prenom_utilisateur)
+                    }
+                }
+            })
+        })
+
+    </script>
 
     <?php include $_SERVER['DOCUMENT_ROOT'] . "/includes/inc-bottom.php" ?>

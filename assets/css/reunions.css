@@ -139,22 +139,21 @@ table button:hover {
 /* ADD REUNION */
 
 .containerLeftInfoIndex {
-    width: 20%;
+    width: 40%;
 }
 
-.createReunionForm {
-    display: flex;
-    flex-direction: column;
-}
+
 
 .container-create-reunions {
     padding-top: 40px;
-    margin-left: 12%;
-    border-left: 1px solid rgba(240, 235, 216, 0.2)
+    border-left: 1px solid rgba(240, 235, 216, 0.2);
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .create-form-group {
-    background-color: #2F3F54;
+    background-color: #748cab;
     height: 80%;
     width: 90%;
     border-radius: 30px;
@@ -162,17 +161,14 @@ table button:hover {
     text-align: center;
 }
 
-.create-form-group {
-    background-color: #2F3F54;
+.createReunionForm {
+width: 100%;
 }
 
-.CreateReunionTitle {
-    border-bottom: solid 1px rgba(240, 235, 216, 0.2);
-    font-size: 28px;
-}
-
-.createReunionForm p {
-    margin-top: 60px;
+.createReunionForm h1 {
+    text-align: center;
+    margin-top: -2%;
+    margin-bottom: 4%;
 }
 
 .form-group {
@@ -180,7 +176,7 @@ table button:hover {
 }
 
 .goBackReunionBtn {
-    width: 110%;
+    width: 70%;
     height: 52px;
     padding: 6px 16px;
     position: relative;
@@ -201,4 +197,78 @@ table button:hover {
 
 .goBackReunionBtn i {
     padding: 4px;
+}
+
+.group-name {
+    border-bottom: solid 1px rgba(240, 235, 216, 0.2);
+}
+
+form {
+    height: 100%;
+}
+
+form ul {
+    text-align: left;
+    margin-top: 10px;
+    background-color: #5e728d;
+    color: #F0EBD8;
+    max-height: 150px;
+    overflow-y:auto;
+    width: 50%;
+    border: solid 1px #0D1321;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-left: 28%;
+}
+
+form ul li {
+    padding: 10px;
+    margin-left: 10px;
+}
+
+form label {
+    color: #F0EBD8;
+}
+
+form input {
+    border-radius: 10px;
+    border: none;
+    height: 22px;
+    width: 20%;
+    text-indent: 5%;
+}
+
+form input:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+form input[type="text"] {
+    margin-left: 6px;
+}
+
+form h2 {
+    padding: 4px;
+    color: #2F3F54;
+}
+
+form h3 {
+    font-weight: 500;
+    margin-top: 6px;
+    color: #0D1321;
+}
+
+form select {
+    margin-top: 10px;
+    padding: 8px;
+    border: none;
+    border-radius: 6px;
+    background-color: #F0EBD8;
+    color:#2F3F54;
+    font-weight: 500;
+}
+
+form select:hover {
+    cursor: pointer;
+    opacity: 0.9;
 }
