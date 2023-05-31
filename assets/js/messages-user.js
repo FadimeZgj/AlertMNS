@@ -1,169 +1,265 @@
 
-let user = userId
+// let user = userId
+
+let listMsg = document.querySelector('#conv')
+
 
 // récupérer le dernier message envoyé par l'interlocuteur
-$.ajax({
-  type: "GET",
-  url: "../../json/get-last-messages.php", // Le fichier PHP qui retourne les donnée
-  dataType: "json",
-  success: function (response) {
-    // La fonction à exécuter en cas de succès
-    // Afficher les données dans la console pour débogage
-    //   // Boucle pour afficher les conversations dans la page HTML
-    for (i = 0; i < response.length; i++) {
+function getLastMsg() {
+  return fetch("../../json/get-last-messages.php")
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (lastMessages) {
+      console.log(lastMessages)
+     
+      // Boucle qui parcourt l'objet  
+      for (i = 0; i < lastMessages.length; i++) {
 
-      let html = '<div class="message" data-id = ' + response[i].id_expediteur + ' ><div class="image-user">' +
-        "<img src='https://dummyimage.com/70x70/1D2D44/ffffff.png?text=Photo' alt='Photo'>" +
-        '</div>' +
-        '<div class ="right-content"><div class ="info-user"><div class ="name">' +
-        '<h3 id="destName">' + response[i].prenom_exp + ' ' + response[i].nom_exp + '</h3>' +
-        '<h4>' + response[i].libelle_role + '</h4></div>' +
-        '<div class="hour">Il y a 1 h</div>' +
-        '</div>' +
-        '<div class="text-message">' +
-        '<p>' + response[i].text_message.slice(0, 50) + '...' + '</p>' +
-        '</div></div></div>'
-      $("#conv").append(html); // Ajouter la conversation au conteneur HTML
+        // div qui affiche le resultat
+        let html = '<div class="message" data-id = ' + lastMessages[i].id_expediteur + ' ><div class="image-user">' +
+          "<img src='https://dummyimage.com/70x70/1D2D44/ffffff.png?text=Photo' alt='Photo'>" +
+          '</div>' +
+          '<div class ="right-content"><div class ="info-user"><div class ="name">' +
+          '<h3 id="destName">' + lastMessages[i].prenom_exp + ' ' + lastMessages[i].nom_exp + '</h3>' +
+          '<h4>' + lastMessages[i].libelle_role + '</h4></div>' +
+          '<div class="hour">Il y a 1 h</div>' +
+          '</div>' +
+          '<div class="text-message">' +
+          '<p>' + lastMessages[i].text_message.slice(0, 50) + '...' + '</p>' +
+          '</div></div></div>'
+        listMsg.insertAdjacentHTML('beforeend', html);
+      }
+      // Ajouter la dernière conversation à sessionStorage
+      if (lastMessages.length > 0) {
+        const lastMessageId = lastMessages[lastMessages.length - 1].id_expediteur;
+        sessionStorage.setItem('lastMessageId', lastMessageId);
+      }
+    })
+}
+let dataId
+
+// fonction asynchrone pour récupérer l'id après l'affichage des derniers messages
+async function getId() {
+  //attendre la fonction qui récupère le dernier message
+  await getLastMsg()
+  // récupérer l'id du destinataire
+  let recipient = document.querySelectorAll('.message');
+  recipient.forEach(recipientId => {
+    recipientId.addEventListener('click', function () {
+      dataId = recipientId.getAttribute('data-id');
+      // Mettre à jour l'URL avec l'ID
+      updateURL(dataId);
+      // Appeler une fonction pour traiter l'ID
+      handleId(dataId);
+    });
+  });
+}
+
+// fonction qui permet de mettre à jour l'url avec l'id du destinataire
+function updateURL(dataId) {
+  const url = new URL(window.location.href);
+  url.searchParams.set("id", dataId);
+  const newURL = url.toString();
+  history.pushState(null, "", newURL);
+}
+// fonction qui récupère l'id dans l'url
+function getURLParameter(name) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(name);
+}
+
+// Affiche les messages dans l'interface avec les bulles etc...
+function displayMessages(messages) {
+  dataId = getURLParameter('id');
+  console.log(dataId)
+  let interface = document.querySelector(".conversation-interface")
+
+  // Vérifier si la div des messages est déjà vide ou non
+  let isInterfaceEmpty = interface.innerHTML.trim() === '';
+  if (dataId) {
+
+  }
+  messages.forEach(function (message) {
+    // construire le HTML pour le message
+    if (message.id_exp != dataId) {
+      interface.innerHTML += '<div class="message-user"><div class="bulle-user"><div class="info">' +
+        '<p class="name">' + message.prenom_exp + ' ' + message.nom_exp + '</p><p class="date">' + message.date_message + '</p></div>' +
+        '<div class="bubble-right"><div class="contenu-my-message">' +
+        '<p>' + message.text_message + '</p></div>' +
+        '<div class="arrow-right"></div>' +
+        "<img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt='photo_de_profil'></div></div>"
 
     }
-  },
-  error: function (jqXHR, textStatus, errorThrown) {
-    // La fonction à exécuter en cas d'erreur
-    console.log("Erreur : " + errorThrown);
+    else {
+      interface.innerHTML += '<div class="conversation"><div class ="message-me"><div class = "user-info">' +
+        "<img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt='photo_de_profil'></div>" +
+        '<div class="bulle"><div class="info">' +
+        '<p class="name">' + message.prenom_exp + ' ' + message.nom_exp + '</p><p class="date">' + message.date_message + '</p></div>' +
+        '<div class="arrow-left"></div>' +
+        '<div class="contenu-message"><p>' + message.text_message + '</p></div></div></div></div>';
+    }
+    // commencer au bas de la div
+    element = document.querySelector('.conversation-interface')
+    element.scrollTop = element.scrollHeight;
+  })
+
+  // Si la div des messages était vide, ajustez le scroll pour afficher les nouveaux messages ajoutés
+  if (isInterfaceEmpty) {
+    element.scrollTop = element.scrollHeight;
+  }
+}
+
+
+function handleId(dataId) {
+  // Stocker l'ID dans le sessionStorage
+  sessionStorage.setItem('lastClickedId', dataId);
+  // Récupérer l'ID de la dernière conversation
+  const lastMessageId = sessionStorage.getItem('lastMessageId');
+
+  // Utiliser l'ID de la dernière conversation s'il n'y a pas d'ID de destinataire dans l'URL
+  if (!dataId && lastMessageId) {
+    dataId = lastMessageId;
+  }
+  // Faites quelque chose avec l'ID récupéré, par exemple une requête Fetch
+  fetch("../../json/get-conversations.php?id=" + dataId)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (conversation) {
+      // Traitez les détails du message ici
+      console.log(conversation);
+      displayMessages(conversation)
+
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  console.log(dataId);
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  let lastClickedId = sessionStorage.getItem('lastClickedId');
+  if (lastClickedId) {
+    // Utiliser le dernier ID...
+    handleId(lastClickedId)
+  } else {
+    // Vérifier si un ID de destinataire est présent dans l'URL
+    const url = new URL(window.location.href);
+    const dataId = url.searchParams.get("id");
+    if (dataId) {
+      handleId(dataId);
+    } else {
+      // Sinon, récupérer l'ID de la dernière conversation
+      const lastMessageId = sessionStorage.getItem('lastMessageId');
+      if (lastMessageId) {
+        handleId(lastMessageId);
+      }
+    }
+  }
+})
+
+
+
+// Gérer l'événement popstate pour récupérer le nouvel ID lors de la navigation
+window.addEventListener("popstate", function (event) {
+  const url = new URL(window.location.href);
+  const dataId = url.searchParams.get("id");
+  if (dataId) {
+    handleId(dataId);
   }
 });
+getId()
 
-$(document).ready(function () {
+// Récupérer le bouton d'envoi du message
+let sendButton = document.getElementById('send-message-btn');
 
-  let $listeMsg = $(".liste-messages");
+// Ajouter un gestionnaire d'événement au bouton d'envoi
+sendButton.addEventListener('click', function (event) {
+  // Empêcher le comportement par défaut du bouton d'envoi
+  event.preventDefault();
 
-  // écouter les clics sur les divs de classe "message"
-  $listeMsg.on('click', '.message', function () {
-    // récupérer l'ID du destinataire associé à la div cliquée
-    let id_destinataire = $(this).data('id');
+  // Obtenir le contenu du champ de saisie du message
+  let messageInput = document.getElementById('message-input');
+  let textMessage = messageInput.value;
 
-    //Ajouter l'ID du destinataire à l'URL actuelle
-    let currentUrl = window.location.href;
-    let newUrl = currentUrl.replace(/(\?|&)id=\d+/gi, '') + '?id=' + id_destinataire;
-    window.history.pushState({ path: newUrl }, '', newUrl);
+  // Obtenir l'ID du destinataire à partir de l'URL
+  let recipientId = getURLParameter('id');
 
-    
-    // envoyer la requête AJAX
-    $.ajax({
-      url: '../../json/get-conversations.php',
-      type: 'POST',
-      data: { id_destinataire: id_destinataire },
-      dataType: 'json',
-      success: function (response) {
+  // Créer un objet de message avec les données nécessaires
+  let message = {
+    text_message: textMessage,
+    id_destinataire: recipientId
+  };
 
-        // afficher la conversation dans la liste des messages
-        $('.conversation-interface').empty();
-
-        // parcourir tous les messages de la conversation
-        response.forEach(function (message) {
-          // construire le HTML pour le message
-          let messageHTML = ""
-          if (message.id_exp == userId) {
-            messageHTML = '<div class="message-user"><div class="bulle-user"><div class="info">' +
-              '<p class="name">' + message.prenom_exp + ' ' + message.nom_exp + '</p><p class="date">' + message.date_message + '</p></div>' +
-              '<div class="bubble-right"><div class="contenu-my-message">' +
-              '<p>' + message.text_message + '</p></div>' +
-              '<div class="arrow-right"></div>' + 
-              "<img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt='photo_de_profil'></div></div>" 
-              
-          }
-          else {
-            messageHTML = '<div class="conversation"><div class ="message-me"><div class = "user-info">' +
-              "<img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt='photo_de_profil'></div>" +
-              '<div class="bulle"><div class="info">' +
-              '<p class="name">' + message.prenom_exp + ' ' + message.nom_exp + '</p><p class="date">' + message.date_message + '</p></div>' +
-              '<div class="arrow-left"></div>' +
-              '<div class="contenu-message"><p>' + message.text_message + '</p></div></div></div></div>';
-          }
-          // ajouter le message HTML à la div "conversation"
-          $('.conversation-interface').append(messageHTML);
-
-          // commencer au bas de la div
-          element = document.querySelector('.conversation-interface')
-          element.scrollTop = element.scrollHeight;
-        });
-      },
-      error: function (xhr, status, error) {
-        console.error(error);
-      }
-    });
-
-    $.ajax({
-      url: '../../json/get-users.php',
-      type: 'POST',
-      data: { id_destinataire: id_destinataire },
-      dataType: 'json',
-      success: function (response) {
-        console.log(response)
-        $('#dest-name').empty();
-        // extraire le nom du destinataire de la réponse
-
-        for (i = 0; i < response.length; i++) {
-          let destinataireNom = response[i].prenom_utilisateur + ' ' + response[i].nom_utilisateur;
-                  // afficher le nom du destinataire ailleurs dans la page
-        $('#dest-name').append(destinataireNom);
-
-        }
-
-      },
-      error: function (xhr, status, error) {
-        console.error(xhr.responseText);
-      }
-    });
-
-    $.ajax({
-      url: '/user/messages.php',
-      type: 'POST',
-      data: {id: id_destinataire},
-      success: function (response){
-        // // Récupère l'ID du destinataire de la réponse
-        // let id_destinataire = response.id_destinataire;
-        
-        // // Ajoute l'ID du destinataire à l'URL du formulaire
-        // let form = document.querySelector("#message");
-        // form.action += "?id=" + id_destinataire;
-
-        // Obtenir les paramètres de l'URL
-        // const urlParams = new URLSearchParams(window.location.search);
-
-        // // Récupérer la valeur de l'ID à partir des paramètres de l'URL
-        // const id_destinataire = urlParams.get('id');
-
-        // // Utiliser l'ID récupéré pour le formulaire
-        // if (id_destinataire !== null) {
-        //   let form = document.querySelector("#message");
-        //   form.action += "?id=" + id_destinataire;
-        // }   
-
-        const url = new URL(document.querySelector("#message").action);
-
-        // Vérifie s'il existe déjà un paramètre 'id' dans l'URL
-        if (url.searchParams.has('id')) {
-          // Met à jour la valeur du paramètre 'id'
-          url.searchParams.set('id', id_destinataire);
-        } else {
-          // Ajoute le paramètre 'id' à l'URL
-          url.searchParams.append('id', id_destinataire);
-        }
-
-        // Utiliser l'URL mise à jour pour l'action du formulaire
-        document.querySelector("#message").action = url;
-      }
-    });
-    
-  });
+  // Envoyer le message au destinataire sélectionné
+  sendMessageToRecipient(message);
+  messageInput.value = '';
 });
 
+// Récupérer la référence à la div des messages
+let conversationInterface = document.querySelector(".conversation-interface");
 
+function sendMessageToRecipient(message) {
+  fetch('/user/messages.php?id=' + encodeURIComponent(message.id_destinataire), {
+    method: 'POST',
+    body: JSON.stringify(message),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(function (response) {
+      console.log(response);
+      if (response.ok) {
+        // Le message a été envoyé avec succès
+        console.log('Message envoyé avec succès');
 
+        // Mettre à jour la div des messages en utilisant AJAX
+        fetch("../../json/get-conversations.php?id=" + dataId)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (conversation) {
+            // Obtenir le dernier message de la conversation
+            let lastMessage = conversation[conversation.length - 1];
 
+            // Construire le HTML pour le nouveau message
+            let messageHtml = '';
+            if (lastMessage.id_exp != dataId) {
+              messageHtml = '<div class="message-user"><div class="bulle-user"><div class="info">' +
+                '<p class="name">' + message.prenom_exp + ' ' + message.nom_exp + '</p><p class="date">' + message.date_message + '</p></div>' +
+                '<div class="bubble-right"><div class="contenu-my-message">' +
+                '<p>' + message.text_message + '</p></div>' +
+                '<div class="arrow-right"></div>' +
+                "<img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt='photo_de_profil'></div></div>"
+            } else {
+              messageHtml = '<div class="conversation"><div class ="message-me"><div class = "user-info">' +
+                "<img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt='photo_de_profil'></div>" +
+                '<div class="bulle"><div class="info">' +
+                '<p class="name">' + message.prenom_exp + ' ' + message.nom_exp + '</p><p class="date">' + message.date_message + '</p></div>' +
+                '<div class="arrow-left"></div>' +
+                '<div class="contenu-message"><p>' + message.text_message + '</p></div></div></div></div>';
+            }
 
+            // Ajouter le nouveau message à la div
+            conversationInterface.insertAdjacentHTML('beforeend', messageHtml);
 
+            // Faire défiler jusqu'au bas de la div des messages pour afficher le nouveau message
+            conversationInterface.scrollTop = conversationInterface.scrollHeight;
 
+          })
 
+          .catch(function (error) {
+            console.error('Erreur lors de la récupération des messages:', error);
+          });
 
+        // Effectuez d'autres actions si nécessaire
+      } else {
+        // Erreur lors de l'envoi du message
+        console.error('Erreur lors de l\'envoi du message');
+      }
+    })
+    .catch(function (error) {
+      console.error('Erreur lors de l\'envoi du message:', error);
+    });
+}

@@ -10,45 +10,92 @@ WHERE id_utilisateur = '" . $_SESSION['user']['id'] . "'";
 $query = $dbh->query($sql);
 $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
 
-if (!empty($_GET)) {
-    $id = $_GET['id'];
-}
 
+// if (isset($_GET['id'])) {
+//     $id = $_GET['id'];
+// }
 
-if (isset($_POST['submit'])) 
-{
-    if (!empty($_POST['text_message'])) 
-    {
-            $sql = "INSERT INTO message (text_message, date_message, id_utilisateur) VALUES (:text_message, NOW(), :id_utilisateur)";
-            $query = $dbh->prepare($sql);
-            
-            $res = $query->execute([
-                'text_message' => $_POST['text_message'],
-                'id_utilisateur' => $_SESSION['user']['id']
+// if (isset($_POST['submit'])) {
+//     if (!empty($_POST['text_message'])) {
+//         $sql = "INSERT INTO message (text_message, date_message, id_utilisateur) VALUES (:text_message, NOW(), :id_utilisateur)";
+//         $query = $dbh->prepare($sql);
 
-            ]);
-            
-            $newMsg = $dbh->lastInsertId();
+//         $res = $query->execute([
+//             'text_message' => $_POST['text_message'],
+//             'id_utilisateur' => $_SESSION['user']['id']
 
-        if ($newMsg) 
-        {
-            $sql = "INSERT INTO recevoir (id_message , id_utilisateur) VALUES (:id_message, :id_utilisateur)";
+//         ]);
+
+//         $newMsg = $dbh->lastInsertId();
+
+//         if ($newMsg) {
+//             $sql = "INSERT INTO recevoir (id_message, id_utilisateur) VALUES (:id_message, :id_destinataire)";
+//             $query = $dbh->prepare($sql);
+//             $recipent = $query->execute([
+//                 "id_message" => $newMsg,
+//                 "id_destinataire" => $id
+//             ]);
+//         }
+//     }
+// }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Récupérer les données du message envoyé
+    $postData = json_decode(file_get_contents('php://input'), true);
+    $textMessage = $postData['text_message'];
+    $idDestinataire = $_GET['id'];
+
+    // Effectuer les validations nécessaires sur les données
+    if (!empty($textMessage) && !empty($idDestinataire)) {
+        // Insérer le message dans la base de données
+        $sql = "INSERT INTO message (text_message, date_message, id_utilisateur) VALUES (:text_message, NOW(), :id_utilisateur)";
+        $query = $dbh->prepare($sql);
+
+        $res = $query->execute([
+            'text_message' => $textMessage,
+            'id_utilisateur' => $_SESSION['user']['id']
+        ]);
+
+        // Vérifier si l'insertion du message a réussi
+        if ($res) {
+            // Récupérer l'ID du nouveau message inséré
+            $newMsgId = $dbh->lastInsertId();
+
+            // Insérer une entrée dans la table "recevoir" pour associer le message au destinataire
+            $sql = "INSERT INTO recevoir (id_message, id_utilisateur) VALUES (:id_message, :id_destinataire)";
             $query = $dbh->prepare($sql);
             $recipent = $query->execute([
-                "id_message" => $newMsg,
-                "id_utilisateur" => $id
+                "id_message" => $newMsgId,
+                "id_destinataire" => $idDestinataire
             ]);
+
+            // Vérifier si l'insertion dans la table "recevoir" a réussi
+            if ($recipent) {
+                // Le message a été envoyé avec succès
+                // Effectuez d'autres actions si nécessaire
+                echo 'Message envoyé avec succès';
+            } else {
+                // Erreur lors de l'insertion de l'entrée dans la table "recevoir"
+                echo 'Erreur lors de l\'envoi du message';
+            }
+        } else {
+            // Erreur lors de l'insertion du message dans la table "message"
+            echo 'Erreur lors de l\'envoi du message';
         }
-
+    } else {
+        // Les données du message sont vides ou incomplètes
+        echo 'Veuillez fournir les informations nécessaires pour envoyer le message';
     }
-
 }
+
+
+
 
 $title = "AlertMNS - Messages";
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 
 ?>
-    <link rel="stylesheet" href="/assets/css/messages.css">
+<link rel="stylesheet" href="/assets/css/messages.css">
 </head>
 
 <body>
@@ -106,7 +153,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 
                 <!--Bulle de discussion de l'autre personne-->
                 <div id="conversation">
-                    
+
                 </div>
             </div>
             <div class="text-zone">
@@ -114,8 +161,8 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                 <div class="chatbox">
                     <form action="/admin/messages.php" method="post" id="message">
                         <label for="text_message"></label>
-                        <input type="hidden" name="id_utilisateur">
-                        <input type="text" name="text_message" placeholder="Ecrivez votre message..." id="message-input"> 
+                        <input type="hidden" name="id_destinataire">
+                        <input type="text" name="text_message" placeholder="Ecrivez votre message..." id="message-input">
                 </div>
 
                 <!-- Icônes de la boîte de dialogue-->
@@ -141,4 +188,4 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
         let userId = <?php echo $user_id; ?>;
     </script>
 
-<?php require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-bottom.php'; ?>
+    <?php require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-bottom.php'; ?>

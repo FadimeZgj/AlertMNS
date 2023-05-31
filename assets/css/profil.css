@@ -45,8 +45,29 @@
 .user-input .name-email {
     display: flex;
     flex-direction: column;
+
 }
 
 .firstname-lastname {
     display: flex;
+}
+
+.profile-elements {
+    display: grid;
+    grid-template-rows: 15em 50em;
+    margin: 0em 10em;
+}
+
+.user-input {
+    margin-right: auto;
+}
+
+.user-input .name-email input {
+    padding: 0.8em;
+    width: 30em;
+    margin-right: 2em;
+}
+
+.user-input .name-email label {
+    margin: 0.5em 0em;
 }
