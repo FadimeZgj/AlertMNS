@@ -44,7 +44,7 @@ header .topbar .user-info .user-role {
 
 .sidebar .fa-tower-cell {
     background-color: inherit;
-    color:#F0EBD8;
+    color: #F0EBD8;
 }
 
 .sidebar .fa-calendar-days {
@@ -64,12 +64,13 @@ header .topbar .user-info .user-role {
 
 .container-reunions {
     margin-left: 10%;
-    border-left:2px solid rgba(240, 235, 216, 0.2);
+    border-left: 2px solid rgba(240, 235, 216, 0.2);
 }
 
 .container-reunions h1 {
-    margin-top: 20px;
-    margin-left: 50px;
+    display: flex;
+    justify-content: center;
+    margin-top: 26px;
 }
 
 .containerLeftInfo h1 {
@@ -77,7 +78,12 @@ header .topbar .user-info .user-role {
     margin-left: 140px;
 }
 
-.createReunionBtn {
+.containerLeftInfo {
+    width: 26%;
+}
+
+.createReunionBtn,
+.showReunionBtn {
     width: 110%;
     height: 52px;
     padding: 6px 16px;
@@ -89,37 +95,42 @@ header .topbar .user-info .user-role {
     background-color: #2F3F54;
     color: #F0EBD8;
     font-size: 18px;
+    margin-bottom: 5%;
 }
 
-.createReunionBtn:hover {
+.createReunionBtn:hover,
+.showReunionBtn:hover {
     cursor: pointer;
     background-color: #F0EBD8;
     color: #0D1321;
 }
 
-.createReunionBtn i {
+.createReunionBtn i,
+.showReunionBtn i {
     padding: 4px;
 }
 
 table {
     background-color: #2F3F54;
     color: #F0EBD8;
-    border: solid 1px rgba(240, 235, 216, 0.2); 
-    padding: 10px; 
-    text-align: center; 
-    width: 90%;
-    margin-left: 5%;
-    border-radius: 15px; 
+    border: solid 1px rgba(240, 235, 216, 0.2);
+    padding: 10px;
+    width: 80% !important;
+    text-align: center;    
+    margin-left: 6%;
+    border-radius: 15px;
     margin-top: 5%;
 }
 
 table thead tr th {
     font-weight: 500;
-    padding: 10px;
+    padding: 12px;
+    font-size: 18px;
+    color: #abccf7;
 }
 
 table tbody tr td {
-    padding: 6px;
+    padding: 10px;
 }
 
 table button {
@@ -138,11 +149,9 @@ table button:hover {
 
 /* ADD REUNION */
 
-.containerLeftInfoIndex {
-    width: 40%;
+.containerLeftInfoCreate {
+    width: 34%;
 }
-
-
 
 .container-create-reunions {
     padding-top: 40px;
@@ -161,26 +170,107 @@ table button:hover {
     text-align: center;
 }
 
+.form-group input {
+    width: 50%;
+    height: 26px;
+    border-radius: 30px;
+    background-color: #F0EBD8;
+    color:#0D1321;
+    font-weight: bold;
+}
+
 .createReunionForm {
-width: 100%;
+    margin-top: 3%;
+    background-color: #2F3F54;
+    /* overflow-y: scroll; Pour la version compliquée si j'y arrive */
+    /* height: 100%;
+width: 100%; */
+    height: 70%;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+}
+
+.submitCreateReunionBtn {
+    margin-top: 17%;
+    margin-left: 25%;
+    background-color: #748cab !important;
+    color:#F0EBD8 !important;
+    font-size: 24px;
+    height: 40px !important;
+}
+
+.submitCreateReunionBtn:hover {
+    background-color: #F0EBD8 !important;
+    color:#0D1321 !important;
+}
+
+.form-group-noGroup {
+    display: flex;
+    position: absolute;
+    top: 60%;
+    left: 37.6%;
+}
+
+.createReunionTitle {
+    margin-top: 3%;
+}
+
+.noGroupBtn {
+    margin-left: 5%;
+    margin-top: -3%;
+    text-align: left;
+    width: 100%;
+    height: 28px;
+    padding: 6px 12px;
+    border-radius: 40px;
+    border: none;
+    background-color: #0D1321;
+    color: #F0EBD8;
+}
+
+.noGroupBtn i {
+    margin-right: 2px;
+}
+
+.noGroupBtn:hover {
+    background-color: #F0EBD8;
+    color: #0D1321;
+    cursor: pointer;
+}
+
+.createReunionSelectGroup {
+    margin-top: 10px;
+    padding: 8px;
+    border: none;
+    border-radius: 6px;
+    background-color: #F0EBD8;
+    color: #2F3F54;
+    font-weight: 500;
+    margin-left: 2%;
+}
+
+.createReunionSelectGroup:hover {
+    cursor: pointer;
+    opacity: 0.9;
 }
 
 .createReunionForm h1 {
     text-align: center;
-    margin-top: -2%;
     margin-bottom: 4%;
 }
 
 .form-group {
-    padding: 10px;
+    padding: 12px;
 }
 
 .goBackReunionBtn {
-    width: 70%;
-    height: 52px;
-    padding: 6px 16px;
+    width: 68%;
+    height: 58px;
+    padding: 10px;
     position: relative;
-    left: 106px;
+    left: 96px;
     top: 30px;
     border-radius: 40px;
     border: none;
@@ -204,26 +294,7 @@ width: 100%;
 }
 
 form {
-    height: 100%;
-}
-
-form ul {
-    text-align: left;
-    margin-top: 10px;
-    background-color: #5e728d;
-    color: #F0EBD8;
-    max-height: 150px;
-    overflow-y:auto;
-    width: 50%;
-    border: solid 1px #0D1321;
-    border-radius: 5px;
-    font-size: 16px;
-    margin-left: 28%;
-}
-
-form ul li {
-    padding: 10px;
-    margin-left: 10px;
+    height: 110%;
 }
 
 form label {
@@ -247,6 +318,10 @@ form input[type="text"] {
     margin-left: 6px;
 }
 
+form h1 {
+    padding-top: 10px;
+}
+
 form h2 {
     padding: 4px;
     color: #2F3F54;
@@ -254,21 +329,86 @@ form h2 {
 
 form h3 {
     font-weight: 500;
-    margin-top: 6px;
     color: #0D1321;
 }
 
-form select {
-    margin-top: 10px;
-    padding: 8px;
-    border: none;
-    border-radius: 6px;
-    background-color: #F0EBD8;
-    color:#2F3F54;
-    font-weight: 500;
+/* Edit Reunion */
+
+.editReunionForm {
+    margin-top: 3%;
+        background-color: #2F3F54;
+        overflow-y: scroll;
+        height: 100%;
+        width: 100%;
+    
+        display: flex;
+        justify-content: center;
+        border-radius: 20px;
 }
 
-form select:hover {
-    cursor: pointer;
-    opacity: 0.9;
+.editReunionForm ul {
+    text-align: left;
+    margin-top: 10px;
+    background-color: #5e728d;
+    color: #F0EBD8;
+    max-height: 300px;
+    overflow-y: auto;
+    width: 50%;
+    border: solid 1px #0D1321;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-left: 28%;
+}
+
+.editReunionForm ul li {
+    padding: 10px;
+    margin-left: 10px;
+}
+
+@media (min-width : 1600px) {
+
+    table {
+        padding: 10px;
+        width: 100%;
+        margin-left: 8%;
+        border-radius: 15px;
+        margin-top: 5%;
+    }
+
+    .goBackReunionBtn {
+        width: 70%;
+        height: 52px;
+        padding: 6px 16px;
+        position: relative;
+        left: 106px;
+        top: 30px;
+        border-radius: 40px;
+        border: none;
+        background-color: #2F3F54;
+        color: #F0EBD8;
+        font-size: 18px;
+    }
+
+    .form-group-noGroup {
+        top: 58.5%;
+        left: 43.9%;
+    }
+
+    .createReunionTitle {
+        margin-top: 6%;
+    }
+    .form-group {
+        padding: 20px;
+    }
+    .container-reunions h1 {
+        margin-top: 40px;
+    }
+    .containerLeftInfo {
+        width: 18%;
+    }
+    .createReunionBtn,
+    .showReunionBtn {
+    width: 110%;
+    position: relative;
+    left: 120px;}
 }

@@ -10,24 +10,25 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 
 // récupérer les utilisateur connecté
 $utilisateur = getAllActiveUsers();
-
-
 $groupes = getAllGroupes();
-$users = getAllUsers();
+$reunions = getAllReunions();
 $roles = getAllRoles();
 
-if (!empty($_POST['submit'])) {
+$reunion = getReunionById($_GET['id']);
+$reunionsGroupes = getReunionsGroupesIds($_GET['id']);
 
-    $id = insertUsersInGroup($_POST['groupe'], $_POST['utilisateurs']);
+if (isset($_POST['submit'])) {
 
-    if ($id) {
-        header("Location: /admin/groupes/");
-        exit;
-    } else {
-        echo "Une erreur est survenue...";
-    }
-
+    updateReunionBis($_POST['groupe'], isset($_POST['utilisateurs']) ? $_POST['utilisateurs'] : []);
 }
+
+if (!$reunion) // $groupe == null
+{
+    header("Location: admin/reunions");
+    exit;
+}
+
+$users = getAllUsers();
 
 ?>
 <link rel="stylesheet" href="/assets/css/reunions.css">
@@ -43,7 +44,7 @@ if (!empty($_POST['submit'])) {
         <div class="topbar">
             <div class="logo">
                 <img src='/assets/images/logo1.png' alt='Logo'>
-                <h3>Groupes</h3>
+                <h3>Réunions</h3>
             </div>
             <div class="user-info">
                 <img src='https://dummyimage.com/70x70/1D2D44/ffffff.png?text=Photo' alt='Photo'>
@@ -61,47 +62,70 @@ if (!empty($_POST['submit'])) {
     </header>
 
     <div class="container">
-        <div class="containerLeftInfo">
-            <a href="/admin/groupes/index.php"><button class="createReunionBtn"><i
-                        class="fa-solid fa-arrow-left fa-lg"></i> Revenir à la liste des groupes</button></a>
-
-                        <a href="/admin/reunions/new.php"><button class="createReunionBtn"><i
-                        class="fa-solid fa-arrow-left fa-lg"></i> Créer une réunion</button></a>
+        <div class="containerLeftInfoIndex">
+            <a href="/admin/reunions/index.php">
+                <button class="goBackReunionBtn">
+                    <i class="fa-solid fa-arrow-left fa-lg"></i>
+                    Revenir à la liste des réunions</button>
+            </a>
         </div>
-        <div class="container-reunions">
-            <div class="participantsForm">
-                <form action="/admin/groupes/new.php" method="post">
-                    <h1 class="createReunionTitle">Créer un nouveau groupe</h1>
-
-                            <h3>Sélectionnez les utilisateurs</h3>
+        <!--Information de la colonne de droite-->
+        <div class="container-create-reunions">
+            <div class="editReunionForm">
+                <h2>Modifier la réunion</h2>
+                <form action="/admin/reunions/editQuiFonctionnePas.php?id=<?= $_GET['id'] ?>" method="post">
+                <input type="hidden" name="groupe[id_groupe]" value="<?= $groupe['id_groupe'] ?>">
+                    <div class="create-form-group">
+                        <div class="form-group">
+                            <h2 class="formTitle">Modifier les participants</h2>
                             <select name="select-roles" class="" id="selectRole">
-                            <option value="">Veuillez sélectionner les participants</option>
-                            <?php foreach ($roles as $role): ?>
-                                <option value="<?= $role['id_role'] ?>">
-                                    <?= $role['libelle_role'] ?>
+                                <option value="">Veuillez sélectionner les participants</option>
+                                <?php foreach ($roles as $role): ?>
+                                    <option value="<?= $role['id_role'] ?>">
+                                        <?= $role['libelle_role'] ?>
+                                    </option>
+                                <?php endforeach; ?>
+                                <option value="4">
+                                    Tous les utilisateurs
                                 </option>
-                            <?php endforeach; ?>
-                            <option value="4">
-                                Tous les utilisateurs
-                            </option>
-                        </select>
+                            </select>
 
-                        <ul id="usersList" style="display: none;">
-                            <?php foreach ($users as $user): ?>
-                                <li><input type="hidden" name="utilisateurs[]" value="<?= $user['id_utilisateur'] ?>"></li>
-                            <?php endforeach; ?>
-                        </ul>
+                            <ul id="usersList" style="display: none;">
+                                <?php foreach ($users as $user): ?>
+                        <li><input type="checkbox" name="utilisateurs[]" value="<?= $user['id_utilisateur'] ?>"></li>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
 
                         </div>
                         <!--Div pour le nom du groupe-->
                         <div class="form-group group-name">
                             <label for="nom">Nom du groupe</label>
-                            <input type="text" name="groupe[nom_groupe]" />
+                            <input type="text" name="groupe[nom_groupe]"/>
                         </div>
 
-                        <div class="form-group submitBtn">
+                        <h2 class="formTitle">Création de la réunion</h2>
+                        <h3>Sélectionnez les participants</h3>
+                        <div class="form-group">
+                            <label for="nom">Nom de la réunion</label>
+                            <input type="text" name="reunion[nom_reunion]" value="<?= $reunion['nom_reunion'] ?>" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sujet">Sujet de la réunion</label>
+                            <input type="text" name="reunion[sujet_reunion]" value="<?= $reunion['sujet_reunion'] ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="date">Date de la réunion</label>
+                            <input type="datetime-local" name="reunion[date_reunion]" value="<?= $reunion['date_reunion'] ?>">
+                        </div>
+
+                        <div class="form-group">
                             <input type="submit" name="submit" value="Créer">
                         </div>
+
+                    </div>
 
                 </form>
 
@@ -109,7 +133,6 @@ if (!empty($_POST['submit'])) {
 
         </div>
     </div>
-
     <script>
 
         const getSelect = document.getElementById("selectRole");

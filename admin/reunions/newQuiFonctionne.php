@@ -10,18 +10,20 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 
 // récupérer les utilisateur connecté
 $utilisateur = getAllActiveUsers();
-
-
 $groupes = getAllGroupes();
+$reunions = getAllReunions();
 $users = getAllUsers();
 $roles = getAllRoles();
 
+
+// Traiter le formulaire si envoyé
+// Permet de créer une nouvelle réunion
 if (!empty($_POST['submit'])) {
 
-    $id = insertUsersInGroup($_POST['groupe'], $_POST['utilisateurs']);
+    $id = insertUsersInGroups($_POST['groupe'], $_POST['utilisateurs']);
 
     if ($id) {
-        header("Location: /admin/groupes/");
+        header("Location: /admin/reunions/");
         exit;
     } else {
         echo "Une erreur est survenue...";
@@ -43,7 +45,7 @@ if (!empty($_POST['submit'])) {
         <div class="topbar">
             <div class="logo">
                 <img src='/assets/images/logo1.png' alt='Logo'>
-                <h3>Groupes</h3>
+                <h3>Réunions</h3>
             </div>
             <div class="user-info">
                 <img src='https://dummyimage.com/70x70/1D2D44/ffffff.png?text=Photo' alt='Photo'>
@@ -61,19 +63,22 @@ if (!empty($_POST['submit'])) {
     </header>
 
     <div class="container">
-        <div class="containerLeftInfo">
-            <a href="/admin/groupes/index.php"><button class="createReunionBtn"><i
-                        class="fa-solid fa-arrow-left fa-lg"></i> Revenir à la liste des groupes</button></a>
-
-                        <a href="/admin/reunions/new.php"><button class="createReunionBtn"><i
-                        class="fa-solid fa-arrow-left fa-lg"></i> Créer une réunion</button></a>
+        <div class="containerLeftInfoIndex">
+            <a href="/admin/reunions/index.php">
+                <button class="goBackReunionBtn">
+                    <i class="fa-solid fa-arrow-left fa-lg"></i>
+                    Revenir à la liste des réunions</button>
+            </a>
         </div>
-        <div class="container-reunions">
-            <div class="participantsForm">
-                <form action="/admin/groupes/new.php" method="post">
-                    <h1 class="createReunionTitle">Créer un nouveau groupe</h1>
-
-                            <h3>Sélectionnez les utilisateurs</h3>
+        <!--Information de la colonne de droite-->
+        <div class="container-create-reunions">
+            <div class="createReunionForm">
+                <h1 class="createReunionTitle">Organiser une nouvelle réunion</h1>
+                <form action="/admin/reunions/newQuiFonctionne.php" method="post">
+                    <div class="create-form-group">
+                        <div class="form-group">
+                            <h2 class="formTitle">Création du groupe</h2>
+                            <h3>Sélectionnez les participants</h3>
                             <select name="select-roles" class="" id="selectRole">
                             <option value="">Veuillez sélectionner les participants</option>
                             <?php foreach ($roles as $role): ?>
@@ -99,9 +104,28 @@ if (!empty($_POST['submit'])) {
                             <input type="text" name="groupe[nom_groupe]" />
                         </div>
 
+                        <h2 class="formTitle">Création de la réunion</h2>
+                        <h3>Sélectionnez les participants</h3>
+                        <div class="form-group">
+                            <label for="nom">Nom de la réunion</label>
+                            <input type="text" name="nom_reunion" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sujet">Sujet de la réunion</label>
+                            <input type="text" name="sujet_reunion">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="date">Date de la réunion</label>
+                            <input type="datetime-local" name="date_reunion">
+                        </div>
+
                         <div class="form-group submitBtn">
                             <input type="submit" name="submit" value="Créer">
                         </div>
+
+                    </div>
 
                 </form>
 
@@ -109,7 +133,6 @@ if (!empty($_POST['submit'])) {
 
         </div>
     </div>
-
     <script>
 
         const getSelect = document.getElementById("selectRole");

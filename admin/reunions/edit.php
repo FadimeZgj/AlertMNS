@@ -86,21 +86,21 @@ $groupes = getAllGroupes();
 
                     <div class="form-group">
                     <label for="nom">Nom de la réunion</label>
-                    <input type="text" name="nom" value="<?= $reunion['nom_reunion'] ?>">
+                    <input type="text" name="nom_reunion" value="<?= $reunion['nom_reunion'] ?>">
                     </div>
 
                     <div class="form-group">
                         <label for="date">Date de la réunion</label>
-                        <input type="date" name="date" value="<?= $reunion['date_reunion'] ?>">
+                        <input type="datetime-local" name="date_reunion" value="<?= $reunion['date_reunion'] ?>">
                     </div>
                     
                     <div class="form-group">
                     <label for="sujet">Sujet de la réunion</label>
-                        <input type="text" name="sujet" value="<?= $reunion['sujet_reunion'] ?>">
+                        <input type="text" name="sujet_reunion" value="<?= $reunion['sujet_reunion'] ?>">
                     </div>
                     <div class="form-group">
-                        <label for="groupe">Selectionnez les participants</label>
-                        <select name="groupe" class="">
+                        <label for="groupe">Veuillez choisir le groupe qui participera à la réunion</label>
+                        <select name="groupe" class="createReunionSelectGroup">
                             <?php foreach ($groupes as $groupe): ?>
                                 <option value="<?= $groupe['id_groupe'] ?>">
                                     <?= $groupe['nom_groupe'] ?>
@@ -108,6 +108,7 @@ $groupes = getAllGroupes();
                             <?php endforeach; ?>
 
                     </div>
+                    <div class="form-group">
                     <div class="form-group">
                     <input type="submit" name="submit" value="Enregistrer les modifications">
                     </div>

@@ -64,9 +64,6 @@ if (!empty($_POST['submit'])) {
         <div class="containerLeftInfo">
             <a href="/admin/groupes/index.php"><button class="createReunionBtn"><i
                         class="fa-solid fa-arrow-left fa-lg"></i> Revenir à la liste des groupes</button></a>
-
-                        <a href="/admin/reunions/new.php"><button class="createReunionBtn"><i
-                        class="fa-solid fa-arrow-left fa-lg"></i> Créer une réunion</button></a>
         </div>
         <div class="container-reunions">
             <div class="participantsForm">
