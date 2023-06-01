@@ -42,7 +42,7 @@ $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupérer les données du message envoyé
     $postData = json_decode(file_get_contents('php://input'), true);
-    $textMessage = $postData['text_message'];
+    $textMessage = htmlspecialchars($_POST['nom_utilisateur']);
     $idDestinataire = $_GET['id'];
 
     // Effectuer les validations nécessaires sur les données

@@ -39,13 +39,15 @@
 .profile-elements .user-info {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
+    color: #F0EBD8;
 }
 
 .user-input .name-email {
     display: flex;
     flex-direction: column;
-
+    color: #F0EBD8;
+    font-weight: bold;
 }
 
 .firstname-lastname {
@@ -54,8 +56,8 @@
 
 .profile-elements {
     display: grid;
-    grid-template-rows: 15em 50em;
-    margin: 0em 10em;
+    grid-template-rows: 30% 50%;
+    justify-content: center;
 }
 
 .user-input {
@@ -64,10 +66,42 @@
 
 .user-input .name-email input {
     padding: 0.8em;
-    width: 30em;
-    margin-right: 2em;
+    width: 25em;
+
+}
+
+.user-input .name-email:first-child{
+    margin-right: 4%;
 }
 
 .user-input .name-email label {
     margin: 0.5em 0em;
+}
+
+.user-input button {
+    display: block;
+    width: 20em;
+    margin: auto;
+    padding: 1em;
+    margin-top: 15%;
+    border: none;
+    border-radius: 3em;
+    color: #1D2D44;
+    background-color: #748CAB;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.user-input button:hover {
+    background-color:#748cab8e;
+    cursor: pointer;
+}
+
+.user-input .name-email input {
+    font-size: 100%;
+}
+
+.name-email .error {
+    color: #d25634;
+    margin-bottom: 2em;
 }

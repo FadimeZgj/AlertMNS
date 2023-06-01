@@ -313,6 +313,7 @@ header .topbar .user-info .user-role {
 
 #conversation {
     width: 100%;
+
 }
 
 .conversation{
@@ -320,6 +321,8 @@ header .topbar .user-info .user-role {
 }
 
 .conversation-interface {
+    display: flex;
+    flex-direction: column;
     overflow-y: scroll;
     overflow-x: hidden;
     width: 100%;
@@ -407,16 +410,19 @@ header .topbar .user-info .user-role {
 
 .message-user {
     display: flex;
-    width: auto;
+    align-self: flex-end;
+    margin-bottom: 4%;
+    margin-right: 2%;
+    
 }
 
 .bubble-right {
     display: flex;
-    width: 100% ;
 }
 
 .conversation .message-user {
     display: flex;
+
 }
 
 .arrow-right {
@@ -430,10 +436,10 @@ header .topbar .user-info .user-role {
     border-left: 10px solid #F0EBD8;
 }
 
+
 .bulle-user .info {
     display: flex;
     justify-content: space-between;
-    position: relative;
     margin-left: 100px;
     width: 60%;
     overflow-wrap: break-word;
@@ -442,7 +448,7 @@ header .topbar .user-info .user-role {
 
 .contenu-my-message {
     background-color: #F0EBD8;
-    width: 60%;
+    width: 100%;
     overflow-wrap: break-word;
     padding: 20px;
     color: #1D2D44;
@@ -537,6 +543,8 @@ header .topbar .user-info .user-role {
 
 /* Pour les grands écrans */
 @media (min-width : 1600px) {
+
+   
     .liste-messages .message {
         min-width: 65%;
 
@@ -547,7 +555,7 @@ header .topbar .user-info .user-role {
         top: -50px;
         left: 100px;
     }
-
+/*  
     .contenu-message {
         max-width: 80%;
     }
@@ -559,7 +567,7 @@ header .topbar .user-info .user-role {
     .message-user {
         position: relative;
         left: 300px;
-    }
+    } */
     .chatbox input {
         height: 140px;
         top: 130px;

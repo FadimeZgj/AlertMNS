@@ -5,7 +5,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
 function getLoggedUser()
 {
     $dbh = $GLOBALS['dbh'];
-    $sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , role.libelle_role FROM utilisateur 
+    $sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , utilisateur.email_utilisateur, role.libelle_role FROM utilisateur 
 LEFT JOIN role ON utilisateur.id_role = role.id_role
 WHERE id_utilisateur = '" . $_SESSION['user']['id'] . "'";
     $query = $dbh->query($sql);
@@ -31,13 +31,13 @@ LEFT JOIN role ON utilisateur.id_role = role.id_role WHERE utilisateur.id_utilis
     return $query->fetch(PDO::FETCH_ASSOC);
 }
 
-function userExist()
+function userExist(array $data)
 {
     $dbh = $GLOBALS['dbh'];
     $sql = "SELECT * FROM utilisateur WHERE email_utilisateur = :email_utilisateur";
     $query = $dbh->prepare($sql);
     $res = $query->execute([
-        'email_utilisateur' => $_POST['email_utilisateur']
+        'email_utilisateur' => $data['email_utilisateur']
     ]);
 
     if ($query->rowCount() > 0) {
@@ -74,6 +74,20 @@ function updateUser(array $data)
     $query = $dbh->prepare($sql);
     $query->execute($data);
 
+    return $query->rowCount() == 1;
+}
+
+function updateProfil(array $data)
+{
+    $dbh = $GLOBALS['dbh'];
+    $sql = "UPDATE utilisateur 
+     SET nom_utilisateur = :nom_utilisateur, 
+     prenom_utilisateur = :prenom_utilisateur, 
+     email_utilisateur = :email_utilisateur
+     WHERE id_utilisateur = " . $_SESSION['user']['id'];
+    $query = $dbh->prepare($sql);
+
+    $query->execute($data);
     return $query->rowCount() == 1;
 }
 

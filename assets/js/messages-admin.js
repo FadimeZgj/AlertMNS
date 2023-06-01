@@ -1,5 +1,5 @@
 
-// let user = userId
+ let user = userId
 
 let listMsg = document.querySelector('#conv')
 
@@ -11,7 +11,6 @@ function getLastMsg() {
       return response.json();
     })
     .then(function (lastMessages) {
-      console.log(lastMessages)
      
       // Boucle qui parcourt l'objet  
       for (i = 0; i < lastMessages.length; i++) {
@@ -69,17 +68,33 @@ function getURLParameter(name) {
   return urlParams.get(name);
 }
 
+function getUsers (dataId) {
+  return fetch("../../json/get-users.php?id=" + dataId)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (getUser) {
+
+      let destName = document.querySelector('#dest-name')
+      destName.innerHTML = ''
+
+      for (i = 0; i < getUser.length; i++) {
+        let destinataireNom = getUser[i].prenom_utilisateur + ' ' + getUser[i].nom_utilisateur;
+        // afficher le nom du destinataire ailleurs dans la page
+      destName.insertAdjacentHTML('beforeend', destinataireNom);
+      }
+
+    })
+}
+
 // Affiche les messages dans l'interface avec les bulles etc...
 function displayMessages(messages) {
   dataId = getURLParameter('id');
-  console.log(dataId)
   let interface = document.querySelector(".conversation-interface")
 
   // Vérifier si la div des messages est déjà vide ou non
   let isInterfaceEmpty = interface.innerHTML.trim() === '';
-  if (dataId) {
-
-  }
+  getUsers(dataId)
   messages.forEach(function (message) {
     // construire le HTML pour le message
     if (message.id_exp != dataId) {
@@ -89,7 +104,6 @@ function displayMessages(messages) {
         '<p>' + message.text_message + '</p></div>' +
         '<div class="arrow-right"></div>' +
         "<img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt='photo_de_profil'></div></div>"
-
     }
     else {
       interface.innerHTML += '<div class="conversation"><div class ="message-me"><div class = "user-info">' +
@@ -102,6 +116,7 @@ function displayMessages(messages) {
     // commencer au bas de la div
     element = document.querySelector('.conversation-interface')
     element.scrollTop = element.scrollHeight;
+    
   })
 
   // Si la div des messages était vide, ajustez le scroll pour afficher les nouveaux messages ajoutés
@@ -128,14 +143,12 @@ function handleId(dataId) {
     })
     .then(function (conversation) {
       // Traitez les détails du message ici
-      console.log(conversation);
       displayMessages(conversation)
 
     })
     .catch(function (error) {
       console.log(error);
     });
-  console.log(dataId);
 }
 
 window.addEventListener('DOMContentLoaded', function () {
@@ -200,7 +213,7 @@ sendButton.addEventListener('click', function (event) {
 // Récupérer la référence à la div des messages
 let conversationInterface = document.querySelector(".conversation-interface");
 
-function sendMessageToRecipient(message) {
+async function sendMessageToRecipient(message) {
   fetch('/admin/messages.php?id=' + encodeURIComponent(message.id_destinataire), {
     method: 'POST',
     body: JSON.stringify(message),
@@ -209,7 +222,6 @@ function sendMessageToRecipient(message) {
     }
   })
     .then(function (response) {
-      console.log(response);
       if (response.ok) {
         // Le message a été envoyé avec succès
         console.log('Message envoyé avec succès');
@@ -225,21 +237,12 @@ function sendMessageToRecipient(message) {
 
             // Construire le HTML pour le nouveau message
             let messageHtml = '';
-            if (lastMessage.id_exp != dataId) {
               messageHtml = '<div class="message-user"><div class="bulle-user"><div class="info">' +
-                '<p class="name">' + message.prenom_exp + ' ' + message.nom_exp + '</p><p class="date">' + message.date_message + '</p></div>' +
+                '<p class="name">' + lastMessage.prenom_exp + ' ' + lastMessage.nom_exp + '</p><p class="date">' + lastMessage.date_message + '</p></div>' +
                 '<div class="bubble-right"><div class="contenu-my-message">' +
                 '<p>' + message.text_message + '</p></div>' +
                 '<div class="arrow-right"></div>' +
                 "<img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt='photo_de_profil'></div></div>"
-            } else {
-              messageHtml = '<div class="conversation"><div class ="message-me"><div class = "user-info">' +
-                "<img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt='photo_de_profil'></div>" +
-                '<div class="bulle"><div class="info">' +
-                '<p class="name">' + message.prenom_exp + ' ' + message.nom_exp + '</p><p class="date">' + message.date_message + '</p></div>' +
-                '<div class="arrow-left"></div>' +
-                '<div class="contenu-message"><p>' + message.text_message + '</p></div></div></div></div>';
-            }
 
             // Ajouter le nouveau message à la div
             conversationInterface.insertAdjacentHTML('beforeend', messageHtml);

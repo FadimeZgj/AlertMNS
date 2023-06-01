@@ -1,11 +1,50 @@
 <?php
-session_start();
 require $_SERVER['DOCUMENT_ROOT'] . '/managers/user-manager.php';
-require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
+session_start();
+unset($_SESSION['error']);
 
 if (empty($_SESSION['user'])) {
     header("Location: /");
     die;
+}
+
+if (!empty($_POST['submit'])) {
+
+    $errors = [];
+
+    if (empty($_POST['user']['nom_utilisateur']))
+        $errors['nom_utilisateur'] = "Saisissez le nom.";
+
+    if (empty($_POST['user']['prenom_utilisateur']))
+        $errors['prenom_utilisateur'] = "Saisissez le prenom.";
+
+    if (empty($_POST['user']['email_utilisateur']))
+        $errors['email_utilisateur'] = "Saisissez l'adresse email.";
+
+    if (count($errors) > 0) {
+        $_SESSION['errors'] = $errors;
+        $_SESSION['values'] = $_POST;
+        header("Location: /profil/index.php");
+        die;
+    }
+
+    $_POST['user']['nom_utilisateur'] = htmlspecialchars($_POST['user']['nom_utilisateur']);
+    $_POST['user']['prenom_utilisateur'] = htmlspecialchars($_POST['user']['prenom_utilisateur']);
+    $_POST['user']['email_utilisateur'] = htmlspecialchars($_POST['user']['email_utilisateur']);
+
+
+    $updateProfil = updateProfil($_POST['user']);
+
+
+
+    if ($updateProfil) {
+        header("Location: /profil");
+        exit;
+    } else {
+        $_SESSION['error'] = "Une erreur est survenue.";
+        header("Location: /profil");
+        die;
+    }
 }
 
 $title = "AlertMNS - Profil";
@@ -69,31 +108,47 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                 <div class="user-info">
                     <img src="https://dummyimage.com/100x100.jpg" alt="">
                     <div class="user-name">
-                        <h3>Fadime Ilhan</h3>
-                        <h4>Administrateur</h4>
+                        <h3><?= $utilisateur['prenom_utilisateur'] ." ". $utilisateur['nom_utilisateur'] ?></h3>
+                        <h4><?= $utilisateur['libelle_role']?></h4>
                     </div>
                 </div>
                 <div class="user-input">
-                    <form action="">
+                    <form action="/profil" method="post" name="user">
                         <div class="firstname-lastname">
                             <div class="name-email">
-                                <label for="">Nom</label>
-                                <input type="text">
+                                <label for="user[nom_utilisateur]">Nom</label>
+                                <input type="text" name="user[nom_utilisateur]" value="<?=$utilisateur['nom_utilisateur']?>">
+                                <small class="error" id="errorName"></small>
+                                <?php if (isset($_SESSION['errors']['nom_utilisateur'])) : ?>
+                                    <small class="error"><?= $_SESSION['errors']['nom_utilisateur'] ?></small>
+                                <?php endif; ?>
                             </div>
                             <div class="name-email">
-                                <label for="">Prénom</label>
-                                <input type="text">
+                                <label for="user[prenom_utilisateur]">Prénom</label>
+                                <input type="text" name="user[prenom_utilisateur]" value="<?= $utilisateur['prenom_utilisateur'] ?>">
+                                <small class="error" id="errorFirstname"></small>
+                                <?php if (isset($_SESSION['errors']['prenom_utilisateur'])) : ?>
+                                    <small class="error"><?= $_SESSION['errors']['prenom_utilisateur'] ?></small>
+                                <?php endif; ?>
                             </div>
                         </div>
-                        <div class="name-email"><label for="">Adresse email</label>
-                            <input type="email">
+                        <div class="name-email">
+                            <label for="user[email_utilisateur]">Adresse email</label>
+                            <input type="email" name="user[email_utilisateur]" value="<?=$utilisateur['email_utilisateur']?>">
+                            <small class="error" id="errorEmail"></small>
+                        <?php if (isset($_SESSION['errors']['email_utilisateur'])) : ?>
+                            <small class="error"><?= $_SESSION['errors']['email_utilisateur'] ?></small>
+                        <?php endif; ?>
                         </div>
-                        <button type="submit">Enregistrer les modifications</button>
+                        <button type="submit" name="submit" value="submit">Enregistrer les modifications</button>
                     </form>
+                    <?php if (isset($_SESSION['error'])) : ?>
+                        <p class="invalid"><?= $_SESSION['error'] ?></p>
+                    <?php endif; ?>
                 </div>
-
             </div>
         </section>
+        <?php unset($_SESSION['errors']); ?>
 
         <!-- tablette/mobile -->
 

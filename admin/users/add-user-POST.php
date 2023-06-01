@@ -20,8 +20,7 @@ if (!empty($_POST['submit'])) {
 
     if (empty($_POST['newUser']['mdp_utilisateur']))
         $errors['mdp_utilisateur'] = "Saississez le mot de passe.";
-
-
+        
     if (count($errors) > 0) {
         $_SESSION['errors'] = $errors;
         $_SESSION['values'] = $_POST;
@@ -47,7 +46,7 @@ if (!empty($_POST['submit'])) {
     //     die;
     // }
 
-    $userExist = userExist();
+    $userExist = userExist($_POST['newUser']);
 
     // On insère l'utilisateur en BDD
     // $sql = "INSERT INTO utilisateur (nom_utilisateur, prenom_utilisateur, email_utilisateur, mdp_utilisateur, id_role) 
@@ -60,7 +59,7 @@ if (!empty($_POST['submit'])) {
     //     'mdp_utilisateur' => password_hash($_POST['mdp_utilisateur'], PASSWORD_DEFAULT),
     //     'id_role' => $_POST['id_role']
     // ]);
-
+    
     $addUser = insertUser($_POST['newUser']);
 
     if ($addUser) {
