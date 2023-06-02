@@ -213,8 +213,8 @@ sendButton.addEventListener('click', function (event) {
 // Récupérer la référence à la div des messages
 let conversationInterface = document.querySelector(".conversation-interface");
 
-async function sendMessageToRecipient(message) {
-  fetch('/admin/messages.php?id=' + encodeURIComponent(message.id_destinataire), {
+ function sendMessageToRecipient(message) {
+  fetch('http://localhost:82/admin/messages-POST.php?id=' + encodeURIComponent(message.id_destinataire), {
     method: 'POST',
     body: JSON.stringify(message),
     headers: {
@@ -224,7 +224,9 @@ async function sendMessageToRecipient(message) {
     .then(function (response) {
       if (response.ok) {
         // Le message a été envoyé avec succès
+        
         console.log('Message envoyé avec succès');
+        console.log(message);
 
         // Mettre à jour la div des messages en utilisant AJAX
         fetch("../../json/get-conversations.php?id=" + dataId)
@@ -234,7 +236,7 @@ async function sendMessageToRecipient(message) {
           .then(function (conversation) {
             // Obtenir le dernier message de la conversation
             let lastMessage = conversation[conversation.length - 1];
-
+            console.log(lastMessage)
             // Construire le HTML pour le nouveau message
             let messageHtml = '';
               messageHtml = '<div class="message-user"><div class="bulle-user"><div class="info">' +

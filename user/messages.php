@@ -47,8 +47,9 @@ $utilisateur = $query->fetch(PDO::FETCH_ASSOC);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupérer les données du message envoyé
     $postData = json_decode(file_get_contents('php://input'), true);
-    $textMessage = htmlspecialchars($_POST['nom_utilisateur']);
+    $textMessage = htmlspecialchars($postData['text_message']);
     $idDestinataire = $_GET['id'];
+    var_dump($postData);die;
 
     // Effectuer les validations nécessaires sur les données
     if (!empty($textMessage) && !empty($idDestinataire)) {
@@ -60,6 +61,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'text_message' => $textMessage,
             'id_utilisateur' => $_SESSION['user']['id']
         ]);
+
+        
+
 
         // Vérifier si l'insertion du message a réussi
         if ($res) {
@@ -73,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "id_message" => $newMsgId,
                 "id_destinataire" => $idDestinataire
             ]);
+
 
             // Vérifier si l'insertion dans la table "recevoir" a réussi
             if ($recipent) {

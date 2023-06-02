@@ -1,8 +1,7 @@
 <?php
-
-
+require $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 // Récupérer l'utilisateur connecté
-$utilisateur = getLoggedUser();
+$utilisateur = getAllActiveUsers();
 
 if(in_array("Administrateur", $_SESSION['user']['roles'])):?>
 
