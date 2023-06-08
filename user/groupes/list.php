@@ -45,7 +45,7 @@ $utilisateur = getAllActiveUsers();
 
     <div class="container">
         <div class="containerLeftInfo">
-            <a href="/admin/reunions/index.php"><button class="createReunionBtn"><i
+            <a href="/user/reunions/index.php"><button class="createReunionBtn"><i
                         class="fa-solid fa-arrow-left fa-lg"></i> Revenir à la liste des groupes</button></a>
         </div>
         <div class="container-reunions">

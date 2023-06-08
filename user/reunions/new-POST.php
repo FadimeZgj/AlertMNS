@@ -25,7 +25,7 @@ if (!empty($_POST['submit'])) {
     if (count($errors) > 0) {
         $_SESSION['errors'] = $errors;
         $_SESSION['values'] = $_POST;
-        header("Location: /admin/reunions/new.php");
+        header("Location: /user/reunions/new.php");
         die;
     } 
     
@@ -42,11 +42,11 @@ if (!empty($_POST['submit'])) {
         ]);
 
         if ($res) {
-            header("Location: /admin/reunions/");
+            header("Location: /user/reunions/");
             exit;
         } else {
             $_SESSION['error'] = "Une erreur est survenue.";
-            header("Location: /admin/reunions/new.php");
+            header("Location: /user/reunions/new.php");
             die;
         }
     }

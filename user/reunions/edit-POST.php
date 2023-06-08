@@ -26,7 +26,7 @@ if (!empty($_POST['submit'])) {
     if (count($errors) > 0) {
         $_SESSION['errors'] = $errors;
         $_SESSION['values'] = $_POST;
-        header("Location: /admin/reunions/edit.php");
+        header("Location: /user/reunions/edit.php");
         die;
     } 
     
@@ -36,12 +36,12 @@ if (!empty($_POST['submit'])) {
         // On traite le formulaire si on récupère l'id de la réunion
         if(updateReunion($_GET['id']))
         {
-            header("Location: /admin/reunions/");
+            header("Location: /user/reunions/");
         }
         else
         {
             $_SESSION['error'] = "Une erreur est survenue.";
-        header("Location: /admin/reunions/edit.php");
+        header("Location: /user/reunions/edit.php");
         die;
         }
     

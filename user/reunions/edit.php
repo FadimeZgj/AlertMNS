@@ -15,7 +15,7 @@ $utilisateur = getAllActiveUsers();
 
 // Vérification du paramètre, si il n'y a pas d'id on redirige vers la page des réunions
 if (empty($_GET['id'])) {
-    header("Location: /admin/reunions");
+    header("Location: /user/reunions");
     die;
 }
 
@@ -25,7 +25,7 @@ $reunion = getReunionById($_GET['id']);
 
 // On vérifie si la réunion est bien présente en BDD
 if (!$reunion) {
-    header("Location: /admin/reunions");
+    header("Location: /user/reunions");
     die;
 }
 
@@ -64,12 +64,12 @@ $groupes = getAllGroupes();
 
     <div class="container">
         <div class="containerLeftInfoEdit">
-            <a href="/admin/reunions/index.php"><button class="goBackReunionBtn"><i
+            <a href="/user/reunions/index.php"><button class="goBackReunionBtn"><i
                         class="fa-solid fa-arrow-left fa-lg"></i> <span class="hide">Revenir à la liste des réunions</span></button></a>
         </div>
         <div class="container-edit-reunions">
             <div class="editReunionForm">
-                <form action="/admin/reunions/edit-POST.php?id=<?= $reunion['id_reunion'] ?>" method="post">
+                <form action="/user/reunions/edit-POST.php?id=<?= $reunion['id_reunion'] ?>" method="post">
                     <h1 class="editReunionTitle">Modifier la réunion</h1>
 
                     <div class="form-group-edit">

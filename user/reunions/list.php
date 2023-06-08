@@ -46,9 +46,9 @@ $groupes = getAllGroupes();
 
     <div class="container">
         <div class="containerLeftInfo">
-            <a href="/admin/reunions/"><button class="showReunionBtn"><i
+            <a href="/user/reunions/"><button class="showReunionBtn"><i
                         class="fa-solid fa-arrow-left fa-lg"></i> Voir toutes les réunions</button></a>
-            <a href="/admin/reunions/new.php"><button class="createReunionBtn"><i class="fa-solid fa-plus fa-lg"></i> Organiser une nouvelle
+            <a href="/user/reunions/new.php"><button class="createReunionBtn"><i class="fa-solid fa-plus fa-lg"></i> Organiser une nouvelle
                 réunion</button></a>
         </div>
         <div class="container-reunions">
@@ -85,16 +85,16 @@ $groupes = getAllGroupes();
                                 <?= $userReunion['date_reunion'] ?>
                             </td>
                             <!-- <td>
-                                <a href="/admin/groupes/list.php"><button>Plus d'infos</button></a>
+                                <a href="/user/groupes/list.php"><button>Plus d'infos</button></a>
                             </td> -->
                             <td>
-                                <a href="/admin/groupes/list.php"><button>Participer</button></a>
+                                <a href="/user/groupes/list.php"><button>Participer</button></a>
                             </td>
                             <td>
-                                <a href="/admin/reunions/editQuiFonctionnePas.php?id=<?= $reunion['id_reunion'] ?>"><button>Modifier</button></a>
+                                <a href="/user/reunions/editQuiFonctionnePas.php?id=<?= $reunion['id_reunion'] ?>"><button>Modifier</button></a>
                             </td>
                             <td>
-                            <form action="/admin/reunions/delete.php" method="POST" onsubmit="return confirm('Voulez-vous vraiment annuler cette réunion ?')">
+                            <form action="/user/reunions/delete.php" method="POST" onsubmit="return confirm('Voulez-vous vraiment annuler cette réunion ?')">
                                 <input type="hidden" name="id_reunion" value="<?= $reunion['id_reunion'] ?>">
                                 <button type="submit">Supprimer
                                 </button>

@@ -50,7 +50,7 @@ $groupes = getAllGroupes();
             <!--Entête message-->
             <div class="entete-message">
                 <h1>Groupes</h1>
-                <a href="/admin/groupes/new.php"><i class="fa-solid fa-pen-to-square fa-2xl"></i></a>
+                <a href="/user/groupes/new.php"><i class="fa-solid fa-pen-to-square fa-2xl"></i></a>
             </div>
 
             <!--Barre de recherche-->
@@ -70,7 +70,7 @@ $groupes = getAllGroupes();
                             <?= $groupe['nom_groupe'] ?>
                         </a>
 
-                        <form action="/admin/groupes/delete.php" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce groupe ?')">
+                        <form action="/user/groupes/delete.php" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce groupe ?')">
                         <input type="hidden" name="id_groupe" value="<?= $groupe['id_groupe'] ?>">
                         <button type="submit"><i class="fa-solid fa-trash"></i></button>
                         </form>
@@ -100,7 +100,7 @@ $groupes = getAllGroupes();
             <div class="text-zone">
                 <!-- Boîte de dialogue -->
                 <div class="chatbox">
-                    <form action="/admin/messages.php" method="post" id="message">
+                    <form action="/user/messages.php" method="post" id="message">
                         <label for="text_message"></label>
                         <input type="hidden" name="id_utilisateur">
                         <input type="text" name="text_message" placeholder="Ecrivez votre message..." id="message-input"> 

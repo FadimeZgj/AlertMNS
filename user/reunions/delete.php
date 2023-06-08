@@ -10,7 +10,7 @@ if(!empty($_POST['id_reunion']))
 
     if($count == 1)
     {
-        header("Location: /admin/reunions"); exit;
+        header("Location: /user/reunions"); exit;
     }
     else
     {
@@ -19,5 +19,5 @@ if(!empty($_POST['id_reunion']))
 }
 else
 {
-    header("Location: /admin/reunions"); exit;
+    header("Location: /user/reunions"); exit;
 }

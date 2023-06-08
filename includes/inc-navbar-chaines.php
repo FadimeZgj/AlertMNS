@@ -31,7 +31,7 @@ if (in_array("Administrateur", $_SESSION['user']['roles'])): ?>
                     </div>
                 </div>
             </a>
-            <a href=""><i class="fa-solid fa-user fa-2x"></i>
+            <a href="/profil"><i class="fa-solid fa-user fa-2x"></i>
 
             </a>
             <a href=""><i class="fa-solid fa-gear fa-2x"></i>
@@ -69,7 +69,7 @@ if (in_array("Administrateur", $_SESSION['user']['roles'])): ?>
                     </div>
                 </div>
             </a>
-            <a href=""><i class="fa-solid fa-user fa-2x"></i>
+            <a href="/profil"><i class="fa-solid fa-user fa-2x"></i>
 
             </a>
             <a href=""><i class="fa-solid fa-gear fa-2x"></i>

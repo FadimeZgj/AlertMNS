@@ -33,7 +33,7 @@ function getAllReunions()
     return $dbh->query($sql)->fetchAll();
 }
 
-// Pour voir uniquement les réunions auxquels l'utilisateur est inscrit
+// Pour voir uniquement les réunions auxquelles l'utilisateur est inscrit
 function getUsersReunion()
 {
     $dbh = $GLOBALS['dbh'];
@@ -48,18 +48,26 @@ function getUsersReunion()
     AND affecter.id_utilisateur = '" . $_SESSION['user']['id'] . "'";
     return $dbh->query($sql)->fetchAll();
 }
-
+/**
+ * Fonction qui permet de récupérer tous les groupes dans lequel l'utilisateur est présent
+ */
 function getAllGroupes()
 {
     $dbh = $GLOBALS['dbh'];
+    $userId = $_SESSION['user']['id']; // Récupère l'ID de l'utilisateur en session
     $sql = "SELECT affecter.id_utilisateur as id_du_membre_du_groupe, affecter.id_groupe, groupe.id_groupe as num_groupe, groupe.nom_groupe, groupe.date_groupe, groupe.id_utilisateur as id_createur_groupe, utilisateur.nom_utilisateur as nom_createur_groupe, utilisateur.prenom_utilisateur as prenom_createur_groupe
     FROM affecter
     LEFT JOIN groupe ON groupe.id_groupe = affecter.id_groupe
     LEFT JOIN utilisateur ON utilisateur.id_utilisateur = groupe.id_utilisateur
     WHERE groupe.is_active = 1
+    AND affecter.id_utilisateur = :userId 
     GROUP BY groupe.nom_groupe
     ORDER BY groupe.date_groupe DESC";
-    return $dbh->query($sql)->fetchAll();
+
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute(['userId' => $userId]);
+
+    return $stmt->fetchAll();
 }
 
 function getUsersInGroupe()
@@ -130,7 +138,36 @@ function deleteGroupe(int $id)
     return $stmt->rowCount();
 }
 
-// Pour créer un nouveau groupe
+// Pour créer un nouveau groupe sans l'utilisateur en session
+// function insertUsersInGroup(array $data, array $users)
+// {
+//     $dbh = $GLOBALS['dbh'];
+//     $data['nom_groupe'] = htmlspecialchars($data['nom_groupe']);
+//     $data['id_utilisateur'] = $_SESSION['user']['id'];
+
+//     $sql = "INSERT INTO groupe (nom_groupe, date_groupe, id_utilisateur) VALUES (:nom_groupe, NOW(), :id_utilisateur)";
+//     $stmt = $dbh->prepare($sql);
+//     $stmt->execute($data);
+
+//     $id_groupe = $dbh->lastInsertId();
+
+//     // Lorsqu'on coche les utilisateurs qui seront inscrit dans le groupe
+//     if (count($users) > 0) {
+//         foreach ($users as $id_utilisateur) {
+//             // On les affecte dans le groupe
+//             $sql = "INSERT INTO affecter (id_utilisateur, id_groupe) VALUES (:id_utilisateur, :id_groupe)";
+//             $insertUser = $dbh->prepare($sql);
+//             $insertUser->execute([
+//                 'id_utilisateur' => $id_utilisateur,
+//                 'id_groupe' => $id_groupe
+//             ]);
+//         }
+//     }
+//     return $id_groupe;
+// }
+
+// Pour créer un nouveau groupe avec l'utilisateur qui est en session
+
 function insertUsersInGroup(array $data, array $users)
 {
     $dbh = $GLOBALS['dbh'];
@@ -143,7 +180,15 @@ function insertUsersInGroup(array $data, array $users)
 
     $id_groupe = $dbh->lastInsertId();
 
-    // Lorsqu'on coche les utilisateurs qui seront inscrit dans le groupe
+    // Inclure l'utilisateur en session dans le groupe
+    $sql = "INSERT INTO affecter (id_utilisateur, id_groupe) VALUES (:id_utilisateur, :id_groupe)";
+    $insertUser = $dbh->prepare($sql);
+    $insertUser->execute([
+        'id_utilisateur' => $data['id_utilisateur'],
+        'id_groupe' => $id_groupe
+    ]);
+
+    // Lorsqu'on coche les utilisateurs qui seront inscrits dans le groupe
     if (count($users) > 0) {
         foreach ($users as $id_utilisateur) {
             // On les affecte dans le groupe
@@ -155,8 +200,10 @@ function insertUsersInGroup(array $data, array $users)
             ]);
         }
     }
+
     return $id_groupe;
 }
+
 
 // Pour créer un nouveau groupe et une nouvelle réunion (new V2 et edit V2)
 function insertUsersInGroups(array $data, array $users)

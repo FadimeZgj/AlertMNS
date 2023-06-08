@@ -21,7 +21,7 @@ if (!empty($_POST['submit'])) {
     $id = insertUsersInGroup($_POST['groupe'], $_POST['utilisateurs']);
 
     if ($id) {
-        header("Location: /admin/groupes/");
+        header("Location: /user/groupes/");
         exit;
     } else {
         echo "Une erreur est survenue...";
@@ -62,15 +62,15 @@ if (!empty($_POST['submit'])) {
 
     <div class="container">
         <div class="containerLeftInfoGroup">
-            <a href="/admin/groupes/index.php"><button class="goBackToListGroupesBtn"><i
+            <a href="/user/groupes/index.php"><button class="goBackToListGroupesBtn"><i
                         class="fa-solid fa-arrow-left fa-lg"></i> Aller à la liste des groupes</button></a>
 
-            <a href="/admin/reunions/new.php"><button class="createNewReunionBtn"><i class="fa-solid fa-plus fa-lg"></i>
+            <a href="/user/reunions/new.php"><button class="createNewReunionBtn"><i class="fa-solid fa-plus fa-lg"></i>
                     Créer une réunion</button></a>
         </div>
         <div class="container-groupes">
             <div class="newGroupForm">
-                <form action="/admin/groupes/new.php" method="post" class="createGroupeForm">
+                <form action="/user/groupes/new.php" method="post" class="createGroupeForm">
                     <h1 class="createGroupTitle">Créer un nouveau groupe</h1>
 
                     <div class="form-group-new-group">

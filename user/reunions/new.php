@@ -50,13 +50,13 @@ $reunions = getAllReunions();
 
     <div class="container">
         <div class="containerLeftInfoCreate">
-            <a href="/admin/reunions/index.php"><button class="goBackReunionBtn"><i
+            <a href="/user/reunions/index.php"><button class="goBackReunionBtn"><i
                         class="fa-solid fa-arrow-left fa-lg"></i> <span class="hide">Aller à la liste des réunions</span></button></a>
         </div>
         <!--Information de la colonne de droite-->
         <div class="container-create-reunions">
             <div class="createReunionForm">
-                <form action="/admin/reunions/new-POST.php" method="post" name="addReunionForm">
+                <form action="/user/reunions/new-POST.php" method="post" name="addReunionForm">
                     <h1 class="createReunionTitle">Créer une nouvelle réunion</h1>
 
                     <div class="form-group-add-reunion">
@@ -121,7 +121,7 @@ $reunions = getAllReunions();
                             <?php endforeach; ?>
 
                     <p>Pas de groupe ?</p>
-                    <a href="/admin/groupes/new.php"><button class="noGroupBtn"><i class="fa-solid fa-plus fa-lg"></i>
+                    <a href="/user/groupes/new.php"><button class="noGroupBtn"><i class="fa-solid fa-plus fa-lg"></i>
                             Créer un nouveau groupe</button></a>
 
                     </div>
@@ -144,7 +144,7 @@ $reunions = getAllReunions();
 
                 <div class="form-group-noGroup">
                     <p>Pas de groupe ?</p>
-                    <a href="/admin/groupes/new.php"><button class="noGroupBtn"><i class="fa-solid fa-plus fa-lg"></i>
+                    <a href="/user/groupes/new.php"><button class="noGroupBtn"><i class="fa-solid fa-plus fa-lg"></i>
                             Créer un nouveau groupe</button></a>
                 </div>
 

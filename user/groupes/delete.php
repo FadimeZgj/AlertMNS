@@ -10,7 +10,7 @@ if(!empty($_POST['id_groupe']))
 
     if($count == 1)
     {
-        header("Location: /admin/groupes"); exit;
+        header("Location: /user/groupes"); exit;
     }
     else
     {
@@ -19,5 +19,5 @@ if(!empty($_POST['id_groupe']))
 }
 else
 {
-    header("Location: /admin/groupes"); exit;
+    header("Location: /user/groupes"); exit;
 }
