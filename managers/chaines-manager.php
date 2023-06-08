@@ -1,6 +1,7 @@
 <?php
 
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/managers/user-manager.php';
 
 /**
  * Permet de vérifier les champs d'un formulaire en précisant les champs obligatoires
@@ -47,7 +48,7 @@ function getAllChaines()
 {
     $dbh = $GLOBALS['dbh'];
     $sql = "SELECT * FROM chaine
-    WHERE chaine.id_chaine = chaine.id_chaine
+    WHERE chaine.id_chaine = chaine.id_chaine AND chaine.is_active = 1
     ORDER BY chaine.nom_chaine DESC";
     return $dbh->query($sql)->fetchAll();
 }

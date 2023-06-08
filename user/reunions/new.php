@@ -2,7 +2,7 @@
 
 unset($_SESSION['error']);
 
-require $_SERVER['DOCUMENT_ROOT'] . '/admin/includes/inc-session-check.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/user/includes/inc-session-check.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/managers/user-manager.php';
 

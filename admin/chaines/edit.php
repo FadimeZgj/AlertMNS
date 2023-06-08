@@ -8,63 +8,6 @@ require $_SERVER['DOCUMENT_ROOT'] . '/managers/user-manager.php';
 $utilisateur = getAllActiveUsers();
 $chaines = getAllChaines();
 
-// if (!empty($_POST['submit'])) {
-//     if (empty($_POST['id'])) {
-
-//         header("Location: /admin/chaines/delete");
-//         die;
-//     }
-
-//     $sql = "DELETE FROM chaine WHERE id_chaine = :id_chaine";
-//     $query = $dbh->prepare($sql);
-//     $res = $query->execute([
-//         'id_chaine' => $_POST['id']
-//     ]);
-
-//     header("Location: /admin/chaines/delete");
-
-// }
-
-// if(!empty($_POST['submit']))
-// {
-//     // On met à jour les chaînes
-//     $sql = "UPDATE chaine 
-//     SET nom_chaine = :nom_chaine, 
-//     is_active = :is_active
-//     WHERE id_utilisateur = :id_utilisateur";
-//     $query = $dbh->prepare($sql);
-//     $res = $query->execute([
-//         'nom_chaine' => $_POST['nom_chaine'],
-//         'is_active' => $_POST['is_active'],
-//         'id_utilisateur' => $_GET['id'],
-//     ]);
-
-//         // On recupère tous les ids des rôles de l'utilisateur
-//     // pour comparer avec les rôles envoyés dans le POST
-//     $sql = "SELECT chaine.id_chaine FROM chaine
-//     JOIN role ON role.id_role = utilisateur_role.id_role 
-//     WHERE id_utilisateur = :id_utilisateur";
-//     $query = $dbh->prepare($sql);
-//     $res = $query->execute([
-//         'id_utilisateur' => $_GET['id']
-//     ]);
-
-//     $isActive = $query->fetchAll(PDO::FETCH_COLUMN);
-
-//     foreach($isActive as $active)
-//     {
-//         if(!in_array($active, $disabled))
-//         {
-//             $sql = "DELETE FROM chaine WHERE is_active = :is_active AND id_utilisateur = :id_utilisateur";
-//             $query = $dbh->prepare($sql);
-//             $res = $query->execute([
-//                 'id_utilisateur' => $_GET['id'],
-//                 'is_active' => $active
-//             ]);
-//         }
-//     }
-// }
-
 $title = "AlertMNS - Modifier utilisateur";
 
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';

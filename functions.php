@@ -9,14 +9,6 @@ function getAllEmails()
     return $dbh->query($sql)->fetchAll();
 }
 
-function checked($valeur, $condition)
-{
-    if ($valeur == $condition) {
-        return 'checked';
-    }
-    return '';
-}
-
 // Récupérer les utilisateurs connectés (utile pour la topbar)
 function getAllActiveUsers()
 {
@@ -63,8 +55,20 @@ function getAllGroupes()
     FROM affecter
     LEFT JOIN groupe ON groupe.id_groupe = affecter.id_groupe
     LEFT JOIN utilisateur ON utilisateur.id_utilisateur = groupe.id_utilisateur
-    GROUP BY groupe.nom_groupe ASC";
+    WHERE groupe.is_active = 1
+    GROUP BY groupe.nom_groupe
+    ORDER BY groupe.date_groupe DESC";
     return $dbh->query($sql)->fetchAll();
+}
+
+function getUsersInGroupe()
+{
+    $dbh = $GLOBALS['dbh'];
+    $sql = "SELECT utilisateur.id_utilisateur, utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur, utilisateur.is_active , role.libelle_role FROM utilisateur 
+        LEFT JOIN role ON utilisateur.id_role = role.id_role
+        ORDER BY utilisateur.nom_utilisateur ASC";
+    $query = $dbh->query($sql);
+    return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function getGroupById(int $id)
@@ -110,6 +114,17 @@ function deleteReunion(int $id)
     WHERE id_reunion = :id_reunion";
     $stmt = $dbh->prepare($sql);
     $stmt->execute(['id_reunion' => $id]);
+
+    return $stmt->rowCount();
+}
+
+function deleteGroupe(int $id)
+{
+    $dbh = $GLOBALS['dbh'];
+    $sql = "UPDATE groupe SET is_active = 0
+    WHERE id_groupe = :id_groupe";
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute(['id_groupe' => $id]);
 
     return $stmt->rowCount();
 }

@@ -5,7 +5,7 @@
         <a href="/admin/messages.php"><i class="fa-solid fa-comment-dots fa-2x"></i>
             <p>Voir tous les messages</p>
         </a>
-        <a href=""><i class="fa-solid fa-users fa-2x"></i>
+        <a href="/admin/groupes"><i class="fa-solid fa-users fa-2x"></i>
             <p> Voir tous les groupes</p>
         </a>
         <a href="/admin/chaines"><i class="fa-solid fa-tower-cell fa-2x"></i>
@@ -43,13 +43,13 @@
         <a href="/user/messages.php"><i class="fa-solid fa-comment-dots fa-2x"></i>
             <p>Voir tous les messages</p>
         </a>
-        <a href=""><i class="fa-solid fa-users fa-2x"></i>
+        <a href="/user/groupes"><i class="fa-solid fa-users fa-2x"></i>
             <p> Voir tous les groupes</p>
         </a>
         <a href="/user/chaines"><i class="fa-solid fa-tower-cell fa-2x"></i>
             <p>Voir toutes les chaînes</p>
         </a>
-        <a href=""><i class="fa-regular fa-calendar-days fa-2x"></i>
+        <a href="/user/reunions"><i class="fa-regular fa-calendar-days fa-2x"></i>
             <p>Voir les réunions</p>
         </a>
     </div>

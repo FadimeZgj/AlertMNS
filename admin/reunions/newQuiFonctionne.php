@@ -8,6 +8,8 @@ $title = "AlertMNS - Créer une nouvelle réunion";
 
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 
+
+
 // récupérer les utilisateur connecté
 $utilisateur = getAllActiveUsers();
 $groupes = getAllGroupes();
