@@ -1,7 +1,6 @@
 <?php
 
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
-require $_SERVER['DOCUMENT_ROOT'] . '/managers/user-manager.php';
 
 /**
  * Permet de vérifier les champs d'un formulaire en précisant les champs obligatoires
