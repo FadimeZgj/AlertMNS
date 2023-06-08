@@ -11,6 +11,7 @@ $sql = 'SELECT
                 message.id_utilisateur as id_expediteur, 
                 utilisateur.nom_utilisateur as nom_exp, 
                 utilisateur.prenom_utilisateur as prenom_exp,
+                utilisateur.image_profile,
                 role.libelle_role
 
         FROM (SELECT * FROM message ORDER BY date_message DESC) AS message 

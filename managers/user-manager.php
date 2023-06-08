@@ -5,7 +5,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
 function getLoggedUser()
 {
     $dbh = $GLOBALS['dbh'];
-    $sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , utilisateur.email_utilisateur, role.libelle_role FROM utilisateur 
+    $sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , utilisateur.email_utilisateur, utilisateur.image_profile, role.libelle_role FROM utilisateur 
 LEFT JOIN role ON utilisateur.id_role = role.id_role
 WHERE id_utilisateur = '" . $_SESSION['user']['id'] . "'";
     $query = $dbh->query($sql);
@@ -86,10 +86,25 @@ function updateProfil(array $data)
      email_utilisateur = :email_utilisateur
      WHERE id_utilisateur = " . $_SESSION['user']['id'];
     $query = $dbh->prepare($sql);
+    $res = $query->execute($data);
 
-    $query->execute($data);
+    // On traite l'image
+    if ($res) {
+        // On se charge de l'upload de l'image
+        $image = uploadImageFile('image');
+        if ($image) {
+            $sql = "UPDATE utilisateur SET image_profile = :image_profile WHERE id_utilisateur = :id_utilisateur";
+            $query = $dbh->prepare($sql);
+            $query->execute([
+                'id_utilisateur' => $_SESSION['user']['id'],
+                'image_profile' => $image
+            ]);
+        }
+    }
+
     return $query->rowCount() == 1;
 }
+
 
 function archiveUser(int $id)
 {

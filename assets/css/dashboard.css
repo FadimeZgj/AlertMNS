@@ -124,7 +124,13 @@ main {
 }
 
 .name-user img {
+    border: 2px solid #c5c0ad;
     margin-left: 30px;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50px;
 }
 
 /* sidebar */

@@ -27,7 +27,7 @@
                 </div>
             </div>
         </a>
-        <a href=""><i class="fa-solid fa-user fa-2x hover"></i>
+        <a href="../profil"><i class="fa-solid fa-user fa-2x hover"></i>
             <p>Gérer mon profil</p>
         </a>
         <a href=""><i class="fa-solid fa-gear fa-2x hover"></i>
@@ -65,7 +65,7 @@
                 </div>
             </div>
         </a>
-        <a href=""><i class="fa-solid fa-user fa-2x"></i>
+        <a href="../profil"><i class="fa-solid fa-user fa-2x"></i>
             <p>Gérer mon profil</p>
         </a>
         <a href=""><i class="fa-solid fa-gear fa-2x"></i>

@@ -1,7 +1,7 @@
 
  let user = userId
-
 let listMsg = document.querySelector('#conv')
+let imgprof = 'https://dummyimage.com/70x70/1D2D44/ffffff.png?text=Photo'
 
 
 // récupérer le dernier message envoyé par l'interlocuteur
@@ -14,19 +14,20 @@ function getLastMsg() {
      
       // Boucle qui parcourt l'objet  
       for (i = 0; i < lastMessages.length; i++) {
-
+ 
         // div qui affiche le resultat
-        let html = '<div class="message" data-id = ' + lastMessages[i].id_expediteur + ' ><div class="image-user">' +
-          "<img src='https://dummyimage.com/70x70/1D2D44/ffffff.png?text=Photo' alt='Photo'>" +
+        let html = '<div class="message" data-id="' + lastMessages[i].id_expediteur + '"><div class="image-user">' +
+          "<img src='" + (lastMessages[i].image_profile != null ? lastMessages[i].image_profile : 'https://dummyimage.com/70x70/1D2D44/ffffff.png?text=Photo') + "' alt='image profil'>" +
           '</div>' +
-          '<div class ="right-content"><div class ="info-user"><div class ="name">' +
+          '<div class="right-content"><div class="info-user"><div class="name">' +
           '<h3 id="destName">' + lastMessages[i].prenom_exp + ' ' + lastMessages[i].nom_exp + '</h3>' +
           '<h4>' + lastMessages[i].libelle_role + '</h4></div>' +
           '<div class="hour">Il y a 1 h</div>' +
           '</div>' +
           '<div class="text-message">' +
           '<p>' + lastMessages[i].text_message.slice(0, 50) + '...' + '</p>' +
-          '</div></div></div>'
+          '</div></div></div>';
+
         listMsg.insertAdjacentHTML('beforeend', html);
       }
       // Ajouter la dernière conversation à sessionStorage
@@ -91,10 +92,11 @@ function getUsers (dataId) {
 function displayMessages(messages) {
   dataId = getURLParameter('id');
   let interface = document.querySelector(".conversation-interface")
-
+  interface.innerHTML= ''
   // Vérifier si la div des messages est déjà vide ou non
   let isInterfaceEmpty = interface.innerHTML.trim() === '';
   getUsers(dataId)
+
   messages.forEach(function (message) {
     // construire le HTML pour le message
     if (message.id_exp != dataId) {
@@ -103,11 +105,11 @@ function displayMessages(messages) {
         '<div class="bubble-right"><div class="contenu-my-message">' +
         '<p>' + message.text_message + '</p></div>' +
         '<div class="arrow-right"></div>' +
-        "<img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt='photo_de_profil'></div></div>"
+        "<img src='" + (message.image_exp != null ? message.image_exp : imgprof) + "' alt='image profil'></div></div>"
     }
     else {
       interface.innerHTML += '<div class="conversation"><div class ="message-me"><div class = "user-info">' +
-        "<img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt='photo_de_profil'></div>" +
+        "<img src='" + (message.image_exp != null ? message.image_exp : imgprof) + "' alt='image profil'></div>" +
         '<div class="bulle"><div class="info">' +
         '<p class="name">' + message.prenom_exp + ' ' + message.nom_exp + '</p><p class="date">' + message.date_message + '</p></div>' +
         '<div class="arrow-left"></div>' +
@@ -244,7 +246,7 @@ let conversationInterface = document.querySelector(".conversation-interface");
                 '<div class="bubble-right"><div class="contenu-my-message">' +
                 '<p>' + message.text_message + '</p></div>' +
                 '<div class="arrow-right"></div>' +
-                "<img src='https://dummyimage.com/70x70/3e5c76.png?text=Photo' alt='photo_de_profil'></div></div>"
+                "<img src='" + (lastMessage.image_exp != null ? lastMessage.image_exp : imgprof) + "' alt='image profil'></div></div>"
 
             // Ajouter le nouveau message à la div
             conversationInterface.insertAdjacentHTML('beforeend', messageHtml);

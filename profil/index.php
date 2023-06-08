@@ -1,11 +1,21 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . '/managers/user-manager.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/profil/profil-function.php';
 session_start();
 unset($_SESSION['error']);
 
 if (empty($_SESSION['user'])) {
     header("Location: /");
     die;
+}
+
+if(!empty($_POST['deleteImage'])){
+    $dbh = $GLOBALS['dbh'];
+    $sql = "UPDATE utilisateur 
+     SET image_profile = :image_profile
+     WHERE id_utilisateur = " . $_SESSION['user']['id'];
+    $query = $dbh->prepare($sql);
+    $res = $query->execute(['image_profile' => Null]);
+    $query->rowCount() == 1;
 }
 
 if (!empty($_POST['submit'])) {
@@ -21,6 +31,10 @@ if (!empty($_POST['submit'])) {
     if (empty($_POST['user']['email_utilisateur']))
         $errors['email_utilisateur'] = "Saisissez l'adresse email.";
 
+    if (!filter_var($_POST['user']['email_utilisateur'], FILTER_VALIDATE_EMAIL)) {
+        $errors['email_utilisateur'] = "Saississez l'adresse email.";
+    }
+
     if (count($errors) > 0) {
         $_SESSION['errors'] = $errors;
         $_SESSION['values'] = $_POST;
@@ -32,10 +46,8 @@ if (!empty($_POST['submit'])) {
     $_POST['user']['prenom_utilisateur'] = htmlspecialchars($_POST['user']['prenom_utilisateur']);
     $_POST['user']['email_utilisateur'] = htmlspecialchars($_POST['user']['email_utilisateur']);
 
-
-    $updateProfil = updateProfil($_POST['user']);
-
-
+    $updateProfil = updateProfil($_POST['user']); 
+    
 
     if ($updateProfil) {
         header("Location: /profil");
@@ -47,7 +59,36 @@ if (!empty($_POST['submit'])) {
     }
 }
 
-$title = "AlertMNS - Profil";
+// if(isset($_FILES['image'])) {
+    
+//     $imageFile = $_FILES['image']['tmp_name'];
+    
+//     // Paramètres de redimensionnement
+//     $newWidth = 100;
+//     $newHeight = 100;
+    
+//     // Chargement de l'image
+//     $sourceImage = imagecreatefromjpeg($imageFile);
+    
+//     // Création d'une nouvelle image avec les dimensions souhaitées
+//     $newImage = imagecreatetruecolor($newWidth, $newHeight);
+    
+//     // Redimensionnement de l'image
+//     imagecopyresampled($newImage, $sourceImage, 0, 0, 0, 0, $newWidth, $newHeight, imagesx($sourceImage), imagesy($sourceImage));
+    
+//     // Enregistrement de l'image redimensionnée
+//     $fileName = str_replace(' ','-', basename($_FILES[$inputFileName]['name']));
+//     $outputFile = '../assets/uploads/profile-pictures/' . $fileName;
+//     imagejpeg($newImage, $outputFile);
+    
+//     // Libération de la mémoire
+//     imagedestroy($sourceImage);
+//     imagedestroy($newImage);
+// }
+
+
+
+$title = "AlertMNS - Profil utilisateur";
 
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 
@@ -61,7 +102,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 </head>
 
 <body>
-    <?php include $_SERVER['DOCUMENT_ROOT'] . "/includes/inc-top-bar.php" ?>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . "/includes/inc-top-bar.php"?>
     <!-- Menu burger pour mobile -->
 
     <nav class="navbar">
@@ -106,41 +147,52 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
             <div class="profile-elements">
 
                 <div class="user-info">
-                    <img src="https://dummyimage.com/100x100.jpg" alt="">
+                <div class="img-profil">
+                <img src="<?= isset($utilisateur['image_profile']) ? 
+                $utilisateur['image_profile'] : 
+                'https://dummyimage.com/100x100.jpg' ?>" alt="Image Profil" id="preview" /></div>
                     <div class="user-name">
-                        <h3><?= $utilisateur['prenom_utilisateur'] ." ". $utilisateur['nom_utilisateur'] ?></h3>
-                        <h4><?= $utilisateur['libelle_role']?></h4>
+                        <h3><?= $utilisateur['prenom_utilisateur'] . " " . $utilisateur['nom_utilisateur'] ?></h3>
+                        <h4><?= $utilisateur['libelle_role'] ?></h4>
                     </div>
                 </div>
+                
+                <form action="/profil" method="post" name="user" enctype="multipart/form-data">
+                <div class="upload-img">
+                        <div><label for="image">Ajouter ou modifier votre image de profil</label></div>
+                        <div><input type="file" name="image" id="imageFile" class="form-control" value="<?= isset($urlImageProfil) ? $urlImageProfil : NULL ?>"></div>
+                        <button type="submit" name="deleteImage" value="deleteImage">Supprimer l'image</button>
+                </div>
+
                 <div class="user-input">
-                    <form action="/profil" method="post" name="user">
-                        <div class="firstname-lastname">
-                            <div class="name-email">
-                                <label for="user[nom_utilisateur]">Nom</label>
-                                <input type="text" name="user[nom_utilisateur]" value="<?=$utilisateur['nom_utilisateur']?>">
-                                <small class="error" id="errorName"></small>
-                                <?php if (isset($_SESSION['errors']['nom_utilisateur'])) : ?>
-                                    <small class="error"><?= $_SESSION['errors']['nom_utilisateur'] ?></small>
-                                <?php endif; ?>
-                            </div>
-                            <div class="name-email">
-                                <label for="user[prenom_utilisateur]">Prénom</label>
-                                <input type="text" name="user[prenom_utilisateur]" value="<?= $utilisateur['prenom_utilisateur'] ?>">
-                                <small class="error" id="errorFirstname"></small>
-                                <?php if (isset($_SESSION['errors']['prenom_utilisateur'])) : ?>
-                                    <small class="error"><?= $_SESSION['errors']['prenom_utilisateur'] ?></small>
-                                <?php endif; ?>
-                            </div>
+
+                    <div class="firstname-lastname">
+                        <div class="name-email">
+                            <label for="user[nom_utilisateur]">Nom</label>
+                            <input type="text" name="user[nom_utilisateur]" value="<?= $utilisateur['nom_utilisateur'] ?>">
+                            <small class="error" id="errorName"></small>
+                            <?php if (isset($_SESSION['errors']['nom_utilisateur'])) : ?>
+                                <small class="error"><?= $_SESSION['errors']['nom_utilisateur'] ?></small>
+                            <?php endif; ?>
                         </div>
                         <div class="name-email">
-                            <label for="user[email_utilisateur]">Adresse email</label>
-                            <input type="email" name="user[email_utilisateur]" value="<?=$utilisateur['email_utilisateur']?>">
-                            <small class="error" id="errorEmail"></small>
+                            <label for="user[prenom_utilisateur]">Prénom</label>
+                            <input type="text" name="user[prenom_utilisateur]" value="<?= $utilisateur['prenom_utilisateur'] ?>">
+                            <small class="error" id="errorFirstname"></small>
+                            <?php if (isset($_SESSION['errors']['prenom_utilisateur'])) : ?>
+                                <small class="error"><?= $_SESSION['errors']['prenom_utilisateur'] ?></small>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="name-email">
+                        <label for="user[email_utilisateur]">Adresse email</label>
+                        <input type="email" name="user[email_utilisateur]" value="<?= $utilisateur['email_utilisateur'] ?>">
+                        <small class="error" id="errorEmail"></small>
                         <?php if (isset($_SESSION['errors']['email_utilisateur'])) : ?>
                             <small class="error"><?= $_SESSION['errors']['email_utilisateur'] ?></small>
                         <?php endif; ?>
-                        </div>
-                        <button type="submit" name="submit" value="submit">Enregistrer les modifications</button>
+                    </div>
+                    <button type="submit" name="submit" value="submit">Enregistrer les modifications</button>
                     </form>
                     <?php if (isset($_SESSION['error'])) : ?>
                         <p class="invalid"><?= $_SESSION['error'] ?></p>

@@ -48,3 +48,10 @@ window.onclick = function (e) {
     logoutModal.style.display = "none";
   }
 }
+
+function deleteImage() {
+  var image = document.getElementById('preview');
+  image.src = '';
+  var input = document.getElementById('imageFile');
+  input.value = '';
+}

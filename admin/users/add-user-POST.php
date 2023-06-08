@@ -20,7 +20,30 @@ if (!empty($_POST['submit'])) {
 
     if (empty($_POST['newUser']['mdp_utilisateur']))
         $errors['mdp_utilisateur'] = "Saississez le mot de passe.";
-        
+
+    if (!filter_var($_POST['newUser']['email_utilisateur'], FILTER_VALIDATE_EMAIL)) {
+        $errors['email_utilisateur'] = "Saississez l'adresse email.";
+    }
+
+    $password = $_POST['newUser']['mdp_utilisateur']; // Supposons que le mot de passe provienne d'un formulaire
+
+    $minimumLength = 8; // Longueur minimale requise du mot de passe
+    $maximumLength = 20; // Longueur maximale autorisée du mot de passe
+
+    $containsUppercase = preg_match('/[A-Z]/', $password); // Vérifie s'il y a une lettre majuscule
+    $containsLowercase = preg_match('/[a-z]/', $password); // Vérifie s'il y a une lettre minuscule
+    $containsNumber = preg_match('/\d/', $password); // Vérifie s'il y a un chiffre
+    $containsSpecialChars = preg_match('/[^a-zA-Z0-9]/', $password); // Vérifie s'il y a des caractères spéciaux
+
+    if (strlen($password) < $minimumLength || strlen($password) > $maximumLength) {
+        $errors['mdp_utilisateur'] = "Le mot de passe doit avoir entre $minimumLength et $maximumLength caractères.";
+    } elseif (!$containsUppercase || !$containsLowercase || !$containsNumber || !$containsSpecialChars) {
+        $errors['mdp_utilisateur'] = "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.";
+    } else {
+        $errors['mdp_utilisateur'] =  "Le mot de passe est valide.";
+    }
+
+
     if (count($errors) > 0) {
         $_SESSION['errors'] = $errors;
         $_SESSION['values'] = $_POST;
@@ -59,7 +82,7 @@ if (!empty($_POST['submit'])) {
     //     'mdp_utilisateur' => password_hash($_POST['mdp_utilisateur'], PASSWORD_DEFAULT),
     //     'id_role' => $_POST['id_role']
     // ]);
-    
+
     $addUser = insertUser($_POST['newUser']);
 
     if ($addUser) {

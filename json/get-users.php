@@ -6,7 +6,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
 // $id_destinataire = $_POST['id_destinataire'];
 $id = $_GET['id'];
 
-$sql = "SELECT utilisateur.id_utilisateur, utilisateur.nom_utilisateur , utilisateur.prenom_utilisateur
+$sql = "SELECT utilisateur.id_utilisateur, utilisateur.nom_utilisateur , utilisateur.prenom_utilisateur, utilisateur.image_profile
 FROM utilisateur 
 JOIN message ON message.id_utilisateur = utilisateur.id_utilisateur
 WHERE utilisateur.id_utilisateur = :id_destinataire

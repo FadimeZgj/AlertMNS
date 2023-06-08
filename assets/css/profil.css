@@ -56,9 +56,28 @@
 
 .profile-elements {
     display: grid;
-    grid-template-rows: 30% 50%;
+    grid-template-rows: 30% 5% 50%;
     justify-content: center;
 }
+
+.profile-elements .upload-img {
+    margin-top: -3em;
+    color: #F0EBD8;
+}
+
+.profile-elements .upload-img div {
+    margin-top: 2%;
+}
+
+.profile-elements img {
+    border: 2px solid #c5c0ad;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50px;
+}
+
 
 .user-input {
     margin-right: auto;

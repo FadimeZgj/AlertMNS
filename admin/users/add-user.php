@@ -38,7 +38,9 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
                 <h2><?= $user['prenom_utilisateur'] ?> <?= $user['nom_utilisateur'] ?></h2>
                 <p><?= $user['libelle_role'] ?></p>
             </div>
-            <a href=""><img src='https://dummyimage.com/50x50.jpg' alt='' /></a>
+            <a href=""><img src="<?= $user['image_profile']!=null ? 
+                '../' . $user['image_profile'] : 
+                'https://dummyimage.com/50x50.jpg' ?>" alt="Image Profil" /></a>
         </div>
     </header>
 

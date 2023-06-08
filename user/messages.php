@@ -4,7 +4,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
 
 
 // récupérer les utilisateur connecté
-$sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , role.libelle_role FROM utilisateur 
+$sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , utilisateur.image_profile, role.libelle_role FROM utilisateur 
 LEFT JOIN role ON utilisateur.id_role = role.id_role
 WHERE id_utilisateur = '" . $_SESSION['user']['id'] . "'";
 $query = $dbh->query($sql);
@@ -114,7 +114,9 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                 <h3>ALERT MNS</h3>
             </div>
             <div class="user-info">
-                <img src='https://dummyimage.com/70x70/1D2D44/ffffff.png?text=Photo' alt='Photo'>
+                <img src="<?= $utilisateur['image_profile']!=null ? 
+                $utilisateur['image_profile'] : 
+                'https://dummyimage.com/50x50.jpg' ?>" alt="Image Profil">
                 <div class="user-role">
                     <h4 id="userName"><?= $utilisateur['prenom_utilisateur'] ?> <?= $utilisateur['nom_utilisateur'] ?></h4>
                     <h5><?= $utilisateur['libelle_role'] ?></h5>

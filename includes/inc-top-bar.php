@@ -15,7 +15,9 @@ if(in_array("Administrateur", $_SESSION['user']['roles'])):?>
                 <h2><?= $utilisateur['prenom_utilisateur'] ?> <?= $utilisateur['nom_utilisateur'] ?></h2>
                 <p><?= $utilisateur['libelle_role'] ?></p>
             </div>
-            <a href=""><img src='https://dummyimage.com/50x50.jpg' alt='' /></a>
+            <a href=""><img src="<?= $utilisateur['image_profile'] != null ? 
+                $utilisateur['image_profile'] : 
+                'https://dummyimage.com/50x50.jpg' ?>" alt="Image Profil" /></a>
         </div>
     </header>
 
@@ -30,7 +32,9 @@ if(in_array("Administrateur", $_SESSION['user']['roles'])):?>
                 <h2><?= $utilisateur['prenom_utilisateur'] ?> <?= $utilisateur['nom_utilisateur'] ?></h2>
                 <p><?= $utilisateur['libelle_role'] ?></p>
             </div>
-            <a href=""><img src='https://dummyimage.com/50x50.jpg' alt=''/></a>
+            <a href=""><img src="<?= $utilisateur['image_profile'] != null ? 
+                $utilisateur['image_profile'] : 
+                'https://dummyimage.com/50x50.jpg' ?>" alt="Image Profil" /></a>
         </div>
     </header>
 
