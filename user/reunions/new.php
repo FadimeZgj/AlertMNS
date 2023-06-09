@@ -109,8 +109,12 @@ $reunions = getAllReunions();
                         <?php endif; ?>
                     </div>
 
-
                     <div class="form-group-add-reunion">
+                    <label>Pas de groupe ?</label>
+                    <a href="/user/groupes/new.php"><button class="noGroupBtn"><i class="fa-solid fa-plus fa-lg"></i>
+                            Créer un nouveau groupe</button></a>
+                     </div>
+                    <div class="form-group-add-reunion no-group">
                         <label for="groupe">Veuillez choisir le groupe qui participera à la réunion</label>
                         <select name="groupe" class="createReunionSelectGroup">
                             <!-- <option value="">Veuillez choisir un groupe</option> -->
@@ -119,11 +123,8 @@ $reunions = getAllReunions();
                                     <?= $groupe['nom_groupe'] ?>
                                 </option>
                             <?php endforeach; ?>
-
-                    <p>Pas de groupe ?</p>
-                    <a href="/user/groupes/new.php"><button class="noGroupBtn"><i class="fa-solid fa-plus fa-lg"></i>
-                            Créer un nouveau groupe</button></a>
-
+    </div>
+            
                     </div>
                     <div class="form-group-add-reunion">
                         <input type="submit" name="submit" value="Créer" class="submitCreateReunionBtn"
@@ -142,11 +143,7 @@ $reunions = getAllReunions();
                 <!-- Permet d'enlever les valeurs des input quand on revient/quitte la page -->
                 <?php unset($_SESSION['values']); ?>
 
-                <div class="form-group-noGroup">
-                    <p>Pas de groupe ?</p>
-                    <a href="/user/groupes/new.php"><button class="noGroupBtn"><i class="fa-solid fa-plus fa-lg"></i>
-                            Créer un nouveau groupe</button></a>
-                </div>
+
 
             </div>
 

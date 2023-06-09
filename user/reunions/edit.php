@@ -132,7 +132,7 @@ $groupes = getAllGroupes();
 
                     <div class="form-group">
                         <input type="submit" id="submitEditReunionForm" name="submit"
-                            value="Enregistrer les modifications" class="saveEditModificationSubmitBtn">
+                            value="Enregistrer" class="saveEditModificationSubmitBtn">
                     </div>
                 </form>
 

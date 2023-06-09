@@ -10,7 +10,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 
 // récupérer les utilisateur connecté
 $utilisateur = getAllActiveUsers();
-$userReunions = getUsersReunion();
+$reunions = getAllReunions();
 $groupes = getAllGroupes();
 
 ?>
@@ -32,13 +32,13 @@ $groupes = getAllGroupes();
             </button>
         </div>
         <ul id="responsiveMenu" class="ul">
-            <li><a href="/admin/index.php"><i class="fa-solid fa-house"></i> Accueil</a></li>
-            <li><a href="/admin/messages.php"><i class="fa-solid fa-comment-dots"></i> Voir tous les messages</a></li>
-            <li><a href="/admin.groupes.php"><i class="fa-solid fa-users"></i> Voir tous les groupes</a></li>
-            <li><a href="/admin/chaines/index.php"><i class="fa-solid fa-tower-cell"></i> Voir toutes les chaînes</a>
+            <li><a href="/user/index.php"><i class="fa-solid fa-house"></i> Accueil</a></li>
+            <li><a href="/user/messages.php"><i class="fa-solid fa-comment-dots"></i> Voir tous les messages</a></li>
+            <li><a href="/user/groupes.php"><i class="fa-solid fa-users"></i> Voir tous les groupes</a></li>
+            <li><a href="/user/chaines/index.php"><i class="fa-solid fa-tower-cell"></i> Voir toutes les chaînes</a>
             </li>
-            <li><a href="/admin/reunions/index.php"><i class="fa-regular fa-calendar"></i> Voir les réunions prévues</a></li>
-            <li><a href="/admin/index.php"><i class="fa-solid fa-user"></i> Gérer mon profil</a></li>
+            <li><a href="/user/reunions/index.php"><i class="fa-regular fa-calendar"></i> Voir les réunions prévues</a></li>
+            <li><a href="/user/index.php"><i class="fa-solid fa-user"></i> Gérer mon profil</a></li>
             <li><a href="/"><i class="fa-solid fa-gear"></i> Réglages</a></li>
             <li><a href="/logout.php"><i class="fa-solid fa-arrow-right-from-bracket"></i> Se déconnecter</a></li>
         </ul>
@@ -71,46 +71,50 @@ $groupes = getAllGroupes();
             <a href="/user/reunions/list.php"><button class="showReunionBtn" id="showReunionBtnBtn"><span class="hide"><i class="fa-regular fa-calendar-check fa-lg"></i></span> Voir mes réunions</button></a>
         </div>
         <div class="container-reunions">
-        <h1 class="mainTitleReunion">Mes réunions prévues</h1>
+            <h1 class="hide">Liste de toutes les réunions</h1>
             <table>
+                <caption class="show">Liste de toutes les réunions</caption>
                     <thead>
                         <tr>  
-                        <th>Nom réunion</th>
-                            <th>Sujet</th>
-                            <th>Organisateur</th>
-                            <th>Participants</th>
-                            <th>Date réunion</th>
+                            <th class="hide"><span class="hide">Nom réunion</span></th>
+                            <th class="hide"><span class="hide">Sujet</span></th>
+                            <th class="hide"><span class="hide">Organisateur</span></th>
+                            <th class="hide"><span class="hide">Participants</span></th>
+                            <th class="hide"><span class="hide">Date réunion</span></th>
                             <th></th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                    <?php foreach ($userReunions as $userReunion): ?>
+                    <?php foreach ($reunions as $reunion): ?>
+
                         <tr style="text-align: center;">
-                            <td>
-                                <?= $userReunion['nom_reunion'] ?>
+                            <td>  
+                            <a href="/user/groupes/index.php">                      
+                                <?= $reunion['nom_reunion'] ?>
+                                </a>
+                            </td>
+                            <td class="hide">
+                            <span class="hide"><?= $reunion['sujet_reunion'] ?></span>
+                            </td>
+                            <td class="hide">
+                            <span class="hide"><?= $reunion['prenom_utilisateur'] ?></span>
+                            <span class="hide"><?= $reunion['nom_utilisateur'] ?></span>
+                            </td>
+                            <td class="hide">
+                            <span class="hide"><?= $reunion['nom_groupe'] ?></span>
+                            </td>
+                            <td class="small">
+                            <a href="/user/groupes/index.php"> 
+                                <?= $reunion['date_reunion'] ?>
+                            </a>
+                            </td>
+
+                            <td class="hide">
+                            <span class="hide"><a href="/user/groupes/index.php"><button>Participer</button></span></a>
                             </td>
                             <td>
-                                <?= $userReunion['sujet_reunion'] ?>
-                            </td>
-                            <td>
-                                <?= $userReunion['prenom_utilisateur'] ?>
-                                <?= $userReunion['nom_utilisateur'] ?>
-                            </td>
-                            <td>
-                                <?= $userReunion['nom_groupe'] ?>
-                            </td>
-                            <td>
-                                <?= $userReunion['date_reunion'] ?>
-                            </td>
-                            <!-- <td>
-                                <a href="/user/groupes/list.php"><button>Plus d'infos</button></a>
-                            </td> -->
-                            <td>
-                                <a href="/user/groupes/list.php"><button>Participer</button></a>
-                            </td>
-                            <td>
-                                <a href="/user/reunions/editQuiFonctionnePas.php?id=<?= $reunion['id_reunion'] ?>"><button>Modifier</button></a>
+                            <a href="/user/reunions/edit.php?id=<?= $reunion['id_reunion'] ?>"><button>Modifier</button></a>
                             </td>
                             <td>
                             <form action="/user/reunions/delete.php" method="POST" onsubmit="return confirm('Voulez-vous vraiment annuler cette réunion ?')">

@@ -34,8 +34,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                 <li><a href="#"><i class="fa-solid fa-users fa-2x"></i>Voir tous les groupes</a></li>
                 <li><a href="admin/chaines/"><i class="fa-solid fa-tower-cell fa-2x"></i>Voir toutes les chaînes</a>
                 </li>
-                <li><a href="#"><i class="fa-regular fa-calendar-days fa-2x"></i>Voir les réunions</a></li>
-                <li><a href="#"><i class="fa-solid fa-user fa-2x"></i>Gérer mon profil</a></li>
+                <li><a href="/admin/reunions"><i class="fa-regular fa-calendar-days fa-2x"></i>Voir les réunions</a></li>
+                <li><a href="/profil"><i class="fa-solid fa-user fa-2x"></i>Gérer mon profil</a></li>
                 <li><a href="#"><i class="fa-solid fa-gear fa-2x"></i>Réglages</a></li>
                 <li><a href="../logout.php"><i class="fa-solid fa-arrow-right-from-bracket fa-2x"></i>Déconnexion</a>
                 </li>
@@ -124,7 +124,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                     <a href="/admin/chaines/">
                         <li><i class="fa-solid fa-tower-cell fa-xl"></i>Voir les chaînes</li>
                     </a>
-                    <a href="">
+                    <a href="/admin/groupes/">
                         <li><i class="fa-solid fa-users fa-xl"></i>Voir les groupes</li>
                     </a>
                     <a href="/admin/messages.php">
@@ -139,10 +139,10 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                     <a href="/search-user.php">
                         <li><i class="fa-solid fa-trash-can fa-xl"></i><span>Supprimer un utilisateur</span></li>
                     </a>
-                    <a href="">
+                    <a href="/admin/groupes/">
                         <li><i class="fa-solid fa-trash-can fa-xl"></i><span>Supprimer un groupe</span></li>
                     </a>
-                    <a href="">
+                    <a href="/admin/chaines/">
                         <li><i class="fa-solid fa-trash-can fa-xl"></i><span>Supprimer une chaine</span></li>
                     </a>
                 </ul>
