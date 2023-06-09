@@ -15,6 +15,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 ?>    
 
 <link rel="stylesheet" href="/assets/css/chaines.css">
+<link rel="stylesheet" href="/assets/css/style.css">
 
 </head>
 
