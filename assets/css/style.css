@@ -9,3 +9,150 @@
 body {
     background-color: #1D2D44;
 }
+
+header .logo img {
+    border: none;
+    border-radius: 0px;
+    width: 124px;
+    height: 124px;
+    margin-top: -36px;
+    margin-left: -20px;
+    margin-right: -14px;
+    z-index: -1;
+}
+
+/* Arrière-plan de la modale */
+
+.sidebar i:hover {
+    background-color: #2F3F54;
+    cursor:pointer;
+}
+
+.sidebar .fa-power-off:hover {
+    background-color: inherit;
+    cursor: inherit;
+}
+
+.modal-logout {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 120px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Modal Content */
+.modal-content-logout {
+    background-color: #1D2D44;
+    margin: auto;
+    padding: 20px;
+    width: 46%;
+    height: 50%;
+    color: #F0EBD8;
+    border: 1px solid rgba(240, 235, 216, 0.2);
+    border-radius: 30px;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+}
+
+/* Animation Modal */
+@-webkit-keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+.modal-content-logout i {
+    position: relative;
+    left: 42.5%;
+}
+
+
+.modal-content-logout h3 {
+    text-align: center;
+    font-size: 26px;
+    margin-top: 10px;
+}
+
+.modal-content-logout span {
+    color:#748CAB
+}
+
+.modal-content-logout button {
+    margin-left: 14px;
+    margin-top: 20px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+}
+
+.modal-content-logout button:hover {
+    cursor: pointer;
+}
+
+.modal-content-logout .cancel-btn {
+    width: 30%;
+    height: 54px;
+    margin-left: 18.5%;
+}
+
+.modal-content-logout .cancel-btn:hover {
+    opacity: 0.9;
+}
+
+.modal-content-logout .logout-btn {
+    width: 30%;
+    height: 54px;
+    position: relative;
+    top: 9px;
+    background-color: #2F3F54;
+    color: #F0EBD8;
+}
+
+.modal-content-logout .logout-btn:hover {
+    cursor: pointer;
+    background-color: #F0EBD8;
+    color: #0D1321;
+    font-weight: 600;
+}
+
+@media (min-width : 1600px) {
+    .modal-content-logout {
+        width: 34%;
+        height: 40%;
+    }
+    .modal-content-logout i {
+        left: 42%;
+    }
+}
+
+/* Media query pour les grands écrans */
+@media (min-width : 1600px) {
+    .modal-content-logout .logout-btn {
+        top: 10px;
+    }
+}

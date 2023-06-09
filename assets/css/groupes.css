@@ -1,0 +1,269 @@
+/* Interface principale des groupes */
+.container .messages {
+    overflow-y: scroll !important;
+    height: 90%;
+}
+.groupes {
+    display: flex;
+    padding: 20px;
+    border-bottom: 1px solid rgba(240, 235, 216, 0.2);
+}
+
+.groupes h3 {
+    margin-top: 5%;
+    margin-left: 3%;
+}
+
+.groupes img {
+    border: 1px solid rgba(240, 235, 216, 0.2);
+    border-radius: 60px;
+    margin-left: 2%;
+}
+
+.groupes:hover {
+    background-color: #2F3F54;
+    cursor: pointer;
+}
+
+.search-groupe {
+    border-bottom: 1px solid rgba(240, 235, 216, 0.2);
+}
+
+.search-groupe {
+    display: flex;
+    justify-content: center;
+    margin-left: -10px;
+    padding-bottom: 30px;
+}
+
+.search-groupe i {
+    color: #2f3f54;
+    position: relative;
+    top: 7px;
+    left: 25px;
+}
+
+.search-groupe input[type="search"] {
+    width: 60%;
+    min-height: 30px;
+    text-indent: 12%;
+    border: 1px solid rgba(240, 235, 216, 0.2);
+    border-radius: 20px;
+}
+
+.search-groupe i:hover {
+    cursor: pointer;
+}
+
+.search-groupe input[type="search"]:hover {
+    background-color: #F0EBD8;
+    cursor: pointer;
+}
+
+a {
+    color: #F0EBD8;
+}
+
+a:hover {
+    color: #748CAB;
+}
+
+.sidebar .fa-comment-dots {
+    background-color: inherit;
+    color: #F0EBD8;
+}
+
+.sidebar .fa-solid.fa-users {
+    background-color: #F0EBD8;
+    color: #2F3F54;
+    padding-left: 14px;
+    padding-right: 14px;
+}
+
+.sidebar .fa-solid.fa-users:hover {
+    color: #F0EBD8;
+    background-color: #2F3F54;
+}
+
+.container-groupes {
+    margin-left: 10%;
+    width: 100%;
+    border-left: 2px solid rgba(240, 235, 216, 0.2);
+}
+
+.containerLeftInfoGroup {
+    width: 30%;
+}
+
+.newGroupForm {
+    margin-top: 5%;
+    margin-left: 7%;
+    background-color: #2F3F54;
+    height: 80%;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+}
+
+.createGroupeForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.createGroupTitle {
+    margin-top: 14%;
+    margin-bottom: 6% !important;
+}
+
+
+.goBackToListGroupesBtn,
+.createNewReunionBtn {
+    width: 110%;
+    position: relative;
+    left: 120px;
+    width: 110%;
+    height: 52px;
+    padding: 6px 16px;
+    position: relative;
+    left: 90px;
+    top: 30px;
+    border-radius: 40px;
+    border: none;
+    background-color: #2F3F54;
+    color: #F0EBD8;
+    font-size: 18px;
+    margin-bottom: 5%;
+}
+
+.goBackToListGroupesBtn:hover,
+.createNewReunionBtn:hover {
+    cursor: pointer;
+    background-color: #F0EBD8;
+    color: #0D1321;
+}
+
+.newGroupForm li {
+    list-style-type: none;
+
+}
+
+.selectUsersNewGroup {
+    font-size: 15px;
+    height: 32px;
+    margin-top: 6px;
+    margin-bottom: 10px;
+    padding: 6px;
+    border: none;
+    border-radius: 6px;
+    background-color: #F0EBD8;
+    color: #2F3F54;
+    font-weight: 500;
+    width: 290px;
+    max-width: 300px;
+    border: none;
+}
+
+.selectUsersNewGroup:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.form-group-new-group-name {
+    margin-top: 3%;
+    margin-bottom: 4%;
+}
+
+.form-group-new-group-name input {
+    border-radius: 20px;
+    border: none;
+    height: 28px;
+    width: 80%;
+    text-indent: 5%;
+    margin-top: 2%;
+    background-color: #F0EBD8;
+    color:#2F3F54;
+    font-weight: 400;
+    font-size: 16px;
+    margin-bottom: 4%;
+}
+
+.form-group-new-group-name input:hover {
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+.searchUserForm {
+    display: none;
+}
+
+.searchUserForm input[type="search"] {
+    border: none;
+    width: 76.3%;
+    height: 28px;
+    color: #2F3F54;
+    font-size: 16px;
+    background-color: #F0EBD8;
+    margin-bottom: 1%;
+    margin-top: 1%;
+    font-weight: 500;
+    border-radius: 6px;
+    text-indent: 2%;
+}
+
+.searchUserForm input[type="search"]:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.form-group-new-group input[type="checkbox"] {
+    height: 20px;
+    width: 22px;
+    border: none;
+    color: #2F3F54;
+}
+
+.form-group-new-group input[type="checkbox"]:hover {
+    opacity: 0.9;
+    cursor: pointer;
+}
+.form-group-new-group ul {
+    margin-top: 2%;
+    text-align: left;
+    background-color: #2F3F54;
+    max-height: 20%;
+    overflow-y: scroll;
+    margin-left: -2%;
+}
+
+.form-group-new-group ul li {
+    color: #F0EBD8;
+    padding: 6px;
+    font-size: 19px;
+}
+
+.submitCreateGroupBtn {
+    position: absolute;
+    top: 86%;
+    left: 53.5%;
+    width: 20%;
+    border-radius: 45px;
+    background-color: #748cab;
+    color: #F0EBD8;
+    font-size: 24px;
+    height: 40px;
+    border: none;
+}
+
+.submitCreateGroupBtn:hover {
+    cursor: pointer;
+    background-color: #F0EBD8;
+    color: #0D1321;
+}
+
+@media (min-width : 1600px) {
+
+.submitCreateGroupBtn{
+top: 78%;
+}
+}

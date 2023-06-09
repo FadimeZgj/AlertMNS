@@ -1,22 +1,109 @@
-html, body {
+html,
+body {
+    height: 100vh;
     width: 100%;
-    height: 100%;
-    overflow: scroll;
+    overflow-y: hidden;
 }
 
 header {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     align-items: center;
     color: #F0EBD8;
     border-bottom: 1px solid rgba(240, 235, 216, 0.2);
+    position: absolute;
+    width: 96%;
+    left: 3.5%;
 
 }
 
 main {
-    height: auto;
-    display: flex;
-    justify-content: space-between;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 65px 1fr;
+}
+
+
+/* Arrière-plan de la modale */
+.modal-logout {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 120px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Modal Content */
+.modal-content-logout {
+    background-color: #1D2D44;
+    margin: auto;
+    padding: 20px;
+    width: 46%;
+    height: 50%;
+    color: #F0EBD8;
+    border: 1px solid rgba(240, 235, 216, 0.2);
+    border-radius: 30px;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+}
+
+.modal-content-logout i {
+    position: relative;
+    left: 42.5%;
+}
+
+
+.modal-content-logout h3 {
+    text-align: center;
+    font-size: 26px;
+    margin-top: 10px;
+}
+
+.modal-content-logout span {
+    color: #748CAB
+}
+
+.modal-content-logout button {
+    margin-left: 14px;
+    margin-top: 20px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+}
+
+.modal-content-logout button:hover {
+    cursor: pointer;
+}
+
+.modal-content-logout .cancel-btn {
+    width: 30%;
+    height: 54px;
+    margin-left: 18.5%;
+}
+
+.modal-content-logout .cancel-btn:hover {
+    opacity: 0.9;
+}
+
+.modal-content-logout .logout-btn {
+    width: 30%;
+    height: 54px;
+    position: relative;
+    top: 9px;
+    background-color: #2F3F54;
+    color: #F0EBD8;
+}
+
+.modal-content-logout .logout-btn:hover {
+    background-color: #F0EBD8;
+    color: #0D1321;
+    font-weight: 600;
 }
 
 .name-dashboard {
@@ -37,16 +124,36 @@ main {
 }
 
 .name-user img {
+    border: 2px solid #c5c0ad;
     margin-left: 30px;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50px;
 }
 
-.name-dashboard .fa-solid {
+/* sidebar */
+
+.top-icons .fa-house {
     background-color: #F0EBD8;
     color: #748CAB;
+    margin-top: -5px;
 }
 
-.fa-solid, .fa-regular {
-    padding: 10px;
+.top-icons i:hover {
+    background-color: #2F3F54;
+}
+
+
+.fa-solid,
+.fa-regular {
+    padding: 13px;
+    align-self: center;
+
+}
+
+.sidebar a {
     align-self: center;
 
 }
@@ -55,45 +162,69 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: auto;
-    width: 4.7%;
-    padding-bottom: 30px;
     background-color: #3E5C76;
-    color: #F0EBD8;
-
+    height: 100vh;
 }
 
-.top-icons, .bottom-icons {
+.sidebar a,
+.sidebar .fa-regular {
+    color: #F0EBD8;
+}
+
+.sidebar .hover:hover {
+    background-color: #2F3F54;
+}
+
+.sidebar p {
+    display: none;
+}
+
+.top-icons,
+.bottom-icons {
     display: flex;
     flex-direction: column;
+    padding: 3px;
 }
 
+/* fin nav bar code */
+
 .options {
-    display: flex;
-    justify-content: space-around;
+    margin-top: 1%;
+    display: grid;
+    grid-template-columns: 300px 950px;
+    gap: 2%;
     width: 100%;
     color: #F0EBD8;
+    justify-content: center;
+    margin-top: 5%;
+
 }
 
 .actions {
-    width: 100%;
-    margin-top: 15px;
     background-color: #748CAB;
     border-radius: 30px;
-    padding: 20px;
-    height: 100%;
+    padding: 30px 20px;
+    align-items: center;
+    min-height: 95%;
 }
 
 .actions li {
-    padding: 15px;
+    padding-bottom: 3.1%;
+    padding-top: 3.5%;
     font-weight: 600;
 }
 
-.actions span {
+
+.actions a {
     color: #0D1321;
 }
 
-.actions .fa-solid {
+.actions a:hover {
+    color: #3E5C76;
+}
+
+.actions .fa-solid,
+.fa-regular {
     color: #3E5C76;
 }
 
@@ -111,11 +242,11 @@ ul {
     flex-direction: column;
     gap: 100px;
     width: 100%;
-    margin-top: 15px;
+    height: auto;
     background-color: #748CAB;
     border-radius: 30px;
-    padding: 100px 50px;
-    height: 100%;
+    padding: 7% 50px;
+    min-height: 95%;
 }
 
 .squares ul {
@@ -123,19 +254,26 @@ ul {
     align-items: center;
     justify-content: center;
     gap: 50px;
-    
+
 }
 
 .squares li {
     justify-self: center;
-    background-color:#F0EBD8 ;
-    color: #3E5C76;
+    background-color: #F0EBD8;
     border-radius: 30px;
     width: 250px;
     height: 200px;
     text-align: center;
     font-size: 17px;
     font-weight: 700;
+}
+
+.squares li:hover {
+    background-color: #c5c0ad;
+}
+
+.squares a {
+    color: #3E5C76;
 }
 
 .squares span {
@@ -153,4 +291,327 @@ ul {
     right: 90px;
 }
 
+.profile-mob,
+.name-mob,
+.navbar,
+.squares-mob,
+.actions-mob {
+    display: none;
+}
 
+.squares .chaineTitle {
+    text-align: center;
+    font-size: 34px;
+}
+
+.squares form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.squares label {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.squares select {
+    margin-left: 25%;
+    font-size: 16px;
+    margin-top: -80px;
+    height: 30px;
+    border-radius: 20px;
+    width: 50%;
+    text-indent: 2%;
+    border: 1px solid rgba(240, 235, 216, 0.2);
+    margin-bottom: -40px;
+}
+
+.squares select:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.squares .barreLaterale {
+    margin-top: -50px;
+    height: 6px;
+    width: 100%;
+    border-radius: 25px;
+    background-color: #1D2D44;
+    border: 1px solid rgba(240, 235, 216, 0.2);
+}
+
+.squares .listeChaine {
+    margin-top: -40px;
+    font-size: 20px;
+    margin-left: 40px;
+}
+
+.squares .listeChaine img {
+    border-radius: 50px;
+}
+
+.squares form input[type="text"] {
+    width: 50%;
+    height: 38px;
+    margin-bottom: 20px;
+    margin-top: -50px;
+    border-radius: 25px;
+    text-indent: 5%;
+    border: 1px solid rgba(240, 235, 216, 0.2);
+    background-color: #F0EBD8;
+}
+
+.squares form input[type="submit"] {
+    width: 20%;
+    height: 28px;
+    border-radius: 25px;
+    border: 1px solid rgba(240, 235, 216, 0.2);
+    font-size: 18px;
+    background-color: #F0EBD8;
+    color: #3E5C76;
+}
+
+.squares form input[type="submit"]:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+/* Switch bouton */
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Media query pour les grands écrans */
+
+@media (min-width : 1600px) {
+    .squares {
+        min-height: 30em;
+    }
+
+    .options {
+        margin: auto;
+    }
+
+    /* .squares ul {
+        margin-top: 10px;
+    } */
+
+    .actions {
+        height: 40em;
+    }
+
+}
+
+@media screen and (max-width: 996px) {
+
+    html,
+    body {
+        width: 100%;
+
+    }
+
+    main {
+        max-width: 100%;
+    }
+
+
+    .options,
+    header,
+    .sidebar {
+        display: none;
+    }
+
+    .section-profile,
+    .section-actions,
+    .section-squares {
+        position: relative;
+    }
+
+    .profile-mob {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        gap: 50px;
+        align-items: center;
+        position: relative;
+        top: 10%;
+        left: 100%;
+
+
+    }
+
+    .name-mob {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: #F0EBD8;
+    }
+
+    .name-mob h2 {
+        font-size: 18px;
+    }
+
+    .navbar {
+        display: block;
+        position: relative;
+        float: right;
+        margin-right: 10%;
+    }
+
+    .navbar-toggle {
+        border: none;
+        background: transparent;
+        margin-top: 15px;
+    }
+
+    .menu-icon {
+        display: block;
+        width: 30px;
+        height: 5px;
+        margin-bottom: 4px;
+        background-color: #F0EBD8;
+        cursor: pointer;
+        z-index: 1000;
+    }
+
+
+    /* Style pour le menu burger */
+    .navbar-menu {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+        z-index: 999;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+
+    }
+
+    .navbar-menu a {
+        color: #F0EBD8;
+    }
+
+    .navbar-menu.active {
+        display: block;
+        margin-top: 20%;
+        transform: translateX(0);
+    }
+
+    .nav a {
+        display: block;
+        padding: 0 20px;
+        border-top: 1px solid rgba(240, 235, 216, 0.2);
+        border-bottom: 1px solid rgba(240, 235, 216, 0.2);
+        background-color: #2F3F54;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .nav li {
+        font-size: 20px;
+    }
+
+    .nav li:active {
+        background-color: #3e4855;
+    }
+
+    .fa-regular {
+        color: #F0EBD8;
+    }
+
+    .section-squares {
+        position: absolute;
+        height: 40%;
+        width: 100%;
+        top: 40%;
+    }
+
+    .squares-mob {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: #F0EBD8;
+        position: relative;
+        border-radius: 50px;
+        top: 40%;
+        width: fit-content;
+        height: fit-content;
+        padding: 4%;
+    }
+
+    .squares-mob ul {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        position: relative;
+
+    }
+
+    .squares-mob a {
+        color: #F0EBD8;
+        justify-self: center;
+        background-color: #1D2D44;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 10% 0%;
+        width: 30%;
+
+
+    }
+
+    .squares-mob li:active {
+        background-color: #506077;
+    }
+
+    .section-actions {
+        width: 100%;
+    }
+
+    .actions-mob {
+        display: block;
+        position: relative;
+        top: 30%;
+        width: 100%;
+    }
+
+    .actions-mob ul {
+        width: 150%;
+        position: relative;
+        right: 25%;
+    }
+
+    .actions-mob a {
+        display: block;
+        border-top: 1px solid rgba(240, 235, 216, 0.2);
+        border-bottom: 1px solid rgba(240, 235, 216, 0.2);
+        background-color: #2F3F54;
+        color: #F0EBD8;
+        width: 100%;
+        padding-left: 20%;
+    }
+
+
+
+    .actions-mob a:active {
+        background-color: #3e4855;
+    }
+}

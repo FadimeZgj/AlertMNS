@@ -1,0 +1,126 @@
+.bottom-icons .fa-user {
+    background-color: #F0EBD8;
+    color: #748CAB;
+    margin-top: -5px;
+    padding-right: 17px;
+    padding-left: 17px;
+}
+
+.top-icons .fa-house {
+    background-color: #3E5C76 !important;
+    color: #F0EBD8 !important;
+    margin-top: -5px;
+}
+
+.profile-settings {
+    display: grid;
+    grid-template-columns: 25em 1fr;
+    margin-top: 3.4em;
+    height: 100%;
+}
+
+.profile-options {
+    border-right: 1px solid rgba(240, 235, 216, 0.2);
+}
+
+.profil-options-choices li {
+    text-align: center;
+    padding: 1.5em 0em 1.5em 0em;
+    font-size: 1.2em;
+    color: #F0EBD8;
+    font-weight: bold;
+}
+
+.profil-options-choices .info {
+    background-color: #F0EBD8;
+    color: #748CAB;
+}
+
+.profile-elements .user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #F0EBD8;
+}
+
+.user-input .name-email {
+    display: flex;
+    flex-direction: column;
+    color: #F0EBD8;
+    font-weight: bold;
+}
+
+.firstname-lastname {
+    display: flex;
+}
+
+.profile-elements {
+    display: grid;
+    grid-template-rows: 30% 5% 50%;
+    justify-content: center;
+}
+
+.profile-elements .upload-img {
+    margin-top: -3em;
+    color: #F0EBD8;
+}
+
+.profile-elements .upload-img div {
+    margin-top: 2%;
+}
+
+.profile-elements img {
+    border: 2px solid #c5c0ad;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50px;
+}
+
+
+.user-input {
+    margin-right: auto;
+}
+
+.user-input .name-email input {
+    padding: 0.8em;
+    width: 25em;
+
+}
+
+.user-input .name-email:first-child{
+    margin-right: 4%;
+}
+
+.user-input .name-email label {
+    margin: 0.5em 0em;
+}
+
+.user-input button {
+    display: block;
+    width: 20em;
+    margin: auto;
+    padding: 1em;
+    margin-top: 15%;
+    border: none;
+    border-radius: 3em;
+    color: #1D2D44;
+    background-color: #748CAB;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.user-input button:hover {
+    background-color:#748cab8e;
+    cursor: pointer;
+}
+
+.user-input .name-email input {
+    font-size: 100%;
+}
+
+.name-email .error {
+    color: #d25634;
+    margin-bottom: 2em;
+}
