@@ -31,7 +31,9 @@ $groupes = getAllGroupes();
                 <h3>Groupes</h3>
             </div>
             <div class="user-info">
-                <img src='https://dummyimage.com/70x70/1D2D44/ffffff.png?text=Photo' alt='Photo'>
+            <img src="<?= $utilisateur['image_profile']!=null ? 
+                '../' . $utilisateur['image_profile'] : 
+                'https://dummyimage.com/70x70/1D2D44/ffffff.png?text=Photo' ?>" alt="Image Profil" />
                 <div class="user-role">
                     <h4 id="userName">
                         <?= $utilisateur['prenom_utilisateur'] ?>
