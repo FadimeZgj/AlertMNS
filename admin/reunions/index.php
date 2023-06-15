@@ -121,11 +121,13 @@ $groupes = getAllGroupes();
                             <a href="/admin/reunions/edit.php?id=<?= $reunion['id_reunion'] ?>"><button>Modifier</button></a>
                             </td>
                             <td>
+                            <span class="hide">
                             <form action="/admin/reunions/delete.php" method="POST" onsubmit="return confirm('Voulez-vous vraiment annuler cette réunion ?')">
                                 <input type="hidden" name="id_reunion" value="<?= $reunion['id_reunion'] ?>">
                                 <button type="submit">Supprimer
                                 </button>
                             </form>
+                            </span>
                             </td>
                         </tr>
                         <?php endforeach; ?>

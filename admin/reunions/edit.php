@@ -148,6 +148,11 @@ $groupes = getAllGroupes();
                 <!-- Permet d'enlever les erreurs quand on revient sur la page -->
                 <?php unset($_SESSION['values']); ?>
 
+                <form action="/admin/reunions/delete.php" method="POST" onsubmit="return confirm('Voulez-vous vraiment annuler cette réunion ?')">
+                                <input type="hidden" name="id_reunion" value="<?= $reunion['id_reunion'] ?>">
+                                <button type="submit" class="delete-reunion-btn">Supprimer
+                                </button>
+                            </form>
             </div>
         </div>
 

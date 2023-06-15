@@ -65,7 +65,7 @@ if (!empty($_POST['submit'])) {
     <div class="container">
         <div class="containerLeftInfoGroup">
             <a href="/admin/groupes/index.php"><button class="goBackToListGroupesBtn"><i
-                        class="fa-solid fa-arrow-left fa-lg"></i> Aller à la liste des groupes</button></a>
+                        class="fa-solid fa-arrow-left fa-lg hide"></i> <span class="hide">Aller à la liste des groupes</span> <span class="show">Voir la liste des groupes</span></button></a>
 
             <a href="/admin/reunions/new.php"><button class="createNewReunionBtn"><i class="fa-solid fa-plus fa-lg"></i>
                     Créer une réunion</button></a>

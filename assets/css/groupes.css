@@ -3,6 +3,7 @@
     overflow-y: scroll !important;
     height: 90%;
 }
+
 .groupes {
     display: flex;
     padding: 20px;
@@ -58,6 +59,10 @@
 .search-groupe input[type="search"]:hover {
     background-color: #F0EBD8;
     cursor: pointer;
+}
+
+.show {
+    display: none;
 }
 
 a {
@@ -182,7 +187,7 @@ a:hover {
     text-indent: 5%;
     margin-top: 2%;
     background-color: #F0EBD8;
-    color:#2F3F54;
+    color: #2F3F54;
     font-weight: 400;
     font-size: 16px;
     margin-bottom: 4%;
@@ -227,6 +232,7 @@ a:hover {
     opacity: 0.9;
     cursor: pointer;
 }
+
 .form-group-new-group ul {
     margin-top: 2%;
     text-align: left;
@@ -263,7 +269,52 @@ a:hover {
 
 @media (min-width : 1600px) {
 
-.submitCreateGroupBtn{
-top: 78%;
+    .submitCreateGroupBtn {
+        top: 78%;
+    }
 }
+
+/* Media query pour le responsive mobile */
+@media screen and (max-width: 768px) {
+    .container-groupes{
+        background-color: #2F3F54;
+    }
+    .containerLeftInfoGroup {
+        display: flex;
+        margin-left: -40%;
+    }
+
+    .createGroupTitle {
+        margin-top: 44%;
+    }
+
+    .goBackToListGroupesBtn {
+        font-size: 16px;
+        width: 50%;
+        padding: 6px;
+        height: 36px;
+        background-color: #748CAB;
+        color: #F0EBD8;
+        position: absolute;
+        left: 20px;
+    }
+
+    .createNewReunionBtn {
+        font-size: 16px;
+        width: 50%;
+        padding: 6px;
+        height: 36px;
+        background-color: #748CAB;
+        color: #F0EBD8;
+        position: absolute;
+        left: 20px;
+        top: 90px;
+    }
+
+    .hide {
+        display: none;
+    }
+    .show{
+        display: block;
+    }
 }

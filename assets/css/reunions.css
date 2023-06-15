@@ -137,6 +137,9 @@ header .topbar .user-info .user-role {
     display: none;
 }
 
+.delete-reunion-btn{
+    display: none;
+}
 table {
     background-color: #2F3F54;
     color: #F0EBD8;
@@ -260,7 +263,6 @@ width: 100%; */
 }
 
 .createReunionSelectGroup {
-    margin-top: 6px;
     padding: 8px;
     border: none;
     border-radius: 6px;
@@ -366,6 +368,7 @@ form h3 {
 /* Edit Reunion */
 
 .editReunionTitle {
+    margin-top: 30% !important;
     margin-bottom: 5%;
 }
 
@@ -404,8 +407,7 @@ form h3 {
 }
 
 .saveEditModificationSubmitBtn {
-    margin-top: 80px !important;
-    margin-left: 25% !important;
+    position: relative;
     border-radius: 50px;
     border: none;
     height: 22px;
@@ -614,22 +616,23 @@ form h3 {
         display: flex;
     }
     .createReunionBtn {
-        left: 234px;
+        left: 200px;
         top: 100px;
-        width: 180%;
+        width: 194%;
         display: flex;
         font-size: 16px;
         height: 48px;
+        padding: 4px;
     }
     .showReunionBtn {
         height: 48px;
         display: flex;
+        left: -28%;
         top: 100px;
-        left: -6px;
-        width: 180%;
+        width: 194%;
         margin: 0 0 0 -50%;
         font-size: 16px;
-        padding: 16px 16px 0 16px;
+        padding: 4px;
     }
     .hide {
         display: none;
@@ -641,6 +644,10 @@ form h3 {
     .small {
         font-size: 15px;
     }
+    form {
+        background-color: #2F3F54;
+        height: 70%;
+    }
      table {
         margin-top: 10%;
         display: inline-block;
@@ -649,6 +656,7 @@ form h3 {
         min-height: 50%;
         width: 90% !important;
         overflow-y: auto;
+        overflow-x: hidden;
     }
     table caption {
         font-size: 24px;
@@ -658,7 +666,6 @@ form h3 {
         visibility: collapse;
         text-align: center;
     }
-
     table tbody tr td {
         font-size: 17px;
         text-align: center;
@@ -682,27 +689,62 @@ form h3 {
         color:#2F3F54;   
         position: absolute;
         left: 12px;
-        width: 12%;
-        height: 50px;
+        width: 10%;
+        height: 40px;
+    }
+    .goBackReunionBtn i {
+        position: relative;
+        left: -5px;
     }
     .editReunionForm {
         width: 100%;
         height: 100%;
+        margin: auto;
     }
     .editReunionForm .editReunionTitle {
         font-size: 26px;
+        margin-top: 20%;
+    }
+
+    .form-group-edit{
+        padding: 10px;
+
+    }
+
+    .form-group-edit label{
+        margin-bottom: 10px;
+        margin-left: 7%;
+        width: 70%;
     }
 
     .form-group-edit input {
-        width: 50%;
+        margin-top: 2% !important;
+        margin-left: 6% !important;
+        width: 68%;
     }
     .saveEditModificationSubmitBtn {
         font-size: 18px;
-        left: 12%;
+        left: 36%;
         top: 60px;
+        width: 50% !important;
     }
     .editReunionSelectGroup {
+        display: inline-block;
         margin-top: 2%;
+        margin-left: 6%;
+    }
+    .delete-reunion-btn{
+        display: block;
+        background-color: #c56857;   
+        color:#F0EBD8;
+        font-size: 14px;   
+        position: relative;
+        top: 24px;
+        left: -20px;
+        width: 120%;
+        height: 36px;
+        border: none;
+        border-radius: 25px;
     }
     /* ADD */
     .containerLeftInfoCreate {
@@ -714,8 +756,8 @@ form h3 {
         color:#2F3F54;   
         position: absolute;
         left: 12px;
-        width: 12%;
-        height: 50px;
+        width: 10%;
+        height: 42px;
     }
     .container-create-reunions {
         background-color: #2F3F54;
@@ -731,15 +773,21 @@ form h3 {
     }
     .createReunionForm .createReunionInput {
         width: 60%;
+        margin-top: 2%;
+    }
+    .createReunionForm label {
+        margin-left: 3%;
     }
 
     .createReunionForm .createReunionSelectGroup {
-        margin-left: 0;
+        margin-left: 2px;
         margin-top: 8px;
+        height: 32px;
+        width: 50%;
     }
 
     .createReunionForm .createReunionTitle {
-        margin-top: 16% !important;
+        margin-top: 18% !important;
         font-size: 26px;
     }
     .createReunionForm .submitCreateReunionBtn {
