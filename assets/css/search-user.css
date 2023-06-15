@@ -190,11 +190,8 @@ hr {
         flex-direction: column;
         border-bottom: 1px solid #0D1321;
     }
-    
-    .user {
 
-    }
-    
+
     .user-info img {
         display: block;
     }
