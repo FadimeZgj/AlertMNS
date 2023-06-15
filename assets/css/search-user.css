@@ -157,3 +157,48 @@ hr {
     border-radius: 10px;
     cursor: pointer;
 }
+
+/* mobile */
+
+@media screen and (max-width: 996px) {
+    .options {
+        display: flex !important;
+        justify-content: unset !important;
+        margin-top: 100% !important;
+    }
+
+    .actions {
+        display: none;
+    }
+
+    .search {
+        width: 100vw;
+        height: 90vh;
+    }
+
+    .search h1 {
+        font-size: 26px;
+    }
+
+    .search .submit {
+        font-size: 13px;
+        width: 90px;
+    }
+
+    .user-info {
+        width: 100%;
+        flex-direction: column;
+        border-bottom: 1px solid #0D1321;
+    }
+
+
+    .user-info img {
+        display: block;
+    }
+
+    .is-active {
+        margin-bottom: 15px;
+    }
+
+}
+
