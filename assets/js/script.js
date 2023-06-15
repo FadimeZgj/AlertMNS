@@ -55,3 +55,4 @@ function deleteImage() {
   var input = document.getElementById('imageFile');
   input.value = '';
 }
+

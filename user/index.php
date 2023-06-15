@@ -3,7 +3,7 @@
 require $_SERVER['DOCUMENT_ROOT'] . '/user/includes/inc-session-check.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
 
-$tite = "AlertMNS - Dashboard";
+$title = "AlertMNS - Dashboard";
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 ?>
 

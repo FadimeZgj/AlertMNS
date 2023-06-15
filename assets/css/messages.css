@@ -519,7 +519,7 @@ header .topbar .user-info .user-role {
     display: flex;
     justify-content: flex-end;
     position: absolute;
-    left: 550px;
+    left: 75%;
     top: 90px;
 
 
@@ -607,21 +607,87 @@ header .topbar .user-info .user-role {
 
 /* Media query pour le responsive */
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 900px) {
     header, .sidebar, .messages-interface, .container .messages .search-message {
         display: none;
     }
 
     .container .messages {
-        width: 600px;
-        margin-left: -5px;
+        width: 100%;
+        margin-left: 0px;
+        border-right: none;
+        
     }
     .liste-messages .message {
         margin-left: 5px;
+        overflow: hidden;
+    }
+
+    .liste-messages .message .text-message {
+        font-size: 16px;
     }
 
     .container .messages .entete-message i {
         position: relative;
         right: 50px;
     }
+
+    .search-message {
+        display: none;
+    }
+
+    .messages-interface {
+        width: auto;
+        font-size: 14px;
+    }
+
+    .message-user img {
+        width: 55px;
+        height: 55px;
+    }
+
+    .conversation img {
+        width: 55px;
+        height: 55px;
+    }
+
+    .conversation .bulle {
+        width: 100%;
+    }
+
+    .conversation .message-me {
+        margin-left: 0px;
+        padding: 20px 0px 20px 0px;
+    }
+
+    .conversation .contenu-message {
+        width: 100%;
+    }
+    
+
+    .chatbox input {
+        width: 100vw;
+        min-height: 14vh;
+        /* margin-left: 8%; */
+        margin: auto;
+    }
+
+    .conversation-interface {
+        height: 75%;
+    }
+
+    .icons-group {
+        position:unset;
+    }
+
+    .text-zone {
+        width: 100%;
+    }
+
+    .send-button input[type="submit"]{
+        top: unset;
+        bottom: 160%;
+        right: 30%;
+    }
+
 }

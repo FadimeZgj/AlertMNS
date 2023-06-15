@@ -54,6 +54,11 @@ async function getId() {
       handleId(dataId);
     });
   });
+
+  // responsive messages
+  if (screen.width <= 900) {
+    responsiveMsg()
+  }
 }
 
 // fonction qui permet de mettre à jour l'url avec l'id du destinataire
@@ -183,6 +188,7 @@ window.addEventListener("popstate", function (event) {
   if (dataId) {
     handleId(dataId);
   }
+  
 });
 getId()
 
@@ -270,3 +276,16 @@ let conversationInterface = document.querySelector(".conversation-interface");
       console.error('Erreur lors de l\'envoi du message:', error);
     });
 }
+
+function responsiveMsg() {
+  let divUserMsg = document.querySelectorAll(".message")
+  let listMsg = document.querySelector(".messages")
+  let conv = document.querySelector(".messages-interface")
+  divUserMsg.forEach(element => {
+    element.addEventListener("click", () => {
+      listMsg.remove()
+      conv.style.display = 'block'
+    })
+  });
+}
+

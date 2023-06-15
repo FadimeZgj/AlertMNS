@@ -4,7 +4,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/admin/includes/inc-session-check.php';
 
 $title = "AlertMNS - Dashboard Admin";
 
-include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 
 ?>
 

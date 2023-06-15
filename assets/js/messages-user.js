@@ -54,6 +54,11 @@ async function getId() {
       handleId(dataId);
     });
   });
+
+  // responsive messages
+  if (screen.width <= 900) {
+    responsiveMsg()
+  }
 }
 
 // fonction qui permet de mettre à jour l'url avec l'id du destinataire
@@ -93,7 +98,6 @@ function displayMessages(messages) {
   dataId = getURLParameter('id');
   let interface = document.querySelector(".conversation-interface")
   interface.innerHTML= ''
-  
   // Vérifier si la div des messages est déjà vide ou non
   let isInterfaceEmpty = interface.innerHTML.trim() === '';
   getUsers(dataId)
@@ -184,6 +188,7 @@ window.addEventListener("popstate", function (event) {
   if (dataId) {
     handleId(dataId);
   }
+  
 });
 getId()
 
@@ -217,7 +222,7 @@ sendButton.addEventListener('click', function (event) {
 let conversationInterface = document.querySelector(".conversation-interface");
 
  function sendMessageToRecipient(message) {
-  fetch('http://localhost:82/user/messages.php?id=' + encodeURIComponent(message.id_destinataire), {
+  fetch('http://localhost:82/user/messages-POST.php?id=' + encodeURIComponent(message.id_destinataire), {
     method: 'POST',
     body: JSON.stringify(message),
     headers: {
@@ -249,6 +254,7 @@ let conversationInterface = document.querySelector(".conversation-interface");
                 '<div class="arrow-right"></div>' +
                 "<img src='" + (lastMessage.image_exp != null ? lastMessage.image_exp : imgprof) + "' alt='image profil'></div></div>"
 
+                console.log(messageHtml)
             // Ajouter le nouveau message à la div
             conversationInterface.insertAdjacentHTML('beforeend', messageHtml);
 
@@ -271,3 +277,16 @@ let conversationInterface = document.querySelector(".conversation-interface");
       console.error('Erreur lors de l\'envoi du message:', error);
     });
 }
+
+function responsiveMsg() {
+  let divUserMsg = document.querySelectorAll(".message")
+  let listMsg = document.querySelector(".messages")
+  let conv = document.querySelector(".messages-interface")
+  divUserMsg.forEach(element => {
+    element.addEventListener("click", () => {
+      listMsg.remove()
+      conv.style.display = 'block'
+    })
+  });
+}
+

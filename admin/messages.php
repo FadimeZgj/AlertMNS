@@ -4,6 +4,7 @@
 require $_SERVER['DOCUMENT_ROOT'] . '/admin/includes/inc-session-check.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-db-connect.php';
 
+
 // récupérer les utilisateur connecté
 $sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , utilisateur.image_profile, role.libelle_role FROM utilisateur 
 LEFT JOIN role ON utilisateur.id_role = role.id_role
@@ -119,9 +120,6 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 
                 <!-- Icônes de la boîte de dialogue-->
                 <div class="icons-group">
-                    <i class="fas fa-images fa-xl"></i>
-                    <i class="fa-regular fa-face-smile fa-xl"></i>
-                    <i class="fa-solid fa-ellipsis fa-2xl"></i>
                     <div class="send-button">
                         <input type="submit" value="Envoyer" name="submit" id="send-message-btn">
                     </div>
