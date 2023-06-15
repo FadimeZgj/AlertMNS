@@ -1,11 +1,11 @@
 // menu burger responsive
 
-// const navbarMenu = document.querySelector(".navbar-menu");
-// const navbarToggle = document.querySelector(".navbar-toggle");
+const navbarMenu = document.querySelector(".navbar-menu");
+const navbarToggle = document.querySelector(".navbar-toggle");
 
-// navbarToggle.addEventListener("click", function (e) {
-//   navbarMenu.classList.toggle("active");
-// });
+navbarToggle.addEventListener("click", function (e) {
+  navbarMenu.classList.toggle("active");
+});
 
 
 // let searchInput = document.querySelector("#searchInput");
