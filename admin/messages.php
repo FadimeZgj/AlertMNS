@@ -130,7 +130,6 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 
     </div>
 
-
     <script src="../assets/js/messages-admin.js" async></script>
     <script>
         <?php $user_id = $_SESSION['user']['id']; ?>
