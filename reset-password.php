@@ -20,15 +20,11 @@ if (isset($_POST['email'])) {
         $message = "Bonjour, voici votre nouveau mot de passe : $password";
         $headers = "Content-Type: text/plain; charset=UTF-8\r\n"; // permet de gérer les caractères avec accents
 
-        if (mail($to, $subject, $message, $headers)) {
             $sql = "UPDATE utilisateur SET mdp_utilisateur = ? WHERE email_utilisateur = ?"; // Vide car c'est l'utilisateur qui rentre ce champ
             $stmt = $dbh->prepare($sql);
             $stmt->execute([$hashedPassword, $email]);
             $newPassword = "Voici votre nouveau mot de passe : <strong>" . $password . "</strong>" ;
-            // header("Location: /"); die;
-        } else {
-            echo "Une erreur est survenue...";
-        }
+
     }
 }
 
