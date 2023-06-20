@@ -12,7 +12,7 @@ $newPassword = "";
 if (isset($_POST['email'])) {
     $email = htmlspecialchars($_POST['email']);
     if (isset($email)) {
-        $password = uniqid(); // Génère un mot de passe aléatoire
+        $password = bin2hex(openssl_random_pseudo_bytes(8)); // Génère un mot de passe aléatoire
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // permet de le hasher
 
         $to = $email;
