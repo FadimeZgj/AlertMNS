@@ -113,7 +113,7 @@ $reunions = getAllReunions();
 
                     <div class="form-group-add-reunion">
                     <label>Pas de groupe ?</label>
-                    <a href="/user/groupes/new.php"><button class="noGroupBtn"><i class="fa-solid fa-plus fa-lg"></i>
+                    <a href="/user/groupes/new.php"><button class="noGroupBtn" type="button"><i class="fa-solid fa-plus fa-lg"></i>
                             Créer un nouveau groupe</button></a>
                      </div>
                     <div class="form-group-add-reunion no-group">
