@@ -19,4 +19,33 @@ Backend : PHP, des requêtes JSON et AJAX afin de pouvoir rendre notre applicati
 Base de données : MySQL. 
 ```
 
-## Charte graphique
+## Couleurs
+
+```
+/* CSV */
+0d1321,1d2d44,3e5c76,748cab,f0ebd8
+
+/* With # */
+#0d1321, #1d2d44, #3e5c76, #748cab, #f0ebd8
+
+/* Array */
+["0d1321","1d2d44","3e5c76","748cab","f0ebd8"]
+
+/* Object */
+{"Rich black":"0d1321","Prussian blue":"1d2d44","Payne's gray":"3e5c76","Silver Lake Blue":"748cab","Eggshell":"f0ebd8"}
+
+/* CSS HEX */
+--rich-black: #0d1321ff;
+--prussian-blue: #1d2d44ff;
+--paynes-gray: #3e5c76ff;
+--silver-lake-blue: #748cabff;
+--eggshell: #f0ebd8ff;
+
+/* CSS HSL */
+--rich-black: hsla(222, 43%, 9%, 1);
+--prussian-blue: hsla(215, 40%, 19%, 1);
+--paynes-gray: hsla(208, 31%, 35%, 1);
+--silver-lake-blue: hsla(214, 25%, 56%, 1);
+--eggshell: hsla(47, 44%, 89%, 1);
+
+```
