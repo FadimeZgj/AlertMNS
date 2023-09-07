@@ -1,7 +1,6 @@
 <?php
 
 if (in_array("Administrateur", $_SESSION['user']['roles'])) : ?>
-
     <section>
         <div class="actions">
             <ul>
@@ -22,7 +21,6 @@ if (in_array("Administrateur", $_SESSION['user']['roles'])) : ?>
         </div>
     </section>
 <?php else : ?>
-
     <section>
         <div class="actions">
             <ul>
@@ -38,6 +36,4 @@ if (in_array("Administrateur", $_SESSION['user']['roles'])) : ?>
             </ul>
         </div>
     </section>
-
-
 <?php endif; ?>

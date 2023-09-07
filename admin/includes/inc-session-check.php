@@ -1,7 +1,5 @@
 <?php
-// if($_SERVER['REQUEST_METHOD'] !== 'GET'){
-//     echo json_encode($_SERVER);die;
-// }
+
 session_start();
 
 // On vérifie que l'utilisateur est bien connecté
