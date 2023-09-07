@@ -34,11 +34,11 @@ $groupes = getAllGroupes();
         <ul id="responsiveMenu" class="ul">
             <li><a href="/admin/index.php"><i class="fa-solid fa-house"></i> Accueil</a></li>
             <li><a href="/admin/messages.php"><i class="fa-solid fa-comment-dots"></i> Voir tous les messages</a></li>
-            <li><a href="/admin.groupes.php"><i class="fa-solid fa-users"></i> Voir tous les groupes</a></li>
-            <li><a href="/admin/chaines/index.php"><i class="fa-solid fa-tower-cell"></i> Voir toutes les chaînes</a>
+            <li><a href="/admin/groupes"><i class="fa-solid fa-users"></i> Voir tous les groupes</a></li>
+            <li><a href="/admin/chaines"><i class="fa-solid fa-tower-cell"></i> Voir toutes les chaînes</a>
             </li>
-            <li><a href="/admin/reunions/index.php"><i class="fa-regular fa-calendar"></i> Voir les réunions prévues</a></li>
-            <li><a href="/admin/index.php"><i class="fa-solid fa-user"></i> Gérer mon profil</a></li>
+            <li><a href="/admin/reunions"><i class="fa-regular fa-calendar"></i> Voir les réunions prévues</a></li>
+            <li><a href="/profil"><i class="fa-solid fa-user"></i> Gérer mon profil</a></li>
             <li><a href="/"><i class="fa-solid fa-gear"></i> Réglages</a></li>
             <li><a href="/logout.php"><i class="fa-solid fa-arrow-right-from-bracket"></i> Se déconnecter</a></li>
         </ul>

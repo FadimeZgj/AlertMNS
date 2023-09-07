@@ -226,7 +226,6 @@ footer a {
     }
 
     .footer-content {
-        display: flex;
         position: relative;
         top: 130px;
         left: 100px;

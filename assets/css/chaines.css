@@ -186,7 +186,7 @@ a {
     color: #F0EBD8;
 }
 
-/* Barre de navigation temporaire qui me permet de visualiser */
+/* Barre de navigation */
 
 .sidebar {
     background-color: #3e5c76;
@@ -871,11 +871,6 @@ input[type="search"]:hover {
     .responsive-menu ul .fa-calendar {
         /* L'icône du calendrier qui vit pour les caméras */
         margin-left: -1px;
-    }
-
-    .responsive-menu li:hover {
-        cursor: pointer;
-        background-color: #3e5c76;
     }
 
     .burger-icon .closeMenu {
