@@ -10,7 +10,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 
 // récupérer les utilisateur connecté
 $utilisateur = getAllActiveUsers();
-$reunions = getAllReunions();
+$userReunions = getUsersReunion();
 $groupes = getAllGroupes();
 
 ?>
@@ -70,7 +70,7 @@ $groupes = getAllGroupes();
         <div class="containerLeftInfo">
             <a href="/user/reunions/new.php"><button class="createReunionBtn" id="createReunionBtnBtn"><span class="hide"><i class="fa-solid fa-plus fa-lg"></i></span> Organiser une nouvelle
                 réunion</button></a>
-            <a href="/user/reunions/list.php"><button class="showReunionBtn" id="showReunionBtnBtn"><span class="hide"><i class="fa-regular fa-calendar-check fa-lg"></i></span> Voir mes réunions</button></a>
+            <!-- <a href="/user/reunions/list.php"><button class="showReunionBtn" id="showReunionBtnBtn"><span class="hide"><i class="fa-regular fa-calendar-check fa-lg"></i></span> Voir mes réunions</button></a> -->
         </div>
         <div class="container-reunions">
             <h1 class="hide">Liste de toutes les réunions</h1>
@@ -88,27 +88,27 @@ $groupes = getAllGroupes();
                         </tr>
                     </thead>
                     <tbody>
-                    <?php foreach ($reunions as $reunion): ?>
+                    <?php foreach ($userReunions as $userReunion): ?>
 
                         <tr style="text-align: center;">
                             <td>  
                             <a href="/user/groupes/index.php">                      
-                                <?= $reunion['nom_reunion'] ?>
+                                <?= $userReunion['nom_reunion'] ?>
                                 </a>
                             </td>
                             <td class="hide">
-                            <span class="hide"><?= $reunion['sujet_reunion'] ?></span>
+                            <span class="hide"><?= $userReunion['sujet_reunion'] ?></span>
                             </td>
                             <td class="hide">
-                            <span class="hide"><?= $reunion['prenom_utilisateur'] ?></span>
-                            <span class="hide"><?= $reunion['nom_utilisateur'] ?></span>
+                            <span class="hide"><?= $userReunion['prenom_utilisateur'] ?></span>
+                            <span class="hide"><?= $userReunion['nom_utilisateur'] ?></span>
                             </td>
                             <td class="hide">
-                            <span class="hide"><?= $reunion['nom_groupe'] ?></span>
+                            <span class="hide"><?= $userReunion['nom_groupe'] ?></span>
                             </td>
                             <td class="small">
                             <a href="/user/groupes/index.php"> 
-                                <?= $reunion['date_reunion'] ?>
+                                <?= $userReunion['date_reunion'] ?>
                             </a>
                             </td>
 
@@ -116,11 +116,11 @@ $groupes = getAllGroupes();
                             <span class="hide"><a href="/user/groupes/index.php"><button>Participer</button></span></a>
                             </td>
                             <td>
-                            <a href="/user/reunions/edit.php?id=<?= $reunion['id_reunion'] ?>"><button>Modifier</button></a>
+                            <a href="/user/reunions/edit.php?id=<?= $userReunion['id_reunion'] ?>"><button>Modifier</button></a>
                             </td>
                             <td>
                             <form action="/user/reunions/delete.php" method="POST" onsubmit="return confirm('Voulez-vous vraiment annuler cette réunion ?')">
-                                <input type="hidden" name="id_reunion" value="<?= $reunion['id_reunion'] ?>">
+                                <input type="hidden" name="id_reunion" value="<?= $userReunion['id_reunion'] ?>">
                                 <button type="submit">Supprimer
                                 </button>
                             </form>

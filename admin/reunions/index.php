@@ -50,9 +50,9 @@ $groupes = getAllGroupes();
                 <h3>Réunions</h3>
             </div>
             <div class="user-info">
-            <img src="<?= $utilisateur['image_profile']!=null ? 
+            <a href="/profil"><img src="<?= $utilisateur['image_profile']!=null ? 
                 '../' . $utilisateur['image_profile'] : 
-                'https://dummyimage.com/70x70/1D2D44/ffffff.png?text=Photo' ?>" alt="Image Profil" />
+                'https://dummyimage.com/70x70/1D2D44/ffffff.png?text=Photo' ?>" alt="Image Profil" /></a>
                 <div class="user-role">
                     <h4 id="userName">
                         <?= $utilisateur['prenom_utilisateur'] ?>

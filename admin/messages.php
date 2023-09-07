@@ -57,9 +57,9 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                 <h3>ALERT MNS</h3>
             </div>
             <div class="user-info">
-                <img src="<?= $utilisateur['image_profile']!=null ? 
+                <a href="/profil"><img src="<?= $utilisateur['image_profile']!=null ? 
                 $utilisateur['image_profile'] : 
-                'https://dummyimage.com/50x50.jpg' ?>" alt="Image Profil">
+                'https://dummyimage.com/50x50.jpg' ?>" alt="Image Profil"></a>
                 <div class="user-role">
                     <h4 id="userName"><?= $utilisateur['prenom_utilisateur'] ?> <?= $utilisateur['nom_utilisateur'] ?></h4>
                     <h5><?= $utilisateur['libelle_role'] ?></h5>

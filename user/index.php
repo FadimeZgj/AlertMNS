@@ -27,12 +27,12 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
         </div>
         <div class="navbar-menu" id="menu">
             <ul class="nav navbar-nav">
-                <li><a href="#"><i class="fa-solid fa-house fa-2x"></i>Accueil</a></li>
-                <li><a href="#"><i class="fa-solid fa-comment-dots fa-2x"></i>Voir tous les messages</a></li>
-                <li><a href="#"><i class="fa-solid fa-users fa-2x"></i>Voir tous les groupes</a></li>
-                <li><a href="#"><i class="fa-solid fa-tower-cell fa-2x"></i>Voir toutes les chaînes</a></li>
-                <li><a href="#"><i class="fa-regular fa-calendar-days fa-2x"></i>Voir les réunions</a></li>
-                <li><a href="#"><i class="fa-solid fa-user fa-2x"></i>Gérer mon profil</a></li>
+                <li><a href="/user"><i class="fa-solid fa-house fa-2x"></i>Accueil</a></li>
+                <li><a href="/user/messages.php"><i class="fa-solid fa-comment-dots fa-2x"></i>Voir tous les messages</a></li>
+                <li><a href="/user/groupes"><i class="fa-solid fa-users fa-2x"></i>Voir tous les groupes</a></li>
+                <li><a href="/user/chaines"><i class="fa-solid fa-tower-cell fa-2x"></i>Voir toutes les chaînes</a></li>
+                <li><a href="/user/reunions"><i class="fa-regular fa-calendar-days fa-2x"></i>Voir les réunions</a></li>
+                <li><a href="/profil"><i class="fa-solid fa-user fa-2x"></i>Gérer mon profil</a></li>
                 <li><a href="#"><i class="fa-solid fa-gear fa-2x"></i>Réglages</a></li>
                 <li><a href="../logout.php"><i class="fa-solid fa-arrow-right-from-bracket fa-2x"></i>Déconnexion</a></li>
             </ul>
@@ -47,14 +47,14 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
             <section>
                 <div class="squares">
                     <ul>
-                        <a href=""><li><i class="fa-solid fa-plus fa-2x"></i><span>Créer un groupe</span></li></a>
-                        <a href=""><li><i class="fa-solid fa-comment-dots fa-2x"></i><span>Voir tous les messages</span></li></a>
-                        <a href=""><li><i class="fa-solid fa-plus fa-2x"></i><span>Organiser une réunion</span></li></a>
+                        <a href="/user/groupes/new.php"><li><i class="fa-solid fa-plus fa-2x"></i><span>Créer un groupe</span></li></a>
+                        <a href="/user/messages.php"><li><i class="fa-solid fa-comment-dots fa-2x"></i><span>Voir tous les messages</span></li></a>
+                        <a href="/user/reunions/new.php"><li><i class="fa-solid fa-plus fa-2x"></i><span>Organiser une réunion</span></li></a>
                     </ul>
                     <ul>
-                        <a href=""><li><i class="fa-solid fa-plus fa-2x"></i><span>Voir les réunions prévues</span></li></a>
-                        <a href=""><li><i class="fa-solid fa-tower-cell fa-2x"></i><span>Voir la liste des chaînes</span></li></a>
-                        <a href=""><li><i class="fa-solid fa-magnifying-glass fa-2x"></i><span>Rechercher un utilisateur</span></li></a>
+                        <a href="/user/reunions"><li><i class="fa-solid fa-plus fa-2x"></i><span>Voir les réunions prévues</span></li></a>
+                        <a href="/user/chaines"><li><i class="fa-solid fa-tower-cell fa-2x"></i><span>Voir la liste des chaînes</span></li></a>
+                        <a href="/search-user.php"><li><i class="fa-solid fa-magnifying-glass fa-2x"></i><span>Rechercher un utilisateur</span></li></a>
                     </ul>
                 </div>
             </section>
