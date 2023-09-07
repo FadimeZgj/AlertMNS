@@ -368,7 +368,7 @@ form h3 {
 /* Edit Reunion */
 
 .editReunionTitle {
-    margin-top: 30% !important;
+    margin-top: 5% !important;
     margin-bottom: 5%;
 }
 
@@ -417,6 +417,8 @@ form h3 {
     color: #F0EBD8 !important;
     font-size: 20px;
     height: 40px !important;
+    top: 40px;
+    left: 180px;
 }
 
 .saveEditModificationSubmitBtn:hover {

@@ -31,7 +31,8 @@ if (!empty($_POST['submit'])) {
     
     if (count($errors) == 0) {
         
-        $sql = "INSERT INTO reunion (nom_reunion, date_reunion, sujet_reunion, id_utilisateur, id_groupe) VALUES (:nom_reunion,:date_reunion, :sujet_reunion, :id_utilisateur, :id_groupe)";
+        $sql = "INSERT INTO reunion (nom_reunion, date_reunion, sujet_reunion, id_utilisateur, id_groupe) 
+        VALUES (:nom_reunion,:date_reunion, :sujet_reunion, :id_utilisateur, :id_groupe)";
         $query = $dbh->prepare($sql);
         $res = $query->execute([
             'nom_reunion' => htmlspecialchars($_POST['nom_reunion']),

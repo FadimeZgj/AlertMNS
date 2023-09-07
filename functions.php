@@ -103,7 +103,10 @@ function getReunionById(int $id)
 function updateReunion(int $id)
 {
     $dbh = $GLOBALS['dbh'];
-    $sql = "UPDATE reunion SET nom_reunion = :nom_reunion, date_reunion = :date_reunion, sujet_reunion = :sujet_reunion, id_groupe = :id_groupe  WHERE id_reunion = :id_reunion";
+    $sql = "UPDATE reunion SET nom_reunion = :nom_reunion, 
+    date_reunion = :date_reunion, 
+    sujet_reunion = :sujet_reunion, 
+    id_groupe = :id_groupe  WHERE id_reunion = :id_reunion";
     $stmt = $dbh->prepare($sql);
     $stmt->execute([
         'nom_reunion' => htmlspecialchars($_POST['nom_reunion']),

@@ -30,7 +30,8 @@ if (!empty($_POST['submit'])) {
 
     $sql = "SELECT * FROM utilisateur WHERE email_utilisateur = '" . $email . "'";
 
-    $result = $dbh->query($sql);
+    $result = $dbh->prepare($sql);
+    $result->execute();
     $user = $result->fetch(PDO::FETCH_ASSOC);
 
 
