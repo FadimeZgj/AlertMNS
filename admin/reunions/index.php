@@ -11,7 +11,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 // récupérer les utilisateur connecté
 $utilisateur = getAllActiveUsers();
 $reunions = getAllReunions();
-$groupes = getAllGroupes();
+
 
 ?>
 <link rel="stylesheet" href="/assets/css/reunions.css">

@@ -20,6 +20,11 @@ WHERE id_utilisateur = '" . $_SESSION['user']['id'] . "'";
     return $dbh->query($sql)->fetch(PDO::FETCH_ASSOC);
 }
 
+/**
+ * Fonction qui permet d'afficher les réunions
+ *
+ *
+ */
 function getAllReunions()
 {
     $dbh = $GLOBALS['dbh'];
@@ -55,7 +60,10 @@ function getAllGroupes()
 {
     $dbh = $GLOBALS['dbh'];
     $userId = $_SESSION['user']['id']; // Récupère l'ID de l'utilisateur en session
-    $sql = "SELECT affecter.id_utilisateur as id_du_membre_du_groupe, affecter.id_groupe, groupe.id_groupe as num_groupe, groupe.nom_groupe, groupe.date_groupe, groupe.id_utilisateur as id_createur_groupe, utilisateur.nom_utilisateur as nom_createur_groupe, utilisateur.prenom_utilisateur as prenom_createur_groupe
+    $sql = "SELECT affecter.id_utilisateur as id_du_membre_du_groupe, affecter.id_groupe, 
+    groupe.id_groupe as num_groupe, groupe.nom_groupe, groupe.date_groupe, 
+    groupe.id_utilisateur as id_createur_groupe, 
+    utilisateur.nom_utilisateur as nom_createur_groupe, utilisateur.prenom_utilisateur as prenom_createur_groupe
     FROM affecter
     LEFT JOIN groupe ON groupe.id_groupe = affecter.id_groupe
     LEFT JOIN utilisateur ON utilisateur.id_utilisateur = groupe.id_utilisateur

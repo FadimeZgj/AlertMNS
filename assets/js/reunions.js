@@ -1,3 +1,18 @@
+function validateForm() {
+  let nomReunion = document.forms["addReunionForm"]["reunionName"].value;
+  let dateReunion = document.forms["addReunionForm"]["dateReunion"].value;
+  let sujetReunion = document.forms["addReunionForm"]["reunionSubject"].value;
+
+  if (nomReunion === "" || dateReunion === "" || sujetReunion === "") {
+    alert("Tous les champs doivent être complétés !");
+    return false;
+  }
+}
+
+const formSubmit = document.querySelector("#submitAddReunionForm");
+formSubmit.addEventListener("click", validateForm);
+
+
 const submitAddReunionForm = document.querySelector("#submitAddReunionForm");
 
 // Fonction générique pour afficher les erreurs de champ
