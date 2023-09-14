@@ -15,9 +15,14 @@ function getAllActiveUsers()
     $dbh = $GLOBALS['dbh'];
     $sql = "SELECT utilisateur.prenom_utilisateur , utilisateur.nom_utilisateur , utilisateur.email_utilisateur, 
     utilisateur.image_profile, role.libelle_role FROM utilisateur 
-LEFT JOIN role ON utilisateur.id_role = role.id_role
-WHERE id_utilisateur = '" . $_SESSION['user']['id'] . "'";
-    return $dbh->query($sql)->fetch(PDO::FETCH_ASSOC);
+    LEFT JOIN role ON utilisateur.id_role = role.id_role
+    WHERE id_utilisateur = :id_user";
+
+    $result = $dbh->prepare($sql);
+    $result->execute([
+        "id_user" => $_SESSION['user']['id']
+    ]);
+    return $result->fetch(PDO::FETCH_ASSOC);
 }
 
 /**
