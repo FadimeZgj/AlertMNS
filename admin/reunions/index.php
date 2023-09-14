@@ -93,27 +93,25 @@ $reunions = getAllReunions();
                         <tr style="text-align: center;">
                             <td>  
                             <a href="/admin/groupes/index.php">                      
-                                <?= $reunion['nom_reunion'] ?>
+                                <?= htmlspecialchars($reunion['nom_reunion']) ?>
                                 </a>
                             </td>
                             <td class="hide">
-                            <span class="hide"><?= $reunion['sujet_reunion'] ?></span>
+                            <span class="hide"><?= htmlspecialchars($reunion['sujet_reunion']) ?></span>
                             </td>
                             <td class="hide">
-                            <span class="hide"><?= $reunion['prenom_utilisateur'] ?></span>
-                            <span class="hide"><?= $reunion['nom_utilisateur'] ?></span>
+                            <span class="hide"><?= htmlspecialchars($reunion['prenom_utilisateur']) ?></span>
+                            <span class="hide"><?= htmlspecialchars($reunion['nom_utilisateur']) ?></span>
                             </td>
                             <td class="hide">
-                            <span class="hide"><?= $reunion['nom_groupe'] ?></span>
+                            <span class="hide"><?= htmlspecialchars($reunion['nom_groupe']) ?></span>
                             </td>
                             <td class="small">
                             <a href="/admin/groupes/index.php"> 
-                                <?= $reunion['date_reunion'] ?>
+                                <?= htmlspecialchars($reunion['date_reunion']) ?>
                             </a>
                             </td>
-                            <!-- <td>
-                                <a href="/admin/groupes/list.php"><button>Plus d'infos</button></a>
-                            </td> -->
+
                             <td class="hide">
                             <span class="hide"><a href="/admin/groupes/index.php"><button>Participer</button></span></a>
                             </td>

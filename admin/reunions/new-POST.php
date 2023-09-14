@@ -34,9 +34,9 @@ if (!empty($_POST['submit'])) {
         VALUES (:nom_reunion,:date_reunion, :sujet_reunion, :id_utilisateur, :id_groupe)";
         $query = $dbh->prepare($sql);
         $res = $query->execute([
-            'nom_reunion' => htmlspecialchars($_POST['nom_reunion']),
+            'nom_reunion' => $_POST['nom_reunion'],
             'date_reunion' => $_POST['date_reunion'],
-            'sujet_reunion' => htmlspecialchars($_POST['sujet_reunion']),
+            'sujet_reunion' => $_POST['sujet_reunion'],
             'id_utilisateur' => $_SESSION['user']['id'],
             'id_groupe' => $_POST['groupe']
         ]);
