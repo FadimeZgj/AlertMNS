@@ -1,7 +1,5 @@
 <?php
 
-unset($_SESSION['error']);
-
 require $_SERVER['DOCUMENT_ROOT'] . '/admin/includes/inc-session-check.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/managers/user-manager.php';
@@ -32,6 +30,7 @@ if (!$reunion) {
 // On récupère les groupes
 $groupes = getAllGroupes();
 ?>
+
 <link rel="stylesheet" href="/assets/css/reunions.css">
 <link rel="stylesheet" href="/assets/css/chaines.css">
 <link rel="stylesheet" href="/assets/css/style.css">
