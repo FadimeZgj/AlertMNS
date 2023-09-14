@@ -19,28 +19,20 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
     <main class="main-content">
         <div class="main-form">
             <form action="/login-POST.php" method="POST" name="formConnexion">
-                <label for="email"></label>
                 <input type="email" id="email" name="email" placeholder="adresse@email.fr">
                 <small id="emailMissing" class="checkFormEmail"></small>
                 <?php if (isset($_SESSION['errors']['email'])) : ?>
-                    <!-- Si JavaScript est désactivé, on affiche un message d'erreur-->
-                    <noscript>
                         <small class="error-email" id="errorEmail">
                             <?= $_SESSION['errors']['email'] ?>
                         </small>
-                    </noscript>
                 <?php endif; ?>
 
-                <label for="password"></label>
                 <input type="password" id="password" name="password" placeholder="********">
                 <small id="passwordMissing" class="checkFormPassword"></small>
                 <?php if (isset($_SESSION['errors']['password'])) : ?>
-                    <!-- Si JavaScript est désactivé, on affiche un message d'erreur-->
-                    <noscript>
                         <small class="error-password">
                             <?= $_SESSION['errors']['password'] ?>
                         </small>
-                    </noscript>
                 <?php endif; ?>
 
                 <small class="forgetPassword" id="recupPassword"><a href="/reset-password.php">Mot de passe oublié ?</a></small>

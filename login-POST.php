@@ -25,20 +25,18 @@ if (!empty($_POST['submit'])) {
     }
 
     // 1. On cherche en base de donnée l'utilisateur avec son email
-    $email = htmlspecialchars($_POST['email']); // Pour éviter : 1' OR '1' = '1'; //
-    $password = htmlspecialchars($_POST['password']); // Pour éviter : 1' OR '1' = '1
-
-    $sql = "SELECT * FROM utilisateur WHERE email_utilisateur = '" . $email . "'";
+    $sql = "SELECT * FROM utilisateur WHERE email_utilisateur = :email";
 
     $result = $dbh->prepare($sql);
-    $result->execute();
+    $result->execute([
+        "email" => $_POST['email']
+    ]);
     $user = $result->fetch(PDO::FETCH_ASSOC);
-
 
     // 2. On test si l'utilisateur existe
     if ($user) {
         // 4. S'il existe alors on compare les mots de passes et on vérifie s'il est actif
-        if (password_verify($password, $user['mdp_utilisateur'])) {
+        if (password_verify($_POST['password'], $user['mdp_utilisateur'])) {
             $sql = "SELECT role.libelle_role FROM role
             LEFT JOIN utilisateur ON role.id_role = utilisateur.id_role
             WHERE id_utilisateur = :id_utilisateur 
