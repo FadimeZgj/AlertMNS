@@ -38,9 +38,9 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
                 <h2><?= $user['prenom_utilisateur'] ?> <?= $user['nom_utilisateur'] ?></h2>
                 <p><?= $user['libelle_role'] ?></p>
             </div>
-            <a href=""><img src="<?= $user['image_profile']!=null ? 
-                '../' . $user['image_profile'] : 
-                'https://dummyimage.com/50x50.jpg' ?>" alt="Image Profil" /></a>
+            <a href=""><img src="<?= $user['image_profile'] != null ?
+                                        '../' . $user['image_profile'] :
+                                        'https://dummyimage.com/50x50.jpg' ?>" alt="Image Profil" /></a>
         </div>
     </header>
 
@@ -145,8 +145,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
                         <div class="role">
                             <label for="role">Rôle</label>
                             <select name="newUser[id_role]" id="">
+                                <option value="" selected>Choisissez le rôle</option>
                                 <?php foreach ($roles as $role) : ?>
-                                    <option value="<?= $role['id_role'] ?>" name="newUser[id_role]"><?= $role['libelle_role'] ?></option>
+                                    <option value="<?= $role['id_role'] ?>" name="newUser[id_role]">
+                                        <?= $role['libelle_role'] ?>
+                                    </option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -156,11 +159,15 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
                     </form>
                     <?php if (isset($_SESSION['error'])) : ?>
                         <p class="invalid"><?= $_SESSION['error'] ?></p>
+                    <?php elseif (isset($_SESSION['succes'])) : ?>
+                        <p class="valid"><?= $_SESSION['succes'] ?></p>
                     <?php endif; ?>
                 </div>
+
             </section>
         </div>
         <?php unset($_SESSION['errors']); ?>
+        <?php unset($_SESSION['succes']); ?>
         <!-- tablette/mobile -->
 
         <section class="section-profile">

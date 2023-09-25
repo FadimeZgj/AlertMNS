@@ -24,11 +24,9 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                 <small id="emailMissing" class="checkFormEmail"></small>
                 <?php if (isset($_SESSION['errors']['email'])) : ?>
                     <!-- Si JavaScript est désactivé, on affiche un message d'erreur-->
-                    <noscript>
-                        <small class="error-email" id="errorEmail">
-                            <?= $_SESSION['errors']['email'] ?>
-                        </small>
-                    </noscript>
+                    <small class="error-email" id="errorEmail">
+                        <?= $_SESSION['errors']['email'] ?>
+                    </small>
                 <?php endif; ?>
 
                 <label for="password"></label>
@@ -36,11 +34,9 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                 <small id="passwordMissing" class="checkFormPassword"></small>
                 <?php if (isset($_SESSION['errors']['password'])) : ?>
                     <!-- Si JavaScript est désactivé, on affiche un message d'erreur-->
-                    <noscript>
-                        <small class="error-password">
-                            <?= $_SESSION['errors']['password'] ?>
-                        </small>
-                    </noscript>
+                    <small class="error-password">
+                        <?= $_SESSION['errors']['password'] ?>
+                    </small>
                 <?php endif; ?>
 
                 <small class="forgetPassword" id="recupPassword"><a href="/reset-password.php">Mot de passe oublié ?</a></small>

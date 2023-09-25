@@ -4,8 +4,7 @@
 const regexEmail = /^\S+@\S+\.\S+$/;
 const regexMotDePasse = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>\/?])(?=.*[a-z]).{8,}$/;
 
-const form = document.querySelector("#addUserForm");
-
+let form = document.querySelector("#addUserForm")
 let errorEmail = document.querySelector('#errorEmail')
 let errorPassword = document.querySelector('#errorPassword')
 

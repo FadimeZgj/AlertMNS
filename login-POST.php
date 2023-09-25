@@ -25,19 +25,23 @@ if (!empty($_POST['submit'])) {
     }
 
     // 1. On cherche en base de donnée l'utilisateur avec son email
-    $email = htmlspecialchars($_POST['email']); // Pour éviter : 1' OR '1' = '1'; //
-    $password = htmlspecialchars($_POST['password']); // Pour éviter : 1' OR '1' = '1
 
-    $sql = "SELECT * FROM utilisateur WHERE email_utilisateur = '" . $email . "'";
+    // Convertir les caractères spéciaux en entités HTML
+    // $email = htmlspecialchars($_POST['email']);
+    // $password = htmlspecialchars($_POST['password']);
 
-    $result = $dbh->query($sql);
-    $user = $result->fetch(PDO::FETCH_ASSOC);
-
+    // Requête pour trouver l'utilisateur saisit à l'aide de l'email
+    $sql = "SELECT * FROM utilisateur WHERE email_utilisateur = :email";
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute([
+        'email' => $_POST['email']
+    ]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // 2. On test si l'utilisateur existe
     if ($user) {
-        // 4. S'il existe alors on compare les mots de passes et on vérifie s'il est actif
-        if (password_verify($password, $user['mdp_utilisateur'])) {
+        // S'il existe alors on compare les mots de passes et on vérifie s'il est actif
+        if (password_verify($_POST['password'], $user['mdp_utilisateur'])) {
             $sql = "SELECT role.libelle_role FROM role
             LEFT JOIN utilisateur ON role.id_role = utilisateur.id_role
             WHERE id_utilisateur = :id_utilisateur 
@@ -48,9 +52,7 @@ if (!empty($_POST['submit'])) {
             ]);
             $roles = $query->fetchAll(PDO::FETCH_COLUMN);
 
-
-
-            // 5. Si mdp OK alors on identifie l'utilisateur en SESSION et on redirige vers la page admin
+            // Si mdp OK alors on identifie l'utilisateur en SESSION et on redirige vers la page admin
             session_start();
 
             // On stock les informations de l'utilisateur
@@ -70,7 +72,7 @@ if (!empty($_POST['submit'])) {
                 die;
             }
         } else {
-            // 6. Si le mdp KO alors on redirige vers la page login
+            // Si le mdp n'est pas bon, alors on redirige vers la page login
             $_SESSION['error'] = "Identifiants invalides. ";
             header("Location: /");
             die;

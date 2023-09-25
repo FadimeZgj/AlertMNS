@@ -33,12 +33,12 @@ if (!empty($_POST['submit'])) {
     if (empty($_POST['user']['prenom_utilisateur']))
         $errors['prenom_utilisateur'] = "Saisissez le prenom.";
 
-    if (empty($_POST['user']['email_utilisateur']))
+    if (empty($_POST['user']['email_utilisateur'])) {
         $errors['email_utilisateur'] = "Saisissez l'adresse email.";
-
-    if (!filter_var($_POST['newUser']['email_utilisateur'], FILTER_VALIDATE_EMAIL)) {
-        $errors['email_utilisateur'] = "Saississez l'adresse email.";
+    } elseif (!filter_var($_POST['user']['email_utilisateur'], FILTER_VALIDATE_EMAIL)) {
+        $errors['email_utilisateur'] = "Adresse email invalide.";
     }
+
 
     if (count($errors) > 0) {
         $_SESSION['errors'] = $errors;
@@ -109,9 +109,9 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php'
                 <h2><?= $user['prenom_utilisateur'] ?> <?= $user['nom_utilisateur'] ?></h2>
                 <p><?= $user['libelle_role'] ?></p>
             </div>
-            <a href=""><img src="<?= $user['image_profile']!=null ? 
-                '../' . $user['image_profile'] : 
-                'https://dummyimage.com/50x50.jpg' ?>" alt="Image Profil" /></a>
+            <a href=""><img src="<?= $user['image_profile'] != null ?
+                                        '../' . $user['image_profile'] :
+                                        'https://dummyimage.com/50x50.jpg' ?>" alt="Image Profil" /></a>
         </div>
     </header>
 

@@ -2,6 +2,7 @@
 
 session_start();
 unset($_SESSION['error']);
+
 require $_SERVER['DOCUMENT_ROOT'] . '/admin/includes/inc-session-check.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/managers/user-manager.php';
 
@@ -39,9 +40,10 @@ if (!empty($_POST['submit'])) {
         $errors['mdp_utilisateur'] = "Le mot de passe doit avoir entre $minimumLength et $maximumLength caractères.";
     } elseif (!$containsUppercase || !$containsLowercase || !$containsNumber || !$containsSpecialChars) {
         $errors['mdp_utilisateur'] = "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.";
-    } else {
-        $errors['mdp_utilisateur'] =  "Le mot de passe est valide.";
     }
+    // else {
+    //     $errors['mdp_utilisateur'] =  "Le mot de passe est valide.";
+    // }
 
 
     if (count($errors) > 0) {
@@ -86,10 +88,11 @@ if (!empty($_POST['submit'])) {
     $addUser = insertUser($_POST['newUser']);
 
     if ($addUser) {
+        $_SESSION['succes'] = "Utilisateur enrégistré !";
         header("Location: /admin/users/add-user.php");
         exit;
     } else {
-        $_SESSION['error'] = "Un erreur est survenue.";
+        $_SESSION['error'] = "Une erreur est survenue.";
         header("Location: /admin/users/add-user.php");
         die;
     }

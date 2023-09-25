@@ -160,7 +160,7 @@ hr {
 
 /* mobile */
 
-@media screen and (max-width: 996px) {
+@media screen and (max-width: 768px) {
     .options {
         display: flex !important;
         justify-content: unset !important;
@@ -191,7 +191,6 @@ hr {
         border-bottom: 1px solid #0D1321;
     }
 
-
     .user-info img {
         display: block;
     }
@@ -199,6 +198,5 @@ hr {
     .is-active {
         margin-bottom: 15px;
     }
-
 }
 

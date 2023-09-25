@@ -85,3 +85,7 @@ label {
 .pwValid {
     opacity: 70%;
 }
+
+.valid {
+    color: rgb(53, 129, 53);
+}
