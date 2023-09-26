@@ -22,17 +22,21 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
                 <input type="email" id="email" name="email" placeholder="adresse@email.fr">
                 <small id="emailMissing" class="checkFormEmail"></small>
                 <?php if (isset($_SESSION['errors']['email'])): ?>
+                    <noscript>
                         <small class="error-email" id="errorEmail">
                             <?= $_SESSION['errors']['email'] ?>
                         </small>
+                    </noscript>
                 <?php endif; ?>
 
                 <input type="password" id="password" name="password" placeholder="********">
                 <small id="passwordMissing" class="checkFormPassword"></small>
                 <?php if (isset($_SESSION['errors']['password'])): ?>
+                    <noscript>
                         <small class="error-password">
                             <?= $_SESSION['errors']['password'] ?>
                         </small>
+                    </noscript>
                 <?php endif; ?>
 
                 <small class="forgetPassword" id="recupPassword"><a href="/reset-password.php">Mot de passe oublié
