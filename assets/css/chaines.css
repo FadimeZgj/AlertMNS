@@ -216,7 +216,7 @@ a {
 .bottom-icons {
     display: flex;
     flex-direction: column;
-    justify-content: center ;
+    justify-content: center;
     align-items: center;
 }
 
@@ -819,10 +819,6 @@ input[type="search"]:hover {
 
     /* Pour faire apparaître menu burger */
     .sidebar {
-        display: none;
-    }
-
-    .sidebar .responsive-menu ul {
         display: none;
     }
 

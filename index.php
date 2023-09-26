@@ -21,7 +21,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
             <form action="/login-POST.php" method="POST" name="formConnexion">
                 <input type="email" id="email" name="email" placeholder="adresse@email.fr">
                 <small id="emailMissing" class="checkFormEmail"></small>
-                <?php if (isset($_SESSION['errors']['email'])) : ?>
+                <?php if (isset($_SESSION['errors']['email'])): ?>
                         <small class="error-email" id="errorEmail">
                             <?= $_SESSION['errors']['email'] ?>
                         </small>
@@ -29,18 +29,19 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/inc-top.php';
 
                 <input type="password" id="password" name="password" placeholder="********">
                 <small id="passwordMissing" class="checkFormPassword"></small>
-                <?php if (isset($_SESSION['errors']['password'])) : ?>
+                <?php if (isset($_SESSION['errors']['password'])): ?>
                         <small class="error-password">
                             <?= $_SESSION['errors']['password'] ?>
                         </small>
                 <?php endif; ?>
 
-                <small class="forgetPassword" id="recupPassword"><a href="/reset-password.php">Mot de passe oublié ?</a></small>
+                <small class="forgetPassword" id="recupPassword"><a href="/reset-password.php">Mot de passe oublié
+                        ?</a></small>
 
                 <input type="submit" name="submit" value="Connexion" id="submit">
             </form>
 
-            <?php if (isset($_SESSION['error'])) : ?>
+            <?php if (isset($_SESSION['error'])): ?>
                 <p class="invalid">
                     <?= $_SESSION['error'] ?>
                 </p>
